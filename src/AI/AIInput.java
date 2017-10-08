@@ -139,30 +139,29 @@ public class AIInput implements Runnable
                 } catch (Exception ex) {
                     Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                Vector3D g = null;
                 try {
-                	g = lsm303.readingAcc();
+                    Vector3D g = lsm303.readingAcc();
                     accFilter.init(g);
+                    while(true){
+                        try{ 
+                            Vector3D acc = lsm303.readingAcc();
+                            g.setValues(
+                                g.x*0.9+acc.x*0.1,
+                                g.y*0.9+acc.y*0.1,
+                                g.z*0.9+acc.z*0.1
+                            );
+                            Vector3D gyr = l3gd20.getRawOutValues();
+                            VectorMat result = accFilter.Filter(g, gyr);
+                            //System.out.print(gyr.Display()+",");
+                            //System.out.print(acc.Display()+",");
+                            System.out.println(result.getX(1).Display());
+                        } catch (Exception e){
+                            System.out.println(e);
+                        }
+                        AILogic.Wait(0.02);
+                    }
                 } catch (IOException ex) {
                     Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                while(true){
-                    try{ 
-                        Vector3D acc = lsm303.readingAcc();
-                        g.setValues(
-                        		g.x*0.9+acc.x*0.1,
-                        		g.y*0.9+acc.y*0.1,
-                        		g.z*0.9+acc.z*0.1
-                        		);
-                        Vector3D gyr = l3gd20.getRawOutValues();
-                        VectorMat result = accFilter.Filter(g, gyr);
-                        //System.out.print(gyr.Display()+",");
-                        //System.out.print(acc.Display()+",");
-                        System.out.println(result.getX(1).Display());
-                    } catch (Exception e){
-                        System.out.println(e);
-                    }
-                    AILogic.Wait(0.02);
                 }
             }
         };

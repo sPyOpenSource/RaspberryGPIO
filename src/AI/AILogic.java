@@ -47,7 +47,7 @@ public class AILogic implements Runnable
         pidx = new PID(1,0,0);
         pidy = new PID(1,0,0);
         imax = 150;
-        channels = new ArrayList<Mat>();
+        channels = new ArrayList<>();
         A = new Mat(2,2,CvType.CV_64F);
         B = new Mat(2,1,CvType.CV_64F);
         index = 1;
@@ -99,12 +99,12 @@ public class AILogic implements Runnable
         }
     }
 
-    String Dream()
+    private String Dream()
     {
     	return mem.GetShortMemory(Wish(mem.getLength()));
     }
     
-    int Wish(int length)
+    private int Wish(int length)
     {
 	return (int) (random.nextDouble()*length);
     }
@@ -134,10 +134,11 @@ public class AILogic implements Runnable
                     B.put(0, 0, -dx.dot(dI)/image.getTime(), -dx.dot(dI)/image.getTime());
                     Mat V = new Mat();
                     Core.multiply(A.inv(), B, V);
-                    String info = String.format("%f,%f",
-                    		pidx.Compute(V.get(0,0)[0],0,image.getTime()),
-                    		pidy.Compute(V.get(1,0)[0],0,image.getTime())
-                    		);
+                    String info = String.format(
+                        "%f,%f",
+                    	pidx.Compute(V.get(0,0)[0],0,image.getTime()),
+                    	pidy.Compute(V.get(1,0)[0],0,image.getTime())
+                    );
                     System.out.println(info);
                     //mem.addOutgoingMessage2Arduino("1"+info);
                     //mem.addOutgoingMessage2Network(message+",");

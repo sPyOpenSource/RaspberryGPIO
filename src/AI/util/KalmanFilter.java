@@ -14,8 +14,8 @@ import org.opencv.core.Mat;
 
 public class KalmanFilter
 {
-    private final Mat H,R,F,G;
-    private Mat Q,K,X,P;
+    private final Mat H,R,F,G,P,K;
+    private Mat Q,X;
     
     public KalmanFilter(double processNoiseStdev, double Rx, double Rv, double Qbias, double dt)
     {

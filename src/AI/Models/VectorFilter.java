@@ -26,7 +26,7 @@ import org.opencv.core.CvType;
  */
 public class VectorFilter extends Vector<KalmanFilter>{
     public Vector3D vectorV;
-    public Vector<Double> vectorU;
+    public Vector3D vectorU;
     public VectorFilter(double processNoiseStdev, double Rx, double Rv, double Qbias, double dt){
         super(
                 new KalmanFilter(processNoiseStdev, Rx, Rv, Qbias, dt),
@@ -34,24 +34,19 @@ public class VectorFilter extends Vector<KalmanFilter>{
                 new KalmanFilter(processNoiseStdev, Rx, Rv, Qbias, dt)
         );
     }
-    public VectorMat Filter(Vector3D vector, Vector<Double> gyr){
+    public VectorMat Filter(Vector3D vector, Vector3D gyr){
         vectorU = vector.getUnitVector();
         vectorV = new Vector3D(
                 vectorU.y*gyr.z-vectorU.z*gyr.y,
                 vectorU.z*gyr.x-vectorU.x*gyr.z,
                 vectorU.x*gyr.y-vectorU.y*gyr.x
         );
-        /*vectorV = new Vector3D(
-                -gyr.y,
-                gyr.x,
-                0d
-        );*/
         Mat X = new Mat(2, 1, CvType.CV_64F);
-		X.put(0, 0, vectorU.x, vectorV.x);
-		Mat Y = new Mat(2, 1, CvType.CV_64F);
-		Y.put(0, 0, vectorU.y, vectorV.y);
-		Mat Z = new Mat(2, 1, CvType.CV_64F);
-		Z.put(0, 0, vectorU.z, vectorV.z);
+	X.put(0, 0, vectorU.x, vectorV.x);
+	Mat Y = new Mat(2, 1, CvType.CV_64F);
+	Y.put(0, 0, vectorU.y, vectorV.y);
+	Mat Z = new Mat(2, 1, CvType.CV_64F);
+	Z.put(0, 0, vectorU.z, vectorV.z);
         return new VectorMat(
                 x.Filter(X),
                 y.Filter(Y),

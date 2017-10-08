@@ -16,6 +16,8 @@
  */
 package AI.Models;
 
+import java.util.Objects;
+
 /**
  *
  * @author X. Wang
@@ -29,8 +31,8 @@ public class Vector3D extends Vector<Double>{
         else
             l = 1;
     }
-    public Vector<Double> getUnitVector(){
-        return new Vector<>(x/l,y/l,z/l);
+    public Vector3D getUnitVector(){
+        return new Vector3D(x/l,y/l,z/l);
     }
     public void setValues(Double x, Double y, Double z){
         this.x = x;
@@ -50,7 +52,7 @@ public class Vector3D extends Vector<Double>{
         z/=l;
         l=1;
     }
-    public void Sub(Vector<Double> vector){
+    public void Sub(Vector3D vector){
         x-=vector.x;
         y-=vector.y;
         z-=vector.z;
@@ -60,5 +62,11 @@ public class Vector3D extends Vector<Double>{
     }
     public String Display(){
         return String.format("%.2f,%.2f,%.2f", x,y,z);
+    }
+    public boolean Compare(Vector3D vector){
+        if (Objects.equals(vector.x, x) && Objects.equals(vector.y, y) && Objects.equals(vector.z, z)){
+            return true;
+        }
+        return false;
     }
 }
