@@ -1,4 +1,4 @@
-package AI.Model;
+package AI.Models;
 
 import java.io.IOException;
 import java.io.InputStream;

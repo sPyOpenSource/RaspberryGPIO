@@ -1,6 +1,6 @@
 package AI;
 
-import AI.Model.Info;
+import AI.Models.Info;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

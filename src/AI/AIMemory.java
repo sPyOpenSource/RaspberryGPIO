@@ -1,8 +1,8 @@
 package AI;
 
-import AI.Model.Computer;
-import AI.Model.Info;
-import AI.Model.WebsocketServer;
+import AI.Models.Computer;
+import AI.Models.Info;
+import AI.Models.WebsocketServer;
 import gnu.io.CommPortIdentifier;
 import gnu.io.NoSuchPortException;
 import gnu.io.PortInUseException;

@@ -1,6 +1,6 @@
 package AI;
 
-import AI.Model.Info;
+import AI.Models.Info;
 import AI.util.MotionDetection;
 import java.util.List;
 import java.util.Random;

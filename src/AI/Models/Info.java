@@ -1,4 +1,4 @@
-package AI.Model;
+package AI.Models;
 
 import org.opencv.core.Mat;
 

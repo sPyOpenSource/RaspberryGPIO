@@ -14,9 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package AI.Model;
+package AI.Models;
 
-import AI.Model.VectorMat;
 import AI.util.KalmanFilter;
 import org.opencv.core.Mat;
 import org.opencv.core.CvType;
@@ -26,6 +25,7 @@ import org.opencv.core.CvType;
  * @author X. Wang
  */
 public class VectorFilter extends Vector<KalmanFilter>{
+    private Vector3D vectorU;
     public VectorFilter(double processNoiseStdev, double Rx, double Rv, double dt){
     	super(
                 new KalmanFilter(processNoiseStdev, Rx, Rv, dt),
@@ -34,7 +34,7 @@ public class VectorFilter extends Vector<KalmanFilter>{
         );
     }
     public VectorMat Filter(Vector3D vector, Vector<Double> gyr){
-        Vector<Double> vectorU = vector.getUnitVector();
+        vectorU = vector.getUnitVector();
         Vector<Double> vectorV = new Vector<>(
                 vectorU.y*gyr.z-vectorU.z*gyr.y,
                 vectorU.z*gyr.x-vectorU.x*gyr.z,
@@ -51,5 +51,11 @@ public class VectorFilter extends Vector<KalmanFilter>{
                 y.Filter(Y),
                 z.Filter(Z)
         );
+    }
+    public void init(Vector3D vector){
+        vectorU = vector.getUnitVector();
+        x.init(vectorU.x, 0);
+        y.init(vectorU.y, 0);
+        z.init(vectorU.z, 0);
     }
 }

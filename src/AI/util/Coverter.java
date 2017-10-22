@@ -16,7 +16,7 @@
  */
 package AI.util;
 
-import AI.Model.Vector;
+import AI.Models.Vector;
 
 /**
  *

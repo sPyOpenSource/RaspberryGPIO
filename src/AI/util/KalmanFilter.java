@@ -14,8 +14,8 @@ import org.opencv.core.Mat;
 
 public class KalmanFilter
 {
-    private final Mat H,R,F;
-    private Mat Q,K,X,P;
+    private final Mat H, R, F, X, K, P;
+    private Mat Q;
     
     public KalmanFilter(double processNoiseStdev, double Rx, double Rv, double dt)
     {
@@ -37,6 +37,10 @@ public class KalmanFilter
         X = new Mat(3,1,CvType.CV_64F);
         X.put(0, 0, 0, 0, 0); //Initial position, velocity and accelation.
         
+    }
+    
+    public void init(double x, double v){
+        X.put(0, 0, x, v, 0);
     }
     
     public Mat Filter(Mat Z)

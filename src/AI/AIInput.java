@@ -6,7 +6,7 @@ package AI;
  * @version 1.0
  */
 
-import AI.Model.Info;
+import AI.Models.Info;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

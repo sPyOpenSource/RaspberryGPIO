@@ -19,11 +19,10 @@ package AI.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import AI.Model.Info;
+import AI.Models.Info;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Core;
-import org.opencv.imgcodecs.Imgcodecs;
 
 /**
  *
@@ -31,7 +30,7 @@ import org.opencv.imgcodecs.Imgcodecs;
  */
 public class MotionDetection {
     private Mat X,Y,Ones;
-    private Mat temp = new Mat();
+    private final Mat temp = new Mat();
     private List<Mat> Background;
     private final List<Mat> tempImage;
     private double x,y;
@@ -39,7 +38,7 @@ public class MotionDetection {
     private final double threshold;
     public MotionDetection(double filter, double threshold){
         Background = null;
-        tempImage = new ArrayList<Mat>();
+        tempImage = new ArrayList<>();
         tempImage.add(new Mat());
         tempImage.add(new Mat());
         tempImage.add(new Mat());
@@ -50,7 +49,7 @@ public class MotionDetection {
     }
     public void UpdatePosition(Info image){
         image.getImage().assignTo(temp, CvType.CV_32FC3);
-        List<Mat> channels = new ArrayList<Mat>();
+        List<Mat> channels = new ArrayList<>();
         Core.split(temp, channels);
         if(Background!=null){
             Core.absdiff(Background.get(0),channels.get(0),tempImage.get(0));
