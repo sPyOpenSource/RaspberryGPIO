@@ -5,6 +5,7 @@ import AI.Models.Vector3D;
 import AI.Models.VectorFilter;
 import AI.Models.VectorMat;
 import AI.Models.Info;
+import AI.Models.WebsocketServer;
 import AI.util.KalmanFilter;
 import AI.util.PID;
 import junit.framework.TestCase;
@@ -20,12 +21,16 @@ public class JUnitTest extends TestCase{
     private final AIMemory memory;
     private final Vector3D vector;
     private final PID pid;
+    private final Info info;
+    private final WebsocketServer server;
     
     public JUnitTest(){
         System.load("/home/spy/Downloads/Source/C/opencv/build/lib/libopencv_java320.so");
         memory = new AIMemory();
         vector = new Vector3D(1.0,1.0,1.0);
         pid = new PID(1,1,1);
+        info = new Info("test");
+        server = new WebsocketServer(9000);
     }
 
     @Test
@@ -172,5 +177,12 @@ public class JUnitTest extends TestCase{
         assertEquals(y, -51.0);
         y = pid.Compute(10, 10, 10);
         assertEquals(y, -150.0);
+    }
+    
+    @Test
+    public void testInfo(){
+        System.out.println("* JUnitTest: testInfo()");
+        assertEquals(info.getPayload(), "test");
+        assertEquals(info.isOnline(), false);
     }
 }

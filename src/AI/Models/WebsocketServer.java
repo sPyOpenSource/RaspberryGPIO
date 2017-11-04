@@ -22,23 +22,25 @@ public class WebsocketServer {
     private InputStream in;
     private OutputStream out;
     private Socket client;
-    private final ServerSocket server;
-    private boolean isConnected = false;
+    private ServerSocket server;
     
-    public WebsocketServer(ServerSocket server){
-        this.server = server;
+    public WebsocketServer(int port){
+        try {
+            this.server = new ServerSocket(port);
+        } catch (IOException ex) {
+            Logger.getLogger(WebsocketServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void WaitOnConnection(){
+    public Socket WaitOnConnection(){
         try {
             client = server.accept();
-            isConnected = true;
             System.out.println("A client connected.");
             in = client.getInputStream();
             out = client.getOutputStream();
             String data = new Scanner(in,"UTF-8").useDelimiter("\\r\\n\\r\\n").next();
             Matcher get = Pattern.compile("^GET").matcher(data);
-            if (get.find()) {
+            if (get.find()){
                 Matcher match = Pattern.compile("Sec-WebSocket-Key: (.*)").matcher(data);
                 match.find();
                 byte[] response = ("HTTP/1.1 101 Switching Protocols\r\n"
@@ -54,43 +56,11 @@ public class WebsocketServer {
                         + "\r\n\r\n")
                         .getBytes("UTF-8");
                 out.write(response, 0, response.length);
-            }        
+            }
+            return client;
         } catch (IOException | NoSuchAlgorithmException ex) {
             Logger.getLogger(WebsocketServer.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }  
-    }
-    
-    public String getInput(){
-        try {
-            byte[] buffer = new byte[50];
-            in.read(buffer, 0, 50);
-            byte[] key = {buffer[2],buffer[3],buffer[4],buffer[5]};
-            int length = (buffer[1] & 0xff) - 128;
-            byte[] decode = new byte[length];
-            for(int i = 0; i < length; i++){
-                decode[i] = (byte)(buffer[i+6] ^ key[i & 0x3]);
-            }
-            return new String(decode);
-        } catch (IOException ex) {
-            Logger.getLogger(WebsocketServer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-    
-    public void send(Info info){ 
-        try {
-            byte[] response = info.getPayload().getBytes("UTF-8");
-            byte[] message = new byte[2];
-            message[0] = (byte)129;
-            message[1] = (byte)response.length;
-            out.write(message, 0, 2);
-            out.write(response, 0, response.length);
-        } catch (IOException ex) {
-            Logger.getLogger(WebsocketServer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public boolean isConnect() {
-        return isConnected;
     }
 }

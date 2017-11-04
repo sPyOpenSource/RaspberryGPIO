@@ -2,7 +2,6 @@ package AI;
 
 /**
  * This is a class initialize an artificial intelligence service.
-
  * 
  * @author X. Wang
  * @version 1.0
@@ -31,7 +30,7 @@ public final class AI
     }
     
     public static void main(String[] args) {
-    	System.load("/home/spy/opencv/build/lib/libopencv_java320.so");
+    	System.load("/home/spy/Downloads/Source/C/opencv/build/lib/libopencv_java320.so");
         AI instance = new AI();
         instance.start();
     }

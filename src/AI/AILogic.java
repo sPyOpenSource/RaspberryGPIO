@@ -158,7 +158,7 @@ public class AILogic implements Runnable
             double z = (d*f)/l;
             double x = -xLeft*z/f/xmincor;
             double y = -yLeft*z/f/xmincor ;
-            System.out.println(String.format("%.4f, %.4f, %.4f",x,y,z));
+            //System.out.println(String.format("%.4f, %.4f, %.4f",x,y,z));
         }
         if(index%imax==0){
             System.gc();

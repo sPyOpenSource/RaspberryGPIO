@@ -11,7 +11,6 @@ import gnu.io.UnsupportedCommOperationException;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.ServerSocket;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -35,8 +34,8 @@ public class AIMemory
     private final ConcurrentHashMap<String, List<Info>> dict = new ConcurrentHashMap<>();
     private DatagramSocket socket;
     private SerialPort serialPort;
-    private final String log;
-    private WebsocketServer server;
+    private final static String LOG = "/home/spy/AI/log.txt";
+    private final WebsocketServer server;
     
     /**
      * Constructor for objects of class AIMemory
@@ -47,8 +46,8 @@ public class AIMemory
         shortterm = new String[20];
         emotions = new double[4];
         try {
-            serialPort = (SerialPort)CommPortIdentifier.getPortIdentifier("/dev/ttyACM0").open(this.getClass().getName(),2000);
-            serialPort.setSerialPortParams(115200,SerialPort.DATABITS_8,SerialPort.STOPBITS_1,SerialPort.PARITY_NONE); 
+            serialPort = (SerialPort)CommPortIdentifier.getPortIdentifier("/dev/ttyACM0").open(this.getClass().getName(), 2000);
+            serialPort.setSerialPortParams(115200, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE); 
         } catch (NoSuchPortException | PortInUseException | UnsupportedCommOperationException ex) {
             Logger.getLogger(AIMemory.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,12 +56,7 @@ public class AIMemory
         } catch (SocketException ex) {
             Logger.getLogger(AIMemory.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            server = new WebsocketServer(new ServerSocket(9000));
-        } catch (IOException ex) {
-            Logger.getLogger(AIMemory.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        log ="/home/spy/AI/log.txt";
+        server = new WebsocketServer(9000);
     }
     
     public void SaveShort(String x, int n)
@@ -159,23 +153,37 @@ public class AIMemory
         }
         String[] info = new String(inPacket.getData()).split(";");
         if("start".equals(info[0]))
-            addInfo(new Info(new Computer(inPacket.getSocketAddress(),socket)),"networkClients");
+            addInfo(new Info(new Computer(inPacket.getSocketAddress(), socket)), "networkClients");
         else
-            addInfo(new Info(info[0]),"incomingMessages");
+            addInfo(new Info(info[0]), "incomingMessages");
     } 
     
     public String getLogPath(){
-        return log;
+        return LOG;
+    }
+    
+    public void AddWebsocketClient(){
+        addInfo(new Info(new Computer(server.WaitOnConnection())), "webClients");
     }
     
     public void ReceiveFromWebsocket(){
-        if(!server.isConnect())
-            server.WaitOnConnection();
-        System.out.println(server.getInput());
-    }
-    
-    public void Send(Info info){
-        if (server.isConnect())
-            server.send(info);
+        List<Info> list = search("webClients");
+        for(int i=list.size()-1;i>=0;i--){
+            if(!list.get(i).isOnline()){
+                list.remove(i);
+            } else {
+              if(!list.get(i).isStart()){
+                  final Info info = list.get(i);
+                  Thread thread;
+                  thread = new Thread(){
+                      @Override
+                      public void run(){
+                          addInfo(new Info(info.Receive()),"incomingMessages");
+                      }
+                  };
+                  thread.start();
+              }
+            }
+        }
     }
 }

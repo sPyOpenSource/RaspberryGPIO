@@ -28,10 +28,10 @@ public class KalmanFilter
         F.put(0, 0, 1, dt, pow(dt,2)/2, 0, 1, dt, 0, 0, 1);
         Q = new Mat(3,3,CvType.CV_64F);
         Q.put(0, 0 , 
-        		pow(dt, 5) / 4, pow(dt, 4) / 2, pow(dt, 3) / 2,
-        		pow(dt, 4) / 2, pow(dt, 3) / 1, pow(dt, 2) / 1,
-        		pow(dt, 3) / 1, pow(dt, 2) / 1, pow(dt, 1) / 1
-        		);
+            pow(dt, 5) / 4, pow(dt, 4) / 2, pow(dt, 3) / 2,
+            pow(dt, 4) / 2, pow(dt, 3) / 1, pow(dt, 2) / 1,
+            pow(dt, 3) / 1, pow(dt, 2) / 1, pow(dt, 1) / 1
+        );
         Q = Q.mul(Mat.ones(3,3,CvType.CV_64F), pow(processNoiseStdev, 2)/2);
         K = new Mat();
         X = new Mat(3,1,CvType.CV_64F);

@@ -37,8 +37,20 @@ public class Info {
         }
         return false;
     }
+    public boolean isStart(){
+        if (computer!=null){
+            return computer.isStart();
+        }
+        return false;
+    }
     public void send(Info info){
         if(computer!=null)
             computer.send(info);
+    }
+    public String Receive(){
+        if(computer!=null)
+            return computer.getInput();
+        else
+            return null;
     }
 }

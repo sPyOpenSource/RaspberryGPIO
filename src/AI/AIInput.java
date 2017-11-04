@@ -12,15 +12,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.videoio.VideoCapture;
-import org.opencv.videoio.Videoio;
-import org.opencv.core.Core;
 
 public class AIInput implements Runnable
 {
@@ -30,7 +26,7 @@ public class AIInput implements Runnable
     private final AIMemory mem;
     private final VideoCapture capLeft = new VideoCapture(); 
     private final VideoCapture capRight = new VideoCapture();
-    private final int bufferSize;
+    private final static int BUFFER_SIZE = 1024;
     private BufferedReader in;
     
     /**
@@ -40,7 +36,6 @@ public class AIInput implements Runnable
     public AIInput(AIMemory mem)
     {
     	this.mem = mem;
-        bufferSize = 1024;
         try {
             in = new BufferedReader(new InputStreamReader(mem.getSerialPort().getInputStream()));
         } catch (IOException |NullPointerException ex) {
@@ -48,22 +43,12 @@ public class AIInput implements Runnable
         }
         capLeft.open(0);
         capRight.open(1);
-        capRight.set(Videoio.CAP_PROP_MODE,Videoio.CAP_MODE_GRAY);
-        //capRight.set(Videoio.CAP_PROP_CONVERT_RGB,0);
     }
     
     private void getImageFromWebcam(VideoCapture cap, String images){
         Mat image = new Mat();
         cap.read(image);
-        //System.out.println(images+image.channels());
         if(!image.empty()){
-        	/*List<Mat> test = new ArrayList<Mat>();
-            List<Mat> test2 = new ArrayList<Mat>();
-            Core.split(image,test);
-            test2.add(test.get(0));
-            test2.add(test.get(0));
-            test2.add(test.get(0));
-            Core.merge(test2, image);*/
             Imgcodecs.imwrite("/home/spy/"+images+".jpg", image);
             mem.addInfo(new Info(image),images);
         }
@@ -108,7 +93,7 @@ public class AIInput implements Runnable
                     ReadMessageFromArduino();
             }
         };
-        t1.start();
+        //t1.start();
         Thread t2 = new Thread(){
             @Override
             public void run(){
@@ -119,15 +104,15 @@ public class AIInput implements Runnable
                 }
             }
         };
-        t2.start();
+        //t2.start();
         Thread t3 = new Thread(){
             @Override
             public void run(){
                 while(true)
-                    mem.ReceiveFromNetwork(bufferSize);
+                    mem.ReceiveFromNetwork(BUFFER_SIZE);
             }
         };
-        t3.start();
+        //t3.start();
         Thread t4 = new Thread(){
             @Override
             public void run(){
@@ -138,14 +123,22 @@ public class AIInput implements Runnable
                 }
             }
         };
-        t4.start();
+        //t4.start();
         Thread t5 = new Thread(){
+            @Override
+            public void run(){
+                while(true)
+                    mem.AddWebsocketClient();
+            }
+        };
+        t5.start();
+        Thread t6 = new Thread(){
             @Override
             public void run(){
                 while(true)
                     mem.ReceiveFromWebsocket();
             }
         };
-        t5.start();
+        t6.start();
     }
 }
