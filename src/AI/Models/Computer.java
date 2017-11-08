@@ -55,21 +55,17 @@ public class Computer {
         }
     }
     public boolean isOnline(){
-        if(client==null&&socket==null&&webSocket==null)
-            return false;
         try {
-            if(webSocket==null){
-                if(client==null||socket==null)
-                    return false;
+            if(webSocket!=null){
+                return webSocket.isConnected();
+            } else if(client!=null&&socket!=null){
                 socket.bind(client);
                 return true;
-            } else {
-                return webSocket.isConnected();
             }
         } catch (SocketException ex) {
             Logger.getLogger(Computer.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
         }
+        return false;
     }
     public void send(Info info){
         if(webSocket!=null){

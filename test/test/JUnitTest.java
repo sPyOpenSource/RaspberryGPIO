@@ -5,13 +5,15 @@ import AI.Models.Vector3D;
 import AI.Models.VectorFilter;
 import AI.Models.VectorMat;
 import AI.Models.Info;
-import AI.Models.WebsocketServer;
+import AI.Models.Computer;
 import AI.util.KalmanFilter;
 import AI.util.PID;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import java.net.Socket;
+
 
 /**
  *
@@ -22,7 +24,7 @@ public class JUnitTest extends TestCase{
     private final Vector3D vector;
     private final PID pid;
     private final Info info;
-    private final WebsocketServer server;
+    private final Computer computer;
     
     public JUnitTest(){
         System.load("/home/spy/Downloads/Source/C/opencv/build/lib/libopencv_java320.so");
@@ -30,7 +32,7 @@ public class JUnitTest extends TestCase{
         vector = new Vector3D(1.0,1.0,1.0);
         pid = new PID(1,1,1);
         info = new Info("test");
-        server = new WebsocketServer(9000);
+        computer = new Computer(new Socket());
     }
 
     @Test
@@ -184,5 +186,15 @@ public class JUnitTest extends TestCase{
         System.out.println("* JUnitTest: testInfo()");
         assertEquals(info.getPayload(), "test");
         assertEquals(info.isOnline(), false);
+    }
+    
+    @Test
+    public void testComputer(){
+        System.out.println("* JUnitTest: testComputer()");
+        assertEquals(computer.isOnline(), false);
+        assertEquals(computer.isStart(), false);
+        String test = computer.getInput();
+        assertEquals(test, null);
+        assertEquals(computer.isStart(), true);
     }
 }

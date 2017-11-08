@@ -19,10 +19,10 @@ public class AILogic implements Runnable
     // instance variables
     private final AIMemory mem;
     private final Random random = new Random();
-    private final int imax;
-    private final double dt;
-    private final double threshold,factor,zmincor,d,f,xmincor,percentage;
-    private int index;
+    private final int imax = 150;
+    private final double dt = 0.02;   // in s
+    private final double threshold = 10000,factor,zmincor,d = 0.185,f,xmincor,percentage = 0.5;;
+    private int index = 1;
     private final MotionDetection left, right;
         
     /**
@@ -33,17 +33,11 @@ public class AILogic implements Runnable
     {
         // Initialize instance variables        
 	this.mem = mem;
-        percentage = 0.5;
-        threshold = 10000;
         left = new MotionDetection(0.5, threshold);
         right = new MotionDetection(0.5, threshold);
-        imax = 150;
-        index = 1;
-        dt = 0.02;   // in s
         factor = 500/0.6;
         zmincor = 4.5*3.82/3; // 1m
         xmincor = 0.14/0.62*5; //-0.14 ipv 0.62, 
-        d = 0.185;
         f = 1.90/zmincor;
     }
 
@@ -130,6 +124,7 @@ public class AILogic implements Runnable
             mem.SaveShort(messages.get(Wish(s)).getPayload(),Wish(l));
     	}
     }
+    
     private void Clean(String key){
         List<Info> list = mem.search(key);
         for(int i=list.size()-1;i>=0;i--){
@@ -144,11 +139,11 @@ public class AILogic implements Runnable
             left.UpdatePosition(imageLeft);
             mem.removeAll("leftImages");
         }  
-        Info imageRight = mem.getLast("rightImages");
+        /*Info imageRight = mem.getLast("rightImages");
         if (imageRight!=null){
             mem.removeAll("rightImages");
             right.UpdatePosition(imageRight);
-        }
+        }*/
         double xLeft = left.getX()/factor;
         double yLeft = left.getY()/factor;
         double xRight = right.getX()/factor;
@@ -158,7 +153,7 @@ public class AILogic implements Runnable
             double z = (d*f)/l;
             double x = -xLeft*z/f/xmincor;
             double y = -yLeft*z/f/xmincor ;
-            //System.out.println(String.format("%.4f, %.4f, %.4f",x,y,z));
+            System.out.println(String.format("%.4f, %.4f, %.4f",x,y,z));
         }
         if(index%imax==0){
             System.gc();
@@ -170,8 +165,8 @@ public class AILogic implements Runnable
     public void run() {
         while(true){
             ProcessImages();
-            ProcessMessages();
-            Clean("networkClients");
+            //ProcessMessages();
+            //Clean("networkClients");
             Wait(dt);
         }
     }

@@ -19,9 +19,6 @@ import javax.xml.bind.DatatypeConverter;
  * @author X. Wang
  */
 public class WebsocketServer {
-    private InputStream in;
-    private OutputStream out;
-    private Socket client;
     private ServerSocket server;
     
     public WebsocketServer(int port){
@@ -34,10 +31,10 @@ public class WebsocketServer {
     
     public Socket WaitOnConnection(){
         try {
-            client = server.accept();
+            Socket client = server.accept();
             System.out.println("A client connected.");
-            in = client.getInputStream();
-            out = client.getOutputStream();
+            InputStream in = client.getInputStream();
+            OutputStream out = client.getOutputStream();
             String data = new Scanner(in,"UTF-8").useDelimiter("\\r\\n\\r\\n").next();
             Matcher get = Pattern.compile("^GET").matcher(data);
             if (get.find()){

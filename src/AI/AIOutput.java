@@ -21,7 +21,7 @@ public class AIOutput implements Runnable
 {
     private final AIMemory mem;
     private Writer w;
-    private final double dt;
+    private final double dt = 0.01; // in s
     private String filename;
  
     /**
@@ -37,7 +37,6 @@ public class AIOutput implements Runnable
         } catch (IOException | NullPointerException ex) {
             Logger.getLogger(AIOutput.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dt = 0.01; // in s
     }
     
     /*private void Send(String message){

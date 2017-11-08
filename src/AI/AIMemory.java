@@ -172,17 +172,18 @@ public class AIMemory
             if(!list.get(i).isOnline()){
                 list.remove(i);
             } else {
-              if(!list.get(i).isStart()){
-                  final Info info = list.get(i);
-                  Thread thread;
-                  thread = new Thread(){
-                      @Override
-                      public void run(){
-                          addInfo(new Info(info.Receive()),"incomingMessages");
-                      }
-                  };
-                  thread.start();
-              }
+                if(!list.get(i).isStart()){
+                    final Info info = list.get(i);
+                    Thread thread;
+                    thread = new Thread(){
+                        @Override
+                        public void run(){
+                            while(info.isOnline())
+                                addInfo(new Info(info.Receive()), "incomingMessages");
+                        }
+                    };
+                    thread.start();
+                }
             }
         }
     }

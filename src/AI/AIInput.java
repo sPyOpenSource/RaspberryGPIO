@@ -15,7 +15,6 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.videoio.VideoCapture;
 
 public class AIInput implements Runnable
@@ -24,8 +23,7 @@ public class AIInput implements Runnable
      * This is the initialization of AIInput class 
      */
     private final AIMemory mem;
-    private final VideoCapture capLeft = new VideoCapture(); 
-    private final VideoCapture capRight = new VideoCapture();
+    private final VideoCapture capLeft = new VideoCapture(), capRight = new VideoCapture();
     private final static int BUFFER_SIZE = 1024;
     private BufferedReader in;
     
@@ -42,14 +40,13 @@ public class AIInput implements Runnable
             Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
         }
         capLeft.open(0);
-        capRight.open(1);
+        //capRight.open(1);
     }
     
     private void getImageFromWebcam(VideoCapture cap, String images){
         Mat image = new Mat();
         cap.read(image);
         if(!image.empty()){
-            Imgcodecs.imwrite("/home/spy/"+images+".jpg", image);
             mem.addInfo(new Info(image),images);
         }
     }
@@ -98,13 +95,13 @@ public class AIInput implements Runnable
             @Override
             public void run(){
             	int i = 0;
-                while(i<10){
+                while(i<100){
                     getImageFromWebcam(capLeft,"leftImages");
                     i++;
                 }
             }
         };
-        //t2.start();
+        t2.start();
         Thread t3 = new Thread(){
             @Override
             public void run(){
@@ -131,7 +128,7 @@ public class AIInput implements Runnable
                     mem.AddWebsocketClient();
             }
         };
-        t5.start();
+        //t5.start();
         Thread t6 = new Thread(){
             @Override
             public void run(){
@@ -139,6 +136,6 @@ public class AIInput implements Runnable
                     mem.ReceiveFromWebsocket();
             }
         };
-        t6.start();
+        //t6.start();
     }
 }
