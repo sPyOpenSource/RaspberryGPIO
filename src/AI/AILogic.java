@@ -1,11 +1,10 @@
 package AI;
 
+import AI.Models.Info;
 import AI.util.PID;
-import AI.Models.MatEx;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,11 +18,9 @@ import org.opencv.core.Mat;
  * @author X. Wang 
  * @version 1.0
  */
-public class AILogic implements Runnable
+public class AILogic extends AIBaseLogic
 {
     // instance variables
-    private final AIMemory mem;
-    private final Random random = new Random();
     private final PID pidx,pidy;
     private final int imax;
     private final Mat dx = new Mat();
@@ -32,7 +29,6 @@ public class AILogic implements Runnable
     private final Mat dI = new Mat();
     private final List<Mat> channels;
     private final Mat A,B;
-    private final double dt;
     private Mat Old = new Mat();
     private int index;
         
@@ -43,7 +39,7 @@ public class AILogic implements Runnable
     public AILogic(AIMemory mem)
     {
         // Initialize instance variables
-	this.mem = mem;
+	super(mem);
         pidx = new PID(1,0,0);
         pidy = new PID(1,0,0);
         imax = 150;
@@ -51,27 +47,10 @@ public class AILogic implements Runnable
         A = new Mat(2,2,CvType.CV_64F);
         B = new Mat(2,1,CvType.CV_64F);
         index = 1;
-        dt = 0.02;   // in s
-    }
-
-    /**
-     * This method let the thread sleep for t second
-     * 
-     * @param t
-     */
-    public static void Wait(double t)
-    {
-        if(t>0){
-            try {
-                Thread.sleep((int)(t*1000));
-            } catch (InterruptedException e) {
-                Logger.getLogger(AILogic.class.getName()).log(Level.SEVERE, null, e);
-            }   
-        }	
     }
     
-    private void ProcessMessages(){
-        String info = mem.dequeLast("incomingMessages");
+    /*private void ProcessMessages(){
+        Info info = mem.dequeLast("incomingMessages");
         if (info!=null)
         {
             mem.addInfo(info,"outgoingMessages2Network");
@@ -97,23 +76,13 @@ public class AILogic implements Runnable
                     break;
             }   
         }
-    }
-
-    private String Dream()
-    {
-    	return mem.GetShortMemory(Wish(mem.getLength()));
-    }
-    
-    private int Wish(int length)
-    {
-	return (int) (random.nextDouble()*length);
-    }
+    }*/
 
     private void ProcessImages() {      
-        MatEx image = mem.dequeFirstImage();
+        Info image = mem.dequeFirst("webcame");
         if (image!=null){
             try{  
-                image.getMat().colRange(0,320).rowRange(0,240).assignTo(temp, CvType.CV_16SC3);
+                image.getImage().colRange(0,320).rowRange(0,240).assignTo(temp, CvType.CV_16SC3);
                 Core.split(temp, channels);
                 Mat sum = new Mat();
                 Mat S0 = new Mat();
@@ -158,7 +127,7 @@ public class AILogic implements Runnable
     public void run() {
         while(true){
             ProcessImages();
-            ProcessMessages();
+            //ProcessMessages();
             Wait(dt);
         }
     }

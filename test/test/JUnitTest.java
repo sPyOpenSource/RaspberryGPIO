@@ -26,27 +26,6 @@ public class JUnitTest extends TestCase{
         vector = new Vector3D(1.0,1.0,1.0);
         pid = new PID(1,1,1);
     }
-
-    @Test
-    public void testIncomingMessages(){
-        System.out.println("* JUnitTest: memoryTestIncomingMessages()");
-        memory.addInfo("configure:test","incomingMessages");
-        assertEquals("configure:test",memory.dequeFirst("incomingMessages"));
-    }
-    
-    @Test
-    public void testOutgoingMessages2ArduinoDequeLast(){
-        System.out.println("* JUnitTest: memoryTestOutgoingMessages2ArduinoDequeLast()");
-        memory.addInfo("test1", "outgoingMessages2Arduino");
-        assertEquals("test1",memory.dequeLast("outgoingMessages2Arduino"));
-    }
-    
-    @Test
-    public void testConfiguresGetLast(){
-        System.out.println("* JUnitTest: memoryTestConfiguresGetLast()");
-        memory.addInfo("test2", "configures");
-        assertEquals("test2",memory.dequeLast("configures"));
-    }
     
     @Test
     public void testEmotions(){
@@ -155,8 +134,8 @@ public class JUnitTest extends TestCase{
     
     @Test
     public void testPID(){
-        double y = 0;
-        y = pid.Compute(1, 1, 1);
+        System.out.println("* JUnitTest: testPID()");
+        double y = pid.Compute(1, 1, 1);
         assertEquals(y, -3.0);
         y = pid.Compute(10, 20, 1);
         assertEquals(y, -31.0);

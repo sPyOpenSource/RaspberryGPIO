@@ -6,7 +6,7 @@ package AI;
  * @version 1.0
  */
 
-import AI.Models.MatEx;
+import AI.Models.Info;
 import AI.Models.Vector3D;
 import AI.Models.VectorFilter;
 import AI.Models.VectorMat;
@@ -16,7 +16,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.DatagramPacket;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,14 +23,12 @@ import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 
 
-public class AIInput implements Runnable
+public class AIInput extends AIBaseInput
 {
     /**
      * This is the initialization of AIInput class 
      */
-    private final AIMemory mem;
     private final VideoCapture cap = new VideoCapture(); 
-    private final int bufferSize;
     private BufferedReader log;
     private long start;
     private final LSM303 lsm303;
@@ -44,8 +41,7 @@ public class AIInput implements Runnable
      */
     public AIInput(AIMemory mem)
     {
-    	this.mem = mem;
-        bufferSize = 1024;
+    	super(mem);
         try {
             log = new BufferedReader(new FileReader(mem.getLogPath()));
         } catch (FileNotFoundException ex) {
@@ -55,7 +51,7 @@ public class AIInput implements Runnable
         start = System.currentTimeMillis();
         lsm303 = new LSM303();
         l3gd20 = new L3GD20();
-        accFilter = new VectorFilter(10, 0.0001, 0.001, 0.1, 0.02);
+        accFilter = new VectorFilter(10.0, 0.0001, 0.001, 0.1, 0.02);
     }
     
     private void getImageFromWebcam(){
@@ -63,8 +59,7 @@ public class AIInput implements Runnable
         cap.read(image);
         if(!image.empty()){
             long end = System.currentTimeMillis();
-            MatEx temp = new MatEx(image,(end-start)/1000d);
-            mem.addInpImage(temp);
+            mem.addInfo(new Info(image, (end-start)/1000d),"webcam");
             start = end;
         }
     }
@@ -72,41 +67,9 @@ public class AIInput implements Runnable
     /*private void ReadMessageFromArduino(){
         System.out.println(mem.getSerial().read());
     }*/
-    
-    public void ReceiveFromNetwork(){
-        byte[] buffer = new byte[bufferSize];
-        DatagramPacket inPacket = new DatagramPacket(buffer, bufferSize);
-        try {
-            mem.getSocket().receive(inPacket);
-        } catch (IOException ex) {
-            Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String[] info = new String(inPacket.getData()).split(";");
-        mem.addInfo(info[0],"incomingMessages");
-    }
-    
-    private void ImportMemory(){
-        try {
-            String filename;
-            BufferedReader memory = null;
-            while((filename=log.readLine())!=null){
-                memory = new BufferedReader(new FileReader(filename));               
-            }
-            if(memory==null)
-                return;
-            String pair;
-            while((pair=memory.readLine())!=null){
-                String[] pairs = pair.split(",");
-                mem.addInfo(pairs[1], pairs[0]);
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     @Override
-    public void run() {
-        ImportMemory();
+    public void runThread() {
         /*Thread t1 = new Thread(){
             @Override
             public void run(){
@@ -123,14 +86,6 @@ public class AIInput implements Runnable
             }
         };
         t2.start();
-        Thread t3 = new Thread(){
-            @Override
-            public void run(){
-                while(true)
-                    ReceiveFromNetwork();
-            }
-        };
-        //t3.start();
         Thread t4 = new Thread(){
             @Override
             public void run(){
@@ -166,13 +121,5 @@ public class AIInput implements Runnable
             }
         };
         //t4.start();
-        Thread t5 = new Thread(){
-            @Override
-            public void run(){
-                while(true)
-                    mem.ReceiveFromWebsocket();
-            }
-        };
-        //t5.start();
     }
 }

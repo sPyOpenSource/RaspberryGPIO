@@ -41,6 +41,6 @@ public final class AI
     {
 	logThread.start();
         inpThread.start(); 
-        //oupThread.start();
+        oupThread.start();
     }
 }
