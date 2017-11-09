@@ -6,7 +6,7 @@ package AI;
  * @author X. Wang
  * @version 1.0
  */
-public final class AI
+public final class AI 
 {
     // instance variables
     private final AIMemory mem = new AIMemory();

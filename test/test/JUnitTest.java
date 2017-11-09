@@ -2,16 +2,11 @@ package test;
 
 import AI.AIMemory;
 import AI.Models.Vector3D;
-import AI.Models.VectorFilter;
-import AI.Models.VectorMat;
 import AI.Models.Info;
 import AI.Models.Computer;
-import AI.util.KalmanFilter;
 import AI.util.PID;
 import junit.framework.TestCase;
 import org.junit.Test;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
 import java.net.Socket;
 
 
@@ -66,7 +61,7 @@ public class JUnitTest extends TestCase{
     @Test
     public void testLogpath(){
         System.out.println("* JUnitTest: testLogpath()");
-        assertEquals(memory.getLogPath(),"/home/spy/AI/log.txt");
+        assertEquals(memory.getLogPath(),"log.txt");
     }
     
     @Test
@@ -78,86 +73,6 @@ public class JUnitTest extends TestCase{
         assertEquals(vector.getUnitVector().Compare(vector), true);
         vector.Sub(vector);
         assertEquals(vector.Compare(new Vector3D(0.00,0.00,0.00)), true);
-    }
-    
-    @Test
-    public void testKalmanFilterZero(){
-        System.out.println("* JUnitTest: testKalmanFilter()");
-        VectorFilter filter = new VectorFilter(10, 0.0001, 0.001, 0.02);
-        filter.init(new Vector3D(0.0,0.0,0.0));
-        VectorMat X = filter.Filter(new Vector3D(0.0,0.0,0.0),new Vector3D(0.0,0.0,0.0));
-        assertEquals(X.getX(0).Compare(new Vector3D(0.0,0.0,0.0)),true);
-        assertEquals(X.getX(1).Compare(new Vector3D(0.0,0.0,0.0)),true);
-        assertEquals(X.getX(2).Compare(new Vector3D(0.0,0.0,0.0)),true);
-    }
-    
-    @Test
-    public void testKalmanFilter(){
-        System.out.println("* JUnitTest: testKalmanFilter()");
-        VectorFilter filter = new VectorFilter(10, 0.0001, 0.001, 0.02);
-        filter.init(new Vector3D(1.0,100.0,0.001));
-        VectorMat X = filter.Filter(new Vector3D(1.0,1.0,1.0), new Vector3D(1.0,1.0,1.0));
-        assertEquals(X.getX(0).Compare(new Vector3D(0.00999950003699695,0.999950003699695,9.99950003699695E-6)),true);
-        assertEquals(X.getX(1).Compare(new Vector3D(0.0,0.0,0.0)),true);
-        assertEquals(X.getX(2).Compare(new Vector3D(0.0,0.0,0.0)),true);
-    }
-    
-    @Test
-    public void testKalmanFilterTwoTimes(){
-        System.out.println("* JUnitTest: testKalmanFilter()");
-        KalmanFilter kalmanFilter = new KalmanFilter(10, 0.0001, 0.001, 0.02);
-        kalmanFilter.init(0.001,0.1);
-        Mat Z = Mat.ones(2,1,CvType.CV_64F);
-        kalmanFilter.Filter(Z);
-        Mat X = kalmanFilter.Filter(Z);
-        assertEquals(X.get(0,0)[0], 0.007854898600399885);
-        assertEquals(X.get(1,0)[0], 0.38548986003998853);
-        assertEquals(X.get(2,0)[0], 16.258783204798625);
-    }
-    
-    @Test
-    public void testKalmanFilterThreeTimes(){
-        System.out.println("* JUnitTest: testKalmanFilter()");
-        KalmanFilter kalmanFilter = new KalmanFilter(10, 0.0001, 0.001, 0.02);
-        kalmanFilter.init(0.001,0.1);
-        Mat Z = Mat.ones(2,1,CvType.CV_64F);
-        kalmanFilter.Filter(Z);
-        kalmanFilter.Filter(Z);
-        Mat X = kalmanFilter.Filter(Z);
-        assertEquals(X.get(0,0)[0], 0.023933585123087662);
-        assertEquals(X.get(1,0)[0], 1.0046191990151088);
-        assertEquals(X.get(2,0)[0], 27.464609948167812);
-    }
-    
-    @Test
-    public void testKalmanFilterManyTimes(){
-        System.out.println("* JUnitTest: testKalmanFilter()");
-        KalmanFilter kalmanFilter = new KalmanFilter(10, 0.0001, 0.001, 0.02);
-        kalmanFilter.init(0.001,0.1);
-        Mat Z = Mat.ones(2,1,CvType.CV_64F);
-        for(int i = 0; i < 100; i++){
-            kalmanFilter.Filter(Z);
-        }
-        Mat X = kalmanFilter.Filter(Z);
-        assertEquals(X.get(0,0)[0], 1.3027591767322584);
-        assertEquals(X.get(1,0)[0], 0.9370422506769516);
-        assertEquals(X.get(2,0)[0], 1.0698110481008136);
-    }
-    
-    @Test
-    public void testKalmanFilterXManyTimes(){
-        System.out.println("* JUnitTest: testKalmanFilter()");
-        KalmanFilter kalmanFilter = new KalmanFilter(10, 0.0001, 0.001, 0.02);
-        kalmanFilter.init(0.7,0.0);
-        Mat Z = new Mat(2,1,CvType.CV_64F);
-        Z.put(0, 0, 1d, 0);
-        for(int i = 0; i < 100000; i++){
-            kalmanFilter.Filter(Z);
-        }
-        Mat X = kalmanFilter.Filter(Z);
-        assertEquals(X.get(0,0)[0], 0.9999999999999991);
-        assertEquals(X.get(1,0)[0], 1.7389024333743455E-16);
-        assertEquals(X.get(2,0)[0], -2.9655025754001526E-15);
     }
     
     @Test

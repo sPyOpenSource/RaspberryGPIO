@@ -2,11 +2,6 @@ package AI;
 
 import AI.Models.Info;
 import AI.util.MotionDetection;
-import java.util.List;
-import java.util.Random;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This is the logic class of AI.
@@ -14,16 +9,13 @@ import java.util.logging.Logger;
  * @author X. Wang 
  * @version 1.0
  */
-public class AILogic implements Runnable
+public class AILogic extends AIBaseLogic
 {
     // instance variables
-    private final AIMemory mem;
-    private final Random random = new Random();
     private final int imax = 150;
-    private final double dt = 0.02;   // in s
-    private final double threshold = 10000,factor,zmincor,d = 0.185,f,xmincor,percentage = 0.5;;
+    private final double threshold = 10000,factor,zmincor,d = 0.185,f,xmincor;
     private int index = 1;
-    private final MotionDetection left, right;
+    private final MotionDetection left,right;
         
     /**
      * Constructor for objects of class AILogic
@@ -32,105 +24,13 @@ public class AILogic implements Runnable
     public AILogic(AIMemory mem)
     {
         // Initialize instance variables        
-	this.mem = mem;
+	super(mem);
         left = new MotionDetection(0.5, threshold);
         right = new MotionDetection(0.5, threshold);
         factor = 500/0.6;
         zmincor = 4.5*3.82/3; // 1m
         xmincor = 0.14/0.62*5; //-0.14 ipv 0.62, 
         f = 1.90/zmincor;
-    }
-
-    /**
-     * this is a wait method
-     * 
-     * @param t in seconds
-     */
-    public static void Wait(double t)
-    {
-        if(t>0){
-            try {
-                Thread.sleep((int)(t*1000));
-            } catch (InterruptedException e) {
-                Logger.getLogger(AIMemory.class.getName()).log(Level.SEVERE, null, e);
-            }   
-        }	
-    }
-    
-    private void ProcessMessages(){
-        while(true){
-            Info info = mem.dequeFirst("incomingMessages");
-            if(info==null)
-                break;
-            mem.SaveShort(info.getPayload(), Wish(mem.getShortLength()));
-            Fuzzy(info);
-            Info response = Induction(info);
-            if (response!=null){
-                mem.addInfo(response, "outgoingMessages2Web");
-            } else {
-                String message = Dream();
-                if(message!=null)
-                    mem.addInfo(new Info(message), "outgoingMessages2Web");
-            }
-        }   
-    }
-
-    private Info Induction(Info info)
-    {
-    	String key = info.getPayload();
-        List<Info> messages = mem.search(key);
-        int s = messages.size();
-        if(s>0)
-            return messages.get(Wish(s));
-        else
-            return null;
-    }
-    
-    private void Fuzzy(Info info)
-    {
-    	double p = 0;
-        int l = mem.getShortLength();
-    	for (int i = 0; i < l; i++)
-    	{
-            if (info.getPayload().equals(mem.GetShortMemory(i)))
-            {
-                p=p+1.0/l;
-            }
-    	}
-    	if(p>percentage)
-            mem.addInfo(info, "longterm");
-    }
-    
-    private String Dream()
-    {
-    	return mem.GetShortMemory(Wish(mem.getShortLength()));
-    }
-    
-    private int Wish(int length)
-    {
-	return (int) (random.nextDouble()*length);
-    }
-    
-    public void Love()
-    {
-        int l = mem.getShortLength();
-        List<Info> messages = mem.search("longterm");
-        int s = messages.size();
-        if(s==0){
-            return;
-        }
-    	for (int j = 0; j < l/2; j++)
-    	{
-            mem.SaveShort(messages.get(Wish(s)).getPayload(),Wish(l));
-    	}
-    }
-    
-    private void Clean(String key){
-        List<Info> list = mem.search(key);
-        for(int i=list.size()-1;i>=0;i--){
-            if(!list.get(i).isOnline())
-                list.remove(i);
-        }
     }
 
     private void ProcessImages() {    
@@ -165,8 +65,6 @@ public class AILogic implements Runnable
     public void run() {
         while(true){
             ProcessImages();
-            //ProcessMessages();
-            //Clean("networkClients");
             Wait(dt);
         }
     }
