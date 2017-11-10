@@ -110,13 +110,6 @@ public class LSM303
     }
   }
 
-  public void setWait(long wait)
-  {
-  }
-  public void setKeepReading(boolean keepReading)
-  {
-  }
-
   public Vector3D readingAcc()
     throws IOException
   {
@@ -124,9 +117,8 @@ public class LSM303
 
       int r = accelerometer.read(LSM303_REGISTER_ACCEL_OUT_X_L_A | 0x80, accelData, 0, 6);
       if (r != 6)
-      {
         System.out.println("Error reading accel data, < 6 bytes");
-      }
+      
       int accelX = accel12(accelData, 0);
       int accelY = accel12(accelData, 2);
       int accelZ = accel12(accelData, 4);
@@ -143,9 +135,7 @@ public class LSM303
       //r = magnetometer.read(LSM303_REGISTER_MAG_OUT_X_H_M, magData, 0, 6);
       int r = magnetometer.read(D_OUT_X_L_M|(1<<7), magData, 0, 6);
       if (r != 6)
-      {
         System.out.println("Error reading mag data, < 6 bytes");
-      }
 
       int magX = mag16(magData, 0);
       int magY = mag16(magData, 2);

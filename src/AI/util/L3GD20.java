@@ -8,6 +8,8 @@ import com.pi4j.io.i2c.I2CFactory;
 import java.io.IOException;
 
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class L3GD20
 {
@@ -40,9 +42,9 @@ public class L3GD20
   public final static int L3GD20_REG_RW_INT1_THS_ZL        = 0x37; // Interrupt 1 threshold level Z LSB register
   public final static int L3GD20_REG_RW_INT1_DURATION      = 0x38; // Interrupt 1 duration register
   
-  public final static int L3GD20_MASK_CTRL_REG1_Xen        = 0x01; // X enable
-  public final static int L3GD20_MASK_CTRL_REG1_Yen        = 0x02; // Y enable
-  public final static int L3GD20_MASK_CTRL_REG1_Zen        = 0x04; // Z enable
+  public final static int L3GD20_MASK_CTRL_REG1_X_EN       = 0x01; // X enable
+  public final static int L3GD20_MASK_CTRL_REG1_Y_EN       = 0x02; // Y enable
+  public final static int L3GD20_MASK_CTRL_REG1_Z_EN       = 0x04; // Z enable
   public final static int L3GD20_MASK_CTRL_REG1_PD         = 0x08; // Power-down
   public final static int L3GD20_MASK_CTRL_REG1_BW         = 0x30; // Bandwidth
   public final static int L3GD20_MASK_CTRL_REG1_DR         = 0xc0; // Output data rate
@@ -55,7 +57,7 @@ public class L3GD20
   public final static int L3GD20_MASK_CTRL_REG3_PP_OD      = 0x10; // Push-pull / Open-drain
   public final static int L3GD20_MASK_CTRL_REG3_H_LACTIVE  = 0x20; // Interrupt active configuration on INT1
   public final static int L3GD20_MASK_CTRL_REG3_I1_BOOT    = 0x40; // Boot status available on INT1
-  public final static int L3GD20_MASK_CTRL_REG3_I1_Int1    = 0x80; // Interrupt enabled on INT1
+  public final static int L3GD20_MASK_CTRL_REG3_I1_INT1    = 0x80; // Interrupt enabled on INT1
   public final static int L3GD20_MASK_CTRL_REG4_SIM        = 0x01; // SPI Serial interface selection
   public final static int L3GD20_MASK_CTRL_REG4_FS         = 0x30; // Full scale selection
   public final static int L3GD20_MASK_CTRL_REG4_BLE        = 0x40; // Big/little endian selection
@@ -407,11 +409,6 @@ public class L3GD20
   {
     this.writeToRegisterWithDictionaryCheck(L3GD20_REG_RW_CTRL_REG4, L3GD20_MASK_CTRL_REG4_FS, value, L3GD20Dictionaries.FullScaleMap, "FullScaleMap") ;
   }
-        
-  public String returnConfiguration()
-  {
-    return "To be implemented...";
-  }
   
   public int getDeviceId() throws Exception
   {
@@ -421,7 +418,7 @@ public class L3GD20
   public void setAxisXEnabled(boolean enabled) throws Exception
   {  
     this.writeToRegisterWithDictionaryCheck(L3GD20_REG_RW_CTRL_REG1, 
-                                            L3GD20_MASK_CTRL_REG1_Xen, 
+                                            L3GD20_MASK_CTRL_REG1_X_EN, 
                                             enabled?L3GD20Dictionaries.TRUE:L3GD20Dictionaries.FALSE, 
                                             L3GD20Dictionaries.EnabledMap, 
                                             "EnabledMap");
@@ -429,14 +426,14 @@ public class L3GD20
   
   public boolean isAxisXEnabled() throws Exception
   {
-    String enabled = this.readFromRegisterWithDictionaryMatch(L3GD20_REG_RW_CTRL_REG1, L3GD20_MASK_CTRL_REG1_Xen, L3GD20Dictionaries.EnabledMap);
+    String enabled = this.readFromRegisterWithDictionaryMatch(L3GD20_REG_RW_CTRL_REG1, L3GD20_MASK_CTRL_REG1_X_EN, L3GD20Dictionaries.EnabledMap);
     return enabled.equals(L3GD20Dictionaries.TRUE);
   }
         
   public void setAxisYEnabled(boolean enabled) throws Exception
   {  
     this.writeToRegisterWithDictionaryCheck(L3GD20_REG_RW_CTRL_REG1, 
-                                            L3GD20_MASK_CTRL_REG1_Yen, 
+                                            L3GD20_MASK_CTRL_REG1_Y_EN, 
                                             enabled?L3GD20Dictionaries.TRUE:L3GD20Dictionaries.FALSE, 
                                             L3GD20Dictionaries.EnabledMap, 
                                             "EnabledMap");
@@ -444,14 +441,14 @@ public class L3GD20
   
   public boolean isAxisYEnabled() throws Exception
   {
-    String enabled = this.readFromRegisterWithDictionaryMatch(L3GD20_REG_RW_CTRL_REG1, L3GD20_MASK_CTRL_REG1_Yen, L3GD20Dictionaries.EnabledMap);
+    String enabled = this.readFromRegisterWithDictionaryMatch(L3GD20_REG_RW_CTRL_REG1, L3GD20_MASK_CTRL_REG1_Y_EN, L3GD20Dictionaries.EnabledMap);
     return enabled.equals(L3GD20Dictionaries.TRUE);
   }
         
   public void setAxisZEnabled(boolean enabled) throws Exception
   {  
     this.writeToRegisterWithDictionaryCheck(L3GD20_REG_RW_CTRL_REG1, 
-                                            L3GD20_MASK_CTRL_REG1_Zen, 
+                                            L3GD20_MASK_CTRL_REG1_Z_EN, 
                                             enabled?L3GD20Dictionaries.TRUE:L3GD20Dictionaries.FALSE, 
                                             L3GD20Dictionaries.EnabledMap, 
                                             "EnabledMap");
@@ -459,7 +456,7 @@ public class L3GD20
   
   public boolean isAxisZEnabled() throws Exception
   {
-    String enabled = this.readFromRegisterWithDictionaryMatch(L3GD20_REG_RW_CTRL_REG1, L3GD20_MASK_CTRL_REG1_Zen, L3GD20Dictionaries.EnabledMap);
+    String enabled = this.readFromRegisterWithDictionaryMatch(L3GD20_REG_RW_CTRL_REG1, L3GD20_MASK_CTRL_REG1_Z_EN, L3GD20Dictionaries.EnabledMap);
     return enabled.equals(L3GD20Dictionaries.TRUE);
   }
         
@@ -473,9 +470,9 @@ public class L3GD20
               break;
           case L3GD20Dictionaries.SLEEP:
               this.writeToRegister(L3GD20_REG_RW_CTRL_REG1, L3GD20_MASK_CTRL_REG1_PD |
-                      L3GD20_MASK_CTRL_REG1_Zen |
-                      L3GD20_MASK_CTRL_REG1_Yen |
-                      L3GD20_MASK_CTRL_REG1_Xen, 8);
+                      L3GD20_MASK_CTRL_REG1_Z_EN |
+                      L3GD20_MASK_CTRL_REG1_Y_EN |
+                      L3GD20_MASK_CTRL_REG1_X_EN, 8);
               break;
           case L3GD20Dictionaries.NORMAL:
               this.writeToRegister(L3GD20_REG_RW_CTRL_REG1, L3GD20_MASK_CTRL_REG1_PD, 1);
@@ -487,7 +484,7 @@ public class L3GD20
   
   public String getPowerMode() throws Exception
   {
-    int powermode = this.readFromRegister(L3GD20_REG_RW_CTRL_REG1, L3GD20_MASK_CTRL_REG1_PD | L3GD20_MASK_CTRL_REG1_Xen | L3GD20_MASK_CTRL_REG1_Yen | L3GD20_MASK_CTRL_REG1_Zen);
+    int powermode = this.readFromRegister(L3GD20_REG_RW_CTRL_REG1, L3GD20_MASK_CTRL_REG1_PD | L3GD20_MASK_CTRL_REG1_X_EN | L3GD20_MASK_CTRL_REG1_Y_EN | L3GD20_MASK_CTRL_REG1_Z_EN);
     int dictval = -1;
     if (!BitOps.checkBit(powermode, 3))
       dictval = 0;
@@ -823,23 +820,17 @@ public class L3GD20
    */
   private int readU8(int reg) throws Exception
   {
-    int result = 0;
-    try
-    {
-      result = this.l3dg20.read(reg);
-      if (verbose)
+    int result = this.l3dg20.read(reg);
+    if (verbose)
         System.out.println("(U8) I2C: Device " + toHex(L3GD20ADDRESS) + " returned " + toHex(result) + " from reg " + toHex(reg));
-    }
-    catch (Exception ex)
-    { ex.printStackTrace(); }
     return result;
   }
   
   private void writeU8(int adress, int reg){
-      try{
+      try {
           this.l3dg20.write(adress, (byte)reg);
-      }catch(Exception e){
-          System.out.println(e);
+      } catch (IOException ex) {
+          Logger.getLogger(L3GD20.class.getName()).log(Level.SEVERE, null, ex);
       }
   }
   
@@ -853,6 +844,10 @@ public class L3GD20
   
   private static void waitfor(long howMuch)
   {
-    try { Thread.sleep(howMuch); } catch (InterruptedException ie) { ie.printStackTrace(); }
+    try { 
+        Thread.sleep(howMuch); 
+    } catch (InterruptedException e) {
+        Logger.getLogger(L3GD20.class.getName()).log(Level.SEVERE, null, e);
+    }
   }
 }

@@ -5,9 +5,9 @@ import AI.util.PID;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.opencv.core.CvType;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -31,6 +31,7 @@ public class AILogic extends AIBaseLogic
     private final Mat A,B;
     private Mat Old = new Mat();
     private int index;
+    private long start;
         
     /**
      * Constructor for objects of class AILogic
@@ -47,6 +48,7 @@ public class AILogic extends AIBaseLogic
         A = new Mat(2,2,CvType.CV_64F);
         B = new Mat(2,1,CvType.CV_64F);
         index = 1;
+        start = System.currentTimeMillis();
     }
     
     /*private void ProcessMessages(){
@@ -57,15 +59,14 @@ public class AILogic extends AIBaseLogic
             while(true){
                 if("start".equals(info)){
                     String configure = mem.getLastConfigure();
-                    if (configure!=null){
+                    if (configure!=null)
                         mem.addInfo("0"+configure,"outgoingMessages2Arduino");
-                    }
                 } else {
                     String[] arrays = info.split(":");
                     if(arrays.length>1){
-                        if("0".equals(arrays[0]))
-                            mem.addInfo(arrays[1],"outgoingMessages2Web");
-                        else if("configure".equals(arrays[0])){
+                        if("0".equals(arrays[0])){
+                            mem.addInfo(arrays[1],"outgoingMessages2Network");
+                        } else if("configure".equals(arrays[0])){
                             mem.addInfo(arrays[1],"configures");
                             mem.addInfo("0"+arrays[1],"outgoingMessages2Arduino");
                         }  
@@ -81,6 +82,7 @@ public class AILogic extends AIBaseLogic
     private void ProcessImages() {      
         Info image = mem.dequeFirst("webcame");
         if (image!=null){
+            double dt = (image.getTime() - start)/1000d;
             try{  
                 image.getImage().colRange(0,320).rowRange(0,240).assignTo(temp, CvType.CV_16SC3);
                 Core.split(temp, channels);
@@ -100,17 +102,16 @@ public class AILogic extends AIBaseLogic
                     Core.subtract(Eest,West,dy);
                     double xy = dx.dot(dy);
                     A.put(0, 0, dx.dot(dx), dy.dot(dy), xy, xy);
-                    B.put(0, 0, -dx.dot(dI)/image.getTime(), -dx.dot(dI)/image.getTime());
+                    B.put(0, 0, -dx.dot(dI)/dt, -dx.dot(dI)/dt);
                     Mat V = new Mat();
                     Core.multiply(A.inv(), B, V);
                     String info = String.format(
                         "%f,%f",
-                    	pidx.Compute(V.get(0,0)[0],0,image.getTime()),
-                    	pidy.Compute(V.get(1,0)[0],0,image.getTime())
+                    	pidx.Compute(V.get(0,0)[0],0,dt),
+                    	pidy.Compute(V.get(1,0)[0],0,dt)
                     );
+                    start = image.getTime();
                     System.out.println(info);
-                    //mem.addOutgoingMessage2Arduino("1"+info);
-                    //mem.addOutgoingMessage2Network(message+",");
                 }
                 Old = North;
                 if(index%imax==0){
@@ -118,17 +119,13 @@ public class AILogic extends AIBaseLogic
                 }
                 index++;
             } catch (Exception e){
-                Logger.getLogger(AIMemory.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(AILogic.class.getName()).log(Level.SEVERE, null, e);
             }
         }  
     }
 
     @Override
-    public void run() {
-        while(true){
-            ProcessImages();
-            //ProcessMessages();
-            Wait(dt);
-        }
+    protected void Thread() {
+        ProcessImages();
     }
 }

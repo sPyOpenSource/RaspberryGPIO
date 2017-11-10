@@ -1,6 +1,8 @@
 package AI;
 
 import com.pi4j.io.serial.Serial;
+import java.util.logging.Level;
+import java.util.logging.Logger;
         
 /**
  * This is the memory class of AI.
@@ -21,8 +23,8 @@ public class AIMemory extends AIBaseMemory
         // Initialize instance variables
         try {
             serial.open("/dev/ttyACM0",115200); 
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch(NullPointerException ex) {
+            Logger.getLogger(AIMemory.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
