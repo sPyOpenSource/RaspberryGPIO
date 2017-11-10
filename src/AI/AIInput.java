@@ -10,9 +10,9 @@ import AI.Models.Info;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.opencv.videoio.VideoCapture;
 
 public class AIInput extends AIBaseInput
@@ -48,7 +48,7 @@ public class AIInput extends AIBaseInput
     }
 
     @Override
-    protected void runThread() {
+    protected void Thread() {
         Thread ReadMessageFromArduino = new Thread(){
             @Override
             public void run(){

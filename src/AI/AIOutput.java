@@ -45,10 +45,7 @@ public class AIOutput extends AIBaseOutput
 
 
     @Override
-    public void run() {
-        while(true){
-            //Send("outgoingMessages2Arduino");
-            AILogic.Wait(dt);
-        }
+    protected void Thread() {
+        //Send("outgoingMessages2Arduino");
     }
 }

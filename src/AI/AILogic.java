@@ -62,10 +62,7 @@ public class AILogic extends AIBaseLogic
     }
 
     @Override
-    public void run() {
-        while(true){
-            ProcessImages();
-            Wait(dt);
-        }
+    protected void Thread() {
+        ProcessImages();
     }
 }
