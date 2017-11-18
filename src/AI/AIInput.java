@@ -46,7 +46,7 @@ public class AIInput extends AIBaseInput
         cap.open(0);
         lsm303 = new LSM303();
         l3gd20 = new L3GD20();
-        accFilter = new VectorFilter(10.0, 0.0001, 0.001, 0.1, 0.02);
+        accFilter = new VectorFilter(10.0, 10.0, 0.0001, 0.1, 0.02);
         try {
             l3gd20.init();
         } catch (Exception ex) {
@@ -54,8 +54,11 @@ public class AIInput extends AIBaseInput
         }
         try {
             g = lsm303.readingAcc();
-            accFilter.init(g);
+            Vector3D gyr = l3gd20.getRawOutValues();
+            accFilter.init(g,gyr);
         } catch (IOException ex) {
+            Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
