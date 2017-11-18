@@ -28,7 +28,7 @@ public class AIMemory extends AIBaseMemory
         }
     }
     
-    /*public Serial getSerial(){
+    public Serial getSerial(){
         return serial;
-    }*/
+    }
 }

@@ -51,34 +51,27 @@ public class AILogic extends AIBaseLogic
         start = System.currentTimeMillis();
     }
     
-    /*private void ProcessMessages(){
-        Info info = mem.dequeLast("incomingMessages");
-        if (info!=null)
-        {
-            mem.addInfo(info,"outgoingMessages2Network");
-            while(true){
-                if("start".equals(info)){
-                    String configure = mem.getLastConfigure();
-                    if (configure!=null)
-                        mem.addInfo("0"+configure,"outgoingMessages2Arduino");
-                } else {
-                    String[] arrays = info.split(":");
-                    if(arrays.length>1){
-                        if("0".equals(arrays[0])){
-                            mem.addInfo(arrays[1],"outgoingMessages2Network");
-                        } else if("configure".equals(arrays[0])){
-                            mem.addInfo(arrays[1],"configures");
-                            mem.addInfo("0"+arrays[1],"outgoingMessages2Arduino");
-                        }  
-                    }                         
+    @Override
+    protected void Messages(Info info){
+        if("configure".equals(info.getPayload())){
+            Info configure = mem.dequeLast("configure");
+            if (configure!=null)
+                Configure(configure.getPayload());
+        } else {
+            String[] arrays = info.getPayload().split(":");
+            if(arrays.length>1){
+                if("configure".equals(arrays[0])){
+                    mem.addInfo(new Info(arrays[1]),"configures");
+                    Configure(arrays[1]);
                 }
-                info = mem.dequeFirst("incomingMessages");
-                if(info==null)
-                    break;
-            }   
+            }                    
         }
-    }*/
+    }
 
+    private void Configure(String info){
+        mem.addInfo(new Info("0"+info),"outgoingMessages2Arduino");
+    }
+    
     private void ProcessImages() {      
         Info image = mem.dequeFirst("webcame");
         if (image!=null){
@@ -114,9 +107,8 @@ public class AILogic extends AIBaseLogic
                     System.out.println(info);
                 }
                 Old = North;
-                if(index%imax==0){
+                if(index%imax==0)
                     System.gc();
-                }
                 index++;
             } catch (Exception e){
                 Logger.getLogger(AILogic.class.getName()).log(Level.SEVERE, null, e);

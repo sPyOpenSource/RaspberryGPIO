@@ -12,6 +12,7 @@ import AI.Models.VectorFilter;
 import AI.Models.VectorMat;
 import AI.util.LSM303;
 import AI.util.L3GD20;
+import com.pi4j.io.serial.Serial;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -31,7 +32,9 @@ public class AIInput extends AIBaseInput
     private final L3GD20 l3gd20;
     private final VectorFilter accFilter;
     private Vector3D g;
-    
+    private final double dt = 0.02;
+    private final Serial serial;
+
     /**
      * Constructor for objects of class AIInput
      * @param mem
@@ -39,6 +42,7 @@ public class AIInput extends AIBaseInput
     public AIInput(AIMemory mem)
     {
     	super(mem);
+        serial = mem.getSerial();
         cap.open(0);
         lsm303 = new LSM303();
         l3gd20 = new L3GD20();
@@ -80,23 +84,23 @@ public class AIInput extends AIBaseInput
         } catch (Exception ex){
             Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
         }
-        AILogic.Wait(0.02);
+        AILogic.Wait(dt);
     }
     
-    /*private void ReadMessageFromArduino(){
-        System.out.println(mem.getSerial().read());
-    }*/
+    private void ReadMessageFromArduino(){
+        System.out.println(serial.read());
+    }
 
     @Override
     protected void Thread() {
-        /*Thread t1 = new Thread(){
+        Thread ReadMessageFromArduino = new Thread(){
             @Override
             public void run(){
                 while(true)
                     ReadMessageFromArduino();
             }
         };
-        t1.start();*/
+        ReadMessageFromArduino.start();
         Thread getImageFromWebcam = new Thread(){
             @Override
             public void run(){
@@ -112,6 +116,6 @@ public class AIInput extends AIBaseInput
                     filter();
             }
         };
-        //t4.start();
+        filter.start();
     }
 }

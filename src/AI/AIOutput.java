@@ -1,5 +1,8 @@
 package AI;
 
+import AI.Models.Info;
+import com.pi4j.io.serial.Serial;
+
 /**
  * This is the output of AI.
  * 
@@ -8,6 +11,8 @@ package AI;
  */
 public class AIOutput extends AIBaseOutput
 {
+    private final Serial serial;
+
     /**
      * Constructor for objects of class AIOutput
      * @param mem
@@ -15,18 +20,20 @@ public class AIOutput extends AIBaseOutput
     public AIOutput(AIMemory mem)
     {
 	super(mem);
+        serial = mem.getSerial();
     }
     
-    /*private void Send2Arduino(){
-        String message = mem.dequeFirst("outgoingMessages2Arduino");
+    private void Send2Arduino(){
+        Info message = mem.dequeFirst("outgoingMessages2Arduino");
         if (message!=null){
-            mem.getSerial().write(message);
-            mem.getSerial().flush();
+            serial.write(message.getPayload());
+            serial.flush();
         }
-    }*/
+    }
 
+    
     @Override
     protected void Thread() {
-        //Send2Arduino();
+        Send2Arduino();
     }
 }
