@@ -1,5 +1,6 @@
 package AI;
 
+import AI.Models.Info;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -30,7 +31,7 @@ public class AIOutput extends AIBaseOutput
         }
     }
     
-    /*private void Send(String message){
+    private void Send(String message){
         Info info = mem.dequeFirst(message);
         if(info==null)
             return;
@@ -40,12 +41,10 @@ public class AIOutput extends AIBaseOutput
         } catch (IOException ex) {
             Logger.getLogger(AIOutput.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }*/
-    
-
+    }
 
     @Override
     protected void Thread() {
-        //Send("outgoingMessages2Arduino");
+        Send("outgoingMessages2Arduino");
     }
 }

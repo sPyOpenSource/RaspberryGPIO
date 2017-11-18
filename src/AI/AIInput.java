@@ -56,7 +56,7 @@ public class AIInput extends AIBaseInput
                     ReadMessageFromArduino();
             }
         };
-        //t1.start();
+        ReadMessageFromArduino.start();
         Thread getImageFromWebcamLeft = new Thread(){
             @Override
             public void run(){

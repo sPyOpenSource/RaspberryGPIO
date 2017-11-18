@@ -55,14 +55,18 @@ public class AILogic extends AIBaseLogic
             double y = -yLeft*z/f/xmincor ;
             System.out.println(String.format("%.4f, %.4f, %.4f",x,y,z));
         }
-        if(index%imax==0){
+        if(index%imax==0)
             System.gc();
-        }
         index++;
     }
 
     @Override
     protected void Thread() {
         ProcessImages();
+    }
+
+    @Override
+    protected void Messages(Info info) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
