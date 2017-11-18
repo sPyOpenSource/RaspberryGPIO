@@ -1,6 +1,9 @@
 package AI;
 
 import AI.Models.Info;
+import AI.Models.Vector3D;
+import AI.Models.VectorFilter;
+import AI.Models.VectorMat;
 import AI.util.MotionDetection;
 
 /**
@@ -16,7 +19,8 @@ public class AILogic extends AIBaseLogic
     private final double threshold = 10000,factor,zmincor,d = 0.185,f,xmincor;
     private int index = 1;
     private final MotionDetection left,right;
-        
+    private final VectorFilter accFilter, magFilter;
+
     /**
      * Constructor for objects of class AILogic
      * @param mem
@@ -31,6 +35,10 @@ public class AILogic extends AIBaseLogic
         zmincor = 4.5*3.82/3; // 1m
         xmincor = 0.14/0.62*5; //-0.14 ipv 0.62, 
         f = 1.90/zmincor;
+        accFilter = new VectorFilter(10.0, 10.0, 0.0001, 0.1, 0.03333333333);
+        accFilter.init(new Vector3D(0.0,0.0,0.0), new Vector3D(0.0,0.0,0.0));
+        magFilter = new VectorFilter(10.0, 10.0, 0.0001, 0.1, 0.03333333333);
+        magFilter.init(new Vector3D(0.0,0.0,0.0), new Vector3D(0.0,0.0,0.0));
     }
 
     private void ProcessImages() {    
@@ -48,7 +56,7 @@ public class AILogic extends AIBaseLogic
         double yLeft = left.getY()/factor;
         double xRight = right.getX()/factor;
         double yRight = right.getY()/factor;
-        double l = Math.sqrt(Math.pow(xLeft - xRight,2)+Math.pow(yLeft - yRight,2));
+        double l = Math.sqrt(Math.pow(xLeft - xRight, 2)+Math.pow(yLeft - yRight, 2));
         if (l>0){
             double z = (d*f)/l;
             double x = -xLeft*z/f/xmincor;
@@ -62,11 +70,16 @@ public class AILogic extends AIBaseLogic
 
     @Override
     protected void Thread() {
-        ProcessImages();
+        //ProcessImages();
     }
 
     @Override
     protected void Messages(Info info) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] result = info.getPayload().split(",");
+        Vector3D gyr = new Vector3D(Double.parseDouble(result[3]),Double.parseDouble(result[4]),Double.parseDouble(result[5]));
+        VectorMat answerAcc = accFilter.Filter(new Vector3D(Double.parseDouble(result[0]),Double.parseDouble(result[1]),Double.parseDouble(result[2])), gyr);
+        //VectorMat answerMag = accFilter.Filter(new Vector3D(Double.parseDouble(result[6]),Double.parseDouble(result[7]),Double.parseDouble(result[8])), gyr);
+        System.out.println(answerAcc.getX(0).Display());
+        //System.out.println(answerMag.getX(0).Display());
     }
 }

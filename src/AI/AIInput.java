@@ -67,7 +67,7 @@ public class AIInput extends AIBaseInput
                 }
             }
         };
-        getImageFromWebcamLeft.start();
+        //getImageFromWebcamLeft.start();
         Thread getImageFromWebcamRight = new Thread(){
             @Override
             public void run(){
