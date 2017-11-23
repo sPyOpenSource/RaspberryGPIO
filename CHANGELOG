@@ -1,3 +1,6 @@
+v2.3 XW 23-11-2017
+added: news, topics and messages logic
+
 v2.2 XW 18-11-2017
 implimented: Message(Info info)
 fixed: unittest

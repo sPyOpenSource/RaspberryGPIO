@@ -53,18 +53,40 @@ public class AILogic extends AIBaseLogic
     
     @Override
     protected void Messages(Info info){
-        if("configure".equals(info.getPayload())){
-            Info configure = mem.dequeLast("configure");
-            if (configure!=null)
-                Configure(configure.getPayload());
-        } else {
-            String[] arrays = info.getPayload().split(":");
-            if(arrays.length>1){
-                if("configure".equals(arrays[0])){
-                    mem.addInfo(new Info(arrays[1]),"configures");
-                    Configure(arrays[1]);
-                }
-            }                    
+        switch (info.getPayload()){
+            case "configures":
+                Info configure = mem.dequeLast("configures");
+                if (configure!=null)
+                    Configure(configure.getPayload());
+                break;
+            case "news":
+                mem.search("news").stream().forEach((news) -> {
+                    mem.addInfo(news, "outgoingMessages");
+                }); 
+                break;
+            case "topics":
+                mem.search("topics").stream().forEach((topic) -> {
+                    mem.addInfo(topic, "outgoingMessages");
+                });
+                break;
+            case "messages":
+                mem.search("messages").stream().forEach((message) -> {
+                    mem.addInfo(message, "outgoingMessges");
+                });
+                break;
+            default:
+                String[] array = info.getPayload().split(":");
+                if(array.length>1){
+                    if("configure".equals(array[0])){
+                        mem.addInfo(new Info(array[1]),"configures");
+                        Configure(array[1]);                    
+                    } else if("messages".equals(array[0])){
+                        mem.search(array[1]).stream().forEach((message) -> {
+                            mem.addInfo(message, "outgoingMessges");
+                        });
+                    }
+                }   
+                break;
         }
     }
 
@@ -75,7 +97,7 @@ public class AILogic extends AIBaseLogic
     private void ProcessImages() {      
         Info image = mem.dequeFirst("webcame");
         if (image!=null){
-            double dt = (image.getTime() - start)/1000d;
+            double dt = (image.getTime() - start) / 1000d;
             try{  
                 image.getImage().colRange(0,320).rowRange(0,240).assignTo(temp, CvType.CV_16SC3);
                 Core.split(temp, channels);
