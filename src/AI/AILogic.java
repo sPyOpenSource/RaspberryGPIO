@@ -53,25 +53,20 @@ public class AILogic extends AIBaseLogic
     
     @Override
     protected void Messages(Info info){
-        switch (info.getPayload()){
+        /*switch (info.getPayload()){
             case "configures":
-                Info configure = mem.dequeLast("configures");
+                Info configure = mem.getLast("configures");
                 if (configure!=null)
                     Configure(configure.getPayload());
                 break;
             case "news":
-                mem.search("news").stream().forEach((news) -> {
+                mem.search("news").parallelStream().forEach((news) -> {
                     mem.addInfo(news, "outgoingMessages");
                 }); 
                 break;
             case "topics":
-                mem.search("topics").stream().forEach((topic) -> {
+                mem.search("topics").parallelStream().forEach((topic) -> {
                     mem.addInfo(topic, "outgoingMessages");
-                });
-                break;
-            case "messages":
-                mem.search("messages").stream().forEach((message) -> {
-                    mem.addInfo(message, "outgoingMessges");
                 });
                 break;
             default:
@@ -81,13 +76,13 @@ public class AILogic extends AIBaseLogic
                         mem.addInfo(new Info(array[1]),"configures");
                         Configure(array[1]);                    
                     } else if("messages".equals(array[0])){
-                        mem.search(array[1]).stream().forEach((message) -> {
+                        mem.search(array[1]).parallelStream().forEach((message) -> {
                             mem.addInfo(message, "outgoingMessges");
                         });
                     }
                 }   
                 break;
-        }
+        }*/
     }
 
     private void Configure(String info){
@@ -140,6 +135,6 @@ public class AILogic extends AIBaseLogic
 
     @Override
     protected void Thread() {
-        ProcessImages();
+        //ProcessImages();
     }
 }

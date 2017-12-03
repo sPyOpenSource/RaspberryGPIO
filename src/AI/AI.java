@@ -23,6 +23,7 @@ public final class AI
     public AI()
     {
         // Initialize instance variables
+        mem.setLogPath("/home/spy/AI/");
         inp = new AIInput(mem);
         log = new AILogic(mem);
         oup = new AIOutput(mem);
@@ -32,7 +33,7 @@ public final class AI
     }
     
     public static void main(String[] args) {
-        System.load("/home/spy/opencv/build/lib/libopencv_java320.so");
+        System.load("/home/spy/Downloads/Source/C/opencv/build/lib/libopencv_java331.so");
         AI instance = new AI();
         instance.start();
     }

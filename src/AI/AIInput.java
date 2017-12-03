@@ -14,7 +14,6 @@ import AI.util.LSM303;
 import AI.util.L3GD20;
 import com.pi4j.io.serial.Serial;
 
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,8 +27,8 @@ public class AIInput extends AIBaseInput
      * This is the initialization of AIInput class 
      */
     private final VideoCapture cap = new VideoCapture(); 
-    private final LSM303 lsm303;
-    private final L3GD20 l3gd20;
+    private LSM303 lsm303;
+    private L3GD20 l3gd20;
     private final VectorFilter accFilter;
     private Vector3D g;
     private final double dt = 0.02;
@@ -44,15 +43,11 @@ public class AIInput extends AIBaseInput
     	super(mem);
         serial = mem.getSerial();
         cap.open(0);
-        lsm303 = new LSM303();
-        l3gd20 = new L3GD20();
         accFilter = new VectorFilter(10.0, 10.0, 0.0001, 0.1, 0.02);
-        try {
+        /*try {
+            lsm303 = new LSM303();
+            l3gd20 = new L3GD20();
             l3gd20.init();
-        } catch (Exception ex) {
-            Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
             g = lsm303.readingAcc();
             Vector3D gyr = l3gd20.getRawOutValues();
             accFilter.init(g,gyr);
@@ -60,7 +55,7 @@ public class AIInput extends AIBaseInput
             Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
     
     private void getImageFromWebcam(){
@@ -103,7 +98,7 @@ public class AIInput extends AIBaseInput
                     ReadMessageFromArduino();
             }
         };
-        ReadMessageFromArduino.start();
+        //ReadMessageFromArduino.start();
         Thread getImageFromWebcam = new Thread(){
             @Override
             public void run(){
@@ -111,7 +106,7 @@ public class AIInput extends AIBaseInput
                     getImageFromWebcam();
             }
         };
-        getImageFromWebcam.start();
+        //getImageFromWebcam.start();
         Thread filter = new Thread(){
             @Override
             public void run(){
@@ -119,6 +114,6 @@ public class AIInput extends AIBaseInput
                     filter();
             }
         };
-        filter.start();
+        //filter.start();
     }
 }

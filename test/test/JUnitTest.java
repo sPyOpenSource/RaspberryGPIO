@@ -15,7 +15,7 @@ import org.opencv.core.Mat;
  */
 public class JUnitTest extends TestCase{
     public JUnitTest(){
-        System.load("/home/spy/Downloads/Source/C/opencv/build/lib/libopencv_java320.so");
+        System.load("/home/spy/Downloads/Source/C/opencv/build/lib/libopencv_java331.so");
     }
     
     @Test
@@ -69,9 +69,8 @@ public class JUnitTest extends TestCase{
         KalmanFilter kalmanFilter = new KalmanFilter(10, 10, 0.0001, 0.1, 0.02);
         kalmanFilter.init(0.001,0.1);
         Mat Z = Mat.ones(2,1,CvType.CV_64F);
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < 100; i++)
             kalmanFilter.Filter(Z);
-        }
         Mat X = kalmanFilter.Filter(Z);
         assertEquals(X.get(0,0)[0], 1.0000099933988171);
         assertEquals(X.get(1,0)[0], 0.9999464388129045);
@@ -84,9 +83,8 @@ public class JUnitTest extends TestCase{
         kalmanFilter.init(0.7,0.0);
         Mat Z = new Mat(2,1,CvType.CV_64F);
         Z.put(0, 0, 1d, 0);
-        for(int i = 0; i < 100000; i++){
+        for(int i = 0; i < 100000; i++)
             kalmanFilter.Filter(Z);
-        }
         Mat X = kalmanFilter.Filter(Z);
         assertEquals(X.get(0,0)[0], 1.0);
         assertEquals(X.get(1,0)[0], 0.0);

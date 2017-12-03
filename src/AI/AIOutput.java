@@ -34,6 +34,6 @@ public class AIOutput extends AIBaseOutput
     
     @Override
     protected void Thread() {
-        Send2Arduino();
+        //Send2Arduino();
     }
 }
