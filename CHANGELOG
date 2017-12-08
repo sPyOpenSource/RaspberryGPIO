@@ -1,3 +1,8 @@
+v2.5 XW 08-12-2017
+fixed: memory leaking
+changed: Send2Arduino to Send
+improved: index.js
+
 v2.4 XW 03-12-2017
 added: frontend demo
 

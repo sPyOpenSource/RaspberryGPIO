@@ -21,16 +21,10 @@ import org.opencv.core.Mat;
 public class AILogic extends AIBaseLogic
 {
     // instance variables
-    private final PID pidx,pidy;
-    private final int imax;
-    private final Mat dx = new Mat();
-    private final Mat temp = new Mat();
-    private final Mat dy = new Mat();
-    private final Mat dI = new Mat();
-    private final List<Mat> channels;
-    private final Mat A,B;
-    private Mat Old = new Mat();
-    private int index;
+    private final PID pidx, pidy;
+    private final Mat temp = new Mat(), dx = new Mat(), dy = new Mat(), dI = new Mat(), sum = new Mat(), S0 = new Mat(), V = new Mat(), Old = new Mat();
+    private final List<Mat> channels = new ArrayList<>();
+    private final Mat A, B;
     private long start;
         
     /**
@@ -43,11 +37,8 @@ public class AILogic extends AIBaseLogic
 	super(mem);
         pidx = new PID(1,0,0);
         pidy = new PID(1,0,0);
-        imax = 150;
-        channels = new ArrayList<>();
         A = new Mat(2,2,CvType.CV_64F);
         B = new Mat(2,1,CvType.CV_64F);
-        index = 1;
         start = System.currentTimeMillis();
     }
     
@@ -94,47 +85,46 @@ public class AILogic extends AIBaseLogic
         if (image!=null){
             double dt = (image.getTime() - start) / 1000d;
             try{  
-                image.getImage().colRange(0,320).rowRange(0,240).assignTo(temp, CvType.CV_16SC3);
+                image.getImage().colRange(0, 320).rowRange(0, 240).assignTo(temp, CvType.CV_16SC3);
                 Core.split(temp, channels);
-                Mat sum = new Mat();
-                Mat S0 = new Mat();
                 Core.add(channels.get(0), channels.get(1), S0);
                 Core.add(S0, channels.get(2), sum);
+                channels.parallelStream().forEach((channel) -> {
+                    channel.release();
+                });
                 int height = sum.height();
-                int width = sum.width();
+                int width  = sum.width();
                 Mat North = sum.colRange(0, width-1).rowRange(0, height-1);
                 if (!Old.empty()){
-                    Mat South = sum.colRange(0, width-1).rowRange(1, height);
-                    Mat Eest = sum.colRange(1, width).rowRange(0, height-1);
-                    Mat West = sum.colRange(0, width-1).rowRange(0, height-1);    
-                    Core.subtract(North,Old,dI);
-                    Core.subtract(North,South,dx);
-                    Core.subtract(Eest,West,dy);
+                    Mat South = sum.colRange(0, width-1).rowRange(1, height  );
+                    Mat Eest  = sum.colRange(1, width  ).rowRange(0, height-1);
+                    Mat West  = sum.colRange(0, width-1).rowRange(0, height-1);    
+                    Core.subtract(North, Old,   dI);
+                    Core.subtract(North, South, dx);
+                    Core.subtract(Eest,  West,  dy);
+                    //Old.release();
                     double xy = dx.dot(dy);
                     A.put(0, 0, dx.dot(dx), dy.dot(dy), xy, xy);
                     B.put(0, 0, -dx.dot(dI)/dt, -dx.dot(dI)/dt);
-                    Mat V = new Mat();
                     Core.multiply(A.inv(), B, V);
                     String info = String.format(
                         "%f,%f",
-                    	pidx.Compute(V.get(0,0)[0],0,dt),
-                    	pidy.Compute(V.get(1,0)[0],0,dt)
+                    	pidx.Compute(V.get(0,0)[0], 0, dt),
+                    	pidy.Compute(V.get(1,0)[0], 0, dt)
                     );
                     start = image.getTime();
                     System.out.println(info);
                 }
-                Old = North;
-                if(index%imax==0)
-                    System.gc();
-                index++;
+                North.copyTo(Old);
             } catch (Exception e){
                 Logger.getLogger(AILogic.class.getName()).log(Level.SEVERE, null, e);
             }
+            image.getImage().release();
         }  
     }
 
     @Override
     protected void Thread() {
-        //ProcessImages();
+        ProcessImages();
     }
 }
