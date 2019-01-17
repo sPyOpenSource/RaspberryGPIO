@@ -1,3 +1,9 @@
+v2.3 XW 17-01-2019
+added: path to log.txt
+updated: opencv libary to 3.3.1
+added: right webcam
+changed: filter logic
+
 v2.2 XW 18-11-2017
 implimented: Message(Info info)
 added: iphone input of acc, mag and gyr

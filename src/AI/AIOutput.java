@@ -31,8 +31,8 @@ public class AIOutput extends AIBaseOutput
         }
     }
     
-    private void Send(String message){
-        Info info = mem.dequeFirst(message);
+    private void Send(){
+        Info info = mem.dequeFirst("outgoingMessages2Arduino");
         if(info==null)
             return;
         try {
@@ -45,6 +45,6 @@ public class AIOutput extends AIBaseOutput
 
     @Override
     protected void Thread() {
-        Send("outgoingMessages2Arduino");
+        Send();
     }
 }

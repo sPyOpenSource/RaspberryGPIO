@@ -36,12 +36,12 @@ public class AIInput extends AIBaseInput
             Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
         }
         capLeft.open(0);
-        //capRight.open(1);
+        capRight.open(1);
     }
     
     private void ReadMessageFromArduino(){
         try {
-            mem.addInfo(new Info(in.readLine()),"incomingMessages");         
+            mem.addInfo(new Info(in.readLine()), "incomingMessages");         
         } catch (IOException ex) {
             Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -56,28 +56,22 @@ public class AIInput extends AIBaseInput
                     ReadMessageFromArduino();
             }
         };
-        ReadMessageFromArduino.start();
+        //ReadMessageFromArduino.start();
         Thread getImageFromWebcamLeft = new Thread(){
             @Override
             public void run(){
-            	int i = 0;
-                while(i<100){
-                    getImageFromWebcam(capLeft,"leftImages");
-                    i++;
-                }
+                while(true)
+                    getImageFromWebcam(capLeft, "leftImages");
             }
         };
-        //getImageFromWebcamLeft.start();
+        getImageFromWebcamLeft.start();
         Thread getImageFromWebcamRight = new Thread(){
             @Override
             public void run(){
-            	int i = 0;
-                while(i<10){
-                    getImageFromWebcam(capRight,"rightImages");
-                    i++;
-                }
+                while(true)
+                    getImageFromWebcam(capRight, "rightImages");
             }
         };
-        //t4.start();
+        getImageFromWebcamRight.start();
     }
 }
