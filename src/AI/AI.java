@@ -15,7 +15,7 @@ public final class AI
     private final AIInput inp;
     private final AILogic log;
     private final AIOutput oup;
-    private final Thread logThread,inpThread,oupThread;
+    private final Thread logThread, inpThread, oupThread;
     
     /**
      * Constructor for objects of class AI
@@ -23,7 +23,7 @@ public final class AI
     public AI()
     {
         // Initialize instance variables
-        mem.setLogPath("/home/spy/AI/");
+        mem.setLogPath("/home/pi/AI/");
         inp = new AIInput(mem);
         log = new AILogic(mem);
         oup = new AIOutput(mem);
@@ -33,7 +33,8 @@ public final class AI
     }
     
     public static void main(String[] args) {
-        System.load("/home/spy/Downloads/Source/C/opencv/build/lib/libopencv_java331.so");
+        System.load("/home/pi/opencv-3.3.1/build/lib/libopencv_java331.so");
+        //System.load("/home/spy/Downloads/Source/C/opencv/build/lib/libopencv_java331.so");
         AI instance = new AI();
         instance.start();
     }

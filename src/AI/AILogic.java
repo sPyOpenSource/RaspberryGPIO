@@ -35,10 +35,10 @@ public class AILogic extends AIBaseLogic
     {
         // Initialize instance variables
 	super(mem);
-        pidx = new PID(1,0,0);
-        pidy = new PID(1,0,0);
-        A = new Mat(2,2,CvType.CV_64F);
-        B = new Mat(2,1,CvType.CV_64F);
+        pidx = new PID(1, 0, 0);
+        pidy = new PID(1, 0, 0);
+        A = new Mat(2, 2, CvType.CV_64F);
+        B = new Mat(2, 1, CvType.CV_64F);
         start = System.currentTimeMillis();
     }
     
@@ -77,7 +77,7 @@ public class AILogic extends AIBaseLogic
     }
 
     private void Configure(String info){
-        mem.addInfo(new Info("0"+info),"outgoingMessages2Arduino");
+        mem.addInfo(new Info("0" + info), "outgoingMessages2Arduino");
     }
     
     private void ProcessImages() {      
@@ -94,23 +94,23 @@ public class AILogic extends AIBaseLogic
                 });
                 int height = sum.height();
                 int width  = sum.width();
-                Mat North = sum.colRange(0, width-1).rowRange(0, height-1);
+                Mat North = sum.colRange(0, width-1).rowRange(0, height - 1);
                 if (!Old.empty()){
-                    Mat South = sum.colRange(0, width-1).rowRange(1, height  );
-                    Mat Eest  = sum.colRange(1, width  ).rowRange(0, height-1);
-                    Mat West  = sum.colRange(0, width-1).rowRange(0, height-1);    
-                    Core.subtract(North, Old,   dI);
-                    Core.subtract(North, South, dx);
-                    Core.subtract(Eest,  West,  dy);
+                    Mat South = sum.colRange(0, width - 1).rowRange(1, height    );
+                    Mat Eest  = sum.colRange(1, width    ).rowRange(0, height - 1);
+                    Mat West  = sum.colRange(0, width - 1).rowRange(0, height - 1);    
+                    Core.subtract(North,   Old,  dI);
+                    Core.subtract(North, South,  dx);
+                    Core.subtract( Eest,  West,  dy);
                     //Old.release();
                     double xy = dx.dot(dy);
                     A.put(0, 0, dx.dot(dx), dy.dot(dy), xy, xy);
-                    B.put(0, 0, -dx.dot(dI)/dt, -dx.dot(dI)/dt);
+                    B.put(0, 0, -dx.dot(dI) / dt, -dx.dot(dI) / dt);
                     Core.multiply(A.inv(), B, V);
                     String info = String.format(
                         "%f,%f",
-                    	pidx.Compute(V.get(0,0)[0], 0, dt),
-                    	pidy.Compute(V.get(1,0)[0], 0, dt)
+                    	pidx.Compute(V.get(0, 0)[0], 0, dt),
+                    	pidy.Compute(V.get(1, 0)[0], 0, dt)
                     );
                     start = image.getTime();
                     System.out.println(info);

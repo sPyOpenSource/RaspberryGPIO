@@ -22,7 +22,7 @@ public class AIMemory extends AIBaseMemory
     {
         // Initialize instance variables
         try {
-            serial.open("/dev/ttyACM0",115200); 
+            serial.open("/dev/ttyACM0", 115200); 
         } catch(NullPointerException ex) {
             Logger.getLogger(AIMemory.class.getName()).log(Level.SEVERE, null, ex);
         }

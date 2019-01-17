@@ -10,8 +10,8 @@ import AI.Models.Info;
 import AI.Models.Vector3D;
 import AI.Models.VectorFilter;
 import AI.Models.VectorMat;
-import AI.util.LSM303;
-import AI.util.L3GD20;
+import AI.util.AII2CBus;
+
 import com.pi4j.io.serial.Serial;
 
 import java.util.logging.Level;
@@ -26,12 +26,11 @@ public class AIInput extends AIBaseInput
     /**
      * This is the initialization of AIInput class 
      */
-    private final VideoCapture cap = new VideoCapture(); 
-    private LSM303 lsm303;
-    private L3GD20 l3gd20;
-    private final VectorFilter accFilter;
     private Vector3D g;
+    private AII2CBus i2cbus;
     private final double dt = 0.02;
+    private final VideoCapture cap = new VideoCapture(); 
+    private final VectorFilter accFilter;
     private final Serial serial;
 
     /**
@@ -45,12 +44,11 @@ public class AIInput extends AIBaseInput
         cap.open(0);
         accFilter = new VectorFilter(10.0, 10.0, 0.0001, 0.1, 0.02);
         /*try {
-            lsm303 = new LSM303();
-            l3gd20 = new L3GD20();
-            l3gd20.init();
-            g = lsm303.readingAcc();
-            Vector3D gyr = l3gd20.getRawOutValues();
-            accFilter.init(g,gyr);
+            i2cbus = new AII2CBus();
+            i2cbus.init();
+            g = i2cbus.readingAcc();
+            Vector3D gyr = i2cbus.readingGyr();
+            accFilter.init(g, gyr);
         } catch (IOException ex) {
             Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -66,15 +64,15 @@ public class AIInput extends AIBaseInput
         }
     }
     
-    private void filter(){
+    private void filter(double filter){
         try{ 
-            Vector3D acc = lsm303.readingAcc();
+            Vector3D acc = i2cbus.readingAcc();
             g.setValues(
-                g.x*0.9+acc.x*0.1,
-                g.y*0.9+acc.y*0.1,
-                g.z*0.9+acc.z*0.1
+                g.x * filter + acc.x * (1 - filter),
+                g.y * filter + acc.y * (1 - filter),
+                g.z * filter + acc.z * (1 - filter)
             );
-            Vector3D gyr = l3gd20.getRawOutValues();
+            Vector3D gyr = i2cbus.readingGyr();
             VectorMat result = accFilter.Filter(g, gyr);
             //System.out.print(gyr.Display()+",");
             //System.out.print(acc.Display()+",");
@@ -111,7 +109,7 @@ public class AIInput extends AIBaseInput
             @Override
             public void run(){
                 while(true)
-                    filter();
+                    filter(0.9);
             }
         };
         //filter.start();

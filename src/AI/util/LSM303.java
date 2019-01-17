@@ -5,6 +5,8 @@ import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CDevice;
 import com.pi4j.io.i2c.I2CFactory;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Accelerometer + Magnetometer
@@ -43,26 +45,25 @@ public class LSM303
   public final static int CTRL6             = 0x25; // D
   public final static int CTRL7             = 0x26; // D
   // Gain settings for setMagGain()
-  public final static int LSM303_MAGGAIN_1_3 = 0x20; // +/- 1.3
-  public final static int LSM303_MAGGAIN_1_9 = 0x40; // +/- 1.9
-  public final static int LSM303_MAGGAIN_2_5 = 0x60; // +/- 2.5
-  public final static int LSM303_MAGGAIN_4_0 = 0x80; // +/- 4.0
-  public final static int LSM303_MAGGAIN_4_7 = 0xA0; // +/- 4.7
-  public final static int LSM303_MAGGAIN_5_6 = 0xC0; // +/- 5.6
-  public final static int LSM303_MAGGAIN_8_1 = 0xE0; // +/- 8.1
-
+  /*private final int LSM303_MAGGAIN_1_3 = 0x20; // +/- 1.3
+  private final int LSM303_MAGGAIN_1_9 = 0x40; // +/- 1.9
+  private final int LSM303_MAGGAIN_2_5 = 0x60; // +/- 2.5
+  private final int LSM303_MAGGAIN_4_0 = 0x80; // +/- 4.0
+  private final int LSM303_MAGGAIN_4_7 = 0xA0; // +/- 4.7
+  private final int LSM303_MAGGAIN_5_6 = 0xC0; // +/- 5.6
+  private final int LSM303_MAGGAIN_8_1 = 0xE0; // +/- 8.1
+  */
   private I2CBus bus;
   private I2CDevice accelerometer, magnetometer;
   private byte[] accelData, magData;
   
-  private static final boolean verbose = false;
+  private final boolean verbose = false;
   
   public LSM303()
   {
     if (verbose)
       System.out.println("Starting sensors reading:");
-    try
-    {
+    try {
       // Get i2c bus
       bus = I2CFactory.getInstance(I2CBus.BUS_1); // Depends onthe RasPI version
       if (verbose)
@@ -103,10 +104,8 @@ public class LSM303
       magnetometer.write(CTRL7, (byte)0x00);
       if (verbose)
         System.out.println("Magnetometer OK.");
-    }
-    catch (IOException e)
-    {
-      System.err.println(e.getMessage());
+    } catch (IOException e) {
+      Logger.getLogger(LSM303.class.getName()).log(Level.SEVERE, null, e);
     }
   }
 
@@ -117,7 +116,7 @@ public class LSM303
 
       int r = accelerometer.read(LSM303_REGISTER_ACCEL_OUT_X_L_A | 0x80, accelData, 0, 6);
       if (r != 6)
-        System.out.println("Error reading accel data, < 6 bytes");
+        Logger.getLogger(LSM303.class.getName()).log(Level.SEVERE, "Error reading accel data, < 6 bytes");
       
       int accelX = accel12(accelData, 0);
       int accelY = accel12(accelData, 2);
@@ -135,7 +134,7 @@ public class LSM303
       //r = magnetometer.read(LSM303_REGISTER_MAG_OUT_X_H_M, magData, 0, 6);
       int r = magnetometer.read(D_OUT_X_L_M|(1<<7), magData, 0, 6);
       if (r != 6)
-        System.out.println("Error reading mag data, < 6 bytes");
+        Logger.getLogger(LSM303.class.getName()).log(Level.SEVERE, "Error reading mag data, < 6 bytes");
 
       int magX = mag16(magData, 0);
       int magY = mag16(magData, 2);

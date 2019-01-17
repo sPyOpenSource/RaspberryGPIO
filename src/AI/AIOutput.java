@@ -25,7 +25,7 @@ public class AIOutput extends AIBaseOutput
     
     private void Send(){
         Info message = mem.dequeFirst("outgoingMessages2Arduino");
-        if (message!=null){
+        if (message != null){
             serial.write(message.getPayload());
             serial.flush();
         }
