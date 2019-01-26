@@ -1,3 +1,8 @@
+v2.4 XW 26-01-2019
+changed: opencv to 4.0.1
+fixed: depth camera not working
+added: point cloud calculation
+
 v2.3 XW 17-01-2019
 added: path to log.txt
 updated: opencv libary to 3.3.1

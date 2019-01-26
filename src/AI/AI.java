@@ -31,7 +31,7 @@ public final class AI
     }
     
     public static void main(String[] args) {
-    	System.load("/home/spy/Downloads/Source/C/opencv/build/lib/libopencv_java331.so");
+        System.load("/home/spy/Downloads/Source/C/opencv/build/lib/libopencv_java401.so");
         AI instance = new AI();
         instance.start();
     }

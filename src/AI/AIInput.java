@@ -14,13 +14,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.opencv.videoio.VideoCapture;
+import org.opencv.videoio.VideoWriter;
+import org.opencv.videoio.Videoio;
 
 public class AIInput extends AIBaseInput
 {
     /**
      * This is the initialization of AIInput class 
      */
-    private final VideoCapture capLeft = new VideoCapture(), capRight = new VideoCapture();
+    private final VideoCapture capColorCamera = new VideoCapture(), capDepthCamera = new VideoCapture();
     private BufferedReader in;
     
     /**
@@ -35,8 +37,12 @@ public class AIInput extends AIBaseInput
         } catch (IOException |NullPointerException ex) {
             Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
         }
-        capLeft.open(0);
-        capRight.open(1);
+        capColorCamera.open(0);
+        capDepthCamera.open(1);
+        int fourcc = VideoWriter.fourcc('Z', '1', '6', ' ');
+        capDepthCamera.set(Videoio.CAP_PROP_FOURCC, fourcc);
+        mem.addInfo(new Info(capColorCamera), "the webcam");
+        mem.addInfo(new Info(capDepthCamera), "the webcam");
     }
     
     private void ReadMessageFromArduino(){
@@ -57,21 +63,21 @@ public class AIInput extends AIBaseInput
             }
         };
         //ReadMessageFromArduino.start();
-        Thread getImageFromWebcamLeft = new Thread(){
+        Thread getImageFromWebcamColorCamera = new Thread(){
             @Override
             public void run(){
                 while(true)
-                    getImageFromWebcam(capLeft, "leftImages");
+                    getImageFromWebcam(capColorCamera, "colorCameraImages");
             }
         };
-        getImageFromWebcamLeft.start();
-        Thread getImageFromWebcamRight = new Thread(){
+        getImageFromWebcamColorCamera.start();
+        Thread getImageFromWebcamDepthCamera = new Thread(){
             @Override
             public void run(){
                 while(true)
-                    getImageFromWebcam(capRight, "rightImages");
+                    getImageFromWebcam(capDepthCamera, "depthCameraImages");
             }
         };
-        getImageFromWebcamRight.start();
+        getImageFromWebcamDepthCamera.start();
     }
 }

@@ -33,7 +33,7 @@ public class AIOutput extends AIBaseOutput
     
     private void Send(){
         Info info = mem.dequeFirst("outgoingMessages2Arduino");
-        if(info==null)
+        if(info == null)
             return;
         try {
             w.write(info.getPayload());
