@@ -1,3 +1,7 @@
+v2.5 XW 25-11-2019
+added: camera view
+added: user feedback
+
 v2.4 XW 26-01-2019
 changed: opencv to 4.0.1
 fixed: depth camera not working

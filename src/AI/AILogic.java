@@ -20,7 +20,6 @@ public class AILogic extends AIBaseLogic
     private final MotionDetection colorCamera;
     private final PointCloud depthCamera;
     private final VectorFilter accFilter, magFilter;
-    private int index = 1;
 
     /**
      * Constructor for objects of class AILogic
@@ -38,11 +37,7 @@ public class AILogic extends AIBaseLogic
         magFilter.init(new Vector3D(0d, 0d, 0d), new Vector3D(0d, 0d, 0d));
     }
 
-    private void ProcessImages() {    
-        if (index % 60 == 0){
-            colorCamera.saveBack("/home/spy/color.jpg");
-        }
-        index++;
+    private void ProcessImages() {
         colorCamera.UpdatePosition(mem.dequeFirst("colorCameraImages"));
         depthCamera.Calculate(mem.dequeFirst("depthCameraImages"), colorCamera.getX(), colorCamera.getY());
     }
@@ -54,6 +49,21 @@ public class AILogic extends AIBaseLogic
 
     @Override
     protected void Messages(Info info) {
+        switch (info.getPayload()){
+            case "news":
+                mem.search("news").parallelStream().forEach((news) -> {
+                    mem.addInfo(news, "outgoingMessages");
+                }); 
+                break;
+            case "topics":
+                mem.search("topics").parallelStream().forEach((topic) -> {
+                    mem.addInfo(topic, "outgoingMessages");
+                });
+                break;
+            case "feedback":
+                mem.addEmotion();
+                break;
+        }
         String[] result = info.getPayload().split(",");
         if (result.length == 9){
             Vector3D gyr = new Vector3D(Double.parseDouble(result[3]), Double.parseDouble(result[4]), Double.parseDouble(result[5]));

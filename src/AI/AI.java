@@ -1,5 +1,9 @@
 package AI;
 
+import java.awt.image.BufferedImage;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 /**
  * This is a class initialize an artificial intelligence service.
  * 
@@ -31,9 +35,18 @@ public final class AI
     }
     
     public static void main(String[] args) {
-        System.load("/home/spy/Downloads/Source/C/opencv/build/lib/libopencv_java401.so");
-        AI instance = new AI();
-        instance.start();
+        System.load("/home/spy/Source/C/opencv/build/lib/libopencv_java412.so");
+       SwingUtilities.invokeLater(() -> {
+           VideoPanel panel = new VideoPanel();
+           JFrame frame = new JFrame("Video");
+           frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+           frame.getContentPane().add(panel);
+           frame.setResizable(false);
+           frame.pack();
+           frame.setLocationRelativeTo(null);
+           frame.setVisible(true);
+        });
+              
     }
     
     public void start()
@@ -41,5 +54,9 @@ public final class AI
     	logThread.start();
         inpThread.start(); 
         oupThread.start();
+    }
+    
+    public BufferedImage getImage(String camera){
+        return oup.Mat2BufferedImage(camera);
     }
 }

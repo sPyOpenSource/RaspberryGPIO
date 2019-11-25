@@ -38,14 +38,14 @@ public class AIInput extends AIBaseInput
             Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
         }
         capColorCamera.open(0);
-        capDepthCamera.open(1);
+        capDepthCamera.open(2);
         int fourcc = VideoWriter.fourcc('Z', '1', '6', ' ');
         capDepthCamera.set(Videoio.CAP_PROP_FOURCC, fourcc);
         mem.addInfo(new Info(capColorCamera), "the webcam");
         mem.addInfo(new Info(capDepthCamera), "the webcam");
     }
     
-    private void ReadMessageFromArduino(){
+    private void ReadMessageFromSerial(){
         try {
             mem.addInfo(new Info(in.readLine()), "incomingMessages");         
         } catch (IOException ex) {
@@ -55,14 +55,14 @@ public class AIInput extends AIBaseInput
 
     @Override
     protected void Thread() {
-        Thread ReadMessageFromArduino = new Thread(){
+        Thread ReadMessageFromSerial = new Thread(){
             @Override
             public void run(){
                 while(true)
-                    ReadMessageFromArduino();
+                    ReadMessageFromSerial();
             }
         };
-        //ReadMessageFromArduino.start();
+        //ReadMessageFromSerial.start();
         Thread getImageFromWebcamColorCamera = new Thread(){
             @Override
             public void run(){
