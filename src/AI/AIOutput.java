@@ -24,7 +24,7 @@ public class AIOutput extends AIBaseOutput
     }
     
     private void Send(){
-        Info message = mem.dequeFirst("outgoingMessages2Arduino");
+        Info message = mem.dequeFirst("outgoingMessages2Serial");
         if (message != null){
             serial.write(message.getPayload());
             serial.flush();
@@ -33,6 +33,6 @@ public class AIOutput extends AIBaseOutput
 
     @Override
     protected void Thread() {
-        //Send2Arduino();
+        Send();
     }
 }
