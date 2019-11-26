@@ -32,7 +32,7 @@ public class AILogic extends AIBaseLogic
     public AILogic(AIMemory mem)
     {
         // Initialize instance variables
-	super(mem);
+        super(mem);
         pidx = new PID(1, 0, 0);
         pidy = new PID(1, 0, 0);
         A = new Mat(2, 2, CvType.CV_64F);
@@ -42,10 +42,10 @@ public class AILogic extends AIBaseLogic
     
     @Override
     protected void Messages(Info info){
-        /*switch (info.getPayload()){
+        switch (info.getPayload()){
             case "configures":
                 Info configure = mem.getLast("configures");
-                if (configure!=null)
+                if (configure != null)
                     Configure(configure.getPayload());
                 break;
             case "news":
@@ -58,28 +58,15 @@ public class AILogic extends AIBaseLogic
                     mem.addInfo(topic, "outgoingMessages");
                 });
                 break;
-            default:
-                String[] array = info.getPayload().split(":");
-                if(array.length>1){
-                    if("configure".equals(array[0])){
-                        mem.addInfo(new Info(array[1]),"configures");
-                        Configure(array[1]);                    
-                    } else if("messages".equals(array[0])){
-                        mem.search(array[1]).parallelStream().forEach((message) -> {
-                            mem.addInfo(message, "outgoingMessges");
-                        });
-                    }
-                }
-                break;
-        }*/
+        }
     }
 
     private void Configure(String info){
-        mem.addInfo(new Info("0" + info), "outgoingMessages2Arduino");
+        mem.addInfo(new Info(info + ";"), "outgoingMessages2Serial");
     }
     
     private void ProcessImages() {      
-        Info image = mem.dequeFirst("webcame");
+        Info image = mem.dequeFirst("webcam");
         if (image != null){
             double dt = (image.getTime() - start) / 1000d;
             try{  

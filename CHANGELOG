@@ -1,3 +1,6 @@
+v1.1 XW 26-11-2019
+fixed: serial communication
+
 v1.0 XW 13-10-2019
 removed: raw reading in L3GD20
 added: readme

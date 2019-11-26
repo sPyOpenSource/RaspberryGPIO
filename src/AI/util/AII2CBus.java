@@ -18,6 +18,9 @@ import static AI.util.LSM303.D_OUT_X_L_M;
 import static AI.util.LSM303.LSM303_ADDRESS_ACCEL;
 import static AI.util.LSM303.LSM303_ADDRESS_MAG;
 import static AI.util.LSM303.LSM303_REGISTER_ACCEL_OUT_X_L_A;
+import com.sun.jna.Library;
+import com.sun.jna.Native;
+import com.sun.jna.Platform;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -29,27 +32,38 @@ import java.util.logging.Logger;
  */
 public class AII2CBus
 {
-    //private I2CBus bus;
     private boolean verbose = false;
-    //private I2CDevice accelerometer, magnetometer, l3dg20;
     private double gain;
+    public static int O_RDWR = 0x00000002;
     
     public AII2CBus(){
-        /*try {
-            // Get i2c bus
-            //bus = I2CFactory.getInstance(I2CBus.BUS_1); // Depends onthe RasPI version
-            if (verbose)
-                System.out.println("Connected to bus. OK.");
-
-            // Get device itself
-            //l3dg20        = bus.getDevice(L3GD20ADDRESS);
-            //accelerometer = bus.getDevice(LSM303_ADDRESS_ACCEL);
-            //magnetometer  = bus.getDevice(LSM303_ADDRESS_MAG);
-            if (verbose)
-                System.out.println("Connected to devices. OK.");
-        } catch (IOException ex) {
-            Logger.getLogger(AII2CBus.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        String fileName = "/dev/i2c-1";
+        int file = CLibrary.INSTANCE.open(fileName, O_RDWR);
+        if(file < 0){
+            System.out.println("fialed to open i2c-1 file");
+            return;
+        }
+        int i2c_slave = 0x0703;
+        int ioctl = CLibrary.INSTANCE.ioctl(file, i2c_slave, L3GD20ADDRESS);
+        if(ioctl < 0){
+            System.out.println("ioctl call failed");
+            return;
+        }
+        byte[] buf = {0,0};
+        int writeReturn = CLibrary.INSTANCE.write(file, buf, 2);
+        if (writeReturn != 2){
+            System.out.println("Write fialed");
+        }
+    }
+    
+    public interface CLibrary extends Library{
+        CLibrary INSTANCE = (CLibrary)Native.loadLibrary(Platform.isWindows()?"msvcrt":"c", CLibrary.class);
+        
+        public int ioctl(int fd, int cmd, int arg);
+        public int open(String path, int flags);
+        public int close(int fd);
+        public int write(int fd, byte[] buffer, int count);
+        public int read(int fd, byte[] buffer, int count);
     }
     
     public void init() throws Exception

@@ -11,14 +11,14 @@ import AI.Models.Vector3D;
 import AI.Models.VectorFilter;
 import AI.Models.VectorMat;
 import AI.util.AII2CBus;
+import gnu.io.SerialPort;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
-import org.opencv.videoio.Videoio;
-
 
 public class AIInput extends AIBaseInput
 {
@@ -30,7 +30,7 @@ public class AIInput extends AIBaseInput
     private final double dt = 0.02;
     private final VideoCapture cap = new VideoCapture(); 
     private final VectorFilter accFilter;
-    //private final Serial serial;
+    private final SerialPort serial;
 
     /**
      * Constructor for objects of class AIInput
@@ -38,12 +38,12 @@ public class AIInput extends AIBaseInput
      */
     public AIInput(AIMemory mem)
     {
-    	super(mem);
-        //serial = mem.getSerial();
-        cap.open(0);
+        super(mem);
+        serial = mem.getSerial();
+        //cap.open(0);
         //cap.set(Videoio.CV_CAP_PROP_FRAME_WIDTH, 320);
         //cap.set(Videoio.CV_CAP_PROP_FRAME_HEIGHT, 240);
-        mem.addInfo(new Info(cap), "the webcam");
+        //mem.addInfo(new Info(cap), "the webcam");
         accFilter = new VectorFilter(10.0, 10.0, 0.0001, 0.1, 0.02);
     }
     
@@ -66,26 +66,30 @@ public class AIInput extends AIBaseInput
             Vector3D gyr = i2cbus.readingGyr();
             VectorMat result = accFilter.Filter(g, gyr);
             System.out.println(result.getX(1).Display());
-        } catch (Exception ex){
+        } catch (IOException ex){
             Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
         }
         AILogic.Wait(dt);
     }
     
-    private void ReadMessageFromArduino(){
-        //System.out.println(serial.read());
+    private void ReadMessageFromSerial(){
+        try {
+            System.out.println(serial.getInputStream().read());
+        } catch (IOException ex) {
+            Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     protected void Thread() {
-        Thread ReadMessageFromArduino = new Thread(){
+        Thread ReadMessageFromSerial = new Thread(){
             @Override
             public void run(){
                 while(true)
-                    ReadMessageFromArduino();
+                    ReadMessageFromSerial();
             }
         };
-        //ReadMessageFromArduino.start();
+        ReadMessageFromSerial.start();
         Thread getImageFromWebcam = new Thread(){
             @Override
             public void run(){
