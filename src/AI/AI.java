@@ -29,14 +29,14 @@ public final class AI
         inp = new AIInput(mem);
         log = new AILogic(mem);
         oup = new AIOutput(mem);
-	logThread = new Thread(log);
-        inpThread = new Thread(inp);
-        oupThread = new Thread(oup);
+        logThread = new Thread(log, "logic");
+        inpThread = new Thread(inp, "input");
+        oupThread = new Thread(oup, "output");
     }
     
     public static void main(String[] args) {
         System.load("/home/spy/Source/C/opencv/build/lib/libopencv_java412.so");
-       SwingUtilities.invokeLater(() -> {
+       /*SwingUtilities.invokeLater(() -> {
            VideoPanel panel = new VideoPanel();
            JFrame frame = new JFrame("Video");
            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,18 +45,19 @@ public final class AI
            frame.pack();
            frame.setLocationRelativeTo(null);
            frame.setVisible(true);
-        });
-              
+        });*/
+       AI ai = new AI();
+       ai.start();
     }
     
     public void start()
     {
-    	logThread.start();
+        logThread.start();
         inpThread.start(); 
         oupThread.start();
     }
     
     public BufferedImage getImage(String camera){
-        return oup.Mat2BufferedImage(camera);
+        return oup.getBufferedImage(camera);
     }
 }

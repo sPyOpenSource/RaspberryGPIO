@@ -5,10 +5,10 @@ import gnu.io.NoSuchPortException;
 import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
 import gnu.io.UnsupportedCommOperationException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-        
 /**
  * This is the memory class of AI.
  * 

@@ -22,7 +22,7 @@ public class AIInput extends AIBaseInput
     /**
      * This is the initialization of AIInput class 
      */
-    private final VideoCapture capColorCamera = new VideoCapture(), capDepthCamera = new VideoCapture();
+    private final VideoCapture capColorCamera = new VideoCapture(), capDepthCamera = new VideoCapture();//, ipCamera = new VideoCapture("http://192.168.1.4:8080/video");
     private BufferedReader in;
     
     /**
@@ -39,10 +39,12 @@ public class AIInput extends AIBaseInput
         }
         capColorCamera.open(0);
         capDepthCamera.open(2);
+        //ipCamera.open(0);
         int fourcc = VideoWriter.fourcc('Z', '1', '6', ' ');
         capDepthCamera.set(Videoio.CAP_PROP_FOURCC, fourcc);
         mem.addInfo(new Info(capColorCamera), "the webcam");
         mem.addInfo(new Info(capDepthCamera), "the webcam");
+        //mem.addInfo(new Info(ipCamera), "the webcam");
     }
     
     private void ReadMessageFromSerial(){
@@ -70,7 +72,7 @@ public class AIInput extends AIBaseInput
                     getImageFromWebcam(capColorCamera, "colorCameraImages");
             }
         };
-        getImageFromWebcamColorCamera.start();
+        //getImageFromWebcamColorCamera.start();
         Thread getImageFromWebcamDepthCamera = new Thread(){
             @Override
             public void run(){
@@ -78,6 +80,14 @@ public class AIInput extends AIBaseInput
                     getImageFromWebcam(capDepthCamera, "depthCameraImages");
             }
         };
-        getImageFromWebcamDepthCamera.start();
+        //getImageFromWebcamDepthCamera.start();
+       /* Thread getImageFromWebcamIPCamera = new Thread(){
+            @Override
+            public void run(){
+                while(true)
+                    getImageFromWebcam(ipCamera, "ipCameraImages");
+            }
+        };
+        getImageFromWebcamIPCamera.start();*/
     }
 }

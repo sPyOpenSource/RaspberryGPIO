@@ -1,6 +1,8 @@
 package AI;
 
 import AI.Models.Info;
+import org.opencv.core.Mat;
+
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.IOException;
@@ -8,7 +10,6 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.opencv.core.Mat;
 
 /**
  * This is the output of AI.
@@ -26,7 +27,7 @@ public class AIOutput extends AIBaseOutput
      */
     public AIOutput(AIMemory mem)
     {
-	super(mem);
+        super(mem);
         try {
             w = new OutputStreamWriter(mem.getSerialPort().getOutputStream(),"UTF-8");
         } catch (IOException | NullPointerException ex) {
@@ -35,7 +36,7 @@ public class AIOutput extends AIBaseOutput
     }
     
     private void Send(){
-        Info info = mem.dequeFirst("outgoingMessages2Serial");
+        Info info = (Info)mem.dequeFirst("outgoingMessages2Serial");
         if(info == null)
             return;
         try {
@@ -46,23 +47,23 @@ public class AIOutput extends AIBaseOutput
         }
     }
     
-public BufferedImage Mat2BufferedImage(String camera){
+public BufferedImage getBufferedImage(String camera){
     //source: http://answers.opencv.org/question/10344/opencv-java-load-image-to-gui/
     //Fastest code
     //The output can be assigned either to a BufferedImage or to an Image
 
      int type = BufferedImage.TYPE_BYTE_GRAY;
-     Mat temp = mem.dequeFirst(camera).getImage();
+     Mat temp = ((Info)mem.dequeFirst(camera)).getImage();
      if (temp == null){
          return null;
      }
      if (temp .channels() > 1 ) {
          type = BufferedImage.TYPE_3BYTE_BGR;
      }
-     int bufferSize = temp.channels()*temp.cols()*temp.rows();
+     int bufferSize = temp.channels() * temp.cols() * temp.rows();
      byte [] b = new byte[bufferSize];
-     temp.get(0,0,b); // get all the pixels
-     BufferedImage image = new BufferedImage(temp.cols(),temp.rows(), type);
+     temp.get(0, 0, b); // get all the pixels
+     BufferedImage image = new BufferedImage(temp.cols(), temp.rows(), type);
      final byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
      System.arraycopy(b, 0, targetPixels, 0, b.length);  
      temp.release();

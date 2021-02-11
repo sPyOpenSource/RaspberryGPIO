@@ -20,19 +20,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="video" min="-2" pref="640" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Update" min="-2" max="-2" attributes="0"/>
-                          <Component id="Start" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jScrollPane1" pref="115" max="32767" attributes="0"/>
+                  <Component id="Update" alignment="0" max="32767" attributes="0"/>
+                  <Component id="Start" alignment="0" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,7 +40,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Update" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -85,8 +78,8 @@
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="2">
-                <StringItem index="0" value="colorCameraImages"/>
-                <StringItem index="1" value="depthCameraImages"/>
+                <StringItem index="0" value="Color Camera"/>
+                <StringItem index="1" value="Depth Camera"/>
               </StringArray>
             </Property>
             <Property name="selectionMode" type="int" value="0"/>
