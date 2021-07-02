@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=GUI
+comment0.text=\n\n\ @author\ X.\ Wang\n
+comment1.params=
+comment1.target=GUI()
+comment1.text=\n\ Creates\ new\ form\ NewJPanel\n
+comment2.params=
+comment2.target=void\ initComponents()
+comment2.text=\n\ This\ method\ is\ called\ from\ within\ the\ constructor\ to\ initialize\ the\ form.\n\ WARNING\:\ Do\ NOT\ modify\ this\ code.\ The\ content\ of\ this\ method\ is\ always\n\ regenerated\ by\ the\ Form\ Editor.\n
+comment3.params=evt
+comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment4.params=evt
+comment4.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment5.params=
+comment5.target=int\ getSize()
+comment6.params=i
+comment6.target=java.lang.String\ getElementAt(int)
+comment7.params=evt
+comment7.target=void\ StartActionPerformed(java.awt.event.ActionEvent)
+comment8.params=evt
+comment8.target=void\ UpdateActionPerformed(java.awt.event.ActionEvent)
+numComments=9

@@ -1,18 +1,19 @@
 package AI;
 /**
  * This is the input class of AI.
+ * Everthing including human interdaces
  * 
  * @author X. Wang 
  * @version 1.0
  */
 
-import AI.Models.Info;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import AI.Models.Info;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
@@ -22,7 +23,9 @@ public class AIInput extends AIBaseInput
     /**
      * This is the initialization of AIInput class 
      */
-    private final VideoCapture capColorCamera = new VideoCapture(), capDepthCamera = new VideoCapture();//, ipCamera = new VideoCapture("http://192.168.1.4:8080/video");
+    private final VideoCapture capColorCamera = new VideoCapture();
+    private final VideoCapture capDepthCamera = new VideoCapture();
+    private final VideoCapture ipCamera = new VideoCapture("http://192.168.1.4:8080/video");
     private BufferedReader in;
     
     /**
@@ -34,17 +37,17 @@ public class AIInput extends AIBaseInput
         super(mem);
         try {
             in = new BufferedReader(new InputStreamReader(mem.getSerialPort().getInputStream()));
-        } catch (IOException |NullPointerException ex) {
+        } catch (NullPointerException ex) {
             Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
         }
         capColorCamera.open(0);
         capDepthCamera.open(2);
-        //ipCamera.open(0);
+        ipCamera.open(0);
         int fourcc = VideoWriter.fourcc('Z', '1', '6', ' ');
         capDepthCamera.set(Videoio.CAP_PROP_FOURCC, fourcc);
         mem.addInfo(new Info(capColorCamera), "the webcam");
         mem.addInfo(new Info(capDepthCamera), "the webcam");
-        //mem.addInfo(new Info(ipCamera), "the webcam");
+        mem.addInfo(new Info(ipCamera), "the webcam");
     }
     
     private void ReadMessageFromSerial(){
@@ -56,7 +59,7 @@ public class AIInput extends AIBaseInput
     }
 
     @Override
-    protected void Thread() {
+    protected void setup() {
         Thread ReadMessageFromSerial = new Thread(){
             @Override
             public void run(){
@@ -81,13 +84,13 @@ public class AIInput extends AIBaseInput
             }
         };
         //getImageFromWebcamDepthCamera.start();
-       /* Thread getImageFromWebcamIPCamera = new Thread(){
+        Thread getImageFromWebcamIPCamera = new Thread(){
             @Override
             public void run(){
                 while(true)
                     getImageFromWebcam(ipCamera, "ipCameraImages");
             }
         };
-        getImageFromWebcamIPCamera.start();*/
+        //getImageFromWebcamIPCamera.start();
     }
 }

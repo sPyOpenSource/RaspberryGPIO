@@ -9,14 +9,14 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @author spy
+ * @author X. Wang
  */
-public class VideoPanel extends javax.swing.JPanel {
+public class GUI extends javax.swing.JPanel {
 
     /**
      * Creates new form NewJPanel
      */
-    public VideoPanel() {
+    public GUI() {
         initComponents();
     }
 
@@ -89,19 +89,19 @@ public class VideoPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartActionPerformed
-        if(instance==null){
-        instance = new AI();
-        instance.start();
+        if(instance == null){
+            instance = new AI();
+            instance.start();
         }
     }//GEN-LAST:event_StartActionPerformed
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
-        if(instance!=null){
+        if(instance != null){
             if(!cameras.isSelectionEmpty()){
-            BufferedImage image = instance.getImage(cameras.getSelectedValue());
-            if (image != null){
-            video.getGraphics().drawImage(image, 0, 0, null);
-            }
+                BufferedImage image = instance.getImage(cameras.getSelectedValue());
+                if (image != null){
+                    video.getGraphics().drawImage(image, 0, 0, null);
+                }
             }
         }
     }//GEN-LAST:event_UpdateActionPerformed

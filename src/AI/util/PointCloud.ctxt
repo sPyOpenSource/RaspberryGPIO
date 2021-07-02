@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=PointCloud
+comment0.text=\n\n\ @author\ X.\ Wang\n
+comment1.params=
+comment1.target=PointCloud()
+comment2.params=dequeFirst\ x\ y
+comment2.target=void\ Calculate(AI.Models.Info,\ double,\ double)
+numComments=3

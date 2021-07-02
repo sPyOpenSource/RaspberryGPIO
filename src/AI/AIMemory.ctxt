@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=AIMemory
+comment0.text=\n\ This\ is\ the\ memory\ class\ of\ AI.\n\ Everything\ including\ storages\n\ \n\ @author\ X.\ Wang\ \n\ @version\ 1.0\n
+comment1.params=
+comment1.target=AIMemory()
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ AIMemory\n
+comment2.params=
+comment2.target=com.fazecast.jSerialComm.SerialPort\ getSerialPort()
+numComments=3

@@ -5,6 +5,7 @@ import org.opencv.core.Mat;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -13,6 +14,7 @@ import java.util.logging.Logger;
 
 /**
  * This is the output of AI.
+ * Everthing about Networking
  * 
  * @author X. Wang
  * @version 1.0
@@ -47,31 +49,32 @@ public class AIOutput extends AIBaseOutput
         }
     }
     
-public BufferedImage getBufferedImage(String camera){
-    //source: http://answers.opencv.org/question/10344/opencv-java-load-image-to-gui/
-    //Fastest code
-    //The output can be assigned either to a BufferedImage or to an Image
-
-     int type = BufferedImage.TYPE_BYTE_GRAY;
-     Mat temp = ((Info)mem.dequeFirst(camera)).getImage();
-     if (temp == null){
-         return null;
-     }
-     if (temp .channels() > 1 ) {
-         type = BufferedImage.TYPE_3BYTE_BGR;
-     }
-     int bufferSize = temp.channels() * temp.cols() * temp.rows();
-     byte [] b = new byte[bufferSize];
-     temp.get(0, 0, b); // get all the pixels
-     BufferedImage image = new BufferedImage(temp.cols(), temp.rows(), type);
-     final byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
-     System.arraycopy(b, 0, targetPixels, 0, b.length);  
-     temp.release();
-     return image;
+    /**
+     * source: http://answers.opencv.org/question/10344/opencv-java-load-image-to-gui/
+     * Fastest code
+     * The output can be assigned either to a BufferedImage or to an Image
+     */
+    public BufferedImage getBufferedImage(String camera){
+        int type = BufferedImage.TYPE_BYTE_GRAY;
+        Mat temp = ((Info)mem.dequeFirst(camera)).getImage();
+        if (temp == null){
+            return null;
+        }
+        if (temp .channels() > 1 ){
+            type = BufferedImage.TYPE_3BYTE_BGR;
+        }
+        int bufferSize = temp.channels() * temp.cols() * temp.rows();
+        byte [] b = new byte[bufferSize];
+        temp.get(0, 0, b); // get all the pixels
+        BufferedImage image = new BufferedImage(temp.cols(), temp.rows(), type);
+        final byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
+        System.arraycopy(b, 0, targetPixels, 0, b.length);  
+        temp.release();
+        return image;
     }
     
     @Override
-    protected void Thread() {
+    protected void loop() {
         Send();
     }
 }

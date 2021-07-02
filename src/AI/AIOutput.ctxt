@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=AIOutput
+comment0.text=\n\ This\ is\ the\ output\ of\ AI.\n\ Everthing\ about\ Networking\n\ \n\ @author\ X.\ Wang\n\ @version\ 1.0\n
+comment1.params=mem
+comment1.target=AIOutput(AIMemory)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ AIOutput\n\ @param\ mem\n
+comment2.params=
+comment2.target=void\ Send()
+comment3.params=camera
+comment3.target=java.awt.image.BufferedImage\ getBufferedImage(java.lang.String)
+comment3.text=\n\ source\:\ http\://answers.opencv.org/question/10344/opencv-java-load-image-to-gui/\n\ Fastest\ code\n\ The\ output\ can\ be\ assigned\ either\ to\ a\ BufferedImage\ or\ to\ an\ Image\n
+comment4.params=
+comment4.target=void\ loop()
+numComments=5

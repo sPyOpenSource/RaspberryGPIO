@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=AI
+comment0.text=\n\ This\ is\ a\ class\ initialize\ an\ artificial\ intelligence\ service.\n\ \n\ @author\ X.\ Wang\n\ @version\ 1.0\n
+comment1.params=
+comment1.target=AI()
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ AI\n
+comment2.params=args
+comment2.target=void\ main(java.lang.String[])
+comment3.params=
+comment3.target=void\ start()
+comment4.params=camera
+comment4.target=java.awt.image.BufferedImage\ getImage(java.lang.String)
+numComments=5

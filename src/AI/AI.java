@@ -25,7 +25,7 @@ public final class AI
     public AI()
     {
         // Initialize instance variables
-        mem.setLogPath("/home/spy/AI/");
+        mem.setLogPath("~/AI/");
         inp = new AIInput(mem);
         log = new AILogic(mem);
         oup = new AIOutput(mem);
@@ -35,7 +35,6 @@ public final class AI
     }
     
     public static void main(String[] args) {
-        System.load("/home/spy/Source/C/opencv/build/lib/libopencv_java412.so");
        /*SwingUtilities.invokeLater(() -> {
            VideoPanel panel = new VideoPanel();
            JFrame frame = new JFrame("Video");

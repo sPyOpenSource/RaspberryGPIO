@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=AILogic
+comment0.text=\n\ This\ is\ the\ logic\ class\ of\ AI.\n\ Everything\ including\ processing\n\ \n\ @author\ X.\ Wang\ \n\ @version\ 1.0\n
+comment1.params=mem
+comment1.target=AILogic(AIMemory)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ AILogic\n\ @param\ mem\n
+comment2.params=
+comment2.target=void\ ProcessImages()
+comment3.params=
+comment3.target=void\ loop()
+comment4.params=info
+comment4.target=void\ MessagesLogic(Models.Info)
+numComments=5

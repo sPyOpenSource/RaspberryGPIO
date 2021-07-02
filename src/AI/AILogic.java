@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
 
 /**
  * This is the logic class of AI.
+ * Everything including processing
  * 
  * @author X. Wang 
  * @version 1.0
@@ -34,7 +35,7 @@ public class AILogic extends AIBaseLogic
     {
         // Initialize instance variables        
         super(mem);
-        colorCamera  = new MotionDetection(filter, threshold);
+        colorCamera = new MotionDetection(filter, threshold);
         depthCamera = new PointCloud();
         accFilter = new VectorFilter(10, 10, 0.0001, 0.1, 0.1 / 3);
         magFilter = new VectorFilter(10, 10, 0.0001, 0.1, 0.1 / 3);
@@ -48,12 +49,12 @@ public class AILogic extends AIBaseLogic
     }
 
     @Override
-    protected void Thread() {
+    protected void loop() {
         ProcessImages();
     }
 
     @Override
-    protected void Messages(Info info) {
+    protected void MessagesLogic(Info info) {
         switch (info.getPayload()){
             case "news":
                 ((AIBaseMemory)mem).search("news").parallelStream().forEach((news) -> {
