@@ -1,4 +1,5 @@
 package AI;
+
 /**
  * This is the input class of AI.
  * 
@@ -11,8 +12,8 @@ import AI.Models.Vector3D;
 import AI.Models.VectorFilter;
 import AI.Models.VectorMat;
 import AI.util.AII2CBus;
-import gnu.io.SerialPort;
 
+import gnu.io.SerialPort;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +29,7 @@ public class AIInput extends AIBaseInput
     private Vector3D g;
     private AII2CBus i2cbus;
     private final double dt = 0.02;
-    private final VideoCapture cap = new VideoCapture(); 
+    private final VideoCapture cap = new VideoCapture("http://192.168.1.4:8080/video"); 
     private final VectorFilter accFilter;
     private final SerialPort serial;
 
@@ -40,10 +41,6 @@ public class AIInput extends AIBaseInput
     {
         super(mem);
         serial = mem.getSerial();
-        //cap.open(0);
-        //cap.set(Videoio.CV_CAP_PROP_FRAME_WIDTH, 320);
-        //cap.set(Videoio.CV_CAP_PROP_FRAME_HEIGHT, 240);
-        //mem.addInfo(new Info(cap), "the webcam");
         accFilter = new VectorFilter(10.0, 10.0, 0.0001, 0.1, 0.02);
     }
     
@@ -56,7 +53,7 @@ public class AIInput extends AIBaseInput
     }
     
     private void filter(double filter){
-        try{ 
+        try{
             Vector3D acc = i2cbus.readingAcc();
             g.setValues(
                 g.x * filter + acc.x * (1 - filter),

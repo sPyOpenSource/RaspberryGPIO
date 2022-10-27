@@ -2,7 +2,10 @@ package AI;
 
 import AI.Models.Info;
 import AI.util.PID;
+import ecm.PrimeTest.LucasLehmer;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +27,7 @@ public class AILogic extends AIBaseLogic
     private final Mat temp = new Mat(), dx = new Mat(), dy = new Mat(), dI = new Mat(), sum = new Mat(), V = new Mat(), Old = new Mat();
     private final Mat A, B;
     private long start;
+    private final ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         
     /**
      * Constructor for objects of class AILogic
@@ -44,19 +48,27 @@ public class AILogic extends AIBaseLogic
     protected void Messages(Info info){
         switch (info.getPayload()){
             case "configures":
-                Info configure = mem.getLast("configures");
-                if (configure != null)
+                Info configure = (Info)mem.getLast("configures");
+                if (configure != null){
                     Configure(configure.getPayload());
+                }
                 break;
             case "news":
-                mem.search("news").parallelStream().forEach((news) -> {
+                 ((AIBaseMemory)mem).search("news").parallelStream().forEach((news) -> {
                     mem.addInfo(news, "outgoingMessages");
                 }); 
                 break;
             case "topics":
-                mem.search("topics").parallelStream().forEach((topic) -> {
+                 ((AIBaseMemory)mem).search("topics").parallelStream().forEach((topic) -> {
                     mem.addInfo(topic, "outgoingMessages");
                 });
+                break;
+            case "prime":
+                ((AIBaseMemory)mem).search("prime").parallelStream().forEach(
+                        (prime) -> {
+                            LucasLehmer ll = new LucasLehmer(Integer.parseInt(prime.getPayload()));
+                            pool.execute(ll);
+                        });
                 break;
         }
     }
@@ -66,7 +78,7 @@ public class AILogic extends AIBaseLogic
     }
     
     private void ProcessImages() {      
-        Info image = mem.dequeFirst("webcam");
+        Info image = (Info)mem.dequeFirst("webcam");
         if (image != null){
             double dt = (image.getTime() - start) / 1000d;
             try{  

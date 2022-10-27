@@ -27,7 +27,7 @@ public class AIOutput extends AIBaseOutput
     }
     
     private void Send(){
-        Info message = mem.dequeFirst("outgoingMessages2Serial");
+        Info message = (Info)mem.dequeFirst("outgoingMessages2Serial");
         if (message != null){
             try {
                 serial.getOutputStream().write(message.getPayload().getBytes());

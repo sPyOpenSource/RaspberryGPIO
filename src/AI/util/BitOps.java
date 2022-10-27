@@ -59,8 +59,7 @@ public class BitOps
   {
     int currentValueCleared = clearBits(currentValue, ~mask); // clear bits not under mask
     int i = 0;
-    while (mask % 2 == 0 && mask != 0x00)
-    {
+    while (mask % 2 == 0 && mask != 0x00){
       mask >>= 1;
       i++;
     }
@@ -69,17 +68,19 @@ public class BitOps
   
   public static int twosComplementToByte(int value)
   {
-    if (value >= 0 && value <= 0x7f)
+    if (value >= 0 && value <= 0x7f){
       return value;
-    else
+    } else {
       return value - 0x100;
+    }
   }
   
   public static int twosComplementToCustom(int value, int signBitPosition)
   {
-    if (value >= 0 && value <= (1 << signBitPosition) - 1)
+    if (value >= 0 && value <= (1 << signBitPosition) - 1){
       return value;
-    else
+    } else {
       return value - (2 << signBitPosition);
+    }
   }
 }

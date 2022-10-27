@@ -18,6 +18,7 @@ import static AI.util.LSM303.D_OUT_X_L_M;
 import static AI.util.LSM303.LSM303_ADDRESS_ACCEL;
 import static AI.util.LSM303.LSM303_ADDRESS_MAG;
 import static AI.util.LSM303.LSM303_REGISTER_ACCEL_OUT_X_L_A;
+
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.Platform;
