@@ -11,7 +11,7 @@ import org.opencv.core.Mat;
 
 /**
  *
- * @author spy
+ * @author X. Wang
  */
 public class PointCloud {
     final double factorxy, factorz;

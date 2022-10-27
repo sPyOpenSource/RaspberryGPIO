@@ -62,42 +62,45 @@ public class Game extends Thread{
             case 2:
                 rectangle.translate(size * X, 0);
                 Thread threadKey = new Thread(){
-    @Override
-    public void run(){
-      System.out.println("Thread Running");
-      while(true){
-          String key = client.Receive();
-          int keyCode;
-          if(key.length() > 1){
-          System.out.println(key);
-          keyCode = Integer.parseInt(client.Receive());
-          }else {
-                        keyCode = KeyEvent.getExtendedKeyCodeForChar(key.charAt(0));
-              
-client.Receive();}
-    //client.send(new Info(AIBaseLogic.Image2Base64(getScreenShot(component))));
-      
-                robot.keyPress(keyCode);
-    robot.keyRelease(keyCode);}}};
+                    @Override
+                    public void run(){
+                        System.out.println("Thread Running");
+                        while(true){
+                            String key = client.Receive();
+                            int keyCode;
+                            if(key.length() > 1){
+                                System.out.println(key);
+                                keyCode = Integer.parseInt(client.Receive());
+                            } else {
+                                keyCode = KeyEvent.getExtendedKeyCodeForChar(key.charAt(0));    
+                                client.Receive();
+                            }
+                            //client.send(new Info(AIBaseLogic.Image2Base64(getScreenShot(component))));
+
+                            robot.keyPress(keyCode);
+                            robot.keyRelease(keyCode);
+                        }
+                    }
+                };
                 threadKey.start();
                 break;
             default:
                 Thread threadMouse = new Thread(){
-    @Override
-    public void run(){
-      System.out.println("Thread Running");
-      while(true){
-          String mouse = client.Receive();
-          int x = (int)(Double.parseDouble(mouse.split(",")[0]) * width);
-          int y = (int)(Double.parseDouble(mouse.split(",")[1]) * height);
-          robot.mouseMove(x + xf, y + yf);
-          robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-    robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+                    @Override
+                    public void run(){
+                        System.out.println("Thread Running");
+                        while(true){
+                            String mouse = client.Receive();
+                            int x = (int)(Double.parseDouble(mouse.split(",")[0]) * width);
+                            int y = (int)(Double.parseDouble(mouse.split(",")[1]) * height);
+                            robot.mouseMove(x + xf, y + yf);
+                            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+                            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 
-    //client.send(new Info(AIBaseLogic.Image2Base64(getScreenShot(component))));
-      }
-    }
-  };
+                            //client.send(new Info(AIBaseLogic.Image2Base64(getScreenShot(component))));
+                        }
+                    }
+                };
                 threadMouse.start();
                 break;
         }
@@ -105,21 +108,20 @@ client.Receive();}
     
     public static BufferedImage getScreenShot(
     Component component) {
-
-    BufferedImage image = new BufferedImage(
-      component.getWidth(),
-      component.getHeight(),
-      BufferedImage.TYPE_INT_RGB
-      );
-    // call the Component's paint method, using
-    // the Graphics object of the image.
-    component.paint( image.getGraphics() ); // alternately use .printAll(..)
-    return image;
-  }
+        BufferedImage image = new BufferedImage(
+            component.getWidth(),
+            component.getHeight(),
+            BufferedImage.TYPE_INT_RGB
+        );
+        // call the Component's paint method, using
+        // the Graphics object of the image.
+        component.paint( image.getGraphics() ); // alternately use .printAll(..)
+        return image;
+    }
     
     public void Analyse(){
         //file.read(image);
-       // System.out.println(image.size());
+        //System.out.println(image.size());
         //write.write(image);
         old = image.clone();
         image = new Mat(rectangle.height, rectangle.width, CvType.CV_32SC3);
@@ -128,13 +130,13 @@ client.Receive();}
         BufferedImage bufferedImage = robot.createScreenCapture(rectangle);
         
         int[] pixels = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
-        image .put(0, 0, pixels);
+        image.put(0, 0, pixels);
         df = new Mat(rectangle.height, rectangle.width, CvType.CV_32SC3);
         Core.subtract(old, image, df);
         double d = df.dot(df);
         
         if(d > 100000)
-        client.send(new Info(AIBaseLogic.Image2Base64(bufferedImage)));
+            client.send(new Info(AIBaseLogic.Image2Base64(bufferedImage)));
         else
             System.out.println(d);
     }
@@ -177,13 +179,13 @@ client.Receive();}
         try {
             Game.robot = new Robot();
             Game game1 = new Game(35, 1);
-        game1.start();
-        Game game2 = new Game(35, 2);
-        game2.start();
-        Game game3 = new Game(35, 3);
-        game3.start();
-        Game game4 = new Game(35, 4);
-        game4.start();
+            game1.start();
+            Game game2 = new Game(35, 2);
+            game2.start();
+            Game game3 = new Game(35, 3);
+            game3.start();
+            Game game4 = new Game(35, 4);
+            game4.start();
         } catch (AWTException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
