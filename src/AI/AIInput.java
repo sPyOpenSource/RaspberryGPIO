@@ -41,7 +41,7 @@ public class AIInput extends AIBaseInput
      */
     public AIInput(AIMemory mem)
     {
-    	super(mem);
+        super(mem);
         serial = mem.getSerial();
         cap.open(0);
         cap.set(Videoio.CAP_PROP_FRAME_WIDTH, 320);

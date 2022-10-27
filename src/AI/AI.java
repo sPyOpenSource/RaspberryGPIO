@@ -27,7 +27,7 @@ public final class AI
         inp = new AIInput(mem);
         log = new AILogic(mem);
         oup = new AIOutput(mem);
-	logThread = new Thread(log);
+        logThread = new Thread(log);
         inpThread = new Thread(inp);
         oupThread = new Thread(oup);
     }
@@ -40,7 +40,7 @@ public final class AI
     
     public void start()
     {
-	logThread.start();
+        logThread.start();
         inpThread.start(); 
         oupThread.start();
     }

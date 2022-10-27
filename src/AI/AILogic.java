@@ -44,17 +44,17 @@ public class AILogic extends AIBaseLogic
     protected void Messages(Info info){
         switch (info.getPayload()){
             case "configures":
-                Info configure = mem.getLast("configures");
+                Info configure = (Info)mem.getLast("configures");
                 if (configure!=null)
                     Configure(configure.getPayload());
                 break;
             case "news":
-                mem.search("news").parallelStream().forEach((news) -> {
+                 ((AIBaseMemory)mem).search("news").parallelStream().forEach((news) -> {
                     mem.addInfo(news, "outgoingMessages");
                 }); 
                 break;
             case "topics":
-                mem.search("topics").parallelStream().forEach((topic) -> {
+                 ((AIBaseMemory)mem).search("topics").parallelStream().forEach((topic) -> {
                     mem.addInfo(topic, "outgoingMessages");
                 });
                 break;
@@ -66,7 +66,7 @@ public class AILogic extends AIBaseLogic
     }
     
     private void ProcessImages() {      
-        Info image = mem.dequeFirst("webcam");
+        Info image = (Info)mem.dequeFirst("webcam");
         if (image != null){
             double dt = (image.getTime() - start) / 1000d;
             try{  

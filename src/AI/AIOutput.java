@@ -1,6 +1,7 @@
 package AI;
 
 import AI.Models.Info;
+import AI.util.MicroPython;
 import com.pi4j.io.serial.Serial;
 
 /**
@@ -12,6 +13,7 @@ import com.pi4j.io.serial.Serial;
 public class AIOutput extends AIBaseOutput
 {
     private final Serial serial;
+    private final MicroPython microPython;
 
     /**
      * Constructor for objects of class AIOutput
@@ -21,10 +23,11 @@ public class AIOutput extends AIBaseOutput
     {
 	super(mem);
         serial = mem.getSerial();
+        microPython = new MicroPython(serial);
     }
     
     private void Send(){
-        Info message = mem.dequeFirst("outgoingMessages2Serial");
+        Info message = (Info)mem.dequeFirst("outgoingMessages2Serial");
         if (message != null){
             serial.write(message.getPayload());
             serial.flush();
@@ -34,5 +37,9 @@ public class AIOutput extends AIBaseOutput
     @Override
     protected void Thread() {
         Send();
+    }
+    
+    public void sendFile(String path){
+        microPython.sendFile(path);
     }
 }
