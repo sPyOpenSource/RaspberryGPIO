@@ -335,7 +335,6 @@ public class Raspberry_GPIO extends JVSMain implements MyOpenLabDriverOwnerIF {
 
     public VSObject setOutput(VSComboBox combo, VSObject pin, int c) {
         if (combo.selectedIndex == GPIO_INPUT) {
-
             pin = new VSBoolean();
             element.setPinOutputReference(c, pin);
 
@@ -442,34 +441,29 @@ public class Raspberry_GPIO extends JVSMain implements MyOpenLabDriverOwnerIF {
             pin = gpio.provisionDigitalInputPin(raspin, PinPullResistance.PULL_DOWN);
 
             // create and register gpio pin listener
-            pin.addListener(new GpioPinListenerDigital() {
-                @Override
-                public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
-                    // display pin state on console
-                    //System.out.println(" --> GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
-
-                    int c = 0;                    
-                    processPin(event, pin_right_1, io_pin_right_1, c++);
-                    processPin(event, pin_right_4,io_pin_right_4,  c++);
-                    processPin(event, pin_right_5,io_pin_right_5, c++);
-                    processPin(event, pin_right_6, io_pin_right_6, c++);
-                    processPin(event, pin_right_26, io_pin_right_26, c++);
-                    processPin(event, pin_right_27, io_pin_right_27, c++);
-                    processPin(event, pin_right_28, io_pin_right_28, c++);
-                    processPin(event, pin_right_29, io_pin_right_29, c++);
-
-                    processPin(event, pin_left_7, io_pin_left_7, c++);
-                    processPin(event, pin_left_0, io_pin_left_0, c++);
-                    processPin(event, pin_left_2,io_pin_left_2,  c++);
-                    processPin(event, pin_left_3, io_pin_left_3, c++);
-                    processPin(event, pin_left_21, io_pin_left_21, c++);
-                    processPin(event, pin_left_22, io_pin_left_22, c++);
-                    processPin(event, pin_left_23, io_pin_left_23, c++);
-                    processPin(event, pin_left_24, io_pin_left_24, c++);
-                    processPin(event, pin_left_25,io_pin_left_25, c++);                    
-
-                }
-
+            pin.addListener((GpioPinListenerDigital) (GpioPinDigitalStateChangeEvent event) -> {
+                // display pin state on console
+                //System.out.println(" --> GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
+                
+                int c = 0;
+                processPin(event, pin_right_1, io_pin_right_1, c++);
+                processPin(event, pin_right_4,io_pin_right_4,  c++);
+                processPin(event, pin_right_5,io_pin_right_5, c++);
+                processPin(event, pin_right_6, io_pin_right_6, c++);
+                processPin(event, pin_right_26, io_pin_right_26, c++);
+                processPin(event, pin_right_27, io_pin_right_27, c++);
+                processPin(event, pin_right_28, io_pin_right_28, c++);
+                processPin(event, pin_right_29, io_pin_right_29, c++);
+                
+                processPin(event, pin_left_7, io_pin_left_7, c++);
+                processPin(event, pin_left_0, io_pin_left_0, c++);
+                processPin(event, pin_left_2,io_pin_left_2,  c++);
+                processPin(event, pin_left_3, io_pin_left_3, c++);
+                processPin(event, pin_left_21, io_pin_left_21, c++);
+                processPin(event, pin_left_22, io_pin_left_22, c++);
+                processPin(event, pin_left_23, io_pin_left_23, c++);
+                processPin(event, pin_left_24, io_pin_left_24, c++);
+                processPin(event, pin_left_25,io_pin_left_25, c++);
             });
 
         } else {
