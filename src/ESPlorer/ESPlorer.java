@@ -42,7 +42,7 @@ public class ESPlorer extends javax.swing.JFrame {
 
     public static SerialPort serialPort;
     public static ArrayList<String> sendBuf;
-    public static boolean pasteMode = true; // for MicroPython only
+    public static boolean pasteMode = false; // for MicroPython only
 
     public static boolean pOpen = false;
     public static boolean sOpen = false;
@@ -257,7 +257,6 @@ public class ESPlorer extends javax.swing.JFrame {
         AnswerDelay = new javax.swing.JSlider();
         DumbMode = new javax.swing.JCheckBox();
         LineDelayLabel = new javax.swing.JLabel();
-        LineDelay = new javax.swing.JSlider();
         TurboMode = new javax.swing.JCheckBox();
         ATvXX = new javax.swing.JLayeredPane();
         BasicATcommandsPane = new javax.swing.JLayeredPane();
@@ -392,6 +391,8 @@ public class ESPlorer extends javax.swing.JFrame {
         ButtonSnippet9 = new javax.swing.JButton();
         ButtonSnippet10 = new javax.swing.JButton();
         ButtonSnippet11 = new javax.swing.JButton();
+        LineDelay = new javax.swing.JSlider();
+        jCheckBox1 = new javax.swing.JCheckBox();
         RightBottomPane = new javax.swing.JLayeredPane();
         Command = new javax.swing.JComboBox<>();
         SendCommand = new javax.swing.JButton();
@@ -835,6 +836,7 @@ public class ESPlorer extends javax.swing.JFrame {
         setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         setLocationByPlatform(true);
         setName("ESPlorer"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1024, 768));
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 formFocusGained(evt);
@@ -1229,13 +1231,13 @@ public class ESPlorer extends javax.swing.JFrame {
         FileLayeredPane.setLayout(FileLayeredPaneLayout);
         FileLayeredPaneLayout.setHorizontalGroup(
             FileLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TextScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+            .addComponent(TextScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
         );
         FileLayeredPaneLayout.setVerticalGroup(
             FileLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FileLayeredPaneLayout.createSequentialGroup()
                 .addComponent(TextScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         FilesTabbedPane.addTab("NewFile", FileLayeredPane);
@@ -1345,15 +1347,15 @@ public class ESPlorer extends javax.swing.JFrame {
                 .addComponent(FilesToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(FilesTabbedPane)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(SriptsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Busy)
                     .addComponent(FilePathLabel))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LeftMainButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addContainerGap())
         );
 
         TextTab.addTab("Scripts", SriptsTab);
@@ -2391,22 +2393,6 @@ public class ESPlorer extends javax.swing.JFrame {
         LineDelayLabel.setText("Line delay for \"Dumb Mode\" = 200 ms");
         LineDelayLabel.setToolTipText("It's usual \"line delay\", as you known.");
 
-        LineDelay.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        LineDelay.setMajorTickSpacing(500);
-        LineDelay.setMaximum(1000);
-        LineDelay.setMinorTickSpacing(100);
-        LineDelay.setPaintLabels(true);
-        LineDelay.setPaintTicks(true);
-        LineDelay.setSnapToTicks(true);
-        LineDelay.setToolTipText("Fixed delay between lines");
-        LineDelay.setValue(200);
-        LineDelay.setAlignmentY(1.0F);
-        LineDelay.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                LineDelayStateChanged(evt);
-            }
-        });
-
         TurboMode.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         TurboMode.setText("\"Turbo Mode\"");
         TurboMode.setToolTipText("");
@@ -2427,7 +2413,6 @@ public class ESPlorer extends javax.swing.JFrame {
         OptionsFileSendMode.setLayer(AnswerDelay, javax.swing.JLayeredPane.DEFAULT_LAYER);
         OptionsFileSendMode.setLayer(DumbMode, javax.swing.JLayeredPane.DEFAULT_LAYER);
         OptionsFileSendMode.setLayer(LineDelayLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        OptionsFileSendMode.setLayer(LineDelay, javax.swing.JLayeredPane.DEFAULT_LAYER);
         OptionsFileSendMode.setLayer(TurboMode, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout OptionsFileSendModeLayout = new javax.swing.GroupLayout(OptionsFileSendMode);
@@ -2448,8 +2433,7 @@ public class ESPlorer extends javax.swing.JFrame {
                             .addComponent(Delay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(AnswerDelayLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(AnswerDelay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LineDelayLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(LineDelay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(LineDelayLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         OptionsFileSendModeLayout.setVerticalGroup(
@@ -2468,9 +2452,7 @@ public class ESPlorer extends javax.swing.JFrame {
                 .addComponent(DumbMode)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LineDelayLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LineDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         NodeMCUSettings.setLayer(OptionsOther, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -2518,7 +2500,7 @@ public class ESPlorer extends javax.swing.JFrame {
         );
         NodeMCULayout.setVerticalGroup(
             NodeMCULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TextTab, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
+            .addComponent(TextTab, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
         );
 
         TextTab.getAccessibleContext().setAccessibleName("NewFile");
@@ -3869,11 +3851,11 @@ public class ESPlorer extends javax.swing.JFrame {
         LeftBasePane.setLayout(LeftBasePaneLayout);
         LeftBasePaneLayout.setHorizontalGroup(
             LeftBasePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LeftTab, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+            .addComponent(LeftTab, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
         );
         LeftBasePaneLayout.setVerticalGroup(
             LeftBasePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LeftTab, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+            .addComponent(LeftTab, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
         );
 
         LeftTab.getAccessibleContext().setAccessibleName("LeftTab");
@@ -4263,9 +4245,11 @@ public class ESPlorer extends javax.swing.JFrame {
         );
         TerminalLogPaneLayout.setVerticalGroup(
             TerminalLogPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 305, Short.MAX_VALUE)
+            .addGap(0, 335, Short.MAX_VALUE)
             .addGroup(TerminalLogPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(RightSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
+                .addGroup(TerminalLogPaneLayout.createSequentialGroup()
+                    .addComponent(RightSplitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         RightFilesSplitPane.setLeftComponent(TerminalLogPane);
@@ -4323,15 +4307,13 @@ public class ESPlorer extends javax.swing.JFrame {
         FileManagersLayer.setLayout(FileManagersLayerLayout);
         FileManagersLayerLayout.setHorizontalGroup(
             FileManagersLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FileManagersLayerLayout.createSequentialGroup()
-                .addComponent(PyFileManagerPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(PyFileManagerPane, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
         );
         FileManagersLayerLayout.setVerticalGroup(
             FileManagersLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FileManagersLayerLayout.createSequentialGroup()
-                .addComponent(PyFileManagerPane, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addComponent(PyFileManagerPane, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 100, Short.MAX_VALUE))
         );
 
         FileManagerScrollPane.setViewportView(FileManagersLayer);
@@ -4461,8 +4443,33 @@ public class ESPlorer extends javax.swing.JFrame {
         });
         RightSnippetsPane.add(ButtonSnippet11);
 
+        LineDelay.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        LineDelay.setMajorTickSpacing(500);
+        LineDelay.setMaximum(1000);
+        LineDelay.setMinorTickSpacing(100);
+        LineDelay.setPaintLabels(true);
+        LineDelay.setPaintTicks(true);
+        LineDelay.setSnapToTicks(true);
+        LineDelay.setToolTipText("Fixed delay between lines");
+        LineDelay.setValue(200);
+        LineDelay.setAlignmentY(1.0F);
+        LineDelay.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                LineDelayStateChanged(evt);
+            }
+        });
+
+        jCheckBox1.setText("Past Mode");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         RightBigPane.setLayer(RightFilesSplitPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
         RightBigPane.setLayer(RightSnippetsPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        RightBigPane.setLayer(LineDelay, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        RightBigPane.setLayer(jCheckBox1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout RightBigPaneLayout = new javax.swing.GroupLayout(RightBigPane);
         RightBigPane.setLayout(RightBigPaneLayout);
@@ -4470,14 +4477,25 @@ public class ESPlorer extends javax.swing.JFrame {
             RightBigPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(RightFilesSplitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(RightSnippetsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(RightBigPaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LineDelay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox1)
+                .addContainerGap())
         );
         RightBigPaneLayout.setVerticalGroup(
             RightBigPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RightBigPaneLayout.createSequentialGroup()
-                .addComponent(RightFilesSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                .addComponent(RightFilesSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RightSnippetsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addComponent(RightSnippetsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(RightBigPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LineDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RightBigPaneLayout.createSequentialGroup()
+                        .addComponent(jCheckBox1)
+                        .addContainerGap())))
         );
 
         RightBasePane.add(RightBigPane);
@@ -5339,33 +5357,15 @@ public class ESPlorer extends javax.swing.JFrame {
         PortFinder();
         this.setTitle("ESPlorer " + VERSION + " by 4refr0nt");
         ProgressBar.setVisible(false);
-        CommandsSetNodeMCU();
+        CommandsSetMicroPython();
         isToolbarShow();
-        isLeftExtraShow();
-        isRightExtraShow();
         isRightSnippetsShow();
-        SetWindowSize();
         isFileManagerShow();
         isLogShow();
     }//GEN-LAST:event_formWindowOpened
-    
-    private void SetWindowSize() {
-        int x, y, h, w;
-        x = prefs.getInt(WIN_X, 0);
-        y = prefs.getInt(WIN_Y, 0);
-        h = prefs.getInt(WIN_H, 768);
-        w = prefs.getInt(WIN_W, 1024);
-        this.setBounds(x, y, w, h);
-    }
 
     private void isToolbarShow() {
         FilesToolBar.setVisible(MenuItemViewToolbar.isSelected());
-    }
-
-    private void isLeftExtraShow() {
-    }
-
-    private void isRightExtraShow() {
     }
 
     private void isRightSnippetsShow() {
@@ -5504,7 +5504,7 @@ public class ESPlorer extends javax.swing.JFrame {
             fos = new FileOutputStream(iFile.get(iTab));
             osw = new OutputStreamWriter(fos, "UTF-8");
             bw = new BufferedWriter(osw);
-            bw.write(TextEditor1.get(iTab).getText());
+            bw.write(TextEditorList.get(iTab).getText());
             bw.flush();
             osw.flush();
             fos.flush();
@@ -5531,7 +5531,7 @@ public class ESPlorer extends javax.swing.JFrame {
         } catch (IOException ex) {
             log(ex.toString());
         }
-        TextEditor1.get(iTab).discardAllEdits();
+        TextEditorList.get(iTab).discardAllEdits();
         FileChanged.set(iTab, false);
         UpdateEditorButtons();
         return success;
@@ -5557,21 +5557,22 @@ public class ESPlorer extends javax.swing.JFrame {
         if (UseExternalEditor.isSelected()) {
             return;
         }
-        TextEditor1.get(iTab).cut();
+        TextEditorList.get(iTab).cut();
         FileChanged.set(iTab, true);
     }//GEN-LAST:event_MenuItemEditCutActionPerformed
 
     private void MenuItemEditCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemEditCopyActionPerformed
-        TextEditor1.get(iTab).copy();
+        TextEditorList.get(iTab).copy();
     }//GEN-LAST:event_MenuItemEditCopyActionPerformed
 
     private void MenuItemEditPasteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemEditPasteActionPerformed
         if (UseExternalEditor.isSelected()) {
             return;
         }
-        TextEditor1.get(iTab).paste();
+        TextEditorList.get(iTab).paste();
         FileChanged.set(iTab, true);
     }//GEN-LAST:event_MenuItemEditPasteActionPerformed
+
 // File open
     private void MenuItemFileOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemFileOpenActionPerformed
         OpenFile();
@@ -5654,7 +5655,7 @@ public class ESPlorer extends javax.swing.JFrame {
             while ((line = br.readLine()) != null) {
                 sb.append(line).append('\n');
             }
-            TextEditor1.get(iTab).setText(sb.toString());
+            TextEditorList.get(iTab).setText(sb.toString());
             success = true;
         } catch (IOException ex) {
             log(ex.toString());
@@ -5678,13 +5679,13 @@ public class ESPlorer extends javax.swing.JFrame {
             log("Internal error 103: can't close stream.");
         }
         if (success) {
-            TextEditor1.get(iTab).setCaretPosition(0);
+            TextEditorList.get(iTab).setCaretPosition(0);
             FileChanged.set(iTab, false);
-            TextEditor1.get(iTab).discardAllEdits();
+            TextEditorList.get(iTab).discardAllEdits();
             UpdateEditorButtons();
             FileLabelUpdate();
             if (UseExternalEditor.isSelected()) {
-                TextEditor1.get(iTab).setEditable(false);
+                TextEditorList.get(iTab).setEditable(false);
             }
             log("Loading " + FileName + ": Success.");
         }
@@ -5720,7 +5721,7 @@ public class ESPlorer extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItemLogClearActionPerformed
     
     private void CheckSelected() {
-        if (TextEditor1.get(iTab).getSelectedText() == null) {
+        if (TextEditorList.get(iTab).getSelectedText() == null) {
             MenuItemEditorCut.setEnabled(false);
             MenuItemEditCut.setEnabled(false);
             MenuItemEditorCopy.setEnabled(false);
@@ -5790,13 +5791,13 @@ public class ESPlorer extends javax.swing.JFrame {
         }
         // CanUndo
         try {
-            if (TextEditor1.isEmpty()) {
+            if (TextEditorList.isEmpty()) {
                 return;
             }
         } catch (Exception e) {
             return;
         }
-        if (TextEditor1.get(iTab).canUndo()) {
+        if (TextEditorList.get(iTab).canUndo()) {
             MenuItemEditUndo.setEnabled(true);
             MenuItemEditorUndo.setEnabled(true);
             ButtonUndo.setEnabled(true);
@@ -5806,7 +5807,7 @@ public class ESPlorer extends javax.swing.JFrame {
             ButtonUndo.setEnabled(false);
         }
         // CanRedo
-        if (TextEditor1.get(iTab).canRedo()) {
+        if (TextEditorList.get(iTab).canRedo()) {
             MenuItemEditRedo.setEnabled(true);
             MenuItemEditorRedo.setEnabled(true);
             ButtonRedo.setEnabled(true);
@@ -5870,14 +5871,14 @@ public class ESPlorer extends javax.swing.JFrame {
     }//GEN-LAST:event_AlwaysOnTopItemStateChanged
 
     private void MenuItemEditUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemEditUndoActionPerformed
-        if (TextEditor1.get(iTab).canUndo()) {
-            TextEditor1.get(iTab).undoLastAction();
+        if (TextEditorList.get(iTab).canUndo()) {
+            TextEditorList.get(iTab).undoLastAction();
         }
     }//GEN-LAST:event_MenuItemEditUndoActionPerformed
 
     private void MenuItemEditRedoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemEditRedoActionPerformed
-        if (TextEditor1.get(iTab).canRedo()) {
-            TextEditor1.get(iTab).redoLastAction();
+        if (TextEditorList.get(iTab).canRedo()) {
+            TextEditorList.get(iTab).redoLastAction();
         }
     }//GEN-LAST:event_MenuItemEditRedoActionPerformed
 
@@ -5888,33 +5889,6 @@ public class ESPlorer extends javax.swing.JFrame {
     private void MenuItemEditorUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemEditorUndoActionPerformed
         MenuItemEditUndo.doClick();
     }//GEN-LAST:event_MenuItemEditorUndoActionPerformed
-
-    private void FileDownloadFinisher(boolean success) {
-        try {
-            serialPort.removeEventListener();
-        } catch (SerialPortException e) {
-            log(e.toString());
-        }
-        try {
-            serialPort.addEventListener(new PortReader(), portMask);
-        } catch (SerialPortException e) {
-            log("Downloader: Can't Add OldEventListener.");
-        }
-        //SendUnLock();
-        StopSend();
-        if (success) {
-            TerminalAdd("Success.\r\n");
-            if (DownloadCommand.startsWith("EDIT")) {
-                FileNew(rcvFile);
-            } else if (DownloadCommand.startsWith("DOWNLOAD")) {
-                SaveDownloadedFile();
-            } else {
-                // nothing, reserved
-            }
-        } else {
-            TerminalAdd("FAIL.\r\n");
-        }
-    }
 
     private int CRC(byte[] s) {
         int cs = 0;
@@ -5993,13 +5967,13 @@ public class ESPlorer extends javax.swing.JFrame {
         int l;
         if ((LeftTab.getSelectedIndex() == 0) && (TextTab.getSelectedIndex() == 0)) { // NodeMCU and Scripts
             try {
-                l = TextEditor1.get(iTab).getSelectedText().length();
+                l = TextEditorList.get(iTab).getSelectedText().length();
             } catch (Exception e) {
                 log("Can't send: nothing selected.");
                 return;
             }
             if (l > 0) {
-                SendToESP(TextEditor1.get(iTab).getSelectedText());
+                SendToESP(TextEditorList.get(iTab).getSelectedText());
             }
         } else if ((LeftTab.getSelectedIndex() == 0) && (TextTab.getSelectedIndex() == 0)) { // NodeMCU and Snippets
             try {
@@ -6183,8 +6157,8 @@ public class ESPlorer extends javax.swing.JFrame {
     private void MenuItemEditSendLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemEditSendLineActionPerformed
         int nLine;
         if ((LeftTab.getSelectedIndex() == 0) && (TextTab.getSelectedIndex() == 0)) { // NodeMCU and Scripts
-            nLine = TextEditor1.get(iTab).getCaretLineNumber();
-            String cmd = TextEditor1.get(iTab).getText().split("\r?\n")[nLine];
+            nLine = TextEditorList.get(iTab).getCaretLineNumber();
+            String cmd = TextEditorList.get(iTab).getText().split("\r?\n")[nLine];
             btnSend(cmd);
         } else if ((LeftTab.getSelectedIndex() == 0) && (TextTab.getSelectedIndex() == 2)) { // NodeMCU and Snippets
             nLine = SnippetText.getCaretLineNumber();
@@ -6240,25 +6214,25 @@ public class ESPlorer extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItemViewTermFontDecActionPerformed
 
     private void MenuItemViewEditorFontIncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemViewEditorFontIncActionPerformed
-        int size = TextEditor1.get(iTab).getFont().getSize();
+        int size = TextEditorList.get(iTab).getFont().getSize();
         if (size < EDITOR_FONT_SIZE_MAX) {
-            TextEditor1.get(iTab).setFont(TextEditor1.get(iTab).getFont().deriveFont(TextEditor1.get(iTab).getFont().getSize() + 1f));
+            TextEditorList.get(iTab).setFont(TextEditorList.get(iTab).getFont().deriveFont(TextEditorList.get(iTab).getFont().getSize() + 1f));
         } else {
-            TextEditor1.get(iTab).setFont(TextEditor1.get(iTab).getFont().deriveFont(EDITOR_FONT_SIZE_MAX));
+            TextEditorList.get(iTab).setFont(TextEditorList.get(iTab).getFont().deriveFont(EDITOR_FONT_SIZE_MAX));
         }
-        prefs.putFloat(EDITOR_FONT_SIZE, TextEditor1.get(iTab).getFont().getSize());
+        prefs.putFloat(EDITOR_FONT_SIZE, TextEditorList.get(iTab).getFont().getSize());
         PrefsFlush();
         SetTheme(prefs.getInt(COLOR_THEME, 0), true); // for all
     }//GEN-LAST:event_MenuItemViewEditorFontIncActionPerformed
 
     private void MenuItemViewEditorFontDecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemViewEditorFontDecActionPerformed
-        int size = TextEditor1.get(iTab).getFont().getSize();
+        int size = TextEditorList.get(iTab).getFont().getSize();
         if (size > EDITOR_FONT_SIZE_MIN) {
-            TextEditor1.get(iTab).setFont(TextEditor1.get(iTab).getFont().deriveFont(TextEditor1.get(iTab).getFont().getSize() - 1f));
+            TextEditorList.get(iTab).setFont(TextEditorList.get(iTab).getFont().deriveFont(TextEditorList.get(iTab).getFont().getSize() - 1f));
         } else {
-            TextEditor1.get(iTab).setFont(TextEditor1.get(iTab).getFont().deriveFont(EDITOR_FONT_SIZE_MIN));
+            TextEditorList.get(iTab).setFont(TextEditorList.get(iTab).getFont().deriveFont(EDITOR_FONT_SIZE_MIN));
         }
-        prefs.putFloat(EDITOR_FONT_SIZE, TextEditor1.get(iTab).getFont().getSize());
+        prefs.putFloat(EDITOR_FONT_SIZE, TextEditorList.get(iTab).getFont().getSize());
         PrefsFlush();
         SetTheme(prefs.getInt(COLOR_THEME, 0), true); // for all
     }//GEN-LAST:event_MenuItemViewEditorFontDecActionPerformed
@@ -6401,7 +6375,6 @@ public class ESPlorer extends javax.swing.JFrame {
 
     private void MenuItemViewLeftExtraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemViewLeftExtraActionPerformed
         prefs.putBoolean(SHOW_EXTRA_LEFT, MenuItemViewLeftExtra.isSelected());
-        isLeftExtraShow();
     }//GEN-LAST:event_MenuItemViewLeftExtraActionPerformed
 
     private void MenuViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuViewActionPerformed
@@ -6459,7 +6432,6 @@ public class ESPlorer extends javax.swing.JFrame {
 
     private void MenuItemViewLeftExtraItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_MenuItemViewLeftExtraItemStateChanged
         prefs.putBoolean(SHOW_EXTRA_LEFT, MenuItemViewLeftExtra.isSelected());
-        isLeftExtraShow();
     }//GEN-LAST:event_MenuItemViewLeftExtraItemStateChanged
 
     private void MenuItemViewSnippetsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_MenuItemViewSnippetsItemStateChanged
@@ -6535,12 +6507,6 @@ public class ESPlorer extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
     
     private void AppClose() {
-        Rectangle r = this.getBounds();
-        prefs.putInt(WIN_X, r.x);
-        prefs.putInt(WIN_Y, r.y);
-        prefs.putInt(WIN_H, r.height);
-        prefs.putInt(WIN_W, r.width);
-        //log("w="+Integer.toString(prefs.getInt(WIN_W, 0)));
         while (FilesTabbedPane.getTabCount() > 0) {
             if (CloseFile() == JOptionPane.CANCEL_OPTION) {
                 return;
@@ -6640,8 +6606,8 @@ public class ESPlorer extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdGetCIPSTATUSActionPerformed
 
     private void AT_ServerComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AT_ServerComponentShown
-        WiFi_common.setVisible(false);
-        TCP_common.setVisible(true);
+        /*WiFi_common.setVisible(false);
+        TCP_common.setVisible(true);*/
     }//GEN-LAST:event_AT_ServerComponentShown
 
     private void AT_ServerFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AT_ServerFocusGained
@@ -6686,8 +6652,8 @@ public class ESPlorer extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdGetCIPMODEActionPerformed
 
     private void AT_ClientComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AT_ClientComponentShown
-        WiFi_common.setVisible(false);
-        TCP_common.setVisible(true);
+        /*WiFi_common.setVisible(false);
+        TCP_common.setVisible(true);*/
     }//GEN-LAST:event_AT_ClientComponentShown
 
     private void AT_ClientFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AT_ClientFocusGained
@@ -6745,7 +6711,6 @@ public class ESPlorer extends javax.swing.JFrame {
             udp_local_port.setEnabled(true);
             udp_mode.setEnabled(true);
         }
-
     }//GEN-LAST:event_protocolItemStateChanged
 
     private void UDPPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_UDPPropertyChange
@@ -6769,8 +6734,8 @@ public class ESPlorer extends javax.swing.JFrame {
     }//GEN-LAST:event_singleItemStateChanged
 
     private void AT_StationComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AT_StationComponentShown
-        WiFi_common.setVisible(true);
-        TCP_common.setVisible(false);
+        /*WiFi_common.setVisible(true);
+        TCP_common.setVisible(false);*/
     }//GEN-LAST:event_AT_StationComponentShown
 
     private void AT_StationFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AT_StationFocusGained
@@ -7294,12 +7259,12 @@ public class ESPlorer extends javax.swing.JFrame {
 
     private void FileSendESPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileSendESPActionPerformed
         if (FileSendESP.isSelected()) {
-            if (TextEditor1.get(iTab).getText().length() == 0) {
+            if (TextEditorList.get(iTab).getText().length() == 0) {
                 JOptionPane.showMessageDialog(null, "File empty.");
                 FileSendESP.setSelected(false);
                 return;
             }
-            SendToESP(TextEditor1.get(iTab).getText());
+            SendToESP(TextEditorList.get(iTab).getText());
         } else {
             StopSend();
         }
@@ -7310,7 +7275,7 @@ public class ESPlorer extends javax.swing.JFrame {
             StopSend();
             return;
         }
-        if (TextEditor1.get(iTab).getText().length() == 0) {
+        if (TextEditorList.get(iTab).getText().length() == 0) {
             FileSaveESP.setSelected(false);
             JOptionPane.showMessageDialog(null, "File empty.");
             return;
@@ -7429,8 +7394,8 @@ public class ESPlorer extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonFileNewActionPerformed
 
     private void AT_SoftAPComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_AT_SoftAPComponentShown
-        WiFi_common.setVisible(true);
-        TCP_common.setVisible(false);
+        /*WiFi_common.setVisible(true);
+        TCP_common.setVisible(false);*/
     }//GEN-LAST:event_AT_SoftAPComponentShown
 
     private void AT_SoftAPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AT_SoftAPFocusGained
@@ -7509,6 +7474,11 @@ public class ESPlorer extends javax.swing.JFrame {
         int ch = channel.getSelectedIndex() + 1;
         btnSend("AT+CWSAP=\"" + SSIDsoftAP.getText() + "\",\"" + PASSsoftAP.getText() + "\"," + Integer.toString(ch) + "," + encryption.getSelectedIndex());
     }//GEN-LAST:event_cmdSetCWSAPActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+       pasteMode = jCheckBox1.isSelected();
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
    
     private void goLink(URI link) {
         try {
@@ -7527,26 +7497,6 @@ public class ESPlorer extends javax.swing.JFrame {
         }
     }
 
-    private void CommandsSetNodeMCU() {
-        Command.removeAllItems();
-        Command.addItem("=node.heap()");
-        Command.addItem("=node.chipid()");
-        Command.addItem("file.close()");
-        Command.addItem("file.remove(\"\")");
-        Command.addItem("dofile(\"\")");
-        Command.addItem("wifi.setmode(wifi.STATION)");
-        Command.addItem("wifi.setmode(wifi.SOFTAP)");
-        Command.addItem("wifi.setmode(wifi.STATIONAP)");
-        Command.addItem("=wifi.getmode()");
-        Command.addItem("wifi.sta.config(\"myssid\",\"mypassword\")");
-        Command.addItem("=wifi.sta.getip()");
-        Command.addItem("=wifi.ap.getip()");
-        Command.addItem("=wifi.sta.getmac()");
-        Command.addItem("=wifi.ap.getmac()");
-        Command.addItem("=wifi.sta.status()");
-        Command.addItem("=tmr.now()");
-    }
-
     private void CommandsSetMicroPython() {
         Command.removeAllItems();
         Command.addItem("import sys; print(sys.version_info)");
@@ -7563,7 +7513,6 @@ public class ESPlorer extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-
         /* Set the Nimbus look and feel */
 //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -7597,7 +7546,6 @@ public class ESPlorer extends javax.swing.JFrame {
             java.awt.EventQueue.invokeLater(() -> {
                 new ESPlorer().setVisible(true);
             });
-
         } catch (Exception ex) {
             Logger.getLogger(ESPlorer.class
                     .getName()).log(Level.INFO, null, ex);
@@ -7956,6 +7904,7 @@ public class ESPlorer extends javax.swing.JFrame {
     private javax.swing.JComboBox conn_id;
     private javax.swing.JTextArea data;
     private javax.swing.JComboBox encryption;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -8006,7 +7955,7 @@ public class ESPlorer extends javax.swing.JFrame {
     private static final boolean DEBUG = false;
     /* Files tab start */
     private ArrayList<javax.swing.JLayeredPane> FileLayeredPane1;
-    private ArrayList<org.fife.ui.rsyntaxtextarea.RSyntaxTextArea> TextEditor1;
+    private ArrayList<org.fife.ui.rsyntaxtextarea.RSyntaxTextArea> TextEditorList;
     private ArrayList<org.fife.ui.rtextarea.RTextScrollPane> TextScroll1;
     private ArrayList<javax.swing.GroupLayout> FileLayeredPaneLayout1;
     private ArrayList<CompletionProvider> provider;
@@ -8146,10 +8095,6 @@ public class ESPlorer extends javax.swing.JFrame {
     private static final String USE_EXT_EDITOR = "use_ext_editor";
     private static final String SHOW_DONATE = "show_donate";
     private static final String SHOW_EOL = "show_eol";
-    private static final String WIN_X = "win_x";
-    private static final String WIN_Y = "win_y";
-    private static final String WIN_H = "win_h";
-    private static final String WIN_W = "win_w";
     private static final String CONDENSED = "condensed";
     private static final String AUTODETECT = "autodetect_firmware";
     private static final String COMMAND_ECHO = "command_echo";
@@ -8166,7 +8111,6 @@ public class ESPlorer extends javax.swing.JFrame {
     private static javax.swing.ImageIcon LED_RED;
     private static javax.swing.ImageIcon LED_BLUE;
 
-    private static final int FIRMWARE_NODEMCU = 0;
     private static final int FIRMWARE_MPYTHON = 1;
     private static final int FIRMWARE_AT = 2;
 
@@ -8502,7 +8446,7 @@ public class ESPlorer extends javax.swing.JFrame {
 
         FileLayeredPane1 = new ArrayList<>();
         TextScroll1 = new ArrayList<>();
-        TextEditor1 = new ArrayList<>();
+        TextEditorList = new ArrayList<>();
         FileLayeredPaneLayout1 = new ArrayList<>();
         provider = new ArrayList<>();
         ac = new ArrayList<>();
@@ -8601,35 +8545,35 @@ public class ESPlorer extends javax.swing.JFrame {
 
         FileLayeredPane1.add(new javax.swing.JLayeredPane());
         TextScroll1.add(new org.fife.ui.rtextarea.RTextScrollPane());
-        TextEditor1.add(new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea());
+        TextEditorList.add(new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea());
         iFile.add(new File(""));
         FileChanged.add(false);
         provider.add(createCompletionProvider());
         ac.add(new AutoCompletion(provider.get(i)));
-        ac.get(i).install(TextEditor1.get(i));
+        ac.get(i).install(TextEditorList.get(i));
 
         FileLayeredPaneLayout1.add(new javax.swing.GroupLayout(FileLayeredPane1.get(i)));
 
-            TextEditor1.get(i).setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
-        TextEditor1.get(i).setColumns(20);
-        TextEditor1.get(i).setRows(5);
-        TextEditor1.get(i).setDragEnabled(false);
-        TextEditor1.get(i).setFadeCurrentLineHighlight(true);
-        TextEditor1.get(i).setPaintMarkOccurrencesBorder(true);
-        TextEditor1.get(i).setPaintMatchedBracketPair(true);
-        TextEditor1.get(i).setPopupMenu(ContextMenuEditor);
-        TextEditor1.get(i).setCodeFoldingEnabled(false);
-        TextEditor1.get(i).setAntiAliasingEnabled(true);
-        TextEditor1.get(i).setTabsEmulated(true);
-        TextEditor1.get(i).setBracketMatchingEnabled(true);
-        TextEditor1.get(i).setTabSize(4);
-        TextEditor1.get(i).addCaretListener((javax.swing.event.CaretEvent evt) -> {
+            TextEditorList.get(i).setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
+        TextEditorList.get(i).setColumns(20);
+        TextEditorList.get(i).setRows(5);
+        TextEditorList.get(i).setDragEnabled(false);
+        TextEditorList.get(i).setFadeCurrentLineHighlight(true);
+        TextEditorList.get(i).setPaintMarkOccurrencesBorder(true);
+        TextEditorList.get(i).setPaintMatchedBracketPair(true);
+        TextEditorList.get(i).setPopupMenu(ContextMenuEditor);
+        TextEditorList.get(i).setCodeFoldingEnabled(false);
+        TextEditorList.get(i).setAntiAliasingEnabled(true);
+        TextEditorList.get(i).setTabsEmulated(true);
+        TextEditorList.get(i).setBracketMatchingEnabled(true);
+        TextEditorList.get(i).setTabSize(4);
+        TextEditorList.get(i).addCaretListener((javax.swing.event.CaretEvent evt) -> {
             TextEditorCaretUpdate(evt);
         });
-        TextEditor1.get(i).addActiveLineRangeListener((org.fife.ui.rsyntaxtextarea.ActiveLineRangeEvent evt) -> {
+        TextEditorList.get(i).addActiveLineRangeListener((org.fife.ui.rsyntaxtextarea.ActiveLineRangeEvent evt) -> {
             TextEditorActiveLineRangeChanged(evt);
         });
-        TextEditor1.get(i).addInputMethodListener(new java.awt.event.InputMethodListener() {
+        TextEditorList.get(i).addInputMethodListener(new java.awt.event.InputMethodListener() {
             @Override
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 TextEditorCaretPositionChanged(evt);
@@ -8640,22 +8584,22 @@ public class ESPlorer extends javax.swing.JFrame {
                 TextEditorInputMethodTextChanged(evt);
             }
         });
-        TextEditor1.get(i).addKeyListener(new java.awt.event.KeyAdapter() {
+        TextEditorList.get(i).addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TextEditorKeyTyped(evt);
             }
         });
-        TextEditor1.get(i).addFocusListener(new java.awt.event.FocusAdapter() {
+        TextEditorList.get(i).addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
                 int i;
-                for (i = 0; i < TextEditor1.size(); i++) {
-                    TextEditor1.get(i).setEditable(!UseExternalEditor.isSelected());
+                for (i = 0; i < TextEditorList.size(); i++) {
+                    TextEditorList.get(i).setEditable(!UseExternalEditor.isSelected());
                 }
             }
         });
-        TextScroll1.get(i).setViewportView(TextEditor1.get(i));
+        TextScroll1.get(i).setViewportView(TextEditorList.get(i));
         TextScroll1.get(i).setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         TextScroll1.get(i).setIconRowHeaderEnabled(false);
         TextScroll1.get(i).setLineNumbersEnabled(true);
@@ -8679,9 +8623,9 @@ public class ESPlorer extends javax.swing.JFrame {
         SetTheme(EditorTheme.getSelectedIndex(), false);
         FileLabelUpdate();
         if (UseExternalEditor.isSelected()) {
-            TextEditor1.get(i).setEditable(false);
+            TextEditorList.get(i).setEditable(false);
         }
-        TextEditor1.get(i).setText(s);
+        TextEditorList.get(i).setText(s);
     }
 
     private void SetTheme(int t, boolean all) {
@@ -8710,8 +8654,8 @@ public class ESPlorer extends javax.swing.JFrame {
             Theme theme = Theme.load(getClass().getResourceAsStream(res));
             if (all) {
                 for (int i = 0; i < FilesTabbedPane.getTabCount(); i++) {
-                    theme.apply(TextEditor1.get(i));
-                    TextEditor1.get(i).setFont(TextEditor1.get(i).getFont().deriveFont(prefs.getFloat(EDITOR_FONT_SIZE, EDITOR_FONT_SIZE_DEFAULT)));
+                    theme.apply(TextEditorList.get(i));
+                    TextEditorList.get(i).setFont(TextEditorList.get(i).getFont().deriveFont(prefs.getFloat(EDITOR_FONT_SIZE, EDITOR_FONT_SIZE_DEFAULT)));
                 }
                 theme.apply(SnippetText);
                 SnippetText.setFont(SnippetText.getFont().deriveFont(prefs.getFloat(EDITOR_FONT_SIZE, EDITOR_FONT_SIZE_DEFAULT)));
@@ -8721,8 +8665,8 @@ public class ESPlorer extends javax.swing.JFrame {
                 //SnippetText.setBackground(SnippetTopPane.getBackground());
                 log("Set new color theme: Success.");
             } else {
-                theme.apply(TextEditor1.get(iTab));
-                TextEditor1.get(iTab).setFont(TextEditor1.get(iTab).getFont().deriveFont(prefs.getFloat(EDITOR_FONT_SIZE, EDITOR_FONT_SIZE_DEFAULT)));
+                theme.apply(TextEditorList.get(iTab));
+                TextEditorList.get(iTab).setFont(TextEditorList.get(iTab).getFont().deriveFont(prefs.getFloat(EDITOR_FONT_SIZE, EDITOR_FONT_SIZE_DEFAULT)));
             }
         } catch (IOException e) {
             log(e.toString());
@@ -8733,8 +8677,8 @@ public class ESPlorer extends javax.swing.JFrame {
     private void RemoveTab() {
         if (FilesTabbedPane.getTabCount() <= 1) {
             iTab = 0;
-            TextEditor1.get(iTab).setText("");
-            TextEditor1.get(iTab).discardAllEdits();
+            TextEditorList.get(iTab).setText("");
+            TextEditorList.get(iTab).discardAllEdits();
             FilesTabbedPane.setTitleAt(iTab, NewFile);
             iFile.set(iTab, new File(""));
             FileLabelUpdate();
@@ -8746,7 +8690,7 @@ public class ESPlorer extends javax.swing.JFrame {
             FileChanged.remove(iTab);
             ac.remove(iTab);
             provider.remove(iTab);
-            TextEditor1.remove(iTab);
+            TextEditorList.remove(iTab);
             TextScroll1.remove(iTab);
             FileLayeredPaneLayout1.remove(iTab);
             FileLayeredPane1.remove(iTab);
@@ -8768,10 +8712,10 @@ public class ESPlorer extends javax.swing.JFrame {
         } catch (Exception e) {
             return false;
         }
-        if (TextEditor1.get(iTab).canUndo()) {
+        if (TextEditorList.get(iTab).canUndo()) {
             return true;
         }
-        return TextEditor1.get(iTab).canRedo();
+        return TextEditorList.get(iTab).canRedo();
     }
 
     private int Dialog(String msg, int btn) {
@@ -8960,11 +8904,6 @@ public class ESPlorer extends javax.swing.JFrame {
                             btnSend("import sys; print(\"MicroPython ver:\",sys.version_info)");
                             LeftTab.setSelectedIndex(0);
                             SetFirmwareType(FIRMWARE_MPYTHON);
-                        } else if (data.contains("\r\n>")) {
-                            TerminalAdd("\r\nNodeMCU firmware detected.\r\n");
-                            btnSend("=node.heap()");
-                            LeftTab.setSelectedIndex(0);
-                            SetFirmwareType(FIRMWARE_NODEMCU);
                         } else if (data.contains("\r\nERR")) {
                             TerminalAdd("\r\nAT-based firmware detected.\r\n");
                             btnSend("AT+GMR");
@@ -8976,6 +8915,8 @@ public class ESPlorer extends javax.swing.JFrame {
                         }
                     } else if (LocalEcho) {
                         TerminalAdd(data);
+                        System.out.println(data);
+                        TextEditorList.get(0).setText(data.replace("'", "").replace("\\n","\n"));
                     } else if (data.contains("\r")) {
                         LocalEcho = true;
                         TerminalAdd(data.substring(data.indexOf("\r")));
@@ -9271,7 +9212,7 @@ public class ESPlorer extends javax.swing.JFrame {
                         ProgressBar.setValue((j * 100) / div);
                         if (j > sendBuf.size() - 1) {
                             timer.stop();
-                            pasteMode(true);
+                            //pasteMode(true);
                             StopSend();
                         }
                     }
@@ -9870,7 +9811,7 @@ public class ESPlorer extends javax.swing.JFrame {
     private void DisablingNotImplemented() {
        {
             /* temporay disabling not emplemented functions */
-            LineDelay.setValue(0); // micro python very fast :)
+            //.setValue(0); // micro python very fast :)
             DumbMode.setSelected(true);
 
             MenuItemViewLeftExtra.setSelected(false);
@@ -9922,9 +9863,9 @@ public class ESPlorer extends javax.swing.JFrame {
     private boolean pySaveFileESP(String ft) {
         boolean success = false;
         log("pyFileSaveESP: Starting...");
-        String[] content = TextEditor1.get(iTab).getText().split("\r?\n");
+        String[] content = TextEditorList.get(iTab).getText().split("\r?\n");
         if (PYFILER.Put(ft, content)) {
-            pasteMode(true);
+            //pasteMode(true);
             success = SendTimerStart();
         }
         return success;

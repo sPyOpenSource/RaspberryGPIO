@@ -14,10 +14,6 @@ public class pyFiler {
     public static final int OK = 0;
     public static final int ERROR_COMMUNICATION = 1;
 
-    public pyFiler() {
-
-    }
-
     public String ListDir() {
         return "";
     }
@@ -95,6 +91,33 @@ private byte[] concatArray(byte[] a, byte[] b) {
             log("len   =" + Integer.toString(len));*/
         }
         return r;
+    }
+    
+     private void FileDownloadFinisher(boolean success) {
+        /*try {
+            serialPort.removeEventListener();
+        } catch (SerialPortException e) {
+            log(e.toString());
+        }
+        try {
+            serialPort.addEventListener(new ESPlorer.PortReader(), portMask);
+        } catch (SerialPortException e) {
+            log("Downloader: Can't Add OldEventListener.");
+        }
+        //SendUnLock();
+        StopSend();
+        if (success) {
+            TerminalAdd("Success.\r\n");
+            if (DownloadCommand.startsWith("EDIT")) {
+                FileNew(rcvFile);
+            } else if (DownloadCommand.startsWith("DOWNLOAD")) {
+                SaveDownloadedFile();
+            } else {
+                // nothing, reserved
+            }
+        } else {
+            TerminalAdd("FAIL.\r\n");
+        }*/
     }
     
     public String escape(String str) {
