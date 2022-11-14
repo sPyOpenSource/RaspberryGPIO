@@ -40,7 +40,7 @@ import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 
-public class Raspberry_GPIO extends JVSMain implements MyOpenLabDriverOwnerIF {
+public class RaspberryGPIO extends JVSMain implements MyOpenLabDriverOwnerIF {
 
     private final int GPIO_INPUT = 0;
     private final int GPIO_OUTPUT = 1;
