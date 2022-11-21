@@ -1,3 +1,4 @@
+
 package AI;
 
 import AI.Models.Info;
@@ -31,7 +32,7 @@ public class AIOutput extends AIBaseOutput
     {
         super(mem);
         try {
-            w = new OutputStreamWriter(mem.getSerialPort().getOutputStream(),"UTF-8");
+            w = new OutputStreamWriter(mem.getSerialPort().getOutputStream(), "UTF-8");
         } catch (IOException | NullPointerException ex) {
             Logger.getLogger(AIOutput.class.getName()).log(Level.SEVERE, null, ex);
         }

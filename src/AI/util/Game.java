@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package AI.util;
 
 import AI.AIBaseLogic;
-import AI.Models.Computer;
+import AI.Models.Node;
 import AI.Models.Info;
-import AI.Models.WebsocketServer;
 import Factorzations.GUI;
 
 import java.awt.AWTException;
@@ -43,7 +38,7 @@ public class Game extends Thread{
     private static Component component;
     
     public Game(int size, int n){
-        client = new Info(new Computer(server.WaitOnConnection()));
+        client = new Info(new Node(server.WaitOnConnection()));
         String key = client.Receive();
         //file = new VideoCapture("/home/spy/视频/media/Robots.avi");
         //write.open("/home/spy/视频/media/Robots.mp4", VideoWriter.fourcc('M', 'P', '4','V'), 30d, new Size(512,288));
@@ -185,6 +180,7 @@ public class Game extends Thread{
             width = gui.getWidth();
             height = gui.getHeight();
         });*/
+        
         try {
             Game.robot = new Robot();
             //Game game1 = new Game(35, 1);

@@ -1,8 +1,9 @@
+
 package AI;
 
 import AI.Models.Info;
 import AI.Models.Vector3D;
-import AI.Models.VectorFilter;
+import AI.util.VectorFilter;
 import AI.Models.VectorMat;
 import AI.util.MotionDetection;
 import AI.util.PointCloud;
@@ -58,12 +59,12 @@ public class AILogic extends AIBaseLogic
         switch (info.getPayload()){
             case "news":
                 ((AIBaseMemory)mem).search("news").parallelStream().forEach((news) -> {
-                    mem.addInfo(news, "outgoingMessages");
+                    mem.add(news, "outgoingMessages");
                 }); 
                 break;
             case "topics":
                 ((AIBaseMemory)mem).search("topics").parallelStream().forEach((topic) -> {
-                    mem.addInfo(topic, "outgoingMessages");
+                    mem.add(topic, "outgoingMessages");
                 });
                 break;
             case "feedback":
@@ -79,9 +80,15 @@ public class AILogic extends AIBaseLogic
         }
         String[] result = info.getPayload().split(",");
         if (result.length == 9){
-            Vector3D gyr = new Vector3D(Double.parseDouble(result[3]), Double.parseDouble(result[4]), Double.parseDouble(result[5]));
-            VectorMat answerAcc = accFilter.Filter(new Vector3D(Double.parseDouble(result[0]), Double.parseDouble(result[1]), Double.parseDouble(result[2])), gyr);
-            mem.addInfo(new Info(answerAcc.getX(0).Display()), "outgoingMessages");
+            Vector3D gyr = new Vector3D(
+                    Double.valueOf(result[3]), 
+                    Double.valueOf(result[4]), 
+                    Double.valueOf(result[5]));
+            VectorMat answerAcc = accFilter.Filter(new Vector3D(
+                    Double.valueOf(result[0]), 
+                    Double.valueOf(result[1]), 
+                    Double.valueOf(result[2])), gyr);
+            mem.add(new Info(answerAcc.getVector(0).Display()), "outgoingMessages");
         }
     }
 }

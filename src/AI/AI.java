@@ -1,3 +1,4 @@
+
 package AI;
 
 import java.awt.image.BufferedImage;
@@ -35,7 +36,7 @@ public final class AI
     }
     
     public static void main(String[] args) {
-       /*SwingUtilities.invokeLater(() -> {
+        /*SwingUtilities.invokeLater(() -> {
            VideoPanel panel = new VideoPanel();
            JFrame frame = new JFrame("Video");
            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,8 +46,8 @@ public final class AI
            frame.setLocationRelativeTo(null);
            frame.setVisible(true);
         });*/
-       AI ai = new AI();
-       ai.start();
+        AI ai = new AI();
+        ai.start();
     }
     
     public void start()

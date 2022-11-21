@@ -1,4 +1,6 @@
+
 package AI;
+
 /**
  * This is the input class of AI.
  * Everthing including human interdaces
@@ -45,14 +47,14 @@ public class AIInput extends AIBaseInput
         ipCamera.open(0);
         int fourcc = VideoWriter.fourcc('Z', '1', '6', ' ');
         capDepthCamera.set(Videoio.CAP_PROP_FOURCC, fourcc);
-        mem.addInfo(new Info(capColorCamera), "the webcam");
-        mem.addInfo(new Info(capDepthCamera), "the webcam");
-        mem.addInfo(new Info(ipCamera), "the webcam");
+        mem.add(new Info(capColorCamera), "the webcam");
+        mem.add(new Info(capDepthCamera), "the webcam");
+        mem.add(new Info(ipCamera), "the webcam");
     }
     
     private void ReadMessageFromSerial(){
         try {
-            mem.addInfo(new Info(in.readLine()), "incomingMessages");         
+            mem.add(new Info(in.readLine()), "incomingMessages");         
         } catch (IOException ex) {
             Logger.getLogger(AIInput.class.getName()).log(Level.SEVERE, null, ex);
         }
