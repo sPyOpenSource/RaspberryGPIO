@@ -3,10 +3,10 @@ package AI;
 
 import AI.Models.Info;
 import AI.Models.Vector3D;
-import AI.util.VectorFilter;
 import AI.Models.VectorMat;
 import AI.util.MotionDetection;
 import AI.util.PointCloud;
+import AI.util.VectorFilter;
 
 import ecm.PrimeTest.LucasLehmer;
 import java.util.concurrent.ExecutorService;

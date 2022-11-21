@@ -45,7 +45,7 @@ public class Game extends Thread{
         //int width = Toolkit.getDefaultToolkit().getScreenSize().width;
         //Rectangle rectangle = new Rectangle(20*16, 20*9);
         rectangle = new Rectangle(size * X, size * Y);
-        width = rectangle.width;
+        width  = rectangle.width;
         height = rectangle.height;
         image = new Mat(rectangle.height, rectangle.width, CvType.CV_32SC3);
         switch(n){
@@ -111,8 +111,7 @@ public class Game extends Thread{
         }
     }
     
-    public static BufferedImage getScreenShot(
-    Component component) {
+    public static BufferedImage getScreenShot(Component component) {
         BufferedImage image = new BufferedImage(
             component.getWidth(),
             component.getHeight(),
