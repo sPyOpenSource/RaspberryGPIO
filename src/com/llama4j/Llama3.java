@@ -17,10 +17,13 @@
 // jbang Llama3.java --help
 //
 // Enjoy!
+
 package com.llama4j;
 
 import VisualLogic.ExternalIF;
 import VisualLogic.variables.VSString;
+import tools.JVSMain;
+
 import java.awt.Image;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -30,7 +33,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.random.RandomGenerator;
 import java.util.random.RandomGeneratorFactory;
-import tools.JVSMain;
         
 public class Llama3 extends JVSMain {
     // Batch-size used in prompt evaluation.
@@ -254,8 +256,8 @@ public class Llama3 extends JVSMain {
     
     @Override
     public void init() {
-        initPins(0,1,0,1);
-        setSize(40,25);
+        initPins(0, 1, 0, 1);
+        setSize(40, 25);
         element.jSetInnerBorderVisibility(false);
         element.jSetTopPinsVisible(false);
         element.jSetBottomPinsVisible(false);
@@ -286,7 +288,8 @@ public class Llama3 extends JVSMain {
             if(in != null){
                 Options options = Options.parseOptions(new String[]{
                     "--model", "/Users/xuyi/Downloads/Llama-3.2-1B-Instruct-Q4_0.gguf",
-                    "--prompt", in.getValue()
+                    "--prompt", in.getValue(),
+                    "--stream", "false"
                 });
                 Llama model = AOT.tryUsePreLoaded(options.modelPath(), options.maxTokens());
                 if (model == null) {
