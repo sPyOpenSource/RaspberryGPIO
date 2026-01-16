@@ -16,6 +16,7 @@
  */
 package test;
 
+import com.llama4j.Llama3;
 import org.junit.Test;
 
 /**
@@ -25,6 +26,6 @@ import org.junit.Test;
 public class JUnitTest {
     @Test
     public void test(){
-        
+        Llama3 ai = new Llama3();
     }
 }

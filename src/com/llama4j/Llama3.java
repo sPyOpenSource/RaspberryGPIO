@@ -279,7 +279,7 @@ public class Llama3 extends JVSMain {
 
     @Override
     public void initOutputPins(){
-        element.setPinOutputReference(0,out);
+        element.setPinOutputReference(0, out);
     }
   
     @Override
