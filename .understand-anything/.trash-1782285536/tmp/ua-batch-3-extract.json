@@ -1,0 +1,6595 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".DS_Store",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 3,
+      "nonEmptyLines": 3,
+      "metrics": {}
+    },
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 32,
+      "metrics": {}
+    },
+    {
+      "path": ".understand-anything/config.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "sections": [
+        {
+          "heading": "outputLanguage",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "CHANGELOG",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 26,
+      "metrics": {}
+    },
+    {
+      "path": "manifest.mf",
+      "language": "mf",
+      "fileCategory": "code",
+      "totalLines": 3,
+      "nonEmptyLines": 2,
+      "metrics": {}
+    },
+    {
+      "path": "src/com/llama4j/AOT.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 77,
+      "nonEmptyLines": 71,
+      "functions": [
+        {
+          "name": "preLoadGGUF",
+          "startLine": 25,
+          "endLine": 46,
+          "params": [
+            "modelPath"
+          ]
+        },
+        {
+          "name": "tryUsePreLoaded",
+          "startLine": 57,
+          "endLine": 76,
+          "params": [
+            "modelPath",
+            "contextLength"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "AOT",
+          "startLine": 20,
+          "endLine": 77,
+          "methods": [
+            "preLoadGGUF",
+            "tryUsePreLoaded"
+          ],
+          "properties": [
+            "PRELOADED_GGUF"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "tryUsePreLoaded",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "AOT",
+          "line": 20,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "preLoadGGUF",
+          "callee": "modelPath.isEmpty",
+          "lineNumber": 26
+        },
+        {
+          "caller": "preLoadGGUF",
+          "callee": "Path.of",
+          "lineNumber": 30
+        },
+        {
+          "caller": "preLoadGGUF",
+          "callee": "Files.exists",
+          "lineNumber": 31
+        },
+        {
+          "caller": "preLoadGGUF",
+          "callee": "Files.isRegularFile",
+          "lineNumber": 31
+        },
+        {
+          "caller": "preLoadGGUF",
+          "callee": "new IllegalArgumentException",
+          "lineNumber": 32
+        },
+        {
+          "caller": "preLoadGGUF",
+          "callee": "GGUF.loadModel",
+          "lineNumber": 34
+        },
+        {
+          "caller": "preLoadGGUF",
+          "callee": "FileChannel.open",
+          "lineNumber": 35
+        },
+        {
+          "caller": "preLoadGGUF",
+          "callee": "new PartialModel",
+          "lineNumber": 36
+        },
+        {
+          "caller": "preLoadGGUF",
+          "callee": "path.getFileName().toString",
+          "lineNumber": 37
+        },
+        {
+          "caller": "preLoadGGUF",
+          "callee": "path.getFileName",
+          "lineNumber": 37
+        },
+        {
+          "caller": "preLoadGGUF",
+          "callee": "ModelLoader.loadModel",
+          "lineNumber": 38
+        },
+        {
+          "caller": "preLoadGGUF",
+          "callee": "gguf.getTensorDataOffset",
+          "lineNumber": 39
+        },
+        {
+          "caller": "preLoadGGUF",
+          "callee": "gguf.getTensorInfos",
+          "lineNumber": 40
+        },
+        {
+          "caller": "preLoadGGUF",
+          "callee": "new RuntimeException",
+          "lineNumber": 44
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "modelPath.getFileName().toString",
+          "lineNumber": 62
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "modelPath.getFileName",
+          "lineNumber": 62
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "preLoaded.modelFileName",
+          "lineNumber": 63
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "Objects.equals",
+          "lineNumber": 64
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "preLoaded.model",
+          "lineNumber": 68
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "Timer.log",
+          "lineNumber": 69
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "FileChannel.open",
+          "lineNumber": 70
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "GGUF.loadTensors",
+          "lineNumber": 72
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "preLoaded.tensorDataOffset",
+          "lineNumber": 72
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "preLoaded.tensorInfos",
+          "lineNumber": 72
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "ModelLoader.loadWeights",
+          "lineNumber": 73
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "baseModel.configuration",
+          "lineNumber": 73
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "new Llama",
+          "lineNumber": 74
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "baseModel.configuration().withContextLength",
+          "lineNumber": 74
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "baseModel.configuration",
+          "lineNumber": 74
+        },
+        {
+          "caller": "tryUsePreLoaded",
+          "callee": "baseModel.tokenizer",
+          "lineNumber": 74
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/ArrayFloatTensor.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 70,
+      "nonEmptyLines": 58,
+      "functions": [
+        {
+          "name": "ArrayFloatTensor",
+          "startLine": 27,
+          "endLine": 29,
+          "params": [
+            "values"
+          ]
+        },
+        {
+          "name": "allocate",
+          "startLine": 31,
+          "endLine": 34,
+          "params": []
+        },
+        {
+          "name": "size",
+          "startLine": 36,
+          "endLine": 39,
+          "params": []
+        },
+        {
+          "name": "getFloat",
+          "startLine": 41,
+          "endLine": 44,
+          "params": [
+            "index"
+          ]
+        },
+        {
+          "name": "setFloat",
+          "startLine": 46,
+          "endLine": 49,
+          "params": [
+            "index",
+            "value"
+          ]
+        },
+        {
+          "name": "type",
+          "startLine": 51,
+          "endLine": 54,
+          "params": []
+        },
+        {
+          "name": "fillInPlace",
+          "startLine": 56,
+          "endLine": 60,
+          "params": [
+            "thisOffset",
+            "size",
+            "value"
+          ]
+        },
+        {
+          "name": "getFloatVector",
+          "startLine": 62,
+          "endLine": 68,
+          "params": [
+            "species",
+            "index"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ArrayFloatTensor",
+          "startLine": 23,
+          "endLine": 70,
+          "methods": [
+            "ArrayFloatTensor",
+            "allocate",
+            "size",
+            "getFloat",
+            "setFloat",
+            "type",
+            "fillInPlace",
+            "getFloatVector"
+          ],
+          "properties": [
+            "values"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "allocate",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "size",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "getFloat",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "setFloat",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "type",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "fillInPlace",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "getFloatVector",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "ArrayFloatTensor",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "allocate",
+          "callee": "FloatTensor.numberOfElements",
+          "lineNumber": 32
+        },
+        {
+          "caller": "allocate",
+          "callee": "new ArrayFloatTensor",
+          "lineNumber": 33
+        },
+        {
+          "caller": "fillInPlace",
+          "callee": "Arrays.fill",
+          "lineNumber": 58
+        },
+        {
+          "caller": "getFloatVector",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 65
+        },
+        {
+          "caller": "getFloatVector",
+          "callee": "FloatVector.fromArray",
+          "lineNumber": 67
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 8,
+        "functionCount": 8,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/BF16FloatTensor.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 112,
+      "nonEmptyLines": 98,
+      "functions": [
+        {
+          "name": "BF16FloatTensor",
+          "startLine": 36,
+          "endLine": 39,
+          "params": [
+            "size",
+            "memorySegment"
+          ]
+        },
+        {
+          "name": "size",
+          "startLine": 41,
+          "endLine": 44,
+          "params": []
+        },
+        {
+          "name": "setFloat",
+          "startLine": 46,
+          "endLine": 49,
+          "params": [
+            "index",
+            "value"
+          ]
+        },
+        {
+          "name": "getFloatVector",
+          "startLine": 51,
+          "endLine": 54,
+          "params": [
+            "species",
+            "index"
+          ]
+        },
+        {
+          "name": "type",
+          "startLine": 56,
+          "endLine": 59,
+          "params": []
+        },
+        {
+          "name": "getFloat",
+          "startLine": 61,
+          "endLine": 65,
+          "params": [
+            "index"
+          ]
+        },
+        {
+          "name": "bfloat16ToFloat",
+          "startLine": 67,
+          "endLine": 69,
+          "params": [
+            "bfloat16"
+          ]
+        },
+        {
+          "name": "dot",
+          "startLine": 71,
+          "endLine": 78,
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ]
+        },
+        {
+          "name": "vectorDot",
+          "startLine": 80,
+          "endLine": 110,
+          "params": [
+            "thiz",
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "BF16FloatTensor",
+          "startLine": 31,
+          "endLine": 112,
+          "methods": [
+            "BF16FloatTensor",
+            "size",
+            "setFloat",
+            "getFloatVector",
+            "type",
+            "getFloat",
+            "bfloat16ToFloat",
+            "dot",
+            "vectorDot"
+          ],
+          "properties": [
+            "size",
+            "memorySegment"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "BF16FloatTensor",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "setFloat",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "type",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "getFloat",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "dot",
+          "line": 71,
+          "isDefault": false
+        },
+        {
+          "name": "BF16FloatTensor",
+          "line": 31,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "setFloat",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 48
+        },
+        {
+          "caller": "getFloatVector",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 53
+        },
+        {
+          "caller": "getFloat",
+          "callee": "bfloat16ToFloat",
+          "lineNumber": 64
+        },
+        {
+          "caller": "getFloat",
+          "callee": "readShort",
+          "lineNumber": 64
+        },
+        {
+          "caller": "bfloat16ToFloat",
+          "callee": "Float.intBitsToFloat",
+          "lineNumber": 68
+        },
+        {
+          "caller": "dot",
+          "callee": "vectorDot",
+          "lineNumber": 74
+        },
+        {
+          "caller": "dot",
+          "callee": "FloatTensor.scalarDot",
+          "lineNumber": 76
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "S_SPECIES_HALF.length",
+          "lineNumber": 81
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 81
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "FloatVector.zero",
+          "lineNumber": 82
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.loopBound",
+          "lineNumber": 83
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 84
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 85
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "ShortVector.fromMemorySegment",
+          "lineNumber": 86
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bfloat16\n                    .castShape(I_SPECIES, 0) // (int) vi\n                    .lanewise(VectorOperators.LSHL, 16).reinterpretAsFloats",
+          "lineNumber": 97
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bfloat16\n                    .castShape(I_SPECIES, 0).lanewise",
+          "lineNumber": 97
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bfloat16.castShape",
+          "lineNumber": 97
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "thizVector.fma",
+          "lineNumber": 101
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "val.reduceLanes",
+          "lineNumber": 103
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "scalarDot",
+          "lineNumber": 106
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 9,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/CategoricalSampler.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 33,
+      "callGraph": [
+        {
+          "caller": "sampleToken",
+          "callee": "rng.nextFloat",
+          "lineNumber": 26
+        },
+        {
+          "caller": "sampleToken",
+          "callee": "logits.size",
+          "lineNumber": 28
+        },
+        {
+          "caller": "sampleToken",
+          "callee": "logits.getFloat",
+          "lineNumber": 29
+        },
+        {
+          "caller": "sampleToken",
+          "callee": "logits.size",
+          "lineNumber": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/com/llama4j/ChatFormat.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 101,
+      "nonEmptyLines": 88,
+      "functions": [
+        {
+          "name": "ChatFormat",
+          "startLine": 38,
+          "endLine": 48,
+          "params": [
+            "tokenizer"
+          ]
+        },
+        {
+          "name": "getTokenizer",
+          "startLine": 50,
+          "endLine": 52,
+          "params": []
+        },
+        {
+          "name": "getStopTokens",
+          "startLine": 54,
+          "endLine": 56,
+          "params": []
+        },
+        {
+          "name": "encodeHeader",
+          "startLine": 58,
+          "endLine": 65,
+          "params": [
+            "message"
+          ]
+        },
+        {
+          "name": "encodeMessage",
+          "startLine": 67,
+          "endLine": 72,
+          "params": [
+            "message"
+          ]
+        },
+        {
+          "name": "encodeDialogPrompt",
+          "startLine": 74,
+          "endLine": 85,
+          "params": [
+            "appendAssistantTurn",
+            "dialog"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChatFormat",
+          "startLine": 27,
+          "endLine": 101,
+          "methods": [
+            "ChatFormat",
+            "getTokenizer",
+            "getStopTokens",
+            "encodeHeader",
+            "encodeMessage",
+            "encodeDialogPrompt"
+          ],
+          "properties": [
+            "tokenizer",
+            "beginOfText",
+            "endHeader",
+            "startHeader",
+            "endOfTurn",
+            "endOfText",
+            "endOfMessage",
+            "stopTokens"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ChatFormat",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "getTokenizer",
+          "line": 50,
+          "isDefault": false
+        },
+        {
+          "name": "getStopTokens",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "encodeHeader",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "encodeMessage",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "encodeDialogPrompt",
+          "line": 74,
+          "isDefault": false
+        },
+        {
+          "name": "ChatFormat",
+          "line": 27,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ChatFormat",
+          "callee": "this.tokenizer.getSpecialTokens",
+          "lineNumber": 40
+        },
+        {
+          "caller": "ChatFormat",
+          "callee": "specialTokens.get",
+          "lineNumber": 41
+        },
+        {
+          "caller": "ChatFormat",
+          "callee": "specialTokens.get",
+          "lineNumber": 42
+        },
+        {
+          "caller": "ChatFormat",
+          "callee": "specialTokens.get",
+          "lineNumber": 43
+        },
+        {
+          "caller": "ChatFormat",
+          "callee": "specialTokens.get",
+          "lineNumber": 44
+        },
+        {
+          "caller": "ChatFormat",
+          "callee": "specialTokens.get",
+          "lineNumber": 45
+        },
+        {
+          "caller": "ChatFormat",
+          "callee": "specialTokens.getOrDefault",
+          "lineNumber": 46
+        },
+        {
+          "caller": "ChatFormat",
+          "callee": "Set.of",
+          "lineNumber": 47
+        },
+        {
+          "caller": "encodeHeader",
+          "callee": "new ArrayList<>",
+          "lineNumber": 59
+        },
+        {
+          "caller": "encodeHeader",
+          "callee": "tokens.add",
+          "lineNumber": 60
+        },
+        {
+          "caller": "encodeHeader",
+          "callee": "tokens.addAll",
+          "lineNumber": 61
+        },
+        {
+          "caller": "encodeHeader",
+          "callee": "this.tokenizer.encodeAsList",
+          "lineNumber": 61
+        },
+        {
+          "caller": "encodeHeader",
+          "callee": "message.role().name",
+          "lineNumber": 61
+        },
+        {
+          "caller": "encodeHeader",
+          "callee": "message.role",
+          "lineNumber": 61
+        },
+        {
+          "caller": "encodeHeader",
+          "callee": "tokens.add",
+          "lineNumber": 62
+        },
+        {
+          "caller": "encodeHeader",
+          "callee": "tokens.addAll",
+          "lineNumber": 63
+        },
+        {
+          "caller": "encodeHeader",
+          "callee": "this.tokenizer.encodeAsList",
+          "lineNumber": 63
+        },
+        {
+          "caller": "encodeMessage",
+          "callee": "this.encodeHeader",
+          "lineNumber": 68
+        },
+        {
+          "caller": "encodeMessage",
+          "callee": "tokens.addAll",
+          "lineNumber": 69
+        },
+        {
+          "caller": "encodeMessage",
+          "callee": "this.tokenizer.encodeAsList",
+          "lineNumber": 69
+        },
+        {
+          "caller": "encodeMessage",
+          "callee": "message.content().strip",
+          "lineNumber": 69
+        },
+        {
+          "caller": "encodeMessage",
+          "callee": "message.content",
+          "lineNumber": 69
+        },
+        {
+          "caller": "encodeMessage",
+          "callee": "tokens.add",
+          "lineNumber": 70
+        },
+        {
+          "caller": "encodeDialogPrompt",
+          "callee": "new ArrayList<>",
+          "lineNumber": 75
+        },
+        {
+          "caller": "encodeDialogPrompt",
+          "callee": "tokens.add",
+          "lineNumber": 76
+        },
+        {
+          "caller": "encodeDialogPrompt",
+          "callee": "tokens.addAll",
+          "lineNumber": 78
+        },
+        {
+          "caller": "encodeDialogPrompt",
+          "callee": "this.encodeMessage",
+          "lineNumber": 78
+        },
+        {
+          "caller": "encodeDialogPrompt",
+          "callee": "tokens.addAll",
+          "lineNumber": 82
+        },
+        {
+          "caller": "encodeDialogPrompt",
+          "callee": "this.encodeHeader",
+          "lineNumber": 82
+        },
+        {
+          "caller": "encodeDialogPrompt",
+          "callee": "new ChatFormat.Message",
+          "lineNumber": 82
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 7,
+        "functionCount": 6,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/F16FloatTensor.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 124,
+      "nonEmptyLines": 110,
+      "functions": [
+        {
+          "name": "F16FloatTensor",
+          "startLine": 35,
+          "endLine": 38,
+          "params": [
+            "size",
+            "memorySegment"
+          ]
+        },
+        {
+          "name": "size",
+          "startLine": 40,
+          "endLine": 43,
+          "params": []
+        },
+        {
+          "name": "setFloat",
+          "startLine": 45,
+          "endLine": 48,
+          "params": [
+            "index",
+            "value"
+          ]
+        },
+        {
+          "name": "getFloatVector",
+          "startLine": 50,
+          "endLine": 53,
+          "params": [
+            "species",
+            "index"
+          ]
+        },
+        {
+          "name": "type",
+          "startLine": 55,
+          "endLine": 58,
+          "params": []
+        },
+        {
+          "name": "getFloat",
+          "startLine": 60,
+          "endLine": 64,
+          "params": [
+            "index"
+          ]
+        },
+        {
+          "name": "dot",
+          "startLine": 66,
+          "endLine": 73,
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ]
+        },
+        {
+          "name": "vectorDot",
+          "startLine": 75,
+          "endLine": 123,
+          "params": [
+            "thiz",
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "F16FloatTensor",
+          "startLine": 31,
+          "endLine": 124,
+          "methods": [
+            "F16FloatTensor",
+            "size",
+            "setFloat",
+            "getFloatVector",
+            "type",
+            "getFloat",
+            "dot",
+            "vectorDot"
+          ],
+          "properties": [
+            "size",
+            "memorySegment"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "F16FloatTensor",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "setFloat",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "type",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "getFloat",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "dot",
+          "line": 66,
+          "isDefault": false
+        },
+        {
+          "name": "F16FloatTensor",
+          "line": 31,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "setFloat",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 47
+        },
+        {
+          "caller": "getFloatVector",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 52
+        },
+        {
+          "caller": "getFloat",
+          "callee": "Float.float16ToFloat",
+          "lineNumber": 63
+        },
+        {
+          "caller": "getFloat",
+          "callee": "readShort",
+          "lineNumber": 63
+        },
+        {
+          "caller": "dot",
+          "callee": "vectorDot",
+          "lineNumber": 69
+        },
+        {
+          "caller": "dot",
+          "callee": "FloatTensor.scalarDot",
+          "lineNumber": 71
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "S_SPECIES_HALF.length",
+          "lineNumber": 76
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 76
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "FloatVector.zero",
+          "lineNumber": 77
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.loopBound",
+          "lineNumber": 78
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 79
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 80
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "ShortVector.fromMemorySegment",
+          "lineNumber": 81
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bits16.castShape(I_SPECIES, 0).reinterpretAsInts",
+          "lineNumber": 83
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bits16.castShape",
+          "lineNumber": 83
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bits32.and(0x7C00).neg().lanewise",
+          "lineNumber": 104
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bits32.and(0x7C00).neg",
+          "lineNumber": 104
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bits32.and",
+          "lineNumber": 104
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bits32.and(0x8000).lanewise(VectorOperators.LSHL, 16).or",
+          "lineNumber": 105
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bits32.and(0x8000).lanewise",
+          "lineNumber": 105
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bits32.and",
+          "lineNumber": 105
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bits32.and(0x7FFF).add(0x1C000).lanewise(VectorOperators.LSHL, 13).and",
+          "lineNumber": 108
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bits32.and(0x7FFF).add(0x1C000).lanewise",
+          "lineNumber": 108
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bits32.and(0x7FFF).add",
+          "lineNumber": 108
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bits32.and",
+          "lineNumber": 108
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "bits32.reinterpretAsFloats",
+          "lineNumber": 113
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "thizVector.fma",
+          "lineNumber": 114
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "val.reduceLanes",
+          "lineNumber": 116
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "scalarDot",
+          "lineNumber": 119
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 8,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/FloatTensor.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 239,
+      "nonEmptyLines": 200,
+      "functions": [
+        {
+          "name": "readShort",
+          "startLine": 53,
+          "endLine": 56,
+          "params": [
+            "memorySegment",
+            "offset"
+          ]
+        },
+        {
+          "name": "readByte",
+          "startLine": 58,
+          "endLine": 61,
+          "params": [
+            "memorySegment",
+            "offset"
+          ]
+        },
+        {
+          "name": "size",
+          "startLine": 82,
+          "endLine": 82,
+          "params": []
+        },
+        {
+          "name": "getFloat",
+          "startLine": 84,
+          "endLine": 84,
+          "params": [
+            "index"
+          ]
+        },
+        {
+          "name": "setFloat",
+          "startLine": 86,
+          "endLine": 86,
+          "params": [
+            "index",
+            "value"
+          ]
+        },
+        {
+          "name": "getFloatVector",
+          "startLine": 88,
+          "endLine": 88,
+          "params": [
+            "species",
+            "offset"
+          ]
+        },
+        {
+          "name": "type",
+          "startLine": 90,
+          "endLine": 90,
+          "params": []
+        },
+        {
+          "name": "numberOfElements",
+          "startLine": 92,
+          "endLine": 95,
+          "params": []
+        },
+        {
+          "name": "scalarDot",
+          "startLine": 97,
+          "endLine": 103,
+          "params": [
+            "thiz",
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ]
+        },
+        {
+          "name": "dot",
+          "startLine": 105,
+          "endLine": 107,
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ]
+        },
+        {
+          "name": "matmul",
+          "startLine": 109,
+          "endLine": 111,
+          "params": [
+            "that",
+            "out",
+            "dim0",
+            "dim1"
+          ]
+        },
+        {
+          "name": "matmul",
+          "startLine": 113,
+          "endLine": 122,
+          "params": [
+            "context",
+            "that",
+            "out",
+            "dim0",
+            "dim1"
+          ]
+        },
+        {
+          "name": "reduce",
+          "startLine": 129,
+          "endLine": 135,
+          "params": [
+            "thisOffset",
+            "size",
+            "seed",
+            "reduce"
+          ]
+        },
+        {
+          "name": "sum",
+          "startLine": 137,
+          "endLine": 139,
+          "params": [
+            "thisOffset",
+            "size"
+          ]
+        },
+        {
+          "name": "max",
+          "startLine": 141,
+          "endLine": 143,
+          "params": [
+            "thisOffset",
+            "size"
+          ]
+        },
+        {
+          "name": "copyTo",
+          "startLine": 145,
+          "endLine": 147,
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ]
+        },
+        {
+          "name": "argmax",
+          "startLine": 149,
+          "endLine": 162,
+          "params": [
+            "thisOffset",
+            "size"
+          ]
+        },
+        {
+          "name": "argmax",
+          "startLine": 164,
+          "endLine": 166,
+          "params": []
+        },
+        {
+          "name": "mapInPlace",
+          "startLine": 178,
+          "endLine": 184,
+          "params": [
+            "thisOffset",
+            "size",
+            "mapFunction"
+          ]
+        },
+        {
+          "name": "mapInPlace",
+          "startLine": 186,
+          "endLine": 188,
+          "params": [
+            "mapFunction"
+          ]
+        },
+        {
+          "name": "mapWithIndexInPlace",
+          "startLine": 190,
+          "endLine": 196,
+          "params": [
+            "thisOffset",
+            "size",
+            "mapWithIndexFunction"
+          ]
+        },
+        {
+          "name": "addInPlace",
+          "startLine": 198,
+          "endLine": 200,
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ]
+        },
+        {
+          "name": "addInPlace",
+          "startLine": 202,
+          "endLine": 204,
+          "params": [
+            "that"
+          ]
+        },
+        {
+          "name": "multiplyInPlace",
+          "startLine": 206,
+          "endLine": 208,
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ]
+        },
+        {
+          "name": "multiplyInPlace",
+          "startLine": 210,
+          "endLine": 212,
+          "params": [
+            "that"
+          ]
+        },
+        {
+          "name": "divideInPlace",
+          "startLine": 214,
+          "endLine": 216,
+          "params": [
+            "thisOffset",
+            "size",
+            "value"
+          ]
+        },
+        {
+          "name": "fillInPlace",
+          "startLine": 218,
+          "endLine": 220,
+          "params": [
+            "thisOffset",
+            "size",
+            "value"
+          ]
+        },
+        {
+          "name": "softmaxInPlace",
+          "startLine": 222,
+          "endLine": 230,
+          "params": [
+            "thisOffset",
+            "size"
+          ]
+        },
+        {
+          "name": "saxpyInPlace",
+          "startLine": 232,
+          "endLine": 238,
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size",
+            "a"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "FloatTensor",
+          "startLine": 33,
+          "endLine": 239,
+          "methods": [
+            "readShort",
+            "readByte",
+            "size",
+            "getFloat",
+            "setFloat",
+            "getFloatVector",
+            "type",
+            "numberOfElements",
+            "scalarDot",
+            "dot",
+            "matmul",
+            "matmul",
+            "reduce",
+            "sum",
+            "max",
+            "copyTo",
+            "argmax",
+            "argmax",
+            "mapInPlace",
+            "mapInPlace",
+            "mapWithIndexInPlace",
+            "addInPlace",
+            "addInPlace",
+            "multiplyInPlace",
+            "multiplyInPlace",
+            "divideInPlace",
+            "fillInPlace",
+            "softmaxInPlace",
+            "saxpyInPlace"
+          ],
+          "properties": [
+            "VECTOR_BIT_SIZE",
+            "USE_VECTOR_API",
+            "UNSAFE",
+            "F_SPECIES",
+            "I_SPECIES",
+            "S_SPECIES_HALF"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "numberOfElements",
+          "line": 92,
+          "isDefault": false
+        },
+        {
+          "name": "FloatTensor",
+          "line": 33,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "readShort",
+          "callee": "UNSAFE.getShort",
+          "lineNumber": 55
+        },
+        {
+          "caller": "readShort",
+          "callee": "memorySegment.address",
+          "lineNumber": 55
+        },
+        {
+          "caller": "readByte",
+          "callee": "UNSAFE.getByte",
+          "lineNumber": 60
+        },
+        {
+          "caller": "readByte",
+          "callee": "memorySegment.address",
+          "lineNumber": 60
+        },
+        {
+          "caller": "numberOfElements",
+          "callee": "Arrays.stream(dimensions).allMatch",
+          "lineNumber": 93
+        },
+        {
+          "caller": "numberOfElements",
+          "callee": "Arrays.stream",
+          "lineNumber": 93
+        },
+        {
+          "caller": "numberOfElements",
+          "callee": "Arrays.stream(dimensions).reduce(Math::multiplyExact).orElseThrow",
+          "lineNumber": 94
+        },
+        {
+          "caller": "numberOfElements",
+          "callee": "Arrays.stream(dimensions).reduce",
+          "lineNumber": 94
+        },
+        {
+          "caller": "numberOfElements",
+          "callee": "Arrays.stream",
+          "lineNumber": 94
+        },
+        {
+          "caller": "scalarDot",
+          "callee": "thiz.getFloat",
+          "lineNumber": 100
+        },
+        {
+          "caller": "scalarDot",
+          "callee": "that.getFloat",
+          "lineNumber": 100
+        },
+        {
+          "caller": "dot",
+          "callee": "scalarDot",
+          "lineNumber": 106
+        },
+        {
+          "caller": "matmul",
+          "callee": "Parallel.parallelFor",
+          "lineNumber": 110
+        },
+        {
+          "caller": "matmul",
+          "callee": "out.setFloat",
+          "lineNumber": 110
+        },
+        {
+          "caller": "matmul",
+          "callee": "dot",
+          "lineNumber": 110
+        },
+        {
+          "caller": "matmul",
+          "callee": "new IllegalArgumentException",
+          "lineNumber": 115
+        },
+        {
+          "caller": "matmul",
+          "callee": "String.format",
+          "lineNumber": 115
+        },
+        {
+          "caller": "matmul",
+          "callee": "Parallel.parallelForLong",
+          "lineNumber": 117
+        },
+        {
+          "caller": "matmul",
+          "callee": "out[idxArr].setFloat",
+          "lineNumber": 120
+        },
+        {
+          "caller": "matmul",
+          "callee": "dot",
+          "lineNumber": 120
+        },
+        {
+          "caller": "reduce",
+          "callee": "reduce.apply",
+          "lineNumber": 132
+        },
+        {
+          "caller": "reduce",
+          "callee": "getFloat",
+          "lineNumber": 132
+        },
+        {
+          "caller": "sum",
+          "callee": "reduce",
+          "lineNumber": 138
+        },
+        {
+          "caller": "max",
+          "callee": "reduce",
+          "lineNumber": 142
+        },
+        {
+          "caller": "copyTo",
+          "callee": "that.mapWithIndexInPlace",
+          "lineNumber": 146
+        },
+        {
+          "caller": "copyTo",
+          "callee": "this.getFloat",
+          "lineNumber": 146
+        },
+        {
+          "caller": "argmax",
+          "callee": "this.getFloat",
+          "lineNumber": 152
+        },
+        {
+          "caller": "argmax",
+          "callee": "this.getFloat",
+          "lineNumber": 155
+        },
+        {
+          "caller": "argmax",
+          "callee": "argmax",
+          "lineNumber": 165
+        },
+        {
+          "caller": "argmax",
+          "callee": "size",
+          "lineNumber": 165
+        },
+        {
+          "caller": "mapInPlace",
+          "callee": "setFloat",
+          "lineNumber": 181
+        },
+        {
+          "caller": "mapInPlace",
+          "callee": "mapFunction.apply",
+          "lineNumber": 181
+        },
+        {
+          "caller": "mapInPlace",
+          "callee": "getFloat",
+          "lineNumber": 181
+        },
+        {
+          "caller": "mapInPlace",
+          "callee": "mapInPlace",
+          "lineNumber": 187
+        },
+        {
+          "caller": "mapInPlace",
+          "callee": "size",
+          "lineNumber": 187
+        },
+        {
+          "caller": "mapWithIndexInPlace",
+          "callee": "setFloat",
+          "lineNumber": 193
+        },
+        {
+          "caller": "mapWithIndexInPlace",
+          "callee": "mapWithIndexFunction.apply",
+          "lineNumber": 193
+        },
+        {
+          "caller": "mapWithIndexInPlace",
+          "callee": "getFloat",
+          "lineNumber": 193
+        },
+        {
+          "caller": "addInPlace",
+          "callee": "mapWithIndexInPlace",
+          "lineNumber": 199
+        },
+        {
+          "caller": "addInPlace",
+          "callee": "that.getFloat",
+          "lineNumber": 199
+        },
+        {
+          "caller": "addInPlace",
+          "callee": "addInPlace",
+          "lineNumber": 203
+        },
+        {
+          "caller": "addInPlace",
+          "callee": "size",
+          "lineNumber": 203
+        },
+        {
+          "caller": "multiplyInPlace",
+          "callee": "mapWithIndexInPlace",
+          "lineNumber": 207
+        },
+        {
+          "caller": "multiplyInPlace",
+          "callee": "that.getFloat",
+          "lineNumber": 207
+        },
+        {
+          "caller": "multiplyInPlace",
+          "callee": "multiplyInPlace",
+          "lineNumber": 211
+        },
+        {
+          "caller": "multiplyInPlace",
+          "callee": "size",
+          "lineNumber": 211
+        },
+        {
+          "caller": "divideInPlace",
+          "callee": "mapInPlace",
+          "lineNumber": 215
+        },
+        {
+          "caller": "fillInPlace",
+          "callee": "mapInPlace",
+          "lineNumber": 219
+        },
+        {
+          "caller": "softmaxInPlace",
+          "callee": "max",
+          "lineNumber": 224
+        },
+        {
+          "caller": "softmaxInPlace",
+          "callee": "mapInPlace",
+          "lineNumber": 226
+        },
+        {
+          "caller": "softmaxInPlace",
+          "callee": "Math.exp",
+          "lineNumber": 226
+        },
+        {
+          "caller": "softmaxInPlace",
+          "callee": "sum",
+          "lineNumber": 227
+        },
+        {
+          "caller": "softmaxInPlace",
+          "callee": "divideInPlace",
+          "lineNumber": 229
+        },
+        {
+          "caller": "saxpyInPlace",
+          "callee": "setFloat",
+          "lineNumber": 235
+        },
+        {
+          "caller": "saxpyInPlace",
+          "callee": "that.getFloat",
+          "lineNumber": 235
+        },
+        {
+          "caller": "saxpyInPlace",
+          "callee": "this.getFloat",
+          "lineNumber": 235
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 29,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/GGMLTensorEntry.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 25,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/com/llama4j/GGMLType.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 106,
+      "nonEmptyLines": 90,
+      "callGraph": [
+        {
+          "caller": "byteSizeFor",
+          "callee": "getTypeSize",
+          "lineNumber": 88
+        },
+        {
+          "caller": "byteSizeFor",
+          "callee": "getBlockSize",
+          "lineNumber": 89
+        },
+        {
+          "caller": "byteSizeFor",
+          "callee": "Math.toIntExact",
+          "lineNumber": 90
+        },
+        {
+          "caller": "byteSizeFor",
+          "callee": "getBlockSize",
+          "lineNumber": 90
+        },
+        {
+          "caller": "GGMLType",
+          "callee": "isPowerOf2",
+          "lineNumber": 98
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/com/llama4j/GGUF.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 390,
+      "nonEmptyLines": 356,
+      "functions": [
+        {
+          "name": "getTensorInfos",
+          "startLine": 42,
+          "endLine": 44,
+          "params": []
+        },
+        {
+          "name": "getTensorDataOffset",
+          "startLine": 50,
+          "endLine": 52,
+          "params": []
+        },
+        {
+          "name": "getMetadata",
+          "startLine": 54,
+          "endLine": 56,
+          "params": []
+        },
+        {
+          "name": "loadModel",
+          "startLine": 63,
+          "endLine": 70,
+          "params": [
+            "modelPath"
+          ]
+        },
+        {
+          "name": "loadModelImpl",
+          "startLine": 119,
+          "endLine": 147,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "loadTensors",
+          "startLine": 149,
+          "endLine": 161,
+          "params": [
+            "fileChannel",
+            "tensorDataOffset",
+            "tensorInfos"
+          ]
+        },
+        {
+          "name": "readGGMLType",
+          "startLine": 166,
+          "endLine": 169,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readTensorInfo",
+          "startLine": 171,
+          "endLine": 196,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readString",
+          "startLine": 198,
+          "endLine": 207,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readKeyValuePair",
+          "startLine": 209,
+          "endLine": 220,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readMetadataValue",
+          "startLine": 222,
+          "endLine": 228,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readHeader",
+          "startLine": 230,
+          "endLine": 264,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readArray",
+          "startLine": 266,
+          "endLine": 325,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readMetadataValueOfType",
+          "startLine": 327,
+          "endLine": 339,
+          "params": [
+            "valueType",
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readByte",
+          "startLine": 341,
+          "endLine": 345,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readBoolean",
+          "startLine": 347,
+          "endLine": 349,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readShort",
+          "startLine": 351,
+          "endLine": 355,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readInt",
+          "startLine": 357,
+          "endLine": 361,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readLong",
+          "startLine": 363,
+          "endLine": 367,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readFloat",
+          "startLine": 369,
+          "endLine": 371,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readDouble",
+          "startLine": 373,
+          "endLine": 375,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "readMetadataValueType",
+          "startLine": 377,
+          "endLine": 380,
+          "params": [
+            "fileChannel"
+          ]
+        },
+        {
+          "name": "getAlignment",
+          "startLine": 382,
+          "endLine": 389,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "GGUF",
+          "startLine": 31,
+          "endLine": 390,
+          "methods": [
+            "getTensorInfos",
+            "getTensorDataOffset",
+            "getMetadata",
+            "loadModel",
+            "loadModelImpl",
+            "loadTensors",
+            "readGGMLType",
+            "readTensorInfo",
+            "readString",
+            "readKeyValuePair",
+            "readMetadataValue",
+            "readHeader",
+            "readArray",
+            "readMetadataValueOfType",
+            "readByte",
+            "readBoolean",
+            "readShort",
+            "readInt",
+            "readLong",
+            "readFloat",
+            "readDouble",
+            "readMetadataValueType",
+            "getAlignment"
+          ],
+          "properties": [
+            "GGUF_MAGIC",
+            "DEFAULT_ALIGNMENT",
+            "SUPPORTED_GGUF_VERSIONS",
+            "magic",
+            "version",
+            "tensorCount",
+            "alignment",
+            "metadata_kv_count",
+            "metadata",
+            "tensorInfos",
+            "tensorDataOffset",
+            "BB_1",
+            "BB_2",
+            "BB_4",
+            "BB_8"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getTensorInfos",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "getTensorDataOffset",
+          "line": 50,
+          "isDefault": false
+        },
+        {
+          "name": "getMetadata",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "loadModel",
+          "line": 63,
+          "isDefault": false
+        },
+        {
+          "name": "loadTensors",
+          "line": 149,
+          "isDefault": false
+        },
+        {
+          "name": "getAlignment",
+          "line": 382,
+          "isDefault": false
+        },
+        {
+          "name": "GGUF",
+          "line": 31,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadModel",
+          "callee": "FileChannel.open",
+          "lineNumber": 64
+        },
+        {
+          "caller": "loadModel",
+          "callee": "Timer.log",
+          "lineNumber": 65
+        },
+        {
+          "caller": "loadModel",
+          "callee": "new GGUF",
+          "lineNumber": 66
+        },
+        {
+          "caller": "loadModel",
+          "callee": "gguf.loadModelImpl",
+          "lineNumber": 67
+        },
+        {
+          "caller": "loadModelImpl",
+          "callee": "readHeader",
+          "lineNumber": 121
+        },
+        {
+          "caller": "loadModelImpl",
+          "callee": "HashMap.newHashMap",
+          "lineNumber": 124
+        },
+        {
+          "caller": "loadModelImpl",
+          "callee": "readTensorInfo",
+          "lineNumber": 126
+        },
+        {
+          "caller": "loadModelImpl",
+          "callee": "tensorInfos.containsKey",
+          "lineNumber": 127
+        },
+        {
+          "caller": "loadModelImpl",
+          "callee": "tensorInfos.put",
+          "lineNumber": 128
+        },
+        {
+          "caller": "loadModelImpl",
+          "callee": "getAlignment",
+          "lineNumber": 133
+        },
+        {
+          "caller": "loadModelImpl",
+          "callee": "fileChannel.position",
+          "lineNumber": 133
+        },
+        {
+          "caller": "loadModelImpl",
+          "callee": "getAlignment",
+          "lineNumber": 133
+        },
+        {
+          "caller": "loadModelImpl",
+          "callee": "fileChannel.position",
+          "lineNumber": 134
+        },
+        {
+          "caller": "loadModelImpl",
+          "callee": "fileChannel.position",
+          "lineNumber": 134
+        },
+        {
+          "caller": "loadModelImpl",
+          "callee": "fileChannel.position",
+          "lineNumber": 146
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "Arena.ofAuto",
+          "lineNumber": 150
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "fileChannel.map",
+          "lineNumber": 151
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "fileChannel.size",
+          "lineNumber": 151
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "HashMap.newHashMap",
+          "lineNumber": 152
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "tensorInfos.size",
+          "lineNumber": 152
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "tensorInfos.entrySet",
+          "lineNumber": 153
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "entry.getValue",
+          "lineNumber": 154
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "FloatTensor.numberOfElements",
+          "lineNumber": 155
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "ti.dimensions",
+          "lineNumber": 155
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "Math.toIntExact",
+          "lineNumber": 156
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "ti.ggmlType().byteSizeFor",
+          "lineNumber": 156
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "ti.ggmlType",
+          "lineNumber": 156
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "tensorData.asSlice",
+          "lineNumber": 157
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "ti.offset",
+          "lineNumber": 157
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "tensorEntries.put",
+          "lineNumber": 158
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "ti.name",
+          "lineNumber": 158
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "new GGMLTensorEntry",
+          "lineNumber": 158
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "ti.name",
+          "lineNumber": 158
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "ti.ggmlType",
+          "lineNumber": 158
+        },
+        {
+          "caller": "loadTensors",
+          "callee": "ti.dimensions",
+          "lineNumber": 158
+        },
+        {
+          "caller": "readGGMLType",
+          "callee": "readInt",
+          "lineNumber": 167
+        },
+        {
+          "caller": "readGGMLType",
+          "callee": "GGMLType.fromId",
+          "lineNumber": 168
+        },
+        {
+          "caller": "readTensorInfo",
+          "callee": "readString",
+          "lineNumber": 174
+        },
+        {
+          "caller": "readTensorInfo",
+          "callee": "name.length",
+          "lineNumber": 175
+        },
+        {
+          "caller": "readTensorInfo",
+          "callee": "readInt",
+          "lineNumber": 178
+        },
+        {
+          "caller": "readTensorInfo",
+          "callee": "Math.toIntExact",
+          "lineNumber": 183
+        },
+        {
+          "caller": "readTensorInfo",
+          "callee": "readLong",
+          "lineNumber": 183
+        },
+        {
+          "caller": "readTensorInfo",
+          "callee": "readGGMLType",
+          "lineNumber": 186
+        },
+        {
+          "caller": "readTensorInfo",
+          "callee": "readLong",
+          "lineNumber": 193
+        },
+        {
+          "caller": "readTensorInfo",
+          "callee": "new GGUF.GGUFTensorInfo",
+          "lineNumber": 195
+        },
+        {
+          "caller": "readString",
+          "callee": "Math.toIntExact",
+          "lineNumber": 201
+        },
+        {
+          "caller": "readString",
+          "callee": "readLong",
+          "lineNumber": 201
+        },
+        {
+          "caller": "readString",
+          "callee": "fileChannel.read",
+          "lineNumber": 204
+        },
+        {
+          "caller": "readString",
+          "callee": "ByteBuffer.wrap",
+          "lineNumber": 204
+        },
+        {
+          "caller": "readString",
+          "callee": "new String",
+          "lineNumber": 206
+        },
+        {
+          "caller": "readKeyValuePair",
+          "callee": "readString",
+          "lineNumber": 215
+        },
+        {
+          "caller": "readKeyValuePair",
+          "callee": "key.length",
+          "lineNumber": 216
+        },
+        {
+          "caller": "readKeyValuePair",
+          "callee": "key.codePoints().allMatch",
+          "lineNumber": 217
+        },
+        {
+          "caller": "readKeyValuePair",
+          "callee": "key.codePoints",
+          "lineNumber": 217
+        },
+        {
+          "caller": "readKeyValuePair",
+          "callee": "readMetadataValue",
+          "lineNumber": 218
+        },
+        {
+          "caller": "readKeyValuePair",
+          "callee": "new Pair<>",
+          "lineNumber": 219
+        },
+        {
+          "caller": "readMetadataValue",
+          "callee": "readMetadataValueType",
+          "lineNumber": 225
+        },
+        {
+          "caller": "readMetadataValue",
+          "callee": "readMetadataValueOfType",
+          "lineNumber": 227
+        },
+        {
+          "caller": "readHeader",
+          "callee": "readInt",
+          "lineNumber": 236
+        },
+        {
+          "caller": "readHeader",
+          "callee": "new IllegalArgumentException",
+          "lineNumber": 238
+        },
+        {
+          "caller": "readHeader",
+          "callee": "readInt",
+          "lineNumber": 246
+        },
+        {
+          "caller": "readHeader",
+          "callee": "SUPPORTED_GGUF_VERSIONS.contains",
+          "lineNumber": 247
+        },
+        {
+          "caller": "readHeader",
+          "callee": "new IllegalArgumentException",
+          "lineNumber": 248
+        },
+        {
+          "caller": "readHeader",
+          "callee": "Math.toIntExact",
+          "lineNumber": 253
+        },
+        {
+          "caller": "readHeader",
+          "callee": "readLong",
+          "lineNumber": 253
+        },
+        {
+          "caller": "readHeader",
+          "callee": "Math.toIntExact",
+          "lineNumber": 255
+        },
+        {
+          "caller": "readHeader",
+          "callee": "readLong",
+          "lineNumber": 255
+        },
+        {
+          "caller": "readHeader",
+          "callee": "HashMap.newHashMap",
+          "lineNumber": 258
+        },
+        {
+          "caller": "readHeader",
+          "callee": "readKeyValuePair",
+          "lineNumber": 260
+        },
+        {
+          "caller": "readHeader",
+          "callee": "metadata.containsKey",
+          "lineNumber": 261
+        },
+        {
+          "caller": "readHeader",
+          "callee": "keyValue.first",
+          "lineNumber": 261
+        },
+        {
+          "caller": "readHeader",
+          "callee": "metadata.put",
+          "lineNumber": 262
+        },
+        {
+          "caller": "readHeader",
+          "callee": "keyValue.first",
+          "lineNumber": 262
+        },
+        {
+          "caller": "readHeader",
+          "callee": "keyValue.second",
+          "lineNumber": 262
+        },
+        {
+          "caller": "readArray",
+          "callee": "readMetadataValueType",
+          "lineNumber": 268
+        },
+        {
+          "caller": "readArray",
+          "callee": "Math.toIntExact",
+          "lineNumber": 270
+        },
+        {
+          "caller": "readArray",
+          "callee": "readLong",
+          "lineNumber": 270
+        },
+        {
+          "caller": "readArray",
+          "callee": "readByte",
+          "lineNumber": 277
+        },
+        {
+          "caller": "readArray",
+          "callee": "readShort",
+          "lineNumber": 284
+        },
+        {
+          "caller": "readArray",
+          "callee": "readInt",
+          "lineNumber": 291
+        },
+        {
+          "caller": "readArray",
+          "callee": "readFloat",
+          "lineNumber": 298
+        },
+        {
+          "caller": "readArray",
+          "callee": "readBoolean",
+          "lineNumber": 305
+        },
+        {
+          "caller": "readArray",
+          "callee": "readString",
+          "lineNumber": 312
+        },
+        {
+          "caller": "readArray",
+          "callee": "readArray",
+          "lineNumber": 319
+        },
+        {
+          "caller": "readArray",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 323
+        },
+        {
+          "caller": "readMetadataValueOfType",
+          "callee": "readByte",
+          "lineNumber": 329
+        },
+        {
+          "caller": "readMetadataValueOfType",
+          "callee": "readShort",
+          "lineNumber": 330
+        },
+        {
+          "caller": "readMetadataValueOfType",
+          "callee": "readInt",
+          "lineNumber": 331
+        },
+        {
+          "caller": "readMetadataValueOfType",
+          "callee": "readFloat",
+          "lineNumber": 332
+        },
+        {
+          "caller": "readMetadataValueOfType",
+          "callee": "readLong",
+          "lineNumber": 333
+        },
+        {
+          "caller": "readMetadataValueOfType",
+          "callee": "readDouble",
+          "lineNumber": 334
+        },
+        {
+          "caller": "readMetadataValueOfType",
+          "callee": "readBoolean",
+          "lineNumber": 335
+        },
+        {
+          "caller": "readMetadataValueOfType",
+          "callee": "readString",
+          "lineNumber": 336
+        },
+        {
+          "caller": "readMetadataValueOfType",
+          "callee": "readArray",
+          "lineNumber": 337
+        },
+        {
+          "caller": "readByte",
+          "callee": "fileChannel.read",
+          "lineNumber": 342
+        },
+        {
+          "caller": "readByte",
+          "callee": "BB_1.clear().get",
+          "lineNumber": 344
+        },
+        {
+          "caller": "readByte",
+          "callee": "BB_1.clear",
+          "lineNumber": 344
+        },
+        {
+          "caller": "readBoolean",
+          "callee": "readByte",
+          "lineNumber": 348
+        },
+        {
+          "caller": "readShort",
+          "callee": "fileChannel.read",
+          "lineNumber": 352
+        },
+        {
+          "caller": "readShort",
+          "callee": "BB_2.clear().getShort",
+          "lineNumber": 354
+        },
+        {
+          "caller": "readShort",
+          "callee": "BB_2.clear",
+          "lineNumber": 354
+        },
+        {
+          "caller": "readInt",
+          "callee": "fileChannel.read",
+          "lineNumber": 358
+        },
+        {
+          "caller": "readInt",
+          "callee": "BB_4.clear().getInt",
+          "lineNumber": 360
+        },
+        {
+          "caller": "readInt",
+          "callee": "BB_4.clear",
+          "lineNumber": 360
+        },
+        {
+          "caller": "readLong",
+          "callee": "fileChannel.read",
+          "lineNumber": 364
+        },
+        {
+          "caller": "readLong",
+          "callee": "BB_8.clear().getLong",
+          "lineNumber": 366
+        },
+        {
+          "caller": "readLong",
+          "callee": "BB_8.clear",
+          "lineNumber": 366
+        },
+        {
+          "caller": "readFloat",
+          "callee": "Float.intBitsToFloat",
+          "lineNumber": 370
+        },
+        {
+          "caller": "readFloat",
+          "callee": "readInt",
+          "lineNumber": 370
+        },
+        {
+          "caller": "readDouble",
+          "callee": "Double.longBitsToDouble",
+          "lineNumber": 374
+        },
+        {
+          "caller": "readDouble",
+          "callee": "readLong",
+          "lineNumber": 374
+        },
+        {
+          "caller": "readMetadataValueType",
+          "callee": "readInt",
+          "lineNumber": 378
+        },
+        {
+          "caller": "readMetadataValueType",
+          "callee": "MetadataValueType.fromIndex",
+          "lineNumber": 379
+        },
+        {
+          "caller": "getAlignment",
+          "callee": "metadata.getOrDefault",
+          "lineNumber": 386
+        },
+        {
+          "caller": "getAlignment",
+          "callee": "Integer.bitCount",
+          "lineNumber": 387
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 7,
+        "functionCount": 23,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/Llama.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 404,
+      "nonEmptyLines": 362,
+      "callGraph": [
+        {
+          "caller": "createNewState",
+          "callee": "new State",
+          "lineNumber": 30
+        },
+        {
+          "caller": "createNewState",
+          "callee": "configuration",
+          "lineNumber": 30
+        },
+        {
+          "caller": "createNewState",
+          "callee": "tokenizer.getSpecialTokens().get",
+          "lineNumber": 31
+        },
+        {
+          "caller": "createNewState",
+          "callee": "tokenizer.getSpecialTokens",
+          "lineNumber": 31
+        },
+        {
+          "caller": "withContextLength",
+          "callee": "new Configuration",
+          "lineNumber": 51
+        },
+        {
+          "caller": "State",
+          "callee": "allocate",
+          "lineNumber": 134
+        },
+        {
+          "caller": "State",
+          "callee": "allocate",
+          "lineNumber": 135
+        },
+        {
+          "caller": "State",
+          "callee": "allocate",
+          "lineNumber": 136
+        },
+        {
+          "caller": "State",
+          "callee": "allocate",
+          "lineNumber": 137
+        },
+        {
+          "caller": "State",
+          "callee": "allocate",
+          "lineNumber": 138
+        },
+        {
+          "caller": "State",
+          "callee": "allocate",
+          "lineNumber": 139
+        },
+        {
+          "caller": "State",
+          "callee": "allocate",
+          "lineNumber": 140
+        },
+        {
+          "caller": "State",
+          "callee": "allocate",
+          "lineNumber": 141
+        },
+        {
+          "caller": "State",
+          "callee": "allocate",
+          "lineNumber": 142
+        },
+        {
+          "caller": "State",
+          "callee": "ArrayFloatTensor.allocate",
+          "lineNumber": 145
+        },
+        {
+          "caller": "State",
+          "callee": "Stream.generate(() -> ArrayFloatTensor.allocate(config.contextLength, kvDim)).limit(config.numberOfLayers).toArray",
+          "lineNumber": 147
+        },
+        {
+          "caller": "State",
+          "callee": "Stream.generate(() -> ArrayFloatTensor.allocate(config.contextLength, kvDim)).limit",
+          "lineNumber": 147
+        },
+        {
+          "caller": "State",
+          "callee": "Stream.generate",
+          "lineNumber": 147
+        },
+        {
+          "caller": "State",
+          "callee": "ArrayFloatTensor.allocate",
+          "lineNumber": 147
+        },
+        {
+          "caller": "State",
+          "callee": "Stream.generate(() -> ArrayFloatTensor.allocate(config.contextLength, kvDim)).limit(config.numberOfLayers).toArray",
+          "lineNumber": 148
+        },
+        {
+          "caller": "State",
+          "callee": "Stream.generate(() -> ArrayFloatTensor.allocate(config.contextLength, kvDim)).limit",
+          "lineNumber": 148
+        },
+        {
+          "caller": "State",
+          "callee": "Stream.generate",
+          "lineNumber": 148
+        },
+        {
+          "caller": "State",
+          "callee": "ArrayFloatTensor.allocate",
+          "lineNumber": 148
+        },
+        {
+          "caller": "allocate",
+          "callee": "IntStream.range(0, numTokens)\n                .mapToObj(i -> ArrayFloatTensor.allocate(dims)).toArray",
+          "lineNumber": 153
+        },
+        {
+          "caller": "allocate",
+          "callee": "IntStream.range(0, numTokens).mapToObj",
+          "lineNumber": 153
+        },
+        {
+          "caller": "allocate",
+          "callee": "IntStream.range",
+          "lineNumber": 153
+        },
+        {
+          "caller": "allocate",
+          "callee": "ArrayFloatTensor.allocate",
+          "lineNumber": 154
+        },
+        {
+          "caller": "rmsnorm",
+          "callee": "x.reduce",
+          "lineNumber": 160
+        },
+        {
+          "caller": "rmsnorm",
+          "callee": "Math.sqrt",
+          "lineNumber": 163
+        },
+        {
+          "caller": "rmsnorm",
+          "callee": "out.mapWithIndexInPlace",
+          "lineNumber": 166
+        },
+        {
+          "caller": "rmsnorm",
+          "callee": "weight.get",
+          "lineNumber": 166
+        },
+        {
+          "caller": "rmsnorm",
+          "callee": "x.getFloat",
+          "lineNumber": 166
+        },
+        {
+          "caller": "forward",
+          "callee": "model.configuration",
+          "lineNumber": 171
+        },
+        {
+          "caller": "forward",
+          "callee": "model.weights",
+          "lineNumber": 172
+        },
+        {
+          "caller": "forward",
+          "callee": "Math.sqrt",
+          "lineNumber": 177
+        },
+        {
+          "caller": "forward",
+          "callee": "Parallel.parallelFor",
+          "lineNumber": 181
+        },
+        {
+          "caller": "forward",
+          "callee": "weights.token_embedding_table.copyTo",
+          "lineNumber": 182
+        },
+        {
+          "caller": "forward",
+          "callee": "Parallel.parallelFor",
+          "lineNumber": 190
+        },
+        {
+          "caller": "forward",
+          "callee": "rmsnorm",
+          "lineNumber": 191
+        },
+        {
+          "caller": "forward",
+          "callee": "weights.wq[l].matmul",
+          "lineNumber": 195
+        },
+        {
+          "caller": "forward",
+          "callee": "weights.wk[l].matmul",
+          "lineNumber": 196
+        },
+        {
+          "caller": "forward",
+          "callee": "weights.wv[l].matmul",
+          "lineNumber": 197
+        },
+        {
+          "caller": "forward",
+          "callee": "Parallel.parallelFor",
+          "lineNumber": 200
+        },
+        {
+          "caller": "forward",
+          "callee": "weights.freq_cis_real.get",
+          "lineNumber": 203
+        },
+        {
+          "caller": "forward",
+          "callee": "weights.freq_cis_imag.get",
+          "lineNumber": 204
+        },
+        {
+          "caller": "forward",
+          "callee": "vec.getFloat",
+          "lineNumber": 208
+        },
+        {
+          "caller": "forward",
+          "callee": "vec.getFloat",
+          "lineNumber": 209
+        },
+        {
+          "caller": "forward",
+          "callee": "vec.setFloat",
+          "lineNumber": 210
+        },
+        {
+          "caller": "forward",
+          "callee": "vec.setFloat",
+          "lineNumber": 211
+        },
+        {
+          "caller": "forward",
+          "callee": "Parallel.parallelFor",
+          "lineNumber": 218
+        },
+        {
+          "caller": "forward",
+          "callee": "state.k[t].copyTo",
+          "lineNumber": 219
+        },
+        {
+          "caller": "forward",
+          "callee": "state.v[t].copyTo",
+          "lineNumber": 220
+        },
+        {
+          "caller": "forward",
+          "callee": "Parallel.parallelForLong",
+          "lineNumber": 230
+        },
+        {
+          "caller": "forward",
+          "callee": "state.q[token].dot",
+          "lineNumber": 247
+        },
+        {
+          "caller": "forward",
+          "callee": "state.att[token].setFloat",
+          "lineNumber": 250
+        },
+        {
+          "caller": "forward",
+          "callee": "state.att[token].softmaxInPlace",
+          "lineNumber": 254
+        },
+        {
+          "caller": "forward",
+          "callee": "state.xb[token].fillInPlace",
+          "lineNumber": 260
+        },
+        {
+          "caller": "forward",
+          "callee": "state.att[token].getFloat",
+          "lineNumber": 267
+        },
+        {
+          "caller": "forward",
+          "callee": "state.xb[token].saxpyInPlace",
+          "lineNumber": 269
+        },
+        {
+          "caller": "forward",
+          "callee": "weights.wo[l].matmul",
+          "lineNumber": 274
+        },
+        {
+          "caller": "forward",
+          "callee": "Parallel.parallelFor",
+          "lineNumber": 277
+        },
+        {
+          "caller": "forward",
+          "callee": "state.x[t].addInPlace",
+          "lineNumber": 278
+        },
+        {
+          "caller": "forward",
+          "callee": "Parallel.parallelFor",
+          "lineNumber": 282
+        },
+        {
+          "caller": "forward",
+          "callee": "rmsnorm",
+          "lineNumber": 283
+        },
+        {
+          "caller": "forward",
+          "callee": "weights.w1[l].matmul",
+          "lineNumber": 288
+        },
+        {
+          "caller": "forward",
+          "callee": "weights.w3[l].matmul",
+          "lineNumber": 289
+        },
+        {
+          "caller": "forward",
+          "callee": "Parallel.parallelFor",
+          "lineNumber": 293
+        },
+        {
+          "caller": "forward",
+          "callee": "state.hb[t].mapInPlace",
+          "lineNumber": 294
+        },
+        {
+          "caller": "forward",
+          "callee": "Math.exp",
+          "lineNumber": 294
+        },
+        {
+          "caller": "forward",
+          "callee": "Parallel.parallelFor",
+          "lineNumber": 298
+        },
+        {
+          "caller": "forward",
+          "callee": "state.hb[t].multiplyInPlace",
+          "lineNumber": 299
+        },
+        {
+          "caller": "forward",
+          "callee": "weights.w2[l].matmul",
+          "lineNumber": 303
+        },
+        {
+          "caller": "forward",
+          "callee": "Parallel.parallelFor",
+          "lineNumber": 306
+        },
+        {
+          "caller": "forward",
+          "callee": "state.x[t].addInPlace",
+          "lineNumber": 307
+        },
+        {
+          "caller": "forward",
+          "callee": "Parallel.parallelFor",
+          "lineNumber": 312
+        },
+        {
+          "caller": "forward",
+          "callee": "rmsnorm",
+          "lineNumber": 313
+        },
+        {
+          "caller": "forward",
+          "callee": "weights.wcls.matmul",
+          "lineNumber": 317
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "System.nanoTime",
+          "lineNumber": 344
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "model.configuration",
+          "lineNumber": 346
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "model.configuration",
+          "lineNumber": 347
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "new ArrayList<>",
+          "lineNumber": 349
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "promptTokens.size",
+          "lineNumber": 354
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "Math.min",
+          "lineNumber": 355
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "Math.min",
+          "lineNumber": 355
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "promptTokens.size",
+          "lineNumber": 355
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "promptTokens.get",
+          "lineNumber": 358
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "System.err.print",
+          "lineNumber": 361
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "Tokenizer.replaceControlCharacters",
+          "lineNumber": 361
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "model.tokenizer().decode",
+          "lineNumber": 361
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "model.tokenizer",
+          "lineNumber": 361
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "List.of",
+          "lineNumber": 361
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "System.out.format",
+          "lineNumber": 365
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "promptTokens.size",
+          "lineNumber": 365
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "Arrays.toString",
+          "lineNumber": 365
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "promptTokens.size",
+          "lineNumber": 368
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "forward",
+          "lineNumber": 369
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "promptTokens.size",
+          "lineNumber": 372
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "System.nanoTime",
+          "lineNumber": 375
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "forward",
+          "lineNumber": 377
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "sampler.sampleToken",
+          "lineNumber": 379
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "System.err.print",
+          "lineNumber": 382
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "Tokenizer.replaceControlCharacters",
+          "lineNumber": 382
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "model.tokenizer().decode",
+          "lineNumber": 382
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "model.tokenizer",
+          "lineNumber": 382
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "List.of",
+          "lineNumber": 382
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "generatedTokens.add",
+          "lineNumber": 384
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "onTokenGenerated.accept",
+          "lineNumber": 386
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "stopTokens.contains",
+          "lineNumber": 388
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "System.nanoTime",
+          "lineNumber": 394
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "System.err.printf",
+          "lineNumber": 397
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "generatedTokens.size",
+          "lineNumber": 398
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "model.configuration",
+          "lineNumber": 398
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "promptTokens.size",
+          "lineNumber": 399
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "promptTokens.size",
+          "lineNumber": 399
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "generatedTokens.size",
+          "lineNumber": 400
+        },
+        {
+          "caller": "generateTokens",
+          "callee": "generatedTokens.size",
+          "lineNumber": 400
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/com/llama4j/Llama3.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 313,
+      "nonEmptyLines": 288,
+      "functions": [
+        {
+          "name": "selectSampler",
+          "startLine": 44,
+          "endLine": 69,
+          "params": [
+            "vocabularySize",
+            "temperature",
+            "topp",
+            "rngSeed"
+          ]
+        },
+        {
+          "name": "runInteractive",
+          "startLine": 71,
+          "endLine": 126,
+          "params": [
+            "model",
+            "sampler",
+            "options"
+          ]
+        },
+        {
+          "name": "runInstructOnce",
+          "startLine": 128,
+          "endLine": 157,
+          "params": [
+            "model",
+            "sampler",
+            "options"
+          ]
+        },
+        {
+          "name": "init",
+          "startLine": 257,
+          "endLine": 273,
+          "params": []
+        },
+        {
+          "name": "initInputPins",
+          "startLine": 275,
+          "endLine": 278,
+          "params": []
+        },
+        {
+          "name": "initOutputPins",
+          "startLine": 280,
+          "endLine": 283,
+          "params": []
+        },
+        {
+          "name": "process",
+          "startLine": 285,
+          "endLine": 312,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "Llama3",
+          "startLine": 37,
+          "endLine": 313,
+          "methods": [
+            "selectSampler",
+            "runInteractive",
+            "runInstructOnce",
+            "init",
+            "initInputPins",
+            "initOutputPins",
+            "process"
+          ],
+          "properties": [
+            "BATCH_SIZE",
+            "image",
+            "in",
+            "out"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "init",
+          "line": 257,
+          "isDefault": false
+        },
+        {
+          "name": "initInputPins",
+          "line": 275,
+          "isDefault": false
+        },
+        {
+          "name": "initOutputPins",
+          "line": 280,
+          "isDefault": false
+        },
+        {
+          "name": "process",
+          "line": 285,
+          "isDefault": false
+        },
+        {
+          "name": "Llama3",
+          "line": 37,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "selectSampler",
+          "callee": "RandomGeneratorFactory.getDefault().create",
+          "lineNumber": 51
+        },
+        {
+          "caller": "selectSampler",
+          "callee": "RandomGeneratorFactory.getDefault",
+          "lineNumber": 51
+        },
+        {
+          "caller": "selectSampler",
+          "callee": "new CategoricalSampler",
+          "lineNumber": 55
+        },
+        {
+          "caller": "selectSampler",
+          "callee": "new ToppSampler",
+          "lineNumber": 58
+        },
+        {
+          "caller": "selectSampler",
+          "callee": "logits.divideInPlace",
+          "lineNumber": 62
+        },
+        {
+          "caller": "selectSampler",
+          "callee": "logits.size",
+          "lineNumber": 62
+        },
+        {
+          "caller": "selectSampler",
+          "callee": "logits.softmaxInPlace",
+          "lineNumber": 64
+        },
+        {
+          "caller": "selectSampler",
+          "callee": "logits.size",
+          "lineNumber": 64
+        },
+        {
+          "caller": "selectSampler",
+          "callee": "innerSampler.sampleToken",
+          "lineNumber": 65
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "new ArrayList<>",
+          "lineNumber": 73
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "new ChatFormat",
+          "lineNumber": 74
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "model.tokenizer",
+          "lineNumber": 74
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "conversationTokens.add",
+          "lineNumber": 75
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "options.systemPrompt",
+          "lineNumber": 76
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "conversationTokens.addAll",
+          "lineNumber": 77
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "chatFormat.encodeMessage",
+          "lineNumber": 77
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "new ChatFormat.Message",
+          "lineNumber": 77
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "options.systemPrompt",
+          "lineNumber": 77
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "new Scanner",
+          "lineNumber": 80
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "System.out.print",
+          "lineNumber": 82
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "System.out.flush",
+          "lineNumber": 83
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "in.nextLine",
+          "lineNumber": 84
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "System.out.printf",
+          "lineNumber": 89
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "conversationTokens.size",
+          "lineNumber": 90
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "options.maxTokens",
+          "lineNumber": 91
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "options.maxTokens",
+          "lineNumber": 92
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "conversationTokens.size",
+          "lineNumber": 92
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "model.createNewState",
+          "lineNumber": 97
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "conversationTokens.addAll",
+          "lineNumber": 99
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "chatFormat.encodeMessage",
+          "lineNumber": 99
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "new ChatFormat.Message",
+          "lineNumber": 99
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "conversationTokens.addAll",
+          "lineNumber": 100
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "chatFormat.encodeHeader",
+          "lineNumber": 100
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "new ChatFormat.Message",
+          "lineNumber": 100
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "chatFormat.getStopTokens",
+          "lineNumber": 101
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "Llama.generateTokens",
+          "lineNumber": 102
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "conversationTokens.subList",
+          "lineNumber": 102
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "conversationTokens.size",
+          "lineNumber": 102
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "options.maxTokens",
+          "lineNumber": 102
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "options.echo",
+          "lineNumber": 102
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "options.stream",
+          "lineNumber": 103
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "model.tokenizer().isSpecialToken",
+          "lineNumber": 104
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "model.tokenizer",
+          "lineNumber": 104
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "System.out.print",
+          "lineNumber": 105
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "model.tokenizer().decode",
+          "lineNumber": 105
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "model.tokenizer",
+          "lineNumber": 105
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "List.of",
+          "lineNumber": 105
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "conversationTokens.addAll",
+          "lineNumber": 110
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "conversationTokens.size",
+          "lineNumber": 111
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "responseTokens.isEmpty",
+          "lineNumber": 113
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "stopTokens.contains",
+          "lineNumber": 113
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "responseTokens.getLast",
+          "lineNumber": 113
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "responseTokens.getLast",
+          "lineNumber": 114
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "responseTokens.removeLast",
+          "lineNumber": 115
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "options.stream",
+          "lineNumber": 117
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "model.tokenizer().decode",
+          "lineNumber": 118
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "model.tokenizer",
+          "lineNumber": 118
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "System.out.println",
+          "lineNumber": 119
+        },
+        {
+          "caller": "runInteractive",
+          "callee": "System.err.println",
+          "lineNumber": 122
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "model.createNewState",
+          "lineNumber": 129
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "new ChatFormat",
+          "lineNumber": 130
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "model.tokenizer",
+          "lineNumber": 130
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "new ArrayList<>",
+          "lineNumber": 132
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "promptTokens.add",
+          "lineNumber": 133
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "options.systemPrompt",
+          "lineNumber": 134
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "promptTokens.addAll",
+          "lineNumber": 135
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "chatFormat.encodeMessage",
+          "lineNumber": 135
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "new ChatFormat.Message",
+          "lineNumber": 135
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "options.systemPrompt",
+          "lineNumber": 135
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "promptTokens.addAll",
+          "lineNumber": 137
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "chatFormat.encodeMessage",
+          "lineNumber": 137
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "new ChatFormat.Message",
+          "lineNumber": 137
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "options.prompt",
+          "lineNumber": 137
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "promptTokens.addAll",
+          "lineNumber": 138
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "chatFormat.encodeHeader",
+          "lineNumber": 138
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "new ChatFormat.Message",
+          "lineNumber": 138
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "chatFormat.getStopTokens",
+          "lineNumber": 140
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "Llama.generateTokens",
+          "lineNumber": 141
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "options.maxTokens",
+          "lineNumber": 141
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "options.echo",
+          "lineNumber": 141
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "options.stream",
+          "lineNumber": 142
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "model.tokenizer().isSpecialToken",
+          "lineNumber": 143
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "model.tokenizer",
+          "lineNumber": 143
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "System.out.print",
+          "lineNumber": 144
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "model.tokenizer().decode",
+          "lineNumber": 144
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "model.tokenizer",
+          "lineNumber": 144
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "List.of",
+          "lineNumber": 144
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "responseTokens.isEmpty",
+          "lineNumber": 148
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "stopTokens.contains",
+          "lineNumber": 148
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "responseTokens.getLast",
+          "lineNumber": 148
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "responseTokens.removeLast",
+          "lineNumber": 149
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "options.stream",
+          "lineNumber": 151
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "model.tokenizer().decode",
+          "lineNumber": 152
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "model.tokenizer",
+          "lineNumber": 152
+        },
+        {
+          "caller": "runInstructOnce",
+          "callee": "System.out.println",
+          "lineNumber": 153
+        },
+        {
+          "caller": "require",
+          "callee": "System.out.println",
+          "lineNumber": 173
+        },
+        {
+          "caller": "require",
+          "callee": "messageFormat.formatted",
+          "lineNumber": 173
+        },
+        {
+          "caller": "require",
+          "callee": "System.out.println",
+          "lineNumber": 174
+        },
+        {
+          "caller": "require",
+          "callee": "printUsage",
+          "lineNumber": 175
+        },
+        {
+          "caller": "require",
+          "callee": "System.exit",
+          "lineNumber": 176
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 181
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 182
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 183
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 184
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 185
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 186
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 187
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 188
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 189
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 190
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 191
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 192
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 193
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 194
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 195
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 196
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 197
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 198
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 199
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 200
+        },
+        {
+          "caller": "printUsage",
+          "callee": "out.println",
+          "lineNumber": 201
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "System.nanoTime",
+          "lineNumber": 210
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "require",
+          "lineNumber": 219
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "optionName.startsWith",
+          "lineNumber": 219
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "printUsage",
+          "lineNumber": 224
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "System.exit",
+          "lineNumber": 225
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "optionName.contains",
+          "lineNumber": 229
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "optionName.split",
+          "lineNumber": 230
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "require",
+          "lineNumber": 234
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "Float.parseFloat",
+          "lineNumber": 241
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "Float.parseFloat",
+          "lineNumber": 242
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "Paths.get",
+          "lineNumber": 243
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "Long.parseLong",
+          "lineNumber": 244
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "Integer.parseInt",
+          "lineNumber": 245
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "Boolean.parseBoolean",
+          "lineNumber": 246
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "Boolean.parseBoolean",
+          "lineNumber": 247
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "require",
+          "lineNumber": 248
+        },
+        {
+          "caller": "parseOptions",
+          "callee": "new Options",
+          "lineNumber": 253
+        },
+        {
+          "caller": "init",
+          "callee": "initPins",
+          "lineNumber": 259
+        },
+        {
+          "caller": "init",
+          "callee": "setSize",
+          "lineNumber": 260
+        },
+        {
+          "caller": "init",
+          "callee": "element.jSetInnerBorderVisibility",
+          "lineNumber": 261
+        },
+        {
+          "caller": "init",
+          "callee": "element.jSetTopPinsVisible",
+          "lineNumber": 262
+        },
+        {
+          "caller": "init",
+          "callee": "element.jSetBottomPinsVisible",
+          "lineNumber": 263
+        },
+        {
+          "caller": "init",
+          "callee": "element.jLoadImage",
+          "lineNumber": 265
+        },
+        {
+          "caller": "init",
+          "callee": "element.jGetSourcePath",
+          "lineNumber": 265
+        },
+        {
+          "caller": "init",
+          "callee": "setPin",
+          "lineNumber": 267
+        },
+        {
+          "caller": "init",
+          "callee": "setPin",
+          "lineNumber": 268
+        },
+        {
+          "caller": "init",
+          "callee": "element.jSetPinDescription",
+          "lineNumber": 269
+        },
+        {
+          "caller": "init",
+          "callee": "element.jSetPinDescription",
+          "lineNumber": 270
+        },
+        {
+          "caller": "init",
+          "callee": "setName",
+          "lineNumber": 272
+        },
+        {
+          "caller": "initInputPins",
+          "callee": "element.getPinInputReference",
+          "lineNumber": 277
+        },
+        {
+          "caller": "initOutputPins",
+          "callee": "element.setPinOutputReference",
+          "lineNumber": 282
+        },
+        {
+          "caller": "process",
+          "callee": "Options.parseOptions",
+          "lineNumber": 289
+        },
+        {
+          "caller": "process",
+          "callee": "in.getValue",
+          "lineNumber": 292
+        },
+        {
+          "caller": "process",
+          "callee": "AOT.tryUsePreLoaded",
+          "lineNumber": 295
+        },
+        {
+          "caller": "process",
+          "callee": "options.modelPath",
+          "lineNumber": 295
+        },
+        {
+          "caller": "process",
+          "callee": "options.maxTokens",
+          "lineNumber": 295
+        },
+        {
+          "caller": "process",
+          "callee": "ModelLoader.loadModel",
+          "lineNumber": 298
+        },
+        {
+          "caller": "process",
+          "callee": "options.modelPath",
+          "lineNumber": 298
+        },
+        {
+          "caller": "process",
+          "callee": "options.maxTokens",
+          "lineNumber": 298
+        },
+        {
+          "caller": "process",
+          "callee": "selectSampler",
+          "lineNumber": 300
+        },
+        {
+          "caller": "process",
+          "callee": "model.configuration",
+          "lineNumber": 300
+        },
+        {
+          "caller": "process",
+          "callee": "options.temperature",
+          "lineNumber": 300
+        },
+        {
+          "caller": "process",
+          "callee": "options.topp",
+          "lineNumber": 300
+        },
+        {
+          "caller": "process",
+          "callee": "options.seed",
+          "lineNumber": 300
+        },
+        {
+          "caller": "process",
+          "callee": "options.interactive",
+          "lineNumber": 301
+        },
+        {
+          "caller": "process",
+          "callee": "runInteractive",
+          "lineNumber": 302
+        },
+        {
+          "caller": "process",
+          "callee": "out.setValue",
+          "lineNumber": 304
+        },
+        {
+          "caller": "process",
+          "callee": "runInstructOnce",
+          "lineNumber": 304
+        },
+        {
+          "caller": "process",
+          "callee": "out.setChanged",
+          "lineNumber": 305
+        },
+        {
+          "caller": "process",
+          "callee": "element.notifyPin",
+          "lineNumber": 306
+        },
+        {
+          "caller": "process",
+          "callee": "System.getLogger(Llama3.class.getName()).log",
+          "lineNumber": 310
+        },
+        {
+          "caller": "process",
+          "callee": "System.getLogger",
+          "lineNumber": 310
+        },
+        {
+          "caller": "process",
+          "callee": "Llama3.class.getName",
+          "lineNumber": 310
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 7,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/ModelLoader.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 185,
+      "nonEmptyLines": 163,
+      "functions": [
+        {
+          "name": "loadVocabulary",
+          "startLine": 42,
+          "endLine": 49,
+          "params": [
+            "metadata"
+          ]
+        },
+        {
+          "name": "loadModel",
+          "startLine": 51,
+          "endLine": 55,
+          "params": [
+            "ggufPath",
+            "contextLength",
+            "loadWeights"
+          ]
+        },
+        {
+          "name": "loadModel",
+          "startLine": 57,
+          "endLine": 86,
+          "params": [
+            "fileChannel",
+            "gguf",
+            "contextLength",
+            "loadWeights"
+          ]
+        },
+        {
+          "name": "loadWeights",
+          "startLine": 88,
+          "endLine": 120,
+          "params": [
+            "tensorEntries",
+            "config"
+          ]
+        },
+        {
+          "name": "createTokenizer",
+          "startLine": 122,
+          "endLine": 148,
+          "params": [
+            "metadata",
+            "vocabulary"
+          ]
+        },
+        {
+          "name": "loadQuantized",
+          "startLine": 150,
+          "endLine": 160,
+          "params": [
+            "entry"
+          ]
+        },
+        {
+          "name": "loadArrayOfQuantized",
+          "startLine": 162,
+          "endLine": 168,
+          "params": [
+            "size",
+            "getTensorEntry"
+          ]
+        },
+        {
+          "name": "loadArrayOfFloatBuffer",
+          "startLine": 170,
+          "endLine": 176,
+          "params": [
+            "size",
+            "getTensorEntry"
+          ]
+        },
+        {
+          "name": "toFloatBuffer",
+          "startLine": 178,
+          "endLine": 184,
+          "params": [
+            "tensorEntry"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ModelLoader",
+          "startLine": 38,
+          "endLine": 185,
+          "methods": [
+            "loadVocabulary",
+            "loadModel",
+            "loadModel",
+            "loadWeights",
+            "createTokenizer",
+            "loadQuantized",
+            "loadArrayOfQuantized",
+            "loadArrayOfFloatBuffer",
+            "toFloatBuffer"
+          ],
+          "properties": [
+            "TOKENIZER_LLAMA_3_MODEL",
+            "LLAMA_3_PATTERN"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "loadModel",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "loadModel",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "loadQuantized",
+          "line": 150,
+          "isDefault": false
+        },
+        {
+          "name": "loadArrayOfQuantized",
+          "line": 162,
+          "isDefault": false
+        },
+        {
+          "name": "loadArrayOfFloatBuffer",
+          "line": 170,
+          "isDefault": false
+        },
+        {
+          "name": "toFloatBuffer",
+          "line": 178,
+          "isDefault": false
+        },
+        {
+          "name": "ModelLoader",
+          "line": 38,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadVocabulary",
+          "callee": "metadata.get",
+          "lineNumber": 43
+        },
+        {
+          "caller": "loadVocabulary",
+          "callee": "TOKENIZER_LLAMA_3_MODEL.equals",
+          "lineNumber": 44
+        },
+        {
+          "caller": "loadVocabulary",
+          "callee": "new IllegalArgumentException",
+          "lineNumber": 45
+        },
+        {
+          "caller": "loadVocabulary",
+          "callee": "metadata.get",
+          "lineNumber": 47
+        },
+        {
+          "caller": "loadVocabulary",
+          "callee": "new Vocabulary",
+          "lineNumber": 48
+        },
+        {
+          "caller": "loadModel",
+          "callee": "GGUF.loadModel",
+          "lineNumber": 52
+        },
+        {
+          "caller": "loadModel",
+          "callee": "FileChannel.open",
+          "lineNumber": 53
+        },
+        {
+          "caller": "loadModel",
+          "callee": "loadModel",
+          "lineNumber": 54
+        },
+        {
+          "caller": "loadModel",
+          "callee": "Timer.log",
+          "lineNumber": 58
+        },
+        {
+          "caller": "loadModel",
+          "callee": "gguf.getMetadata",
+          "lineNumber": 59
+        },
+        {
+          "caller": "loadModel",
+          "callee": "loadVocabulary",
+          "lineNumber": 60
+        },
+        {
+          "caller": "loadModel",
+          "callee": "createTokenizer",
+          "lineNumber": 61
+        },
+        {
+          "caller": "loadModel",
+          "callee": "new Llama.Configuration(\n                    (int) metadata.get(\"llama.embedding_length\"),\n                    (int) metadata.get(\"llama.feed_forward_length\"),\n                    (int) metadata.get(\"llama.block_count\"),\n                    (int) metadata.get(\"llama.attention.head_count\"),\n\n                    metadata.containsKey(\"llama.attention.head_count_kv\")\n                            ? (int) metadata.get(\"llama.attention.head_count_kv\")\n                            : (int) metadata.get(\"llama.attention.head_count\"),\n\n                    vocabulary.size(),\n                    (int) metadata.get(\"llama.context_length\"),\n                    (float) metadata.getOrDefault(\"llama.attention.layer_norm_rms_epsilon\", 1e-5f),\n                    (float) metadata.getOrDefault(\"llama.rope.freq_base\", 10000f)\n            ).withContextLength",
+          "lineNumber": 63
+        },
+        {
+          "caller": "loadModel",
+          "callee": "new Llama.Configuration",
+          "lineNumber": 63
+        },
+        {
+          "caller": "loadModel",
+          "callee": "metadata.get",
+          "lineNumber": 64
+        },
+        {
+          "caller": "loadModel",
+          "callee": "metadata.get",
+          "lineNumber": 65
+        },
+        {
+          "caller": "loadModel",
+          "callee": "metadata.get",
+          "lineNumber": 66
+        },
+        {
+          "caller": "loadModel",
+          "callee": "metadata.get",
+          "lineNumber": 67
+        },
+        {
+          "caller": "loadModel",
+          "callee": "metadata.containsKey",
+          "lineNumber": 69
+        },
+        {
+          "caller": "loadModel",
+          "callee": "metadata.get",
+          "lineNumber": 70
+        },
+        {
+          "caller": "loadModel",
+          "callee": "metadata.get",
+          "lineNumber": 71
+        },
+        {
+          "caller": "loadModel",
+          "callee": "vocabulary.size",
+          "lineNumber": 73
+        },
+        {
+          "caller": "loadModel",
+          "callee": "metadata.get",
+          "lineNumber": 74
+        },
+        {
+          "caller": "loadModel",
+          "callee": "metadata.getOrDefault",
+          "lineNumber": 75
+        },
+        {
+          "caller": "loadModel",
+          "callee": "metadata.getOrDefault",
+          "lineNumber": 76
+        },
+        {
+          "caller": "loadModel",
+          "callee": "GGUF.loadTensors",
+          "lineNumber": 81
+        },
+        {
+          "caller": "loadModel",
+          "callee": "gguf.getTensorDataOffset",
+          "lineNumber": 81
+        },
+        {
+          "caller": "loadModel",
+          "callee": "gguf.getTensorInfos",
+          "lineNumber": 81
+        },
+        {
+          "caller": "loadModel",
+          "callee": "loadWeights",
+          "lineNumber": 82
+        },
+        {
+          "caller": "loadModel",
+          "callee": "new Llama",
+          "lineNumber": 84
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "tensorEntries.containsKey",
+          "lineNumber": 89
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "RoPE.precomputeFreqsCis",
+          "lineNumber": 94
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "ropeFreqs.first",
+          "lineNumber": 96
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "ropeFreqs.second",
+          "lineNumber": 97
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "tensorEntries.get",
+          "lineNumber": 99
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "new Llama.Weights",
+          "lineNumber": 100
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "loadQuantized",
+          "lineNumber": 101
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "loadArrayOfFloatBuffer",
+          "lineNumber": 102
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "tensorEntries.get",
+          "lineNumber": 102
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "loadArrayOfQuantized",
+          "lineNumber": 103
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "tensorEntries.get",
+          "lineNumber": 103
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "loadArrayOfQuantized",
+          "lineNumber": 104
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "tensorEntries.get",
+          "lineNumber": 104
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "loadArrayOfQuantized",
+          "lineNumber": 105
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "tensorEntries.get",
+          "lineNumber": 105
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "loadArrayOfQuantized",
+          "lineNumber": 106
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "tensorEntries.get",
+          "lineNumber": 106
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "loadArrayOfFloatBuffer",
+          "lineNumber": 107
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "tensorEntries.get",
+          "lineNumber": 107
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "loadArrayOfQuantized",
+          "lineNumber": 108
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "tensorEntries.get",
+          "lineNumber": 108
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "loadArrayOfQuantized",
+          "lineNumber": 109
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "tensorEntries.get",
+          "lineNumber": 109
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "loadArrayOfQuantized",
+          "lineNumber": 110
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "tensorEntries.get",
+          "lineNumber": 110
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "toFloatBuffer",
+          "lineNumber": 111
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "tensorEntries.get",
+          "lineNumber": 111
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "FloatBuffer.wrap",
+          "lineNumber": 112
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "FloatBuffer.wrap",
+          "lineNumber": 113
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "loadQuantized",
+          "lineNumber": 116
+        },
+        {
+          "caller": "loadWeights",
+          "callee": "tensorEntries.getOrDefault",
+          "lineNumber": 116
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "metadata.get",
+          "lineNumber": 123
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "Arrays.stream(mergeLines)\n                .map(line -> line.split(\" \"))\n                .map(parts ->\n                        new Pair<>(\n                                vocabulary.getIndex(parts[0]).orElseThrow(),\n                                vocabulary.getIndex(parts[1]).orElseThrow())\n                ).toList",
+          "lineNumber": 124
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "Arrays.stream(mergeLines)\n                .map(line -> line.split(\" \")).map",
+          "lineNumber": 124
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "Arrays.stream(mergeLines).map",
+          "lineNumber": 124
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "Arrays.stream",
+          "lineNumber": 124
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "line.split",
+          "lineNumber": 125
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "new Pair<>",
+          "lineNumber": 127
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "vocabulary.getIndex(parts[0]).orElseThrow",
+          "lineNumber": 128
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "vocabulary.getIndex",
+          "lineNumber": 128
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "vocabulary.getIndex(parts[1]).orElseThrow",
+          "lineNumber": 129
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "vocabulary.getIndex",
+          "lineNumber": 129
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "vocabulary.size",
+          "lineNumber": 132
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "Arrays.stream(vocabulary.tokens(), baseTokens, allTokens).toList",
+          "lineNumber": 135
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "Arrays.stream",
+          "lineNumber": 135
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "vocabulary.tokens",
+          "lineNumber": 135
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "specialTokensList.stream().allMatch",
+          "lineNumber": 137
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "specialTokensList.stream",
+          "lineNumber": 137
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "vocabulary.getIndex(token).isPresent",
+          "lineNumber": 137
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "vocabulary.getIndex",
+          "lineNumber": 137
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "IntStream.range(0, specialTokensList.size())\n                        .boxed().collect",
+          "lineNumber": 140
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "IntStream.range(0, specialTokensList.size()).boxed",
+          "lineNumber": 140
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "IntStream.range",
+          "lineNumber": 140
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "specialTokensList.size",
+          "lineNumber": 140
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "Collectors.toMap",
+          "lineNumber": 142
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "specialTokensList.get",
+          "lineNumber": 143
+        },
+        {
+          "caller": "createTokenizer",
+          "callee": "new Tokenizer",
+          "lineNumber": 147
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "entry.ggmlType",
+          "lineNumber": 151
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "new Q8_0FloatTensor",
+          "lineNumber": 154
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "FloatTensor.numberOfElements",
+          "lineNumber": 154
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "entry.shape",
+          "lineNumber": 154
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "entry.memorySegment",
+          "lineNumber": 154
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "new Q4_0FloatTensor",
+          "lineNumber": 155
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "FloatTensor.numberOfElements",
+          "lineNumber": 155
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "entry.shape",
+          "lineNumber": 155
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "entry.memorySegment",
+          "lineNumber": 155
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "new BF16FloatTensor",
+          "lineNumber": 156
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "FloatTensor.numberOfElements",
+          "lineNumber": 156
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "entry.shape",
+          "lineNumber": 156
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "entry.memorySegment",
+          "lineNumber": 156
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "new F16FloatTensor",
+          "lineNumber": 157
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "FloatTensor.numberOfElements",
+          "lineNumber": 157
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "entry.shape",
+          "lineNumber": 157
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "entry.memorySegment",
+          "lineNumber": 157
+        },
+        {
+          "caller": "loadQuantized",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 158
+        },
+        {
+          "caller": "loadArrayOfQuantized",
+          "callee": "loadQuantized",
+          "lineNumber": 165
+        },
+        {
+          "caller": "loadArrayOfQuantized",
+          "callee": "getTensorEntry.apply",
+          "lineNumber": 165
+        },
+        {
+          "caller": "loadArrayOfFloatBuffer",
+          "callee": "toFloatBuffer",
+          "lineNumber": 173
+        },
+        {
+          "caller": "loadArrayOfFloatBuffer",
+          "callee": "getTensorEntry.apply",
+          "lineNumber": 173
+        },
+        {
+          "caller": "toFloatBuffer",
+          "callee": "tensorEntry.ggmlType",
+          "lineNumber": 179
+        },
+        {
+          "caller": "toFloatBuffer",
+          "callee": "tensorEntry.memorySegment().asByteBuffer().order(ByteOrder.LITTLE_ENDIAN).asFloatBuffer",
+          "lineNumber": 181
+        },
+        {
+          "caller": "toFloatBuffer",
+          "callee": "tensorEntry.memorySegment().asByteBuffer().order",
+          "lineNumber": 181
+        },
+        {
+          "caller": "toFloatBuffer",
+          "callee": "tensorEntry.memorySegment().asByteBuffer",
+          "lineNumber": 181
+        },
+        {
+          "caller": "toFloatBuffer",
+          "callee": "tensorEntry.memorySegment",
+          "lineNumber": 181
+        },
+        {
+          "caller": "toFloatBuffer",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 182
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 7,
+        "functionCount": 9,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/Pair.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 19,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/com/llama4j/Parallel.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 41,
+      "functions": [
+        {
+          "name": "parallelFor",
+          "startLine": 29,
+          "endLine": 35,
+          "params": [
+            "startInclusive",
+            "endExclusive",
+            "action"
+          ]
+        },
+        {
+          "name": "parallelForLong",
+          "startLine": 37,
+          "endLine": 43,
+          "params": [
+            "startInclusive",
+            "endExclusive",
+            "action"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Parallel",
+          "startLine": 28,
+          "endLine": 44,
+          "methods": [
+            "parallelFor",
+            "parallelForLong"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "parallelFor",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "parallelForLong",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "Parallel",
+          "line": 28,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "parallelFor",
+          "callee": "action.accept",
+          "lineNumber": 31
+        },
+        {
+          "caller": "parallelFor",
+          "callee": "IntStream.range(startInclusive, endExclusive).parallel().forEach",
+          "lineNumber": 34
+        },
+        {
+          "caller": "parallelFor",
+          "callee": "IntStream.range(startInclusive, endExclusive).parallel",
+          "lineNumber": 34
+        },
+        {
+          "caller": "parallelFor",
+          "callee": "IntStream.range",
+          "lineNumber": 34
+        },
+        {
+          "caller": "parallelForLong",
+          "callee": "action.accept",
+          "lineNumber": 39
+        },
+        {
+          "caller": "parallelForLong",
+          "callee": "LongStream.range(startInclusive, endExclusive).parallel().forEach",
+          "lineNumber": 42
+        },
+        {
+          "caller": "parallelForLong",
+          "callee": "LongStream.range(startInclusive, endExclusive).parallel",
+          "lineNumber": 42
+        },
+        {
+          "caller": "parallelForLong",
+          "callee": "LongStream.range",
+          "lineNumber": 42
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/Q4_0FloatTensor.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 146,
+      "nonEmptyLines": 132,
+      "functions": [
+        {
+          "name": "Q4_0FloatTensor",
+          "startLine": 37,
+          "endLine": 40,
+          "params": [
+            "size",
+            "memorySegment"
+          ]
+        },
+        {
+          "name": "size",
+          "startLine": 42,
+          "endLine": 45,
+          "params": []
+        },
+        {
+          "name": "setFloat",
+          "startLine": 47,
+          "endLine": 50,
+          "params": [
+            "index",
+            "value"
+          ]
+        },
+        {
+          "name": "getFloatVector",
+          "startLine": 52,
+          "endLine": 55,
+          "params": [
+            "species",
+            "index"
+          ]
+        },
+        {
+          "name": "type",
+          "startLine": 57,
+          "endLine": 60,
+          "params": []
+        },
+        {
+          "name": "getFloat",
+          "startLine": 62,
+          "endLine": 77,
+          "params": [
+            "index"
+          ]
+        },
+        {
+          "name": "dot",
+          "startLine": 79,
+          "endLine": 86,
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ]
+        },
+        {
+          "name": "vectorDot",
+          "startLine": 88,
+          "endLine": 145,
+          "params": [
+            "thiz",
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Q4_0FloatTensor",
+          "startLine": 33,
+          "endLine": 146,
+          "methods": [
+            "Q4_0FloatTensor",
+            "size",
+            "setFloat",
+            "getFloatVector",
+            "type",
+            "getFloat",
+            "dot",
+            "vectorDot"
+          ],
+          "properties": [
+            "size",
+            "memorySegment"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Q4_0FloatTensor",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "setFloat",
+          "line": 47,
+          "isDefault": false
+        },
+        {
+          "name": "type",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "getFloat",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "dot",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "Q4_0FloatTensor",
+          "line": 33,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "setFloat",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 49
+        },
+        {
+          "caller": "getFloatVector",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 54
+        },
+        {
+          "caller": "getFloat",
+          "callee": "GGMLType.Q4_0.getBlockSize",
+          "lineNumber": 65
+        },
+        {
+          "caller": "getFloat",
+          "callee": "GGMLType.Q4_0.getTypeSize",
+          "lineNumber": 66
+        },
+        {
+          "caller": "getFloat",
+          "callee": "Float.float16ToFloat",
+          "lineNumber": 67
+        },
+        {
+          "caller": "getFloat",
+          "callee": "readShort",
+          "lineNumber": 67
+        },
+        {
+          "caller": "getFloat",
+          "callee": "GGMLType.Q4_0.getBlockSize",
+          "lineNumber": 69
+        },
+        {
+          "caller": "getFloat",
+          "callee": "GGMLType.Q4_0.getBlockSize",
+          "lineNumber": 70
+        },
+        {
+          "caller": "getFloat",
+          "callee": "readByte",
+          "lineNumber": 71
+        },
+        {
+          "caller": "getFloat",
+          "callee": "readByte",
+          "lineNumber": 73
+        },
+        {
+          "caller": "getFloat",
+          "callee": "GGMLType.Q4_0.getBlockSize",
+          "lineNumber": 73
+        },
+        {
+          "caller": "dot",
+          "callee": "vectorDot",
+          "lineNumber": 82
+        },
+        {
+          "caller": "dot",
+          "callee": "FloatTensor.scalarDot",
+          "lineNumber": 84
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "Integer.bitCount",
+          "lineNumber": 93
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q4_0.getBlockSize",
+          "lineNumber": 93
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "Math.min",
+          "lineNumber": 94
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q4_0.getBlockSize",
+          "lineNumber": 94
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "FloatTensor.scalarDot",
+          "lineNumber": 96
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q4_0.getBlockSize",
+          "lineNumber": 99
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "FloatVector.zero",
+          "lineNumber": 101
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q4_0.getBlockSize",
+          "lineNumber": 102
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q4_0.getTypeSize",
+          "lineNumber": 102
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q4_0.getBlockSize",
+          "lineNumber": 103
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q4_0.getBlockSize",
+          "lineNumber": 103
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q4_0.getBlockSize",
+          "lineNumber": 104
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q4_0.getTypeSize",
+          "lineNumber": 104
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "Float.float16ToFloat",
+          "lineNumber": 105
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "readShort",
+          "lineNumber": 105
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "FloatVector.broadcast",
+          "lineNumber": 106
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "ByteVector.fromMemorySegment",
+          "lineNumber": 107
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.and((byte) 0xF).sub",
+          "lineNumber": 108
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.and",
+          "lineNumber": 108
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.lanewise(VectorOperators.LSHR, 4).sub",
+          "lineNumber": 109
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.lanewise",
+          "lineNumber": 109
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.vectorBitSize",
+          "lineNumber": 110
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + 0 * F_SPECIES.length()).mul",
+          "lineNumber": 112
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 112
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 112
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "loBytes.castShape",
+          "lineNumber": 112
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + 1 * F_SPECIES.length()).mul",
+          "lineNumber": 113
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 113
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 113
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "hiBytes.castShape",
+          "lineNumber": 113
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum2).fma",
+          "lineNumber": 114
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add",
+          "lineNumber": 114
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + 0 * F_SPECIES.length()).mul",
+          "lineNumber": 117
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 117
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 117
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "loBytes.castShape",
+          "lineNumber": 117
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + 1 * F_SPECIES.length()).mul",
+          "lineNumber": 118
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 118
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 118
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "loBytes.castShape",
+          "lineNumber": 118
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + 2 * F_SPECIES.length()).mul",
+          "lineNumber": 119
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 119
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 119
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "hiBytes.castShape",
+          "lineNumber": 119
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + 3 * F_SPECIES.length()).mul",
+          "lineNumber": 120
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 120
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 120
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "hiBytes.castShape",
+          "lineNumber": 120
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum1).add(sum2).add(sum3).fma",
+          "lineNumber": 121
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum1).add(sum2).add",
+          "lineNumber": 121
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum1).add",
+          "lineNumber": 121
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add",
+          "lineNumber": 121
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + (i * 4 + 0) * F_SPECIES.length()).mul",
+          "lineNumber": 127
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 127
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 127
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "tmp.castShape",
+          "lineNumber": 127
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + (i * 4 + 1) * F_SPECIES.length()).mul",
+          "lineNumber": 128
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 128
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 128
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "tmp.castShape",
+          "lineNumber": 128
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + (i * 4 + 2) * F_SPECIES.length()).mul",
+          "lineNumber": 129
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 129
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 129
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "tmp.castShape",
+          "lineNumber": 129
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + (i * 4 + 3) * F_SPECIES.length()).mul",
+          "lineNumber": 130
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 130
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 130
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "tmp.castShape",
+          "lineNumber": 130
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum1).add(sum2).add(sum3).fma",
+          "lineNumber": 131
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum1).add(sum2).add",
+          "lineNumber": 131
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum1).add",
+          "lineNumber": 131
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add",
+          "lineNumber": 131
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 134
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.toString",
+          "lineNumber": 134
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "val.reduceLanes",
+          "lineNumber": 137
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "FloatTensor.scalarDot",
+          "lineNumber": 141
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 8,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/Q8_0FloatTensor.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 138,
+      "nonEmptyLines": 123,
+      "functions": [
+        {
+          "name": "Q8_0FloatTensor",
+          "startLine": 34,
+          "endLine": 37,
+          "params": [
+            "size",
+            "memorySegment"
+          ]
+        },
+        {
+          "name": "size",
+          "startLine": 39,
+          "endLine": 42,
+          "params": []
+        },
+        {
+          "name": "setFloat",
+          "startLine": 44,
+          "endLine": 47,
+          "params": [
+            "index",
+            "value"
+          ]
+        },
+        {
+          "name": "getFloatVector",
+          "startLine": 49,
+          "endLine": 52,
+          "params": [
+            "species",
+            "index"
+          ]
+        },
+        {
+          "name": "type",
+          "startLine": 54,
+          "endLine": 57,
+          "params": []
+        },
+        {
+          "name": "getFloat",
+          "startLine": 59,
+          "endLine": 68,
+          "params": [
+            "index"
+          ]
+        },
+        {
+          "name": "dot",
+          "startLine": 72,
+          "endLine": 79,
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ]
+        },
+        {
+          "name": "vectorDot",
+          "startLine": 81,
+          "endLine": 137,
+          "params": [
+            "thiz",
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Q8_0FloatTensor",
+          "startLine": 30,
+          "endLine": 138,
+          "methods": [
+            "Q8_0FloatTensor",
+            "size",
+            "setFloat",
+            "getFloatVector",
+            "type",
+            "getFloat",
+            "dot",
+            "vectorDot"
+          ],
+          "properties": [
+            "size",
+            "memorySegment",
+            "JAVA_SHORT_LE"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Q8_0FloatTensor",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "setFloat",
+          "line": 44,
+          "isDefault": false
+        },
+        {
+          "name": "type",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "getFloat",
+          "line": 59,
+          "isDefault": false
+        },
+        {
+          "name": "JAVA_SHORT_LE",
+          "line": 70,
+          "isDefault": false
+        },
+        {
+          "name": "dot",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "Q8_0FloatTensor",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "setFloat",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 46
+        },
+        {
+          "caller": "getFloatVector",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 51
+        },
+        {
+          "caller": "getFloat",
+          "callee": "GGMLType.Q8_0.getBlockSize",
+          "lineNumber": 62
+        },
+        {
+          "caller": "getFloat",
+          "callee": "GGMLType.Q8_0.getBlockSize",
+          "lineNumber": 63
+        },
+        {
+          "caller": "getFloat",
+          "callee": "GGMLType.Q8_0.getTypeSize",
+          "lineNumber": 64
+        },
+        {
+          "caller": "getFloat",
+          "callee": "readByte",
+          "lineNumber": 65
+        },
+        {
+          "caller": "getFloat",
+          "callee": "Float.float16ToFloat",
+          "lineNumber": 66
+        },
+        {
+          "caller": "getFloat",
+          "callee": "readShort",
+          "lineNumber": 66
+        },
+        {
+          "caller": "dot",
+          "callee": "vectorDot",
+          "lineNumber": 75
+        },
+        {
+          "caller": "dot",
+          "callee": "FloatTensor.scalarDot",
+          "lineNumber": 77
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "Integer.bitCount",
+          "lineNumber": 86
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q8_0.getBlockSize",
+          "lineNumber": 86
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "Math.min",
+          "lineNumber": 87
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q8_0.getBlockSize",
+          "lineNumber": 87
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "FloatTensor.scalarDot",
+          "lineNumber": 89
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q8_0.getBlockSize",
+          "lineNumber": 92
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "FloatVector.zero",
+          "lineNumber": 94
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q8_0.getBlockSize",
+          "lineNumber": 95
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q8_0.getTypeSize",
+          "lineNumber": 95
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q8_0.getBlockSize",
+          "lineNumber": 96
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q8_0.getBlockSize",
+          "lineNumber": 96
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q8_0.getBlockSize",
+          "lineNumber": 97
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "GGMLType.Q8_0.getTypeSize",
+          "lineNumber": 97
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "Float.float16ToFloat",
+          "lineNumber": 98
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "readShort",
+          "lineNumber": 98
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "FloatVector.broadcast",
+          "lineNumber": 99
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.vectorBitSize",
+          "lineNumber": 100
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "ByteVector.fromMemorySegment",
+          "lineNumber": 102
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + 0 * F_SPECIES.length()).mul",
+          "lineNumber": 103
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 103
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 103
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.castShape",
+          "lineNumber": 103
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + 1 * F_SPECIES.length()).mul",
+          "lineNumber": 104
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 104
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 104
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.castShape",
+          "lineNumber": 104
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum1).fma",
+          "lineNumber": 105
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add",
+          "lineNumber": 105
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "ByteVector.fromMemorySegment",
+          "lineNumber": 108
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + 0 * F_SPECIES.length()).mul",
+          "lineNumber": 109
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 109
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 109
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.castShape",
+          "lineNumber": 109
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + 1 * F_SPECIES.length()).mul",
+          "lineNumber": 110
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 110
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 110
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.castShape",
+          "lineNumber": 110
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + 2 * F_SPECIES.length()).mul",
+          "lineNumber": 111
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 111
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 111
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.castShape",
+          "lineNumber": 111
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + 3 * F_SPECIES.length()).mul",
+          "lineNumber": 112
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 112
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 112
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.castShape",
+          "lineNumber": 112
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum1).add(sum2).add(sum3).fma",
+          "lineNumber": 113
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum1).add(sum2).add",
+          "lineNumber": 113
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum1).add",
+          "lineNumber": 113
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add",
+          "lineNumber": 113
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "ByteVector.fromMemorySegment",
+          "lineNumber": 118
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "ByteVector.SPECIES_128.vectorByteSize",
+          "lineNumber": 118
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + i * 16 + 0 * F_SPECIES.length()).mul",
+          "lineNumber": 119
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 119
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 119
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.castShape",
+          "lineNumber": 119
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + i * 16 + 1 * F_SPECIES.length()).mul",
+          "lineNumber": 120
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 120
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 120
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.castShape",
+          "lineNumber": 120
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + i * 16 + 2 * F_SPECIES.length()).mul",
+          "lineNumber": 121
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 121
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 121
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.castShape",
+          "lineNumber": 121
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector(F_SPECIES, thatOffset + j + i * 16 + 3 * F_SPECIES.length()).mul",
+          "lineNumber": 122
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "that.getFloatVector",
+          "lineNumber": 122
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.length",
+          "lineNumber": 122
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "wBytes.castShape",
+          "lineNumber": 122
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum1).add(sum2).add(sum3).fma",
+          "lineNumber": 123
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum1).add(sum2).add",
+          "lineNumber": 123
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add(sum1).add",
+          "lineNumber": 123
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "sum0.add",
+          "lineNumber": 123
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "new UnsupportedOperationException",
+          "lineNumber": 126
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "F_SPECIES.toString",
+          "lineNumber": 126
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "val.reduceLanes",
+          "lineNumber": 129
+        },
+        {
+          "caller": "vectorDot",
+          "callee": "FloatTensor.scalarDot",
+          "lineNumber": 133
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 7,
+        "functionCount": 8,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/RoPE.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 52,
+      "nonEmptyLines": 51,
+      "functions": [
+        {
+          "name": "precomputeFreqsCis",
+          "startLine": 20,
+          "endLine": 51,
+          "params": [
+            "contextLength",
+            "headSize",
+            "theta",
+            "ropeScaling",
+            "scaleFactor",
+            "loFreqFactor",
+            "hiFreqFactor",
+            "oldContextLength"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "RoPE",
+          "startLine": 19,
+          "endLine": 52,
+          "methods": [
+            "precomputeFreqsCis"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "precomputeFreqsCis",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "RoPE",
+          "line": 19,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "precomputeFreqsCis",
+          "callee": "Math.pow",
+          "lineNumber": 28
+        },
+        {
+          "caller": "precomputeFreqsCis",
+          "callee": "Math.cos",
+          "lineNumber": 44
+        },
+        {
+          "caller": "precomputeFreqsCis",
+          "callee": "Math.sin",
+          "lineNumber": 45
+        },
+        {
+          "caller": "precomputeFreqsCis",
+          "callee": "new Pair<>",
+          "lineNumber": 50
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/Sampler.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 22,
+      "classes": [
+        {
+          "name": "Sampler",
+          "startLine": 19,
+          "endLine": 24,
+          "methods": [
+            "sampleToken"
+          ],
+          "properties": [
+            "ARGMAX"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Sampler",
+          "line": 19,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/Timer.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 42,
+      "nonEmptyLines": 37,
+      "classes": [
+        {
+          "name": "Timer",
+          "startLine": 21,
+          "endLine": 42,
+          "methods": [
+            "close",
+            "log",
+            "log"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Timer",
+          "line": 21,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "log",
+          "callee": "log",
+          "lineNumber": 26
+        },
+        {
+          "caller": "log",
+          "callee": "new Timer",
+          "lineNumber": 30
+        },
+        {
+          "caller": "log",
+          "callee": "System.nanoTime",
+          "lineNumber": 31
+        },
+        {
+          "caller": "close",
+          "callee": "System.nanoTime",
+          "lineNumber": 35
+        },
+        {
+          "caller": "close",
+          "callee": "System.err.println",
+          "lineNumber": 36
+        },
+        {
+          "caller": "close",
+          "callee": "timeUnit.convert",
+          "lineNumber": 37
+        },
+        {
+          "caller": "close",
+          "callee": "timeUnit.toChronoUnit().name().toLowerCase",
+          "lineNumber": 38
+        },
+        {
+          "caller": "close",
+          "callee": "timeUnit.toChronoUnit().name",
+          "lineNumber": 38
+        },
+        {
+          "caller": "close",
+          "callee": "timeUnit.toChronoUnit",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    }
+  ]
+}

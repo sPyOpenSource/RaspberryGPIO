@@ -1,0 +1,2734 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "AIRobot",
+    "languages": [
+      "java",
+      "json",
+      "markdown",
+      "properties",
+      "txt",
+      "unknown",
+      "xml"
+    ],
+    "frameworks": [],
+    "description": "A Java implementation of a Llama model inference engine with tensor operations, GGUF model loading, tokenization, and sampling. Supports quantized tensor formats (Q4_0, Q8_0, BF16, F16) and rotary position embeddings (RoPE).",
+    "analyzedAt": "2026-06-24T07:18:29.879588+00:00",
+    "gitCommitHash": "9c8e8598af1ebdb8ee15da259b65470806fc54a3"
+  },
+  "nodes": [
+    {
+      "id": "document:README.rst",
+      "type": "document",
+      "name": "README.rst",
+      "filePath": "README.rst",
+      "summary": "Project-level README describing AIRobot as a NetBeans-based AI program that depends on AIBase, opencv, and RXTXcomm libraries, with git clone instructions for obtaining the source.",
+      "tags": [
+        "documentation",
+        "readme",
+        "project-overview",
+        "netbeans-project"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:build.xml",
+      "type": "config",
+      "name": "build.xml",
+      "filePath": "build.xml",
+      "summary": "Apache Ant build configuration for the AIRobot project, importing nbproject/build-impl.xml and defining targets for compilation, JAR packaging, execution, testing, and Javadoc generation.",
+      "tags": [
+        "build-configuration",
+        "apache-ant",
+        "build-script",
+        "project-build"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:log.txt",
+      "type": "document",
+      "name": "log.txt",
+      "filePath": "log.txt",
+      "summary": "Timestamped log file listing 10 paths to AI data files under /home/spy/AI/ from November 2017, recording processed data outputs.",
+      "tags": [
+        "log",
+        "timestamps",
+        "data-files",
+        "processing-record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:nbproject/build-impl.xml",
+      "type": "config",
+      "name": "build-impl.xml",
+      "filePath": "nbproject/build-impl.xml",
+      "summary": "Auto-generated Ant build script for the AIRobot J2SE project, handling compilation, jar packaging, execution, debugging, javadoc generation, unit testing (JUnit/TestNG), profiling, and cleanup across 1800+ lines with extensive macro definitions and condition checks.",
+      "tags": [
+        "ant-build",
+        "netbeans",
+        "build-automation",
+        "compilation",
+        "testing"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:nbproject/genfiles.properties",
+      "type": "config",
+      "name": "genfiles.properties",
+      "filePath": "nbproject/genfiles.properties",
+      "summary": "Auto-generated CRC checksum file tracking the state of build-impl.xml and related generated files, used by NetBeans to detect when regeneration is needed.",
+      "tags": [
+        "checksum",
+        "netbeans",
+        "build-tracking",
+        "generated-files"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:nbproject/project.properties",
+      "type": "config",
+      "name": "project.properties",
+      "filePath": "nbproject/project.properties",
+      "summary": "NetBeans project properties defining source directories, classpaths with dependencies (HTTP client, JSON, JSoup, OpenCV, jSerialComm), build settings, JVM arguments, main class (com.llama4j.Llama3), and references to external projects OpenLab and PrimeFactors.",
+      "tags": [
+        "netbeans",
+        "project-configuration",
+        "classpath",
+        "dependencies",
+        "build-settings"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:nbproject/project.xml",
+      "type": "config",
+      "name": "project.xml",
+      "filePath": "nbproject/project.xml",
+      "summary": "NetBeans project descriptor declaring the project type (J2SE), source and test roots, and references to external dependencies (OpenLab, PrimeFactors) used during the Ant build.",
+      "tags": [
+        "netbeans",
+        "project-descriptor",
+        "j2se",
+        "dependencies"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.DS_Store",
+      "type": "file",
+      "name": ".DS_Store",
+      "filePath": ".DS_Store",
+      "summary": "macOS directory metadata file (auto-generated, not part of source)",
+      "tags": [
+        "metadata",
+        "macos",
+        "auto-generated"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "file",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "summary": "Ignore patterns for understand-anything analysis tool, excluding files from codebase scanning",
+      "tags": [
+        "config",
+        "ignore",
+        "analysis"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.understand-anything/config.json",
+      "type": "config",
+      "name": "config.json",
+      "filePath": ".understand-anything/config.json",
+      "summary": "Configuration for understand-anything analysis tool, specifying output language",
+      "tags": [
+        "config",
+        "analysis",
+        "settings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:CHANGELOG",
+      "type": "file",
+      "name": "CHANGELOG",
+      "filePath": "CHANGELOG",
+      "summary": "Project changelog documenting version history and releases",
+      "tags": [
+        "documentation",
+        "changelog",
+        "history"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:manifest.mf",
+      "type": "file",
+      "name": "manifest.mf",
+      "filePath": "manifest.mf",
+      "summary": "Java JAR manifest file defining entry point and classpath",
+      "tags": [
+        "manifest",
+        "jar",
+        "build"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/FloatTensor.java",
+      "type": "file",
+      "name": "FloatTensor.java",
+      "filePath": "src/com/llama4j/FloatTensor.java",
+      "summary": "Abstract base class for all tensor types in the LLM inference engine, providing core tensor operations (dot, matmul, softmax, RMSNorm helpers, reductions) with SIMD vector API acceleration",
+      "tags": [
+        "tensor",
+        "base-class",
+        "linear-algebra",
+        "simd"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/FloatTensor.java:FloatTensor",
+      "type": "class",
+      "name": "FloatTensor",
+      "filePath": "src/com/llama4j/FloatTensor.java",
+      "lineRange": [
+        33,
+        239
+      ],
+      "summary": "Abstract base class for float tensor types. Defines the tensor algebra interface: dot product, matrix multiply, reductions (sum/max/argmax), in-place operations (add/multiply/divide/fill/softmax/saxpy), and utility methods. Uses Java Vector API and sun.misc.Unsafe for memory access.",
+      "tags": [
+        "tensor",
+        "abstract",
+        "linear-algebra",
+        "simd",
+        "vector-api"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/FloatTensor.java:argmax",
+      "type": "function",
+      "name": "argmax",
+      "filePath": "src/com/llama4j/FloatTensor.java",
+      "lineRange": [
+        149,
+        162
+      ],
+      "summary": "Finds the index of the maximum value in a tensor slice. Used by Sampler.ARGMAX for greedy token selection.",
+      "tags": [
+        "reduction",
+        "sampling",
+        "argmax"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "type": "file",
+      "name": "ArrayFloatTensor.java",
+      "filePath": "src/com/llama4j/ArrayFloatTensor.java",
+      "summary": "Float tensor backed by a plain Java float array with full read/write support, used for KV cache and activation buffers",
+      "tags": [
+        "tensor",
+        "array-backed",
+        "cpu"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/com/llama4j/ArrayFloatTensor.java:ArrayFloatTensor",
+      "type": "class",
+      "name": "ArrayFloatTensor",
+      "filePath": "src/com/llama4j/ArrayFloatTensor.java",
+      "lineRange": [
+        23,
+        70
+      ],
+      "summary": "Float tensor backed by float[] array. Supports get/set/fill and SIMD getFloatVector. Used for KV cache and state buffers where random access writes are needed.",
+      "tags": [
+        "tensor",
+        "array-backed",
+        "float-array"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/com/llama4j/BF16FloatTensor.java",
+      "type": "file",
+      "name": "BF16FloatTensor.java",
+      "filePath": "src/com/llama4j/BF16FloatTensor.java",
+      "summary": "BF16 (bfloat16) quantized tensor with vectorized dot product using SIMD short-to-float conversion",
+      "tags": [
+        "tensor",
+        "quantized",
+        "bf16",
+        "simd"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/BF16FloatTensor.java:BF16FloatTensor",
+      "type": "class",
+      "name": "BF16FloatTensor",
+      "filePath": "src/com/llama4j/BF16FloatTensor.java",
+      "lineRange": [
+        31,
+        112
+      ],
+      "summary": "BF16 quantized float tensor backed by MemorySegment. Implements vectorized dot product by loading shorts, converting bf16→float via left-shift and reinterpret, then FMA-accumulating. SetFloat and getFloatVector throw UnsupportedOperationException.",
+      "tags": [
+        "tensor",
+        "quantized",
+        "bf16",
+        "simd",
+        "memory-segment"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/BF16FloatTensor.java:vectorDot",
+      "type": "function",
+      "name": "vectorDot",
+      "filePath": "src/com/llama4j/BF16FloatTensor.java",
+      "lineRange": [
+        80,
+        110
+      ],
+      "summary": "SIMD-accelerated dot product for BF16 tensors. Loads short vectors, casts to int, left-shifts 16 bits, reinterprets as float, and FMA-accumulates against the other tensor's float vector.",
+      "tags": [
+        "simd",
+        "dot-product",
+        "bf16",
+        "vector-api"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/com/llama4j/F16FloatTensor.java",
+      "type": "file",
+      "name": "F16FloatTensor.java",
+      "filePath": "src/com/llama4j/F16FloatTensor.java",
+      "summary": "FP16 quantized tensor with software float16-to-float32 conversion and SIMD vectorized dot product",
+      "tags": [
+        "tensor",
+        "quantized",
+        "fp16",
+        "simd"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/F16FloatTensor.java:F16FloatTensor",
+      "type": "class",
+      "name": "F16FloatTensor",
+      "filePath": "src/com/llama4j/F16FloatTensor.java",
+      "lineRange": [
+        31,
+        124
+      ],
+      "summary": "FP16 quantized float tensor. Converts float16 bits stored as shorts to float32 using manual exponent/mantissa manipulation. Implements fast vectorized dot product with software float16 decode and FMA accumulation.",
+      "tags": [
+        "tensor",
+        "quantized",
+        "fp16",
+        "simd",
+        "memory-segment"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/F16FloatTensor.java:vectorDot",
+      "type": "function",
+      "name": "vectorDot",
+      "filePath": "src/com/llama4j/F16FloatTensor.java",
+      "lineRange": [
+        75,
+        123
+      ],
+      "summary": "SIMD-accelerated dot product for FP16 tensors. Manually decodes float16 bit-representation to float32 in vector registers, then FMA-accumulates. Handles denormals, infinities, and NaN per IEEE 754-2008.",
+      "tags": [
+        "simd",
+        "dot-product",
+        "fp16",
+        "vector-api",
+        "ieee754"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "file",
+      "name": "Q4_0FloatTensor.java",
+      "filePath": "src/com/llama4j/Q4_0FloatTensor.java",
+      "summary": "GGML Q4_0 4-bit quantized tensor with blockwise FP16 scale and SIMD vectorized dot product",
+      "tags": [
+        "tensor",
+        "quantized",
+        "q4_0",
+        "simd",
+        "ggml"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/Q4_0FloatTensor.java:Q4_0FloatTensor",
+      "type": "class",
+      "name": "Q4_0FloatTensor",
+      "filePath": "src/com/llama4j/Q4_0FloatTensor.java",
+      "lineRange": [
+        33,
+        146
+      ],
+      "summary": "GGML Q4_0 block-quantized tensor (32 values per block, FP16 scale, 4-bit nibbles). Implements vectorized dot product by dequantizing nibbles to floats in SIMD registers and FMA-accumulating against the reference tensor.",
+      "tags": [
+        "tensor",
+        "quantized",
+        "q4_0",
+        "simd",
+        "ggml"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/Q4_0FloatTensor.java:getFloat",
+      "type": "function",
+      "name": "getFloat",
+      "filePath": "src/com/llama4j/Q4_0FloatTensor.java",
+      "lineRange": [
+        62,
+        77
+      ],
+      "summary": "Dequantizes a single element from Q4_0 block format: reads the FP16 scale via readShort+Float.float16ToFloat, then extracts the appropriate nibble from the block data.",
+      "tags": [
+        "dequantize",
+        "q4_0",
+        "nibble"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/Q4_0FloatTensor.java:vectorDot",
+      "type": "function",
+      "name": "vectorDot",
+      "filePath": "src/com/llama4j/Q4_0FloatTensor.java",
+      "lineRange": [
+        88,
+        145
+      ],
+      "summary": "SIMD-accelerated dot product for Q4_0 tensors. Unpacks nibble-pairs into low/high byte vectors, casts to float, multiplies by scale, and FMA-accumulates. Supports multiple vector lane widths (128, 256, 512-bit).",
+      "tags": [
+        "simd",
+        "dot-product",
+        "q4_0",
+        "dequantize",
+        "vector-api"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "file",
+      "name": "Q8_0FloatTensor.java",
+      "filePath": "src/com/llama4j/Q8_0FloatTensor.java",
+      "summary": "GGML Q8_0 8-bit quantized tensor with blockwise FP16 scale and SIMD vectorized dot product",
+      "tags": [
+        "tensor",
+        "quantized",
+        "q8_0",
+        "simd",
+        "ggml"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/Q8_0FloatTensor.java:Q8_0FloatTensor",
+      "type": "class",
+      "name": "Q8_0FloatTensor",
+      "filePath": "src/com/llama4j/Q8_0FloatTensor.java",
+      "lineRange": [
+        30,
+        138
+      ],
+      "summary": "GGML Q8_0 block-quantized tensor (32 values per block, FP16 scale, 8-bit signed integers). Implements vectorized dot product by broadcasting scale and casting bytes to floats in SIMD registers.",
+      "tags": [
+        "tensor",
+        "quantized",
+        "q8_0",
+        "simd",
+        "ggml"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/Q8_0FloatTensor.java:vectorDot",
+      "type": "function",
+      "name": "vectorDot",
+      "filePath": "src/com/llama4j/Q8_0FloatTensor.java",
+      "lineRange": [
+        81,
+        137
+      ],
+      "summary": "SIMD-accelerated dot product for Q8_0 tensors. Loads quantized bytes, casts to float, multiplies by FP16 scale, and FMA-accumulates against the reference float vector. Supports 128, 256, and 512-bit vector lanes.",
+      "tags": [
+        "simd",
+        "dot-product",
+        "q8_0",
+        "dequantize",
+        "vector-api"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/com/llama4j/GGMLType.java",
+      "type": "file",
+      "name": "GGMLType.java",
+      "filePath": "src/com/llama4j/GGMLType.java",
+      "summary": "Enum of all supported GGML tensor types (F32, F16, BF16, Q4_0, Q8_0, k-quants, IQ quants) with type size and block size metadata",
+      "tags": [
+        "ggml",
+        "enum",
+        "quantization",
+        "types"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/com/llama4j/GGMLType.java:GGMLType",
+      "type": "class",
+      "name": "GGMLType",
+      "filePath": "src/com/llama4j/GGMLType.java",
+      "lineRange": [
+        21,
+        106
+      ],
+      "summary": "Enum with 30+ GGML tensor format types. Each variant specifies typeSize and blockSize. Provides byteSizeFor() for memory sizing and fromId() for deserialization. Supports F32, F16, BF16, Q4_0, Q4_1, Q8_0, Q8_1, K-quants, and more.",
+      "tags": [
+        "ggml",
+        "enum",
+        "quantization",
+        "type-system"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "type": "file",
+      "name": "GGMLTensorEntry.java",
+      "filePath": "src/com/llama4j/GGMLTensorEntry.java",
+      "summary": "Record holding a mapped tensor's metadata: MemorySegment, name, GGML type, shape dimensions, and data MemorySegment",
+      "tags": [
+        "tensor",
+        "ggml",
+        "record",
+        "metadata"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/CategoricalSampler.java",
+      "type": "file",
+      "name": "CategoricalSampler.java",
+      "filePath": "src/com/llama4j/CategoricalSampler.java",
+      "summary": "Categorical (multinomial) sampler that draws a token from a probability distribution using cumulative distribution function inversion",
+      "tags": [
+        "sampler",
+        "categorical",
+        "random",
+        "token-generation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/Sampler.java",
+      "type": "file",
+      "name": "Sampler.java",
+      "filePath": "src/com/llama4j/Sampler.java",
+      "summary": "Functional interface for token sampling strategies, providing ARGMAX greedy sampler as a built-in constant",
+      "tags": [
+        "sampler",
+        "interface",
+        "functional",
+        "token-generation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/AOT.java",
+      "type": "file",
+      "name": "AOT.java",
+      "filePath": "src/com/llama4j/AOT.java",
+      "summary": "Ahead-of-time model preloading: pre-loads a GGUF model into memory so subsequent inference can skip file I/O",
+      "tags": [
+        "aot",
+        "preloading",
+        "gguf",
+        "model-loading"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/com/llama4j/AOT.java:AOT",
+      "type": "class",
+      "name": "AOT",
+      "filePath": "src/com/llama4j/AOT.java",
+      "lineRange": [
+        20,
+        77
+      ],
+      "summary": "AOT model preloader. Stores a pre-loaded PartialModel (GGUF + tensors) keyed by filename. tryUsePreLoaded() checks for a matching pre-loaded model and creates a Llama instance from it, skipping file I/O.",
+      "tags": [
+        "aot",
+        "preloading",
+        "model-loading",
+        "singleton"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/AOT.java:preLoadGGUF",
+      "type": "function",
+      "name": "preLoadGGUF",
+      "filePath": "src/com/llama4j/AOT.java",
+      "lineRange": [
+        25,
+        46
+      ],
+      "summary": "Validates model path, opens file channel, loads GGUF header and metadata, computes tensor data offsets, stores the pre-loaded model in a static map keyed by filename.",
+      "tags": [
+        "aot",
+        "gguf",
+        "file-io",
+        "preloading"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/AOT.java:tryUsePreLoaded",
+      "type": "function",
+      "name": "tryUsePreLoaded",
+      "filePath": "src/com/llama4j/AOT.java",
+      "lineRange": [
+        57,
+        76
+      ],
+      "summary": "Checks if a matching pre-loaded model exists (same filename, sufficient context length). If found, maps tensor data from the file channel, loads weights, and creates a Llama instance from the pre-loaded model.",
+      "tags": [
+        "aot",
+        "model-loading",
+        "cache-hit",
+        "llama"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/com/llama4j/ChatFormat.java",
+      "type": "file",
+      "name": "ChatFormat.java",
+      "filePath": "src/com/llama4j/ChatFormat.java",
+      "summary": "Chat message formatting following the Llama 3 chat template: encodes dialog turns with special tokens and message roles",
+      "tags": [
+        "chat",
+        "format",
+        "tokenizer",
+        "template",
+        "llama3"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/com/llama4j/ChatFormat.java:ChatFormat",
+      "type": "class",
+      "name": "ChatFormat",
+      "filePath": "src/com/llama4j/ChatFormat.java",
+      "lineRange": [
+        27,
+        101
+      ],
+      "summary": "Llama 3 chat template formatter. Encodes system/user/assistant dialog turns to token sequences using special tokens (<|begin_of_text|>, <|start_header_id|>, <|end_header_id|>, <|eot_id|>, etc.). Provides encodeMessage() and encodeDialogPrompt() for conversation formatting.",
+      "tags": [
+        "chat",
+        "template",
+        "llama3",
+        "tokenization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/ChatFormat.java:ChatFormat",
+      "type": "function",
+      "name": "ChatFormat",
+      "filePath": "src/com/llama4j/ChatFormat.java",
+      "lineRange": [
+        38,
+        48
+      ],
+      "summary": "Constructs ChatFormat by fetching special tokens from the tokenizer and mapping them to named fields (beginOfText, endHeader, endOfTurn, endOfMessage, etc.).",
+      "tags": [
+        "chat",
+        "constructor",
+        "special-tokens"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/com/llama4j/ChatFormat.java:encodeDialogPrompt",
+      "type": "function",
+      "name": "encodeDialogPrompt",
+      "filePath": "src/com/llama4j/ChatFormat.java",
+      "lineRange": [
+        74,
+        85
+      ],
+      "summary": "Encodes a full dialog into a token sequence. Optionally appends the assistant header to prompt for a response.",
+      "tags": [
+        "chat",
+        "dialog",
+        "encoding",
+        "tokens"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/GGUF.java",
+      "type": "file",
+      "name": "GGUF.java",
+      "filePath": "src/com/llama4j/GGUF.java",
+      "summary": "GGUF model file format reader: parses headers, metadata key-value pairs, tensor info, and memory-maps tensor data",
+      "tags": [
+        "gguf",
+        "parser",
+        "model-format",
+        "file-io",
+        "metadata"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/GGUF.java:GGUF",
+      "type": "class",
+      "name": "GGUF",
+      "filePath": "src/com/llama4j/GGUF.java",
+      "lineRange": [
+        31,
+        390
+      ],
+      "summary": "GGUF format parser. Loads model files by reading magic bytes, version, tensor count, alignment, and key-value metadata. Provides readHeader(), readArray(), readTensorInfo(), and typed read methods (readInt, readFloat, readString, etc.). loadTensors() memory-maps tensor data and creates GGMLTensorEntry records.",
+      "tags": [
+        "gguf",
+        "parser",
+        "binary-format",
+        "file-io",
+        "model-loading"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/GGUF.java:loadModelImpl",
+      "type": "function",
+      "name": "loadModelImpl",
+      "filePath": "src/com/llama4j/GGUF.java",
+      "lineRange": [
+        119,
+        147
+      ],
+      "summary": "Internal model loading: reads header, iterates tensor info entries, computes alignment padding, and sets the tensor data offset.",
+      "tags": [
+        "gguf",
+        "loading",
+        "tensor-info",
+        "alignment"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/GGUF.java:loadTensors",
+      "type": "function",
+      "name": "loadTensors",
+      "filePath": "src/com/llama4j/GGUF.java",
+      "lineRange": [
+        149,
+        161
+      ],
+      "summary": "Memory-maps the tensor data region, iterates tensor info entries, computes size and offset, creates GGMLTensorEntry records for each tensor.",
+      "tags": [
+        "gguf",
+        "memory-map",
+        "tensor",
+        "loading"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/GGUF.java:readTensorInfo",
+      "type": "function",
+      "name": "readTensorInfo",
+      "filePath": "src/com/llama4j/GGUF.java",
+      "lineRange": [
+        171,
+        196
+      ],
+      "summary": "Reads a single GGUF tensor info entry: name string, number of dimensions, dimension values, GGML type, and data offset.",
+      "tags": [
+        "gguf",
+        "tensor-info",
+        "deserialization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/GGUF.java:readKeyValuePair",
+      "type": "function",
+      "name": "readKeyValuePair",
+      "filePath": "src/com/llama4j/GGUF.java",
+      "lineRange": [
+        209,
+        220
+      ],
+      "summary": "Reads a metadata key-value pair: validates the key string, reads the value, returns a Pair of key and typed metadata value.",
+      "tags": [
+        "gguf",
+        "metadata",
+        "deserialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/com/llama4j/GGUF.java:readHeader",
+      "type": "function",
+      "name": "readHeader",
+      "filePath": "src/com/llama4j/GGUF.java",
+      "lineRange": [
+        230,
+        264
+      ],
+      "summary": "Reads GGUF file header: validates magic bytes (GGUF), reads version (must be supported), tensor count, alignment, then reads all metadata key-value pairs into a HashMap.",
+      "tags": [
+        "gguf",
+        "header",
+        "magic",
+        "version",
+        "metadata"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/GGUF.java:readArray",
+      "type": "function",
+      "name": "readArray",
+      "filePath": "src/com/llama4j/GGUF.java",
+      "lineRange": [
+        266,
+        325
+      ],
+      "summary": "Reads a GGUF metadata array: reads the element type and count, then dispatches to typed read methods for each element. Supports byte, short, int, float, bool, string, and nested arrays.",
+      "tags": [
+        "gguf",
+        "array",
+        "deserialization",
+        "metadata"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/GGUF.java:readMetadataValueOfType",
+      "type": "function",
+      "name": "readMetadataValueOfType",
+      "filePath": "src/com/llama4j/GGUF.java",
+      "lineRange": [
+        327,
+        339
+      ],
+      "summary": "Dispatches to the correct typed read method based on a MetadataValueType enum value (byte, short, int, float, long, double, bool, string, array).",
+      "tags": [
+        "gguf",
+        "metadata",
+        "type-dispatch"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/Llama.java",
+      "type": "file",
+      "name": "Llama.java",
+      "filePath": "src/com/llama4j/Llama.java",
+      "summary": "Core Llama model record holding configuration, tokenizer, and weights; provides inference forward pass and token generation loop",
+      "tags": [
+        "llama",
+        "inference",
+        "transformer",
+        "forward",
+        "token-generation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/Llama.java:Configuration",
+      "type": "class",
+      "name": "Configuration",
+      "filePath": "src/com/llama4j/Llama.java",
+      "lineRange": [
+        35,
+        66
+      ],
+      "summary": "Llama model hyperparameters: dim, hiddenDim, numberOfLayers, heads, vocabularySize, contextLength, RMS norm epsilon, RoPE theta, headSize. Provides withContextLength() for creating variants with overridden context length.",
+      "tags": [
+        "configuration",
+        "hyperparameters",
+        "llama"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/com/llama4j/Llama.java:Weights",
+      "type": "class",
+      "name": "Weights",
+      "filePath": "src/com/llama4j/Llama.java",
+      "lineRange": [
+        68,
+        107
+      ],
+      "summary": "All model weights: token embedding table, RMS norm weights per layer, attention projection matrices (wq/wk/wv/wo), FFN matrices (w1/w2/w3), final RMS norm weight, RoPE frequency buffers, and optional classifier head (wcls).",
+      "tags": [
+        "weights",
+        "parameters",
+        "llama",
+        "transformer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/com/llama4j/Llama.java:State",
+      "type": "class",
+      "name": "State",
+      "filePath": "src/com/llama4j/Llama.java",
+      "lineRange": [
+        109,
+        150
+      ],
+      "summary": "Inference state holding activation buffers (x, xb, hb, q, k, v, att, logits) and KV cache (keyCache, valueCache) for batched decoding. All tensors are ArrayFloatTensor instances.",
+      "tags": [
+        "state",
+        "activations",
+        "kv-cache",
+        "inference"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/Llama.java:forward",
+      "type": "function",
+      "name": "forward",
+      "filePath": "src/com/llama4j/Llama.java",
+      "lineRange": [
+        169,
+        321
+      ],
+      "summary": "Core transformer forward pass: token embedding lookup, multi-head attention with RoPE, KV cache, SwiGLU FFN, residual connections, and final RMS norm + classifier. Supports batched inference across multiple tokens.",
+      "tags": [
+        "forward",
+        "transformer",
+        "attention",
+        "ffn",
+        "inference"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/Llama.java:generateTokens",
+      "type": "function",
+      "name": "generateTokens",
+      "filePath": "src/com/llama4j/Llama.java",
+      "lineRange": [
+        342,
+        403
+      ],
+      "summary": "Token generation loop: ingests prompt tokens in batches, runs forward pass, samples next token via Sampler, stops on stop tokens or max tokens. Reports prompt/generation throughput stats.",
+      "tags": [
+        "generation",
+        "token",
+        "sampling",
+        "inference-loop"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/com/llama4j/Llama3.java",
+      "type": "file",
+      "name": "Llama3.java",
+      "filePath": "src/com/llama4j/Llama3.java",
+      "summary": "Llama 3 CLI application with interactive chat mode and single-shot instruct mode, plus subgraph4j image processing integration",
+      "tags": [
+        "llama3",
+        "cli",
+        "interactive",
+        "chat",
+        "cmdline"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/Llama3.java:Llama3",
+      "type": "class",
+      "name": "Llama3",
+      "filePath": "src/com/llama4j/Llama3.java",
+      "lineRange": [
+        37,
+        313
+      ],
+      "summary": "Main CLI / subgraph4j node for Llama 3. Provides runInteractive() for multi-turn chat, runInstructOnce() for single prompt, selectSampler() for temperature/top-p, and Options class for CLI argument parsing.",
+      "tags": [
+        "llama3",
+        "cli",
+        "chat",
+        "subgraph4j"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/Llama3.java:selectSampler",
+      "type": "function",
+      "name": "selectSampler",
+      "filePath": "src/com/llama4j/Llama3.java",
+      "lineRange": [
+        44,
+        69
+      ],
+      "summary": "Selects a sampler strategy based on temperature and top-p: temperature=0 uses ARGMAX (greedy), top-p=1 uses CategoricalSampler, otherwise creates ToppSampler with temperature scaling and softmax.",
+      "tags": [
+        "sampler",
+        "temperature",
+        "top-p",
+        "selection"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/Llama3.java:runInteractive",
+      "type": "function",
+      "name": "runInteractive",
+      "filePath": "src/com/llama4j/Llama3.java",
+      "lineRange": [
+        71,
+        126
+      ],
+      "summary": "Interactive chat loop: maintains conversation history, accepts user input via Scanner, encodes dialog with ChatFormat, runs inference, prints streamed response, stops on stop tokens.",
+      "tags": [
+        "interactive",
+        "chat",
+        "loop",
+        "cli"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/Llama3.java:runInstructOnce",
+      "type": "function",
+      "name": "runInstructOnce",
+      "filePath": "src/com/llama4j/Llama3.java",
+      "lineRange": [
+        128,
+        157
+      ],
+      "summary": "Single-shot instruction mode: encodes system prompt + user prompt via ChatFormat, runs inference, prints and returns the response string.",
+      "tags": [
+        "instruct",
+        "single-shot",
+        "inference"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/Llama3.java:process",
+      "type": "function",
+      "name": "process",
+      "filePath": "src/com/llama4j/Llama3.java",
+      "lineRange": [
+        285,
+        312
+      ],
+      "summary": "subgraph4j node entry point. Parses options from input pin, loads model (via AOT or ModelLoader), selects sampler, runs interactive or single-shot mode, writes result to output pin.",
+      "tags": [
+        "subgraph4j",
+        "entry-point",
+        "pipeline",
+        "process"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/com/llama4j/ModelLoader.java",
+      "type": "file",
+      "name": "ModelLoader.java",
+      "filePath": "src/com/llama4j/ModelLoader.java",
+      "summary": "Model loading pipeline: parses GGUF metadata, creates Configuration, loads quantized weights from tensor entries, builds Tokenizer with BPE merges",
+      "tags": [
+        "model-loader",
+        "gguf",
+        "weights",
+        "tokenizer",
+        "pipeline"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/ModelLoader.java:ModelLoader",
+      "type": "class",
+      "name": "ModelLoader",
+      "filePath": "src/com/llama4j/ModelLoader.java",
+      "lineRange": [
+        38,
+        185
+      ],
+      "summary": "Static model loading utilities. loadModel() reads GGUF metadata, creates Llama.Configuration, loads tensor entries, calls loadWeights() to populate Llama.Weights, and creates Tokenizer with BPE merge rules. loadQuantized() dispatches to the correct tensor type (Q8_0, Q4_0, BF16, F16, F32).",
+      "tags": [
+        "model-loader",
+        "gguf",
+        "weights",
+        "tokenizer",
+        "quantization"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/ModelLoader.java:loadModel",
+      "type": "function",
+      "name": "loadModel",
+      "filePath": "src/com/llama4j/ModelLoader.java",
+      "lineRange": [
+        57,
+        86
+      ],
+      "summary": "Full model loading pipeline: opens GGUF file, reads metadata, loads vocabulary, creates Tokenizer (BPE + special tokens), builds Configuration from metadata, loads tensor entries, calls loadWeights(), returns new Llama instance.",
+      "tags": [
+        "model-loading",
+        "pipeline",
+        "gguf",
+        "configuration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/ModelLoader.java:loadWeights",
+      "type": "function",
+      "name": "loadWeights",
+      "filePath": "src/com/llama4j/ModelLoader.java",
+      "lineRange": [
+        88,
+        120
+      ],
+      "summary": "Populates Llama.Weights from tensor entries: loads each weight matrix (token_embedding_table, rms_att_weight, wq/wk/wv/wo, rms_ffn_weight, w1/w2/w3, rms_final_weight, freq_cis_real/imag, wcls) via loadQuantized/loadArrayOfQuantized/loadArrayOfFloatBuffer. Precomputes RoPE frequencies.",
+      "tags": [
+        "weights",
+        "tensor",
+        "loading",
+        "quantized",
+        "rope"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/ModelLoader.java:createTokenizer",
+      "type": "function",
+      "name": "createTokenizer",
+      "filePath": "src/com/llama4j/ModelLoader.java",
+      "lineRange": [
+        122,
+        148
+      ],
+      "summary": "Creates a Tokenizer from GGUF metadata and vocabulary. Reads BPE merge rules, builds special tokens map from model metadata, constructs token list with special tokens appended.",
+      "tags": [
+        "tokenizer",
+        "bpe",
+        "special-tokens",
+        "vocabulary"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/com/llama4j/Pair.java",
+      "type": "file",
+      "name": "Pair.java",
+      "filePath": "src/com/llama4j/Pair.java",
+      "summary": "Generic immutable pair/tuple record used throughout the codebase for key-value and paired return values",
+      "tags": [
+        "utility",
+        "pair",
+        "tuple",
+        "generic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/Parallel.java",
+      "type": "file",
+      "name": "Parallel.java",
+      "filePath": "src/com/llama4j/Parallel.java",
+      "summary": "Utility class for CPU-parallel for-each loops using Java parallel streams over int and long ranges",
+      "tags": [
+        "utility",
+        "parallel",
+        "streams",
+        "cpu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/com/llama4j/Parallel.java:Parallel",
+      "type": "class",
+      "name": "Parallel",
+      "filePath": "src/com/llama4j/Parallel.java",
+      "lineRange": [
+        28,
+        44
+      ],
+      "summary": "Static utility for CPU-parallel iteration. parallelFor() uses IntStream.range().parallel().forEach() and parallelForLong() uses LongStream.range(). Used by FloatTensor.matmul() and Llama.forward() for batched operations.",
+      "tags": [
+        "parallel",
+        "streams",
+        "utility",
+        "cpu"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/RoPE.java",
+      "type": "file",
+      "name": "RoPE.java",
+      "filePath": "src/com/llama4j/RoPE.java",
+      "summary": "Rotary Position Embedding (RoPE) frequency precomputation for Llama models",
+      "tags": [
+        "rope",
+        "positional-encoding",
+        "attention",
+        "llama"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/com/llama4j/RoPE.java:RoPE",
+      "type": "class",
+      "name": "RoPE",
+      "filePath": "src/com/llama4j/RoPE.java",
+      "lineRange": [
+        19,
+        52
+      ],
+      "summary": "RoPE frequency precomputation. precomputeFreqsCis() computes cos/sin frequencies for each position and head dimension using theta-based exponential decay, with support for rope scaling and context extension.",
+      "tags": [
+        "rope",
+        "positional-encoding",
+        "frequency"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/RoPE.java:precomputeFreqsCis",
+      "type": "function",
+      "name": "precomputeFreqsCis",
+      "filePath": "src/com/llama4j/RoPE.java",
+      "lineRange": [
+        20,
+        51
+      ],
+      "summary": "Precomputes RoPE cosine/sine frequencies for all positions up to contextLength. Supports optional rope scaling (linear, freq_factor) and extended context via oldContextLength. Returns a Pair of real and imag FloatBuffers.",
+      "tags": [
+        "rope",
+        "frequency",
+        "cosine",
+        "sine",
+        "scaling"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/com/llama4j/Timer.java",
+      "type": "file",
+      "name": "Timer.java",
+      "filePath": "src/com/llama4j/Timer.java",
+      "summary": "AutoCloseable timer utility for measuring and logging elapsed time of operations",
+      "tags": [
+        "utility",
+        "timer",
+        "logging",
+        "performance"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/com/llama4j/Timer.java:Timer",
+      "type": "class",
+      "name": "Timer",
+      "filePath": "src/com/llama4j/Timer.java",
+      "lineRange": [
+        21,
+        42
+      ],
+      "summary": "AutoCloseable timer. log() creates a Timer and prints the elapsed time on close(). Used for benchmarking model loading and inference steps.",
+      "tags": [
+        "timer",
+        "utility",
+        "logging",
+        "performance"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/Tokenizer.java",
+      "type": "file",
+      "name": "Tokenizer.java",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "summary": "BPE tokenizer for GPT-2 style encoding/decoding. Encodes text to token IDs via byte-pair encoding merges and decodes token IDs back to text. Handles special tokens and provides byte-to-unicode mapping.",
+      "tags": [
+        "tokenizer",
+        "bpe",
+        "encoding",
+        "llama4j",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/com/llama4j/ToppSampler.java",
+      "type": "file",
+      "name": "ToppSampler.java",
+      "filePath": "src/com/llama4j/ToppSampler.java",
+      "summary": "Top-p (nucleus) sampling implementation. Uses a heap-based approach to select tokens from the smallest set whose cumulative probability exceeds the threshold, with cutoff optimization.",
+      "tags": [
+        "sampler",
+        "top-p",
+        "nucleus",
+        "llama4j"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/Vocabulary.java",
+      "type": "file",
+      "name": "Vocabulary.java",
+      "filePath": "src/com/llama4j/Vocabulary.java",
+      "summary": "Java record holding token strings and scores with bidirectional lookup. Provides token-by-index and index-by-token resolution for the vocabulary.",
+      "tags": [
+        "vocabulary",
+        "record",
+        "lookup",
+        "llama4j"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/module-info.java",
+      "type": "file",
+      "name": "module-info.java",
+      "filePath": "src/module-info.java",
+      "summary": "Java module declaration for com.llama4j, declaring dependencies on incubator vector, java.desktop, logging, and native libraries.",
+      "tags": [
+        "module",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/package.bluej",
+      "type": "file",
+      "name": "package.bluej",
+      "filePath": "src/package.bluej",
+      "summary": "BlueJ IDE project configuration file with editor layout, window positions, and package target settings.",
+      "tags": [
+        "bluej",
+        "ide-config"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:test/test/G2PTokenizerTest.java",
+      "type": "file",
+      "name": "G2PTokenizerTest.java",
+      "filePath": "test/test/G2PTokenizerTest.java",
+      "summary": "JUnit test for a grapheme-to-phoneme tokenizer. Tests encoding input words to token IDs and decoding model output IDs back to phonemes using a G2P vocabulary.",
+      "tags": [
+        "test",
+        "g2p",
+        "tokenizer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:test/test/JUnitTest.java",
+      "type": "file",
+      "name": "JUnitTest.java",
+      "filePath": "test/test/JUnitTest.java",
+      "summary": "Simple JUnit test that instantiates the Llama3 model to verify basic initialization.",
+      "tags": [
+        "test",
+        "smoke-test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/com/llama4j/Tokenizer.java:Tokenizer",
+      "type": "class",
+      "name": "Tokenizer",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [
+        39,
+        284
+      ],
+      "summary": "Core BPE tokenizer class with 18 methods implementing GPT-2 compatible encode/decode, special token handling, byte-to-unicode mapping, and merge-based tokenization.",
+      "tags": [
+        "tokenizer",
+        "bpe"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:Tokenizer",
+      "type": "function",
+      "name": "Tokenizer",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [
+        60,
+        71
+      ],
+      "summary": "Constructor that initializes the compiled regex pattern, special tokens map, and merges map from the vocabulary and merge pairs.",
+      "tags": [
+        "constructor"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:encode",
+      "type": "function",
+      "name": "encode",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [
+        84,
+        117
+      ],
+      "summary": "Encodes text to token IDs with special token handling. Splits text on special token boundaries and encodes each segment separately.",
+      "tags": [
+        "encoding",
+        "tokenization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:encodeOrdinary",
+      "type": "function",
+      "name": "encodeOrdinary",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [
+        133,
+        143
+      ],
+      "summary": "Encodes text ignoring special tokens by splitting into regex-defined chunks and encoding each chunk via BPE.",
+      "tags": [
+        "encoding",
+        "tokenization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:encodeChunk",
+      "type": "function",
+      "name": "encodeChunk",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [
+        154,
+        179
+      ],
+      "summary": "Encodes a single text chunk via BPE by converting bytes to token IDs, then repeatedly merging the pair with the lowest merge index.",
+      "tags": [
+        "encoding",
+        "bpe"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:merge",
+      "type": "function",
+      "name": "merge",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [
+        181,
+        195
+      ],
+      "summary": "Merges adjacent token pairs in the ID list according to the BPE merge map, replacing matched pairs with the merged index.",
+      "tags": [
+        "bpe",
+        "merge"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:bytesToUnicode",
+      "type": "function",
+      "name": "bytesToUnicode",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [
+        215,
+        235
+      ],
+      "summary": "Builds a lookup table mapping UTF-8 bytes to unicode code points, avoiding control characters that the BPE code cannot handle.",
+      "tags": [
+        "encoding",
+        "unicode"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:replaceControlCharacters",
+      "type": "function",
+      "name": "replaceControlCharacters",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [
+        251,
+        265
+      ],
+      "summary": "Replaces control characters in a code point array with escaped unicode representations, preserving newlines.",
+      "tags": [
+        "utility",
+        "sanitization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/com/llama4j/ToppSampler.java:ToppSampler",
+      "type": "class",
+      "name": "ToppSampler",
+      "filePath": "src/com/llama4j/ToppSampler.java",
+      "lineRange": [
+        22,
+        110
+      ],
+      "summary": "Implements the Sampler interface using top-p nucleus sampling with a heap-based partial sort for efficiency.",
+      "tags": [
+        "sampler",
+        "top-p"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/com/llama4j/ToppSampler.java:siftDown",
+      "type": "function",
+      "name": "siftDown",
+      "filePath": "src/com/llama4j/ToppSampler.java",
+      "lineRange": [
+        40,
+        54
+      ],
+      "summary": "Heap sift-down operation used to maintain the max-heap property during partial sorting of candidate tokens.",
+      "tags": [
+        "heap",
+        "sorting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/com/llama4j/ToppSampler.java:sampleToken",
+      "type": "function",
+      "name": "sampleToken",
+      "filePath": "src/com/llama4j/ToppSampler.java",
+      "lineRange": [
+        56,
+        108
+      ],
+      "summary": "Performs top-p sampling: crops low-probability tokens, builds a max-heap, truncates to cumulative probability threshold, and samples from the remaining candidates.",
+      "tags": [
+        "sampling",
+        "nucleus",
+        "top-p"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/com/llama4j/Vocabulary.java:Vocabulary",
+      "type": "class",
+      "name": "Vocabulary",
+      "filePath": "src/com/llama4j/Vocabulary.java",
+      "lineRange": [
+        24,
+        45
+      ],
+      "summary": "Java record storing token strings and scores with bidirectional token-to-index and index-to-token lookup.",
+      "tags": [
+        "vocabulary",
+        "record"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/test/G2PTokenizerTest.java:G2PTokenizerTest",
+      "type": "class",
+      "name": "G2PTokenizerTest",
+      "filePath": "test/test/G2PTokenizerTest.java",
+      "lineRange": [
+        32,
+        126
+      ],
+      "summary": "JUnit test class for G2P tokenizer with methods to load vocabulary, encode graphemes, decode phonemes, and run the full test pipeline.",
+      "tags": [
+        "test",
+        "g2p"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:test/test/G2PTokenizerTest.java:loadVocab",
+      "type": "function",
+      "name": "loadVocab",
+      "filePath": "test/test/G2PTokenizerTest.java",
+      "lineRange": [
+        47,
+        60
+      ],
+      "summary": "Loads a G2P vocabulary file into token-to-ID and ID-to-token lookup maps, one token per line.",
+      "tags": [
+        "vocabulary",
+        "loading"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:test/test/G2PTokenizerTest.java:encode",
+      "type": "function",
+      "name": "encode",
+      "filePath": "test/test/G2PTokenizerTest.java",
+      "lineRange": [
+        63,
+        84
+      ],
+      "summary": "Encodes input text to token IDs with optional start/end tokens, handling unknown characters via UNK token.",
+      "tags": [
+        "encoding",
+        "g2p"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:test/test/G2PTokenizerTest.java:decode",
+      "type": "function",
+      "name": "decode",
+      "filePath": "test/test/G2PTokenizerTest.java",
+      "lineRange": [
+        87,
+        100
+      ],
+      "summary": "Decodes token IDs to phoneme strings, filtering out special tokens like UNK, START, END, and PAD.",
+      "tags": [
+        "decoding",
+        "g2p"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:test/test/G2PTokenizerTest.java:test",
+      "type": "function",
+      "name": "test",
+      "filePath": "test/test/G2PTokenizerTest.java",
+      "lineRange": [
+        103,
+        125
+      ],
+      "summary": "JUnit test method that encodes an input word and decodes simulated model output to verify the tokenizer pipeline.",
+      "tags": [
+        "test",
+        "integration"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:build.xml",
+      "target": "document:README.rst",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:log.txt",
+      "target": "document:README.rst",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:nbproject/build-impl.xml",
+      "target": "config:nbproject/project.properties",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:nbproject/build-impl.xml",
+      "target": "config:nbproject/project.xml",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:nbproject/project.xml",
+      "target": "config:nbproject/build-impl.xml",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:nbproject/project.properties",
+      "target": "config:nbproject/build-impl.xml",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:nbproject/genfiles.properties",
+      "target": "config:nbproject/build-impl.xml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:nbproject/project.xml",
+      "target": "config:nbproject/project.properties",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "class:src/com/llama4j/FloatTensor.java:FloatTensor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/FloatTensor.java:FloatTensor",
+      "target": "function:src/com/llama4j/FloatTensor.java:argmax",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "target": "class:src/com/llama4j/ArrayFloatTensor.java:ArrayFloatTensor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/BF16FloatTensor.java",
+      "target": "class:src/com/llama4j/BF16FloatTensor.java:BF16FloatTensor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/BF16FloatTensor.java:BF16FloatTensor",
+      "target": "function:src/com/llama4j/BF16FloatTensor.java:vectorDot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/F16FloatTensor.java",
+      "target": "class:src/com/llama4j/F16FloatTensor.java:F16FloatTensor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/F16FloatTensor.java:F16FloatTensor",
+      "target": "function:src/com/llama4j/F16FloatTensor.java:vectorDot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "target": "class:src/com/llama4j/Q4_0FloatTensor.java:Q4_0FloatTensor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/Q4_0FloatTensor.java:Q4_0FloatTensor",
+      "target": "function:src/com/llama4j/Q4_0FloatTensor.java:getFloat",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/Q4_0FloatTensor.java:Q4_0FloatTensor",
+      "target": "function:src/com/llama4j/Q4_0FloatTensor.java:vectorDot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "target": "class:src/com/llama4j/Q8_0FloatTensor.java:Q8_0FloatTensor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/Q8_0FloatTensor.java:Q8_0FloatTensor",
+      "target": "function:src/com/llama4j/Q8_0FloatTensor.java:vectorDot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLType.java",
+      "target": "class:src/com/llama4j/GGMLType.java:GGMLType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "file:src/com/llama4j/BF16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "file:src/com/llama4j/F16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "target": "file:src/com/llama4j/BF16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "target": "file:src/com/llama4j/F16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "target": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/BF16FloatTensor.java",
+      "target": "file:src/com/llama4j/F16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/BF16FloatTensor.java",
+      "target": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/BF16FloatTensor.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/F16FloatTensor.java",
+      "target": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/F16FloatTensor.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLType.java",
+      "target": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLType.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLType.java",
+      "target": "file:src/com/llama4j/BF16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLType.java",
+      "target": "file:src/com/llama4j/F16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLType.java",
+      "target": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "target": "file:src/com/llama4j/BF16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "target": "file:src/com/llama4j/F16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "target": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Sampler.java",
+      "target": "file:src/com/llama4j/CategoricalSampler.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "file:src/com/llama4j/Sampler.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/AOT.java",
+      "target": "class:src/com/llama4j/AOT.java:AOT",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/AOT.java:AOT",
+      "target": "function:src/com/llama4j/AOT.java:preLoadGGUF",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/AOT.java:AOT",
+      "target": "function:src/com/llama4j/AOT.java:tryUsePreLoaded",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/ChatFormat.java",
+      "target": "class:src/com/llama4j/ChatFormat.java:ChatFormat",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/ChatFormat.java:ChatFormat",
+      "target": "function:src/com/llama4j/ChatFormat.java:ChatFormat",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/ChatFormat.java:ChatFormat",
+      "target": "function:src/com/llama4j/ChatFormat.java:encodeDialogPrompt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/GGUF.java",
+      "target": "class:src/com/llama4j/GGUF.java:GGUF",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/GGUF.java:GGUF",
+      "target": "function:src/com/llama4j/GGUF.java:loadModelImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/GGUF.java:GGUF",
+      "target": "function:src/com/llama4j/GGUF.java:loadTensors",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/GGUF.java:GGUF",
+      "target": "function:src/com/llama4j/GGUF.java:readTensorInfo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/GGUF.java:GGUF",
+      "target": "function:src/com/llama4j/GGUF.java:readKeyValuePair",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/GGUF.java:GGUF",
+      "target": "function:src/com/llama4j/GGUF.java:readHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/GGUF.java:GGUF",
+      "target": "function:src/com/llama4j/GGUF.java:readArray",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/GGUF.java:GGUF",
+      "target": "function:src/com/llama4j/GGUF.java:readMetadataValueOfType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Llama.java",
+      "target": "class:src/com/llama4j/Llama.java:Configuration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Llama.java",
+      "target": "class:src/com/llama4j/Llama.java:Weights",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Llama.java",
+      "target": "class:src/com/llama4j/Llama.java:State",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Llama.java",
+      "target": "function:src/com/llama4j/Llama.java:forward",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Llama.java",
+      "target": "function:src/com/llama4j/Llama.java:generateTokens",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Llama3.java",
+      "target": "class:src/com/llama4j/Llama3.java:Llama3",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/Llama3.java:Llama3",
+      "target": "function:src/com/llama4j/Llama3.java:selectSampler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/Llama3.java:Llama3",
+      "target": "function:src/com/llama4j/Llama3.java:runInteractive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/Llama3.java:Llama3",
+      "target": "function:src/com/llama4j/Llama3.java:runInstructOnce",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/Llama3.java:Llama3",
+      "target": "function:src/com/llama4j/Llama3.java:process",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/ModelLoader.java",
+      "target": "class:src/com/llama4j/ModelLoader.java:ModelLoader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/ModelLoader.java:ModelLoader",
+      "target": "function:src/com/llama4j/ModelLoader.java:loadModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/ModelLoader.java:ModelLoader",
+      "target": "function:src/com/llama4j/ModelLoader.java:loadWeights",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/ModelLoader.java:ModelLoader",
+      "target": "function:src/com/llama4j/ModelLoader.java:createTokenizer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Parallel.java",
+      "target": "class:src/com/llama4j/Parallel.java:Parallel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/RoPE.java",
+      "target": "class:src/com/llama4j/RoPE.java:RoPE",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/RoPE.java:RoPE",
+      "target": "function:src/com/llama4j/RoPE.java:precomputeFreqsCis",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Timer.java",
+      "target": "class:src/com/llama4j/Timer.java:Timer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/GGUF.java",
+      "target": "file:src/com/llama4j/ModelLoader.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGUF.java",
+      "target": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGUF.java",
+      "target": "file:src/com/llama4j/GGMLType.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGUF.java",
+      "target": "file:src/com/llama4j/Pair.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ModelLoader.java",
+      "target": "file:src/com/llama4j/Llama.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ModelLoader.java",
+      "target": "file:src/com/llama4j/GGUF.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ModelLoader.java",
+      "target": "file:src/com/llama4j/RoPE.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ModelLoader.java",
+      "target": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ModelLoader.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ModelLoader.java",
+      "target": "file:src/com/llama4j/BF16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ModelLoader.java",
+      "target": "file:src/com/llama4j/F16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ModelLoader.java",
+      "target": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ModelLoader.java",
+      "target": "file:src/com/llama4j/Pair.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Llama.java",
+      "target": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Llama.java",
+      "target": "file:src/com/llama4j/Parallel.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Llama.java",
+      "target": "file:src/com/llama4j/FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Llama.java",
+      "target": "file:src/com/llama4j/Sampler.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Llama3.java",
+      "target": "file:src/com/llama4j/Llama.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Llama3.java",
+      "target": "file:src/com/llama4j/ChatFormat.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Llama3.java",
+      "target": "file:src/com/llama4j/CategoricalSampler.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Llama3.java",
+      "target": "file:src/com/llama4j/AOT.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Llama3.java",
+      "target": "file:src/com/llama4j/ModelLoader.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Llama3.java",
+      "target": "file:src/com/llama4j/Sampler.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/AOT.java",
+      "target": "file:src/com/llama4j/ModelLoader.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/AOT.java",
+      "target": "file:src/com/llama4j/GGUF.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/AOT.java",
+      "target": "file:src/com/llama4j/Llama.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/AOT.java",
+      "target": "file:src/com/llama4j/Timer.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/RoPE.java",
+      "target": "file:src/com/llama4j/Llama.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Parallel.java",
+      "target": "file:src/com/llama4j/FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "file:src/com/llama4j/Parallel.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Timer.java",
+      "target": "file:src/com/llama4j/GGUF.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Timer.java",
+      "target": "file:src/com/llama4j/ModelLoader.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "class:src/com/llama4j/Tokenizer.java:Tokenizer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:Tokenizer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:encode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:encodeOrdinary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:encodeChunk",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:merge",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:bytesToUnicode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:replaceControlCharacters",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/ToppSampler.java",
+      "target": "class:src/com/llama4j/ToppSampler.java:ToppSampler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/ToppSampler.java",
+      "target": "function:src/com/llama4j/ToppSampler.java:siftDown",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/ToppSampler.java",
+      "target": "function:src/com/llama4j/ToppSampler.java:sampleToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Vocabulary.java",
+      "target": "class:src/com/llama4j/Vocabulary.java:Vocabulary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:test/test/G2PTokenizerTest.java",
+      "target": "class:src/test/G2PTokenizerTest.java:G2PTokenizerTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:test/test/G2PTokenizerTest.java",
+      "target": "function:test/test/G2PTokenizerTest.java:loadVocab",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:test/test/G2PTokenizerTest.java",
+      "target": "function:test/test/G2PTokenizerTest.java:encode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:test/test/G2PTokenizerTest.java",
+      "target": "function:test/test/G2PTokenizerTest.java:decode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:test/test/G2PTokenizerTest.java",
+      "target": "function:test/test/G2PTokenizerTest.java:test",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:test/test/JUnitTest.java",
+      "target": "file:src/com/llama4j/Llama3.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "file:test/test/G2PTokenizerTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "file:src/com/llama4j/Vocabulary.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:core-model",
+      "name": "Core Model Engine",
+      "description": "Java implementation of the Llama model inference engine including tensor operations, GGUF model loading/parsing, tokenization, sampling, and model execution.",
+      "nodeIds": [
+        "file:src/com/llama4j/FloatTensor.java",
+        "file:src/com/llama4j/ArrayFloatTensor.java",
+        "file:src/com/llama4j/BF16FloatTensor.java",
+        "file:src/com/llama4j/F16FloatTensor.java",
+        "file:src/com/llama4j/Q4_0FloatTensor.java",
+        "file:src/com/llama4j/Q8_0FloatTensor.java",
+        "file:src/com/llama4j/GGMLType.java",
+        "file:src/com/llama4j/GGMLTensorEntry.java",
+        "file:src/com/llama4j/Sampler.java",
+        "file:src/com/llama4j/CategoricalSampler.java",
+        "file:src/com/llama4j/ToppSampler.java",
+        "file:src/com/llama4j/AOT.java",
+        "file:src/com/llama4j/ChatFormat.java",
+        "file:src/com/llama4j/GGUF.java",
+        "file:src/com/llama4j/Llama.java",
+        "file:src/com/llama4j/Llama3.java",
+        "file:src/com/llama4j/ModelLoader.java",
+        "file:src/com/llama4j/Pair.java",
+        "file:src/com/llama4j/Parallel.java",
+        "file:src/com/llama4j/RoPE.java",
+        "file:src/com/llama4j/Timer.java",
+        "file:src/com/llama4j/Tokenizer.java",
+        "file:src/com/llama4j/Vocabulary.java"
+      ]
+    },
+    {
+      "id": "layer:tests",
+      "name": "Tests",
+      "description": "JUnit tests exercising the tokenizer and core model components.",
+      "nodeIds": [
+        "file:test/test/G2PTokenizerTest.java",
+        "file:test/test/JUnitTest.java"
+      ]
+    },
+    {
+      "id": "layer:build-config",
+      "name": "Build & Configuration",
+      "description": "NetBeans/Ant build system configuration, Java module metadata, BlueJ project config, and JAR manifest.",
+      "nodeIds": [
+        "config:build.xml",
+        "config:nbproject/build-impl.xml",
+        "config:nbproject/genfiles.properties",
+        "config:nbproject/project.properties",
+        "config:nbproject/project.xml",
+        "file:src/module-info.java",
+        "file:src/package.bluej",
+        "file:manifest.mf"
+      ]
+    },
+    {
+      "id": "layer:documentation",
+      "name": "Documentation",
+      "description": "Project documentation including README, changelog, and runtime log.",
+      "nodeIds": [
+        "document:README.rst",
+        "file:CHANGELOG",
+        "document:log.txt"
+      ]
+    },
+    {
+      "id": "layer:tooling",
+      "name": "Tooling & Metadata",
+      "description": "Understand-Anything analysis metadata and build artifacts.",
+      "nodeIds": [
+        "file:.DS_Store",
+        "file:.understand-anything/.understandignore",
+        "config:.understand-anything/config.json"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Project Overview & Build System",
+      "description": "Begin with the README to understand the project's purpose — a Java-based Llama model inference engine. The Ant build script and NetBeans project configuration define how the project is compiled, tested, and packaged, with dependencies on AIBase, opencv, and RXTXcomm.",
+      "nodeIds": [
+        "document:README.rst",
+        "config:build.xml",
+        "config:nbproject/project.properties",
+        "config:nbproject/project.xml"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Application Entry Point",
+      "description": "Llama3.java is the CLI application that orchestrates the full inference pipeline: it loads the model via ModelLoader, initializes the tokenizer, runs the generation loop, and handles chat interaction. ChatFormat provides the Llama 3 chat template for system/user/assistant message formatting.",
+      "nodeIds": [
+        "file:src/com/llama4j/Llama3.java",
+        "file:src/com/llama4j/ChatFormat.java"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Model File Parsing & Weight Loading",
+      "description": "GGUF.java parses the GGUF model file format, extracting metadata and tensor entries. ModelLoader reads these parsed tensors, creates the appropriate quantized tensor objects, and initializes the model state. AOT.java provides ahead-of-time preloading to reduce inference latency.",
+      "nodeIds": [
+        "file:src/com/llama4j/GGUF.java",
+        "file:src/com/llama4j/GGMLType.java",
+        "file:src/com/llama4j/GGMLTensorEntry.java",
+        "file:src/com/llama4j/ModelLoader.java",
+        "file:src/com/llama4j/AOT.java"
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Core Inference Engine",
+      "description": "Llama.java is the heart of the model — it implements the forward pass through transformer layers, manages the KV-cache for autoregressive generation, and orchestrates attention computations. RoPE.java provides Rotary Position Embeddings to encode token positions, while Parallel.java distributes tensor operations across CPU threads.",
+      "nodeIds": [
+        "file:src/com/llama4j/Llama.java",
+        "file:src/com/llama4j/RoPE.java",
+        "file:src/com/llama4j/Parallel.java"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "Tensor Hierarchy & Matrix Operations",
+      "description": "All neural network computations are built on the FloatTensor abstract base class, which defines matrix arithmetic, reshaping, and indexing primitives. ArrayFloatTensor provides the default dense implementation, while BF16FloatTensor and F16FloatTensor offer memory-efficient half-precision storage for larger models.",
+      "nodeIds": [
+        "file:src/com/llama4j/FloatTensor.java",
+        "file:src/com/llama4j/ArrayFloatTensor.java",
+        "file:src/com/llama4j/BF16FloatTensor.java",
+        "file:src/com/llama4j/F16FloatTensor.java"
+      ]
+    },
+    {
+      "order": 6,
+      "title": "Model Quantization",
+      "description": "To fit large language models into memory, the project supports quantized tensor types. Q4_0FloatTensor uses 4-bit quantization with block scaling for maximum compression, while Q8_0FloatTensor provides 8-bit quantization as a balance between size and precision. GGMLType enumerates all supported formats with metadata.",
+      "nodeIds": [
+        "file:src/com/llama4j/Q4_0FloatTensor.java",
+        "file:src/com/llama4j/Q8_0FloatTensor.java",
+        "file:src/com/llama4j/GGMLType.java"
+      ]
+    },
+    {
+      "order": 7,
+      "title": "Tokenization & Token Sampling",
+      "description": "Tokenizer.java implements BPE tokenization to convert text to token IDs and back. Vocabulary.java maps between IDs and string tokens. Once the model produces logits, Sampler.java and its implementations — CategoricalSampler (direct probability sampling) and ToppSampler (nucleus sampling with a binary heap) — select the next token.",
+      "nodeIds": [
+        "file:src/com/llama4j/Tokenizer.java",
+        "file:src/com/llama4j/Vocabulary.java",
+        "file:src/com/llama4j/Sampler.java",
+        "file:src/com/llama4j/CategoricalSampler.java",
+        "file:src/com/llama4j/ToppSampler.java"
+      ]
+    },
+    {
+      "order": 8,
+      "title": "Tests & Supporting Utilities",
+      "description": "JUnit tests validate the tokenizer (G2PTokenizerTest) and exercise the full inference pipeline (JUnitTest). Supporting utility classes like Pair (generic tuple), Timer (performance profiling), and the module-info.java descriptor round out the project structure.",
+      "nodeIds": [
+        "file:test/test/G2PTokenizerTest.java",
+        "file:test/test/JUnitTest.java",
+        "file:src/com/llama4j/Pair.java",
+        "file:src/com/llama4j/Timer.java",
+        "file:src/module-info.java"
+      ]
+    }
+  ]
+}

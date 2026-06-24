@@ -1,0 +1,3199 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "9c8e8598af1ebdb8ee15da259b65470806fc54a3",
+  "generatedAt": "2026-06-24T07:18:51.337Z",
+  "files": {
+    ".DS_Store": {
+      "filePath": ".DS_Store",
+      "contentHash": "eb44e47050f2fb182bdbd711c1092820682d4a359f81459e5acde3aa32215465",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": false
+    },
+    ".understand-anything/.understandignore": {
+      "filePath": ".understand-anything/.understandignore",
+      "contentHash": "bc97f4cf6017c52a947cb1e43710da357ecc99149da1ad4e2aaf5ed6fd400644",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 39,
+      "hasStructuralAnalysis": false
+    },
+    ".understand-anything/config.json": {
+      "filePath": ".understand-anything/config.json",
+      "contentHash": "e6e1895a8e3cb71f76daebccd84c4fc9877d8a88fb75e476ca22a320e69d4995",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": true
+    },
+    "build.xml": {
+      "filePath": "build.xml",
+      "contentHash": "c1f4edddd1e9aae6335f0ba6cb2cb9d1d8c9ac28276772fe2ab4e92c1e0677fa",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 74,
+      "hasStructuralAnalysis": false
+    },
+    "CHANGELOG": {
+      "filePath": "CHANGELOG",
+      "contentHash": "1d4a9a5f7e2a1bb6465c1d0d093395cb7b3c014f7e60438797c464bc72f5c46d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 36,
+      "hasStructuralAnalysis": false
+    },
+    "log.txt": {
+      "filePath": "log.txt",
+      "contentHash": "f761e5c3eb76f14f3c2495ac169091062987ee3cfd3455ff239ec32b004fb962",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": false
+    },
+    "manifest.mf": {
+      "filePath": "manifest.mf",
+      "contentHash": "aba13eb4e4d2c16f718c4db49e8fd5812a0064e0b12c52e147979240abd019a0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    "nbproject/build-impl.xml": {
+      "filePath": "nbproject/build-impl.xml",
+      "contentHash": "ded47bb9a51d0b6bac84e7c00cd7902af7d3ad9262406d7b939f124d975921fe",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1808,
+      "hasStructuralAnalysis": false
+    },
+    "nbproject/genfiles.properties": {
+      "filePath": "nbproject/genfiles.properties",
+      "contentHash": "bd21756b0380edca074c38a862517b9506a02875d0ca9578cfe9e7e8fc960399",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 9,
+      "hasStructuralAnalysis": false
+    },
+    "nbproject/project.properties": {
+      "filePath": "nbproject/project.properties",
+      "contentHash": "1489e5b1cf0044072ff7ca32f1363981027935ba4bc43978bbaa1e18325b55a6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 127,
+      "hasStructuralAnalysis": false
+    },
+    "nbproject/project.xml": {
+      "filePath": "nbproject/project.xml",
+      "contentHash": "be94251172a599413e1de7f8cf57ee809086af8db98711aeb319f99bb33c01e4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 34,
+      "hasStructuralAnalysis": false
+    },
+    "README.rst": {
+      "filePath": "README.rst",
+      "contentHash": "e644d8fe26789e80b1c0aa5813a2f3b632bec120dbccba627b9223bf608fe5d6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 13,
+      "hasStructuralAnalysis": false
+    },
+    "src/com/llama4j/AOT.java": {
+      "filePath": "src/com/llama4j/AOT.java",
+      "contentHash": "008a051254ffa866c9c78793ca7ca49eab4ee16bca510eb4f323dac1ef9d4671",
+      "functions": [
+        {
+          "name": "preLoadGGUF",
+          "params": [
+            "modelPath"
+          ],
+          "returnType": "PartialModel",
+          "exported": false,
+          "lineCount": 22
+        },
+        {
+          "name": "tryUsePreLoaded",
+          "params": [
+            "modelPath",
+            "contextLength"
+          ],
+          "returnType": "Llama",
+          "exported": true,
+          "lineCount": 20
+        }
+      ],
+      "classes": [
+        {
+          "name": "AOT",
+          "methods": [
+            "preLoadGGUF",
+            "tryUsePreLoaded"
+          ],
+          "properties": [
+            "PRELOADED_GGUF"
+          ],
+          "exported": true,
+          "lineCount": 58
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
+          "source": "java.nio.channels.FileChannel",
+          "specifiers": [
+            "FileChannel"
+          ]
+        },
+        {
+          "source": "java.nio.file.Files",
+          "specifiers": [
+            "Files"
+          ]
+        },
+        {
+          "source": "java.nio.file.Path",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "java.nio.file.StandardOpenOption",
+          "specifiers": [
+            "StandardOpenOption"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Objects",
+          "specifiers": [
+            "Objects"
+          ]
+        }
+      ],
+      "exports": [
+        "tryUsePreLoaded",
+        "AOT"
+      ],
+      "totalLines": 78,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/ArrayFloatTensor.java": {
+      "filePath": "src/com/llama4j/ArrayFloatTensor.java",
+      "contentHash": "65a5a704924a3964b6d3dfab476f8958f47a8d527467bd5a15173763dff664dd",
+      "functions": [
+        {
+          "name": "ArrayFloatTensor",
+          "params": [
+            "values"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "allocate",
+          "params": [],
+          "returnType": "FloatTensor",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "size",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "getFloat",
+          "params": [
+            "index"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "setFloat",
+          "params": [
+            "index",
+            "value"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "type",
+          "params": [],
+          "returnType": "GGMLType",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "fillInPlace",
+          "params": [
+            "thisOffset",
+            "size",
+            "value"
+          ],
+          "returnType": "FloatTensor",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "getFloatVector",
+          "params": [
+            "species",
+            "index"
+          ],
+          "returnType": "FloatVector",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "ArrayFloatTensor",
+          "methods": [
+            "ArrayFloatTensor",
+            "allocate",
+            "size",
+            "getFloat",
+            "setFloat",
+            "type",
+            "fillInPlace",
+            "getFloatVector"
+          ],
+          "properties": [
+            "values"
+          ],
+          "exported": true,
+          "lineCount": 48
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.Arrays",
+          "specifiers": [
+            "Arrays"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.FloatVector",
+          "specifiers": [
+            "FloatVector"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.VectorSpecies",
+          "specifiers": [
+            "VectorSpecies"
+          ]
+        }
+      ],
+      "exports": [
+        "allocate",
+        "size",
+        "getFloat",
+        "setFloat",
+        "type",
+        "fillInPlace",
+        "getFloatVector",
+        "ArrayFloatTensor"
+      ],
+      "totalLines": 71,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/BF16FloatTensor.java": {
+      "filePath": "src/com/llama4j/BF16FloatTensor.java",
+      "contentHash": "cf2beb6ec62de32c988db6aea2348092a2529974b901545f7fe0222c451871ae",
+      "functions": [
+        {
+          "name": "BF16FloatTensor",
+          "params": [
+            "size",
+            "memorySegment"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "size",
+          "params": [],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "setFloat",
+          "params": [
+            "index",
+            "value"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "getFloatVector",
+          "params": [
+            "species",
+            "index"
+          ],
+          "returnType": "FloatVector",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "type",
+          "params": [],
+          "returnType": "GGMLType",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "getFloat",
+          "params": [
+            "index"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "bfloat16ToFloat",
+          "params": [
+            "bfloat16"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "dot",
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "vectorDot",
+          "params": [
+            "thiz",
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 31
+        }
+      ],
+      "classes": [
+        {
+          "name": "BF16FloatTensor",
+          "methods": [
+            "BF16FloatTensor",
+            "size",
+            "setFloat",
+            "getFloatVector",
+            "type",
+            "getFloat",
+            "bfloat16ToFloat",
+            "dot",
+            "vectorDot"
+          ],
+          "properties": [
+            "size",
+            "memorySegment"
+          ],
+          "exported": true,
+          "lineCount": 82
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.llama4j.FloatTensor.F_SPECIES",
+          "specifiers": [
+            "F_SPECIES"
+          ]
+        },
+        {
+          "source": "com.llama4j.FloatTensor.I_SPECIES",
+          "specifiers": [
+            "I_SPECIES"
+          ]
+        },
+        {
+          "source": "com.llama4j.FloatTensor.S_SPECIES_HALF",
+          "specifiers": [
+            "S_SPECIES_HALF"
+          ]
+        },
+        {
+          "source": "com.llama4j.FloatTensor.readShort",
+          "specifiers": [
+            "readShort"
+          ]
+        },
+        {
+          "source": "com.llama4j.FloatTensor.scalarDot",
+          "specifiers": [
+            "scalarDot"
+          ]
+        },
+        {
+          "source": "java.lang.foreign.MemorySegment",
+          "specifiers": [
+            "MemorySegment"
+          ]
+        },
+        {
+          "source": "java.nio.ByteOrder",
+          "specifiers": [
+            "ByteOrder"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.FloatVector",
+          "specifiers": [
+            "FloatVector"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.ShortVector",
+          "specifiers": [
+            "ShortVector"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.VectorOperators",
+          "specifiers": [
+            "VectorOperators"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.VectorSpecies",
+          "specifiers": [
+            "VectorSpecies"
+          ]
+        }
+      ],
+      "exports": [
+        "BF16FloatTensor",
+        "setFloat",
+        "type",
+        "getFloat",
+        "dot",
+        "BF16FloatTensor"
+      ],
+      "totalLines": 113,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/CategoricalSampler.java": {
+      "filePath": "src/com/llama4j/CategoricalSampler.java",
+      "contentHash": "4c6835727b1bcda46a581ac32a9dbed64a65f1a63f119c2ee9663221be312a3f",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "java.util.random.RandomGenerator",
+          "specifiers": [
+            "RandomGenerator"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 38,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/ChatFormat.java": {
+      "filePath": "src/com/llama4j/ChatFormat.java",
+      "contentHash": "642da176aa124b20541066b655490d31b88ce3abb1c920f7a43bc208cedff8dc",
+      "functions": [
+        {
+          "name": "ChatFormat",
+          "params": [
+            "tokenizer"
+          ],
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "getTokenizer",
+          "params": [],
+          "returnType": "Tokenizer",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getStopTokens",
+          "params": [],
+          "returnType": "Set<Integer>",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "encodeHeader",
+          "params": [
+            "message"
+          ],
+          "returnType": "List<Integer>",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "encodeMessage",
+          "params": [
+            "message"
+          ],
+          "returnType": "List<Integer>",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "encodeDialogPrompt",
+          "params": [
+            "appendAssistantTurn",
+            "dialog"
+          ],
+          "returnType": "List<Integer>",
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChatFormat",
+          "methods": [
+            "ChatFormat",
+            "getTokenizer",
+            "getStopTokens",
+            "encodeHeader",
+            "encodeMessage",
+            "encodeDialogPrompt"
+          ],
+          "properties": [
+            "tokenizer",
+            "beginOfText",
+            "endHeader",
+            "startHeader",
+            "endOfTurn",
+            "endOfText",
+            "endOfMessage",
+            "stopTokens"
+          ],
+          "exported": true,
+          "lineCount": 75
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Set",
+          "specifiers": [
+            "Set"
+          ]
+        }
+      ],
+      "exports": [
+        "ChatFormat",
+        "getTokenizer",
+        "getStopTokens",
+        "encodeHeader",
+        "encodeMessage",
+        "encodeDialogPrompt",
+        "ChatFormat"
+      ],
+      "totalLines": 102,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/F16FloatTensor.java": {
+      "filePath": "src/com/llama4j/F16FloatTensor.java",
+      "contentHash": "0e7c2fb5e4568696ae28858cc337f3e86331729eafd45e416ec627f2892233d3",
+      "functions": [
+        {
+          "name": "F16FloatTensor",
+          "params": [
+            "size",
+            "memorySegment"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "size",
+          "params": [],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "setFloat",
+          "params": [
+            "index",
+            "value"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "getFloatVector",
+          "params": [
+            "species",
+            "index"
+          ],
+          "returnType": "FloatVector",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "type",
+          "params": [],
+          "returnType": "GGMLType",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "getFloat",
+          "params": [
+            "index"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "dot",
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "vectorDot",
+          "params": [
+            "thiz",
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 49
+        }
+      ],
+      "classes": [
+        {
+          "name": "F16FloatTensor",
+          "methods": [
+            "F16FloatTensor",
+            "size",
+            "setFloat",
+            "getFloatVector",
+            "type",
+            "getFloat",
+            "dot",
+            "vectorDot"
+          ],
+          "properties": [
+            "size",
+            "memorySegment"
+          ],
+          "exported": true,
+          "lineCount": 94
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.llama4j.FloatTensor.F_SPECIES",
+          "specifiers": [
+            "F_SPECIES"
+          ]
+        },
+        {
+          "source": "com.llama4j.FloatTensor.I_SPECIES",
+          "specifiers": [
+            "I_SPECIES"
+          ]
+        },
+        {
+          "source": "com.llama4j.FloatTensor.S_SPECIES_HALF",
+          "specifiers": [
+            "S_SPECIES_HALF"
+          ]
+        },
+        {
+          "source": "com.llama4j.FloatTensor.readShort",
+          "specifiers": [
+            "readShort"
+          ]
+        },
+        {
+          "source": "com.llama4j.FloatTensor.scalarDot",
+          "specifiers": [
+            "scalarDot"
+          ]
+        },
+        {
+          "source": "java.lang.foreign.MemorySegment",
+          "specifiers": [
+            "MemorySegment"
+          ]
+        },
+        {
+          "source": "java.nio.ByteOrder",
+          "specifiers": [
+            "ByteOrder"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.FloatVector",
+          "specifiers": [
+            "FloatVector"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.ShortVector",
+          "specifiers": [
+            "ShortVector"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.VectorOperators",
+          "specifiers": [
+            "VectorOperators"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.VectorSpecies",
+          "specifiers": [
+            "VectorSpecies"
+          ]
+        }
+      ],
+      "exports": [
+        "F16FloatTensor",
+        "setFloat",
+        "type",
+        "getFloat",
+        "dot",
+        "F16FloatTensor"
+      ],
+      "totalLines": 125,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/FloatTensor.java": {
+      "filePath": "src/com/llama4j/FloatTensor.java",
+      "contentHash": "2e54551494cf2a34250698cf424692456bf0deb59a82e9636a5d0f89c47f1c2a",
+      "functions": [
+        {
+          "name": "readShort",
+          "params": [
+            "memorySegment",
+            "offset"
+          ],
+          "returnType": "short",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "readByte",
+          "params": [
+            "memorySegment",
+            "offset"
+          ],
+          "returnType": "byte",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "size",
+          "params": [],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "getFloat",
+          "params": [
+            "index"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "setFloat",
+          "params": [
+            "index",
+            "value"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "getFloatVector",
+          "params": [
+            "species",
+            "offset"
+          ],
+          "returnType": "FloatVector",
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "type",
+          "params": [],
+          "returnType": "GGMLType",
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "numberOfElements",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "scalarDot",
+          "params": [
+            "thiz",
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "dot",
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "matmul",
+          "params": [
+            "that",
+            "out",
+            "dim0",
+            "dim1"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "matmul",
+          "params": [
+            "context",
+            "that",
+            "out",
+            "dim0",
+            "dim1"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "reduce",
+          "params": [
+            "thisOffset",
+            "size",
+            "seed",
+            "reduce"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "sum",
+          "params": [
+            "thisOffset",
+            "size"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "max",
+          "params": [
+            "thisOffset",
+            "size"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "copyTo",
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "argmax",
+          "params": [
+            "thisOffset",
+            "size"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "argmax",
+          "params": [],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "mapInPlace",
+          "params": [
+            "thisOffset",
+            "size",
+            "mapFunction"
+          ],
+          "returnType": "FloatTensor",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "mapInPlace",
+          "params": [
+            "mapFunction"
+          ],
+          "returnType": "FloatTensor",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "mapWithIndexInPlace",
+          "params": [
+            "thisOffset",
+            "size",
+            "mapWithIndexFunction"
+          ],
+          "returnType": "FloatTensor",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "addInPlace",
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ],
+          "returnType": "FloatTensor",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "addInPlace",
+          "params": [
+            "that"
+          ],
+          "returnType": "FloatTensor",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "multiplyInPlace",
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ],
+          "returnType": "FloatTensor",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "multiplyInPlace",
+          "params": [
+            "that"
+          ],
+          "returnType": "FloatTensor",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "divideInPlace",
+          "params": [
+            "thisOffset",
+            "size",
+            "value"
+          ],
+          "returnType": "FloatTensor",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "fillInPlace",
+          "params": [
+            "thisOffset",
+            "size",
+            "value"
+          ],
+          "returnType": "FloatTensor",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "softmaxInPlace",
+          "params": [
+            "thisOffset",
+            "size"
+          ],
+          "returnType": "FloatTensor",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "saxpyInPlace",
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size",
+            "a"
+          ],
+          "returnType": "FloatTensor",
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "FloatTensor",
+          "methods": [
+            "readShort",
+            "readByte",
+            "size",
+            "getFloat",
+            "setFloat",
+            "getFloatVector",
+            "type",
+            "numberOfElements",
+            "scalarDot",
+            "dot",
+            "matmul",
+            "matmul",
+            "reduce",
+            "sum",
+            "max",
+            "copyTo",
+            "argmax",
+            "argmax",
+            "mapInPlace",
+            "mapInPlace",
+            "mapWithIndexInPlace",
+            "addInPlace",
+            "addInPlace",
+            "multiplyInPlace",
+            "multiplyInPlace",
+            "divideInPlace",
+            "fillInPlace",
+            "softmaxInPlace",
+            "saxpyInPlace"
+          ],
+          "properties": [
+            "VECTOR_BIT_SIZE",
+            "USE_VECTOR_API",
+            "UNSAFE",
+            "F_SPECIES",
+            "I_SPECIES",
+            "S_SPECIES_HALF"
+          ],
+          "exported": true,
+          "lineCount": 207
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.lang.foreign.MemorySegment",
+          "specifiers": [
+            "MemorySegment"
+          ]
+        },
+        {
+          "source": "java.lang.reflect.Field",
+          "specifiers": [
+            "Field"
+          ]
+        },
+        {
+          "source": "java.util.Arrays",
+          "specifiers": [
+            "Arrays"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.FloatVector",
+          "specifiers": [
+            "FloatVector"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.VectorShape",
+          "specifiers": [
+            "VectorShape"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.VectorSpecies",
+          "specifiers": [
+            "VectorSpecies"
+          ]
+        },
+        {
+          "source": "sun.misc.Unsafe",
+          "specifiers": [
+            "Unsafe"
+          ]
+        }
+      ],
+      "exports": [
+        "numberOfElements",
+        "FloatTensor"
+      ],
+      "totalLines": 240,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/GGMLTensorEntry.java": {
+      "filePath": "src/com/llama4j/GGMLTensorEntry.java",
+      "contentHash": "4c0907caf91fd133363c4399df2314b1217efe81471284eb541deb27cbcaef85",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "java.lang.foreign.MemorySegment",
+          "specifiers": [
+            "MemorySegment"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 28,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/GGMLType.java": {
+      "filePath": "src/com/llama4j/GGMLType.java",
+      "contentHash": "0c3f4d9cf7e7d6ee1b6843bc6f47485669876be8781b02e47f6373ef8ec453cd",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "com.llama4j.GGMLType.values",
+          "specifiers": [
+            "values"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 107,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/GGUF.java": {
+      "filePath": "src/com/llama4j/GGUF.java",
+      "contentHash": "4da7b6a075c1e13f1170b24ae8dcf22e862febb167ad880e872897d1d2adf0a5",
+      "functions": [
+        {
+          "name": "getTensorInfos",
+          "params": [],
+          "returnType": "Map<String, GGUFTensorInfo>",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getTensorDataOffset",
+          "params": [],
+          "returnType": "long",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "getMetadata",
+          "params": [],
+          "returnType": "Map<String, Object>",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "loadModel",
+          "params": [
+            "modelPath"
+          ],
+          "returnType": "GGUF",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "loadModelImpl",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "loadTensors",
+          "params": [
+            "fileChannel",
+            "tensorDataOffset",
+            "tensorInfos"
+          ],
+          "returnType": "Map<String, GGMLTensorEntry>",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "readGGMLType",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "GGMLType",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "readTensorInfo",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "GGUF.GGUFTensorInfo",
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "readString",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "readKeyValuePair",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "Pair<String, Object>",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "readMetadataValue",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "Object",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "readHeader",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 35
+        },
+        {
+          "name": "readArray",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "Object",
+          "exported": false,
+          "lineCount": 60
+        },
+        {
+          "name": "readMetadataValueOfType",
+          "params": [
+            "valueType",
+            "fileChannel"
+          ],
+          "returnType": "Object",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "readByte",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "byte",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "readBoolean",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "readShort",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "short",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "readInt",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "readLong",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "long",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "readFloat",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "readDouble",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "double",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "readMetadataValueType",
+          "params": [
+            "fileChannel"
+          ],
+          "returnType": "MetadataValueType",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "getAlignment",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [
+        {
+          "name": "GGUF",
+          "methods": [
+            "getTensorInfos",
+            "getTensorDataOffset",
+            "getMetadata",
+            "loadModel",
+            "loadModelImpl",
+            "loadTensors",
+            "readGGMLType",
+            "readTensorInfo",
+            "readString",
+            "readKeyValuePair",
+            "readMetadataValue",
+            "readHeader",
+            "readArray",
+            "readMetadataValueOfType",
+            "readByte",
+            "readBoolean",
+            "readShort",
+            "readInt",
+            "readLong",
+            "readFloat",
+            "readDouble",
+            "readMetadataValueType",
+            "getAlignment"
+          ],
+          "properties": [
+            "GGUF_MAGIC",
+            "DEFAULT_ALIGNMENT",
+            "SUPPORTED_GGUF_VERSIONS",
+            "magic",
+            "version",
+            "tensorCount",
+            "alignment",
+            "metadata_kv_count",
+            "metadata",
+            "tensorInfos",
+            "tensorDataOffset",
+            "BB_1",
+            "BB_2",
+            "BB_4",
+            "BB_8"
+          ],
+          "exported": true,
+          "lineCount": 360
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
+          "source": "java.lang.foreign.Arena",
+          "specifiers": [
+            "Arena"
+          ]
+        },
+        {
+          "source": "java.lang.foreign.MemorySegment",
+          "specifiers": [
+            "MemorySegment"
+          ]
+        },
+        {
+          "source": "java.nio.ByteBuffer",
+          "specifiers": [
+            "ByteBuffer"
+          ]
+        },
+        {
+          "source": "java.nio.ByteOrder",
+          "specifiers": [
+            "ByteOrder"
+          ]
+        },
+        {
+          "source": "java.nio.channels.FileChannel",
+          "specifiers": [
+            "FileChannel"
+          ]
+        },
+        {
+          "source": "java.nio.charset.StandardCharsets",
+          "specifiers": [
+            "StandardCharsets"
+          ]
+        },
+        {
+          "source": "java.nio.file.Path",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "java.util.HashMap",
+          "specifiers": [
+            "HashMap"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        }
+      ],
+      "exports": [
+        "getTensorInfos",
+        "getTensorDataOffset",
+        "getMetadata",
+        "loadModel",
+        "loadTensors",
+        "getAlignment",
+        "GGUF"
+      ],
+      "totalLines": 391,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/Llama.java": {
+      "filePath": "src/com/llama4j/Llama.java",
+      "contentHash": "bab2fcb4fd0dc92aebf9701505d693e921a4220f31abbd9344c3cabb2483a4ee",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "java.nio.FloatBuffer",
+          "specifiers": [
+            "FloatBuffer"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.Arrays",
+          "specifiers": [
+            "Arrays"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Set",
+          "specifiers": [
+            "Set"
+          ]
+        },
+        {
+          "source": "java.util.function.IntConsumer",
+          "specifiers": [
+            "IntConsumer"
+          ]
+        },
+        {
+          "source": "java.util.stream.IntStream",
+          "specifiers": [
+            "IntStream"
+          ]
+        },
+        {
+          "source": "java.util.stream.Stream",
+          "specifiers": [
+            "Stream"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 405,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/Llama3.java": {
+      "filePath": "src/com/llama4j/Llama3.java",
+      "contentHash": "62534b23bc1faeacc5167aac97438890a2d8620a2021d700f8e94346d2cdcbec",
+      "functions": [
+        {
+          "name": "selectSampler",
+          "params": [
+            "vocabularySize",
+            "temperature",
+            "topp",
+            "rngSeed"
+          ],
+          "returnType": "Sampler",
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "runInteractive",
+          "params": [
+            "model",
+            "sampler",
+            "options"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 56
+        },
+        {
+          "name": "runInstructOnce",
+          "params": [
+            "model",
+            "sampler",
+            "options"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 30
+        },
+        {
+          "name": "init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "initInputPins",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "initOutputPins",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "process",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 28
+        }
+      ],
+      "classes": [
+        {
+          "name": "Llama3",
+          "methods": [
+            "selectSampler",
+            "runInteractive",
+            "runInstructOnce",
+            "init",
+            "initInputPins",
+            "initOutputPins",
+            "process"
+          ],
+          "properties": [
+            "BATCH_SIZE",
+            "image",
+            "in",
+            "out"
+          ],
+          "exported": true,
+          "lineCount": 277
+        }
+      ],
+      "imports": [
+        {
+          "source": "VisualLogic.ExternalIF",
+          "specifiers": [
+            "ExternalIF"
+          ]
+        },
+        {
+          "source": "VisualLogic.variables.VSString",
+          "specifiers": [
+            "VSString"
+          ]
+        },
+        {
+          "source": "tools.JVSMain",
+          "specifiers": [
+            "JVSMain"
+          ]
+        },
+        {
+          "source": "java.awt.Image",
+          "specifiers": [
+            "Image"
+          ]
+        },
+        {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
+          "source": "java.io.PrintStream",
+          "specifiers": [
+            "PrintStream"
+          ]
+        },
+        {
+          "source": "java.nio.file.Path",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "java.nio.file.Paths",
+          "specifiers": [
+            "Paths"
+          ]
+        },
+        {
+          "source": "java.util",
+          "specifiers": [
+            "*"
+          ]
+        },
+        {
+          "source": "java.util.random.RandomGenerator",
+          "specifiers": [
+            "RandomGenerator"
+          ]
+        },
+        {
+          "source": "java.util.random.RandomGeneratorFactory",
+          "specifiers": [
+            "RandomGeneratorFactory"
+          ]
+        }
+      ],
+      "exports": [
+        "init",
+        "initInputPins",
+        "initOutputPins",
+        "process",
+        "Llama3"
+      ],
+      "totalLines": 314,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/ModelLoader.java": {
+      "filePath": "src/com/llama4j/ModelLoader.java",
+      "contentHash": "a3fb1ed17a05ca34f458be0f7fc0fa30b4566e2948444e545806670033e1f556",
+      "functions": [
+        {
+          "name": "loadVocabulary",
+          "params": [
+            "metadata"
+          ],
+          "returnType": "Vocabulary",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "loadModel",
+          "params": [
+            "ggufPath",
+            "contextLength",
+            "loadWeights"
+          ],
+          "returnType": "Llama",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "loadModel",
+          "params": [
+            "fileChannel",
+            "gguf",
+            "contextLength",
+            "loadWeights"
+          ],
+          "returnType": "Llama",
+          "exported": true,
+          "lineCount": 30
+        },
+        {
+          "name": "loadWeights",
+          "params": [
+            "tensorEntries",
+            "config"
+          ],
+          "returnType": "Llama.Weights",
+          "exported": false,
+          "lineCount": 33
+        },
+        {
+          "name": "createTokenizer",
+          "params": [
+            "metadata",
+            "vocabulary"
+          ],
+          "returnType": "Tokenizer",
+          "exported": false,
+          "lineCount": 27
+        },
+        {
+          "name": "loadQuantized",
+          "params": [
+            "entry"
+          ],
+          "returnType": "FloatTensor",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "loadArrayOfQuantized",
+          "params": [
+            "size",
+            "getTensorEntry"
+          ],
+          "returnType": "FloatTensor[]",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "loadArrayOfFloatBuffer",
+          "params": [
+            "size",
+            "getTensorEntry"
+          ],
+          "returnType": "FloatBuffer[]",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "toFloatBuffer",
+          "params": [
+            "tensorEntry"
+          ],
+          "returnType": "FloatBuffer",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "ModelLoader",
+          "methods": [
+            "loadVocabulary",
+            "loadModel",
+            "loadModel",
+            "loadWeights",
+            "createTokenizer",
+            "loadQuantized",
+            "loadArrayOfQuantized",
+            "loadArrayOfFloatBuffer",
+            "toFloatBuffer"
+          ],
+          "properties": [
+            "TOKENIZER_LLAMA_3_MODEL",
+            "LLAMA_3_PATTERN"
+          ],
+          "exported": true,
+          "lineCount": 148
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.llama4j.GGMLType.BF16",
+          "specifiers": [
+            "BF16"
+          ]
+        },
+        {
+          "source": "com.llama4j.GGMLType.F16",
+          "specifiers": [
+            "F16"
+          ]
+        },
+        {
+          "source": "com.llama4j.GGMLType.F32",
+          "specifiers": [
+            "F32"
+          ]
+        },
+        {
+          "source": "com.llama4j.GGMLType.Q4_0",
+          "specifiers": [
+            "Q4_0"
+          ]
+        },
+        {
+          "source": "com.llama4j.GGMLType.Q8_0",
+          "specifiers": [
+            "Q8_0"
+          ]
+        },
+        {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
+          "source": "java.nio.ByteOrder",
+          "specifiers": [
+            "ByteOrder"
+          ]
+        },
+        {
+          "source": "java.nio.FloatBuffer",
+          "specifiers": [
+            "FloatBuffer"
+          ]
+        },
+        {
+          "source": "java.nio.channels.FileChannel",
+          "specifiers": [
+            "FileChannel"
+          ]
+        },
+        {
+          "source": "java.nio.file.Path",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "java.nio.file.StandardOpenOption",
+          "specifiers": [
+            "StandardOpenOption"
+          ]
+        },
+        {
+          "source": "java.util.Arrays",
+          "specifiers": [
+            "Arrays"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.function.IntFunction",
+          "specifiers": [
+            "IntFunction"
+          ]
+        },
+        {
+          "source": "java.util.stream.Collectors",
+          "specifiers": [
+            "Collectors"
+          ]
+        },
+        {
+          "source": "java.util.stream.IntStream",
+          "specifiers": [
+            "IntStream"
+          ]
+        }
+      ],
+      "exports": [
+        "loadModel",
+        "loadModel",
+        "loadQuantized",
+        "loadArrayOfQuantized",
+        "loadArrayOfFloatBuffer",
+        "toFloatBuffer",
+        "ModelLoader"
+      ],
+      "totalLines": 186,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/Pair.java": {
+      "filePath": "src/com/llama4j/Pair.java",
+      "contentHash": "2e2de12e06b119b40a993f755901d7e10d01a156a05c4eba4a8bc9c25a922a25",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 21,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/Parallel.java": {
+      "filePath": "src/com/llama4j/Parallel.java",
+      "contentHash": "8dee45a69f7d8ce4f8595c0df0de917c6d7caf221412644c49a43882d00701f7",
+      "functions": [
+        {
+          "name": "parallelFor",
+          "params": [
+            "startInclusive",
+            "endExclusive",
+            "action"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "parallelForLong",
+          "params": [
+            "startInclusive",
+            "endExclusive",
+            "action"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "Parallel",
+          "methods": [
+            "parallelFor",
+            "parallelForLong"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.function.IntConsumer",
+          "specifiers": [
+            "IntConsumer"
+          ]
+        },
+        {
+          "source": "java.util.function.LongConsumer",
+          "specifiers": [
+            "LongConsumer"
+          ]
+        },
+        {
+          "source": "java.util.stream.IntStream",
+          "specifiers": [
+            "IntStream"
+          ]
+        },
+        {
+          "source": "java.util.stream.LongStream",
+          "specifiers": [
+            "LongStream"
+          ]
+        }
+      ],
+      "exports": [
+        "parallelFor",
+        "parallelForLong",
+        "Parallel"
+      ],
+      "totalLines": 45,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/Q4_0FloatTensor.java": {
+      "filePath": "src/com/llama4j/Q4_0FloatTensor.java",
+      "contentHash": "189d28b2699dc51a4c5ac0628b435125c9a6c8510bef90862185e1fe64daa188",
+      "functions": [
+        {
+          "name": "Q4_0FloatTensor",
+          "params": [
+            "size",
+            "memorySegment"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "size",
+          "params": [],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "setFloat",
+          "params": [
+            "index",
+            "value"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "getFloatVector",
+          "params": [
+            "species",
+            "index"
+          ],
+          "returnType": "FloatVector",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "type",
+          "params": [],
+          "returnType": "GGMLType",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "getFloat",
+          "params": [
+            "index"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "dot",
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "vectorDot",
+          "params": [
+            "thiz",
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 58
+        }
+      ],
+      "classes": [
+        {
+          "name": "Q4_0FloatTensor",
+          "methods": [
+            "Q4_0FloatTensor",
+            "size",
+            "setFloat",
+            "getFloatVector",
+            "type",
+            "getFloat",
+            "dot",
+            "vectorDot"
+          ],
+          "properties": [
+            "size",
+            "memorySegment"
+          ],
+          "exported": true,
+          "lineCount": 114
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.lang.foreign.MemorySegment",
+          "specifiers": [
+            "MemorySegment"
+          ]
+        },
+        {
+          "source": "java.nio.ByteOrder",
+          "specifiers": [
+            "ByteOrder"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.ByteVector",
+          "specifiers": [
+            "ByteVector"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.FloatVector",
+          "specifiers": [
+            "FloatVector"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.VectorOperators",
+          "specifiers": [
+            "VectorOperators"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.VectorSpecies",
+          "specifiers": [
+            "VectorSpecies"
+          ]
+        }
+      ],
+      "exports": [
+        "Q4_0FloatTensor",
+        "setFloat",
+        "type",
+        "getFloat",
+        "dot",
+        "Q4_0FloatTensor"
+      ],
+      "totalLines": 147,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/Q8_0FloatTensor.java": {
+      "filePath": "src/com/llama4j/Q8_0FloatTensor.java",
+      "contentHash": "ab7cfa4a8f0be48585909d2efb2504680db47c087820d89c6a206c3341bbbbb8",
+      "functions": [
+        {
+          "name": "Q8_0FloatTensor",
+          "params": [
+            "size",
+            "memorySegment"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "size",
+          "params": [],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "setFloat",
+          "params": [
+            "index",
+            "value"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "getFloatVector",
+          "params": [
+            "species",
+            "index"
+          ],
+          "returnType": "FloatVector",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "type",
+          "params": [],
+          "returnType": "GGMLType",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "getFloat",
+          "params": [
+            "index"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "dot",
+          "params": [
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "vectorDot",
+          "params": [
+            "thiz",
+            "thisOffset",
+            "that",
+            "thatOffset",
+            "size"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 57
+        }
+      ],
+      "classes": [
+        {
+          "name": "Q8_0FloatTensor",
+          "methods": [
+            "Q8_0FloatTensor",
+            "size",
+            "setFloat",
+            "getFloatVector",
+            "type",
+            "getFloat",
+            "dot",
+            "vectorDot"
+          ],
+          "properties": [
+            "size",
+            "memorySegment",
+            "JAVA_SHORT_LE"
+          ],
+          "exported": true,
+          "lineCount": 109
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.llama4j.FloatTensor.F_SPECIES",
+          "specifiers": [
+            "F_SPECIES"
+          ]
+        },
+        {
+          "source": "com.llama4j.FloatTensor.readByte",
+          "specifiers": [
+            "readByte"
+          ]
+        },
+        {
+          "source": "com.llama4j.FloatTensor.readShort",
+          "specifiers": [
+            "readShort"
+          ]
+        },
+        {
+          "source": "java.lang.foreign.MemorySegment",
+          "specifiers": [
+            "MemorySegment"
+          ]
+        },
+        {
+          "source": "java.lang.foreign.ValueLayout",
+          "specifiers": [
+            "ValueLayout"
+          ]
+        },
+        {
+          "source": "java.nio.ByteOrder",
+          "specifiers": [
+            "ByteOrder"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.ByteVector",
+          "specifiers": [
+            "ByteVector"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.FloatVector",
+          "specifiers": [
+            "FloatVector"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.VectorOperators",
+          "specifiers": [
+            "VectorOperators"
+          ]
+        },
+        {
+          "source": "jdk.incubator.vector.VectorSpecies",
+          "specifiers": [
+            "VectorSpecies"
+          ]
+        }
+      ],
+      "exports": [
+        "Q8_0FloatTensor",
+        "setFloat",
+        "type",
+        "getFloat",
+        "JAVA_SHORT_LE",
+        "dot",
+        "Q8_0FloatTensor"
+      ],
+      "totalLines": 139,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/RoPE.java": {
+      "filePath": "src/com/llama4j/RoPE.java",
+      "contentHash": "edcad0bb3a97695383a85f3be65346948a7d659283caf0b6bf79b93745d44670",
+      "functions": [
+        {
+          "name": "precomputeFreqsCis",
+          "params": [
+            "contextLength",
+            "headSize",
+            "theta",
+            "ropeScaling",
+            "scaleFactor",
+            "loFreqFactor",
+            "hiFreqFactor",
+            "oldContextLength"
+          ],
+          "returnType": "Pair<float[], float[]>",
+          "exported": true,
+          "lineCount": 32
+        }
+      ],
+      "classes": [
+        {
+          "name": "RoPE",
+          "methods": [
+            "precomputeFreqsCis"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 34
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "precomputeFreqsCis",
+        "RoPE"
+      ],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/Sampler.java": {
+      "filePath": "src/com/llama4j/Sampler.java",
+      "contentHash": "19b50f27a5cb8105743b8f3f928454c2953643a9482363b0aca94e56f05850f3",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Sampler",
+          "methods": [
+            "sampleToken"
+          ],
+          "properties": [
+            "ARGMAX"
+          ],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "Sampler"
+      ],
+      "totalLines": 25,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/Timer.java": {
+      "filePath": "src/com/llama4j/Timer.java",
+      "contentHash": "8f31e632ab71cb811ed5f6a4c2e360c26d96ccef9de609353a934786b4dd41c4",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Timer",
+          "methods": [
+            "close",
+            "log",
+            "log"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 22
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.concurrent.TimeUnit",
+          "specifiers": [
+            "TimeUnit"
+          ]
+        }
+      ],
+      "exports": [
+        "Timer"
+      ],
+      "totalLines": 43,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/Tokenizer.java": {
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "contentHash": "1cb0c466abb1ed3f0250911702c07168cd20d0919b1aabf66a37cab75a0576de",
+      "functions": [
+        {
+          "name": "regexPattern",
+          "params": [],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "getSpecialTokens",
+          "params": [],
+          "returnType": "Map<String, Integer>",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "isSpecialToken",
+          "params": [
+            "tokenIndex"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "Tokenizer",
+          "params": [
+            "vocabulary",
+            "merges",
+            "regexPattern",
+            "specialTokens"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "encodeImpl",
+          "params": [
+            "text"
+          ],
+          "returnType": "int[]",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "encode",
+          "params": [
+            "text",
+            "allowedSpecial"
+          ],
+          "returnType": "List<Integer>",
+          "exported": true,
+          "lineCount": 34
+        },
+        {
+          "name": "findAll",
+          "params": [
+            "pattern",
+            "text"
+          ],
+          "returnType": "List<String>",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "encodeOrdinary",
+          "params": [
+            "text"
+          ],
+          "returnType": "List<Integer>",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "getStats",
+          "params": [
+            "ids"
+          ],
+          "returnType": "Map<Pair<Integer, Integer>, Integer>",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "encodeChunk",
+          "params": [
+            "chunk"
+          ],
+          "returnType": "List<Integer>",
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "merge",
+          "params": [
+            "ids",
+            "pair",
+            "idx"
+          ],
+          "returnType": "List<Integer>",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "decodeImpl",
+          "params": [
+            "tokens"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "bytesToUnicode",
+          "params": [],
+          "returnType": "Map<Integer, Integer>",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "encode",
+          "params": [
+            "text"
+          ],
+          "returnType": "int[]",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "replaceControlCharacters",
+          "params": [
+            "codePoints"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "replaceControlCharacters",
+          "params": [
+            "str"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "encodeAsList",
+          "params": [
+            "text"
+          ],
+          "returnType": "List<Integer>",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "decode",
+          "params": [
+            "tokens"
+          ],
+          "returnType": "String",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [
+        {
+          "name": "Tokenizer",
+          "methods": [
+            "regexPattern",
+            "getSpecialTokens",
+            "isSpecialToken",
+            "Tokenizer",
+            "encodeImpl",
+            "encode",
+            "findAll",
+            "encodeOrdinary",
+            "getStats",
+            "encodeChunk",
+            "merge",
+            "decodeImpl",
+            "bytesToUnicode",
+            "encode",
+            "replaceControlCharacters",
+            "replaceControlCharacters",
+            "encodeAsList",
+            "decode"
+          ],
+          "properties": [
+            "compiledPattern",
+            "vocabulary",
+            "merges",
+            "specialTokens",
+            "BYTE_ENCODER",
+            "BYTE_DECODER"
+          ],
+          "exported": true,
+          "lineCount": 246
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.nio.charset.StandardCharsets",
+          "specifiers": [
+            "StandardCharsets"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.Arrays",
+          "specifiers": [
+            "Arrays"
+          ]
+        },
+        {
+          "source": "java.util.Comparator",
+          "specifiers": [
+            "Comparator"
+          ]
+        },
+        {
+          "source": "java.util.HashMap",
+          "specifiers": [
+            "HashMap"
+          ]
+        },
+        {
+          "source": "java.util.HexFormat",
+          "specifiers": [
+            "HexFormat"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.Set",
+          "specifiers": [
+            "Set"
+          ]
+        },
+        {
+          "source": "java.util.regex.Matcher",
+          "specifiers": [
+            "Matcher"
+          ]
+        },
+        {
+          "source": "java.util.regex.Pattern",
+          "specifiers": [
+            "Pattern"
+          ]
+        },
+        {
+          "source": "java.util.stream.Collectors",
+          "specifiers": [
+            "Collectors"
+          ]
+        },
+        {
+          "source": "java.util.stream.IntStream",
+          "specifiers": [
+            "IntStream"
+          ]
+        }
+      ],
+      "exports": [
+        "regexPattern",
+        "getSpecialTokens",
+        "isSpecialToken",
+        "Tokenizer",
+        "encodeOrdinary",
+        "decodeImpl",
+        "encode",
+        "replaceControlCharacters",
+        "replaceControlCharacters",
+        "encodeAsList",
+        "decode",
+        "Tokenizer"
+      ],
+      "totalLines": 285,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/ToppSampler.java": {
+      "filePath": "src/com/llama4j/ToppSampler.java",
+      "contentHash": "6ed1e5d7660b820789d29401df8f8ae9c3a67d9c8721bd8039b87905b33202af",
+      "functions": [
+        {
+          "name": "ToppSampler",
+          "params": [
+            "maxNumberOfElements",
+            "topp",
+            "rng"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "swap",
+          "params": [
+            "array",
+            "from",
+            "to"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "siftDown",
+          "params": [
+            "array",
+            "from",
+            "n",
+            "comparator"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "sampleToken",
+          "params": [
+            "logits"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 53
+        }
+      ],
+      "classes": [
+        {
+          "name": "ToppSampler",
+          "methods": [
+            "ToppSampler",
+            "swap",
+            "siftDown",
+            "sampleToken"
+          ],
+          "properties": [
+            "indices",
+            "topp",
+            "rng"
+          ],
+          "exported": true,
+          "lineCount": 89
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.util.Comparator",
+          "specifiers": [
+            "Comparator"
+          ]
+        },
+        {
+          "source": "java.util.random.RandomGenerator",
+          "specifiers": [
+            "RandomGenerator"
+          ]
+        }
+      ],
+      "exports": [
+        "ToppSampler",
+        "sampleToken",
+        "ToppSampler"
+      ],
+      "totalLines": 111,
+      "hasStructuralAnalysis": true
+    },
+    "src/com/llama4j/Vocabulary.java": {
+      "filePath": "src/com/llama4j/Vocabulary.java",
+      "contentHash": "b2bf152a774348f766b147bac9766df56519f90c15cab896b5764a4936aaaaf9",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "java.util.OptionalInt",
+          "specifiers": [
+            "OptionalInt"
+          ]
+        },
+        {
+          "source": "java.util.stream.Collectors",
+          "specifiers": [
+            "Collectors"
+          ]
+        },
+        {
+          "source": "java.util.stream.IntStream",
+          "specifiers": [
+            "IntStream"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 46,
+      "hasStructuralAnalysis": true
+    },
+    "src/module-info.java": {
+      "filePath": "src/module-info.java",
+      "contentHash": "34a8e1265e1170e0ba5e89f61b9961626f5c085cac373c4123274ff0031f7d66",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "src/package.bluej": {
+      "filePath": "src/package.bluej",
+      "contentHash": "fca930253e3308d6ff07f55f4a9bfbdb1ab5bd27b9d384ea1de0166482d5d9b2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 32,
+      "hasStructuralAnalysis": false
+    },
+    "test/test/G2PTokenizerTest.java": {
+      "filePath": "test/test/G2PTokenizerTest.java",
+      "contentHash": "6dfa10c667f97561f20ba6ac16dab0aeeaa99a80cc0c041cae085c78ac769b5e",
+      "functions": [
+        {
+          "name": "G2PTokenizerTest",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "loadVocab",
+          "params": [
+            "vocabPath"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "encode",
+          "params": [
+            "text"
+          ],
+          "returnType": "List<Integer>",
+          "exported": false,
+          "lineCount": 22
+        },
+        {
+          "name": "decode",
+          "params": [
+            "ids"
+          ],
+          "returnType": "String",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "test",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 23
+        }
+      ],
+      "classes": [
+        {
+          "name": "G2PTokenizerTest",
+          "methods": [
+            "G2PTokenizerTest",
+            "loadVocab",
+            "encode",
+            "decode",
+            "test"
+          ],
+          "properties": [
+            "tokenToId",
+            "idToToken",
+            "UNK_TOKEN",
+            "START_TOKEN",
+            "END_TOKEN"
+          ],
+          "exported": true,
+          "lineCount": 95
+        }
+      ],
+      "imports": [
+        {
+          "source": "java.io.BufferedReader",
+          "specifiers": [
+            "BufferedReader"
+          ]
+        },
+        {
+          "source": "java.io.FileReader",
+          "specifiers": [
+            "FileReader"
+          ]
+        },
+        {
+          "source": "java.io.IOException",
+          "specifiers": [
+            "IOException"
+          ]
+        },
+        {
+          "source": "java.util.ArrayList",
+          "specifiers": [
+            "ArrayList"
+          ]
+        },
+        {
+          "source": "java.util.HashMap",
+          "specifiers": [
+            "HashMap"
+          ]
+        },
+        {
+          "source": "java.util.List",
+          "specifiers": [
+            "List"
+          ]
+        },
+        {
+          "source": "java.util.Map",
+          "specifiers": [
+            "Map"
+          ]
+        },
+        {
+          "source": "org.junit.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [
+        "G2PTokenizerTest",
+        "test",
+        "G2PTokenizerTest"
+      ],
+      "totalLines": 128,
+      "hasStructuralAnalysis": true
+    },
+    "test/test/JUnitTest.java": {
+      "filePath": "test/test/JUnitTest.java",
+      "contentHash": "f4e57d1fc5a16239b2aa0166a9e702df04d3ebec9c6adaa76a7bd61d9c19f38b",
+      "functions": [
+        {
+          "name": "test",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "JUnitTest",
+          "methods": [
+            "test"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "imports": [
+        {
+          "source": "com.llama4j.Llama3",
+          "specifiers": [
+            "Llama3"
+          ]
+        },
+        {
+          "source": "org.junit.Test",
+          "specifiers": [
+            "Test"
+          ]
+        }
+      ],
+      "exports": [
+        "test",
+        "JUnitTest"
+      ],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
+    }
+  }
+}

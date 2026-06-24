@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "issues": [],
+  "warnings": [
+    "class:src/com/llama4j/Tokenizer.java:Tokenizer has 0 class→function 'contains' edges, unlike ChatFormat (2) and AOT (2) which consistently link classes to their member functions. This is a data extraction inconsistency from batch-4 -- all 7 Tokenizer functions have file→function edges but lack class→function edges."
+  ],
+  "stats": {
+    "totalNodes": 101,
+    "totalEdges": 131,
+    "nodeTypes": {
+      "document": 2,
+      "config": 6,
+      "file": 31,
+      "class": 22,
+      "function": 40
+    },
+    "edgeTypes": {
+      "related": 63,
+      "depends_on": 2,
+      "configures": 2,
+      "contains": 62,
+      "imports": 1,
+      "tested_by": 1
+    }
+  }
+}

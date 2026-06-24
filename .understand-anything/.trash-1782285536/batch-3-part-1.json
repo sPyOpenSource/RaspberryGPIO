@@ -1,0 +1,547 @@
+{
+  "batch": 3,
+  "part": 1,
+  "description": "Non-Java files, tensor types, and tokenization files",
+  "nodes": [
+    {
+      "id": "file:.DS_Store",
+      "type": "file",
+      "name": ".DS_Store",
+      "filePath": ".DS_Store",
+      "summary": "macOS directory metadata file (auto-generated, not part of source)",
+      "tags": ["metadata", "macos", "auto-generated"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "file",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "summary": "Ignore patterns for understand-anything analysis tool, excluding files from codebase scanning",
+      "tags": ["config", "ignore", "analysis"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.understand-anything/config.json",
+      "type": "config",
+      "name": "config.json",
+      "filePath": ".understand-anything/config.json",
+      "summary": "Configuration for understand-anything analysis tool, specifying output language",
+      "tags": ["config", "analysis", "settings"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:CHANGELOG",
+      "type": "file",
+      "name": "CHANGELOG",
+      "filePath": "CHANGELOG",
+      "summary": "Project changelog documenting version history and releases",
+      "tags": ["documentation", "changelog", "history"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:manifest.mf",
+      "type": "file",
+      "name": "manifest.mf",
+      "filePath": "manifest.mf",
+      "summary": "Java JAR manifest file defining entry point and classpath",
+      "tags": ["manifest", "jar", "build"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/FloatTensor.java",
+      "type": "file",
+      "name": "FloatTensor.java",
+      "filePath": "src/com/llama4j/FloatTensor.java",
+      "summary": "Abstract base class for all tensor types in the LLM inference engine, providing core tensor operations (dot, matmul, softmax, RMSNorm helpers, reductions) with SIMD vector API acceleration",
+      "tags": ["tensor", "base-class", "linear-algebra", "simd"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/FloatTensor.java:FloatTensor",
+      "type": "class",
+      "name": "FloatTensor",
+      "filePath": "src/com/llama4j/FloatTensor.java",
+      "lineRange": [33, 239],
+      "summary": "Abstract base class for float tensor types. Defines the tensor algebra interface: dot product, matrix multiply, reductions (sum/max/argmax), in-place operations (add/multiply/divide/fill/softmax/saxpy), and utility methods. Uses Java Vector API and sun.misc.Unsafe for memory access.",
+      "tags": ["tensor", "abstract", "linear-algebra", "simd", "vector-api"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/FloatTensor.java:argmax",
+      "type": "function",
+      "name": "argmax",
+      "filePath": "src/com/llama4j/FloatTensor.java",
+      "lineRange": [149, 162],
+      "summary": "Finds the index of the maximum value in a tensor slice. Used by Sampler.ARGMAX for greedy token selection.",
+      "tags": ["reduction", "sampling", "argmax"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "type": "file",
+      "name": "ArrayFloatTensor.java",
+      "filePath": "src/com/llama4j/ArrayFloatTensor.java",
+      "summary": "Float tensor backed by a plain Java float array with full read/write support, used for KV cache and activation buffers",
+      "tags": ["tensor", "array-backed", "cpu"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/com/llama4j/ArrayFloatTensor.java:ArrayFloatTensor",
+      "type": "class",
+      "name": "ArrayFloatTensor",
+      "filePath": "src/com/llama4j/ArrayFloatTensor.java",
+      "lineRange": [23, 70],
+      "summary": "Float tensor backed by float[] array. Supports get/set/fill and SIMD getFloatVector. Used for KV cache and state buffers where random access writes are needed.",
+      "tags": ["tensor", "array-backed", "float-array"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/com/llama4j/BF16FloatTensor.java",
+      "type": "file",
+      "name": "BF16FloatTensor.java",
+      "filePath": "src/com/llama4j/BF16FloatTensor.java",
+      "summary": "BF16 (bfloat16) quantized tensor with vectorized dot product using SIMD short-to-float conversion",
+      "tags": ["tensor", "quantized", "bf16", "simd"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/BF16FloatTensor.java:BF16FloatTensor",
+      "type": "class",
+      "name": "BF16FloatTensor",
+      "filePath": "src/com/llama4j/BF16FloatTensor.java",
+      "lineRange": [31, 112],
+      "summary": "BF16 quantized float tensor backed by MemorySegment. Implements vectorized dot product by loading shorts, converting bf16→float via left-shift and reinterpret, then FMA-accumulating. SetFloat and getFloatVector throw UnsupportedOperationException.",
+      "tags": ["tensor", "quantized", "bf16", "simd", "memory-segment"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/BF16FloatTensor.java:vectorDot",
+      "type": "function",
+      "name": "vectorDot",
+      "filePath": "src/com/llama4j/BF16FloatTensor.java",
+      "lineRange": [80, 110],
+      "summary": "SIMD-accelerated dot product for BF16 tensors. Loads short vectors, casts to int, left-shifts 16 bits, reinterprets as float, and FMA-accumulates against the other tensor's float vector.",
+      "tags": ["simd", "dot-product", "bf16", "vector-api"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/com/llama4j/F16FloatTensor.java",
+      "type": "file",
+      "name": "F16FloatTensor.java",
+      "filePath": "src/com/llama4j/F16FloatTensor.java",
+      "summary": "FP16 quantized tensor with software float16-to-float32 conversion and SIMD vectorized dot product",
+      "tags": ["tensor", "quantized", "fp16", "simd"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/F16FloatTensor.java:F16FloatTensor",
+      "type": "class",
+      "name": "F16FloatTensor",
+      "filePath": "src/com/llama4j/F16FloatTensor.java",
+      "lineRange": [31, 124],
+      "summary": "FP16 quantized float tensor. Converts float16 bits stored as shorts to float32 using manual exponent/mantissa manipulation. Implements fast vectorized dot product with software float16 decode and FMA accumulation.",
+      "tags": ["tensor", "quantized", "fp16", "simd", "memory-segment"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/F16FloatTensor.java:vectorDot",
+      "type": "function",
+      "name": "vectorDot",
+      "filePath": "src/com/llama4j/F16FloatTensor.java",
+      "lineRange": [75, 123],
+      "summary": "SIMD-accelerated dot product for FP16 tensors. Manually decodes float16 bit-representation to float32 in vector registers, then FMA-accumulates. Handles denormals, infinities, and NaN per IEEE 754-2008.",
+      "tags": ["simd", "dot-product", "fp16", "vector-api", "ieee754"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "file",
+      "name": "Q4_0FloatTensor.java",
+      "filePath": "src/com/llama4j/Q4_0FloatTensor.java",
+      "summary": "GGML Q4_0 4-bit quantized tensor with blockwise FP16 scale and SIMD vectorized dot product",
+      "tags": ["tensor", "quantized", "q4_0", "simd", "ggml"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/Q4_0FloatTensor.java:Q4_0FloatTensor",
+      "type": "class",
+      "name": "Q4_0FloatTensor",
+      "filePath": "src/com/llama4j/Q4_0FloatTensor.java",
+      "lineRange": [33, 146],
+      "summary": "GGML Q4_0 block-quantized tensor (32 values per block, FP16 scale, 4-bit nibbles). Implements vectorized dot product by dequantizing nibbles to floats in SIMD registers and FMA-accumulating against the reference tensor.",
+      "tags": ["tensor", "quantized", "q4_0", "simd", "ggml"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/Q4_0FloatTensor.java:getFloat",
+      "type": "function",
+      "name": "getFloat",
+      "filePath": "src/com/llama4j/Q4_0FloatTensor.java",
+      "lineRange": [62, 77],
+      "summary": "Dequantizes a single element from Q4_0 block format: reads the FP16 scale via readShort+Float.float16ToFloat, then extracts the appropriate nibble from the block data.",
+      "tags": ["dequantize", "q4_0", "nibble"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/com/llama4j/Q4_0FloatTensor.java:vectorDot",
+      "type": "function",
+      "name": "vectorDot",
+      "filePath": "src/com/llama4j/Q4_0FloatTensor.java",
+      "lineRange": [88, 145],
+      "summary": "SIMD-accelerated dot product for Q4_0 tensors. Unpacks nibble-pairs into low/high byte vectors, casts to float, multiplies by scale, and FMA-accumulates. Supports multiple vector lane widths (128, 256, 512-bit).",
+      "tags": ["simd", "dot-product", "q4_0", "dequantize", "vector-api"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "file",
+      "name": "Q8_0FloatTensor.java",
+      "filePath": "src/com/llama4j/Q8_0FloatTensor.java",
+      "summary": "GGML Q8_0 8-bit quantized tensor with blockwise FP16 scale and SIMD vectorized dot product",
+      "tags": ["tensor", "quantized", "q8_0", "simd", "ggml"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/com/llama4j/Q8_0FloatTensor.java:Q8_0FloatTensor",
+      "type": "class",
+      "name": "Q8_0FloatTensor",
+      "filePath": "src/com/llama4j/Q8_0FloatTensor.java",
+      "lineRange": [30, 138],
+      "summary": "GGML Q8_0 block-quantized tensor (32 values per block, FP16 scale, 8-bit signed integers). Implements vectorized dot product by broadcasting scale and casting bytes to floats in SIMD registers.",
+      "tags": ["tensor", "quantized", "q8_0", "simd", "ggml"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/com/llama4j/Q8_0FloatTensor.java:vectorDot",
+      "type": "function",
+      "name": "vectorDot",
+      "filePath": "src/com/llama4j/Q8_0FloatTensor.java",
+      "lineRange": [81, 137],
+      "summary": "SIMD-accelerated dot product for Q8_0 tensors. Loads quantized bytes, casts to float, multiplies by FP16 scale, and FMA-accumulates against the reference float vector. Supports 128, 256, and 512-bit vector lanes.",
+      "tags": ["simd", "dot-product", "q8_0", "dequantize", "vector-api"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/com/llama4j/GGMLType.java",
+      "type": "file",
+      "name": "GGMLType.java",
+      "filePath": "src/com/llama4j/GGMLType.java",
+      "summary": "Enum of all supported GGML tensor types (F32, F16, BF16, Q4_0, Q8_0, k-quants, IQ quants) with type size and block size metadata",
+      "tags": ["ggml", "enum", "quantization", "types"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/com/llama4j/GGMLType.java:GGMLType",
+      "type": "class",
+      "name": "GGMLType",
+      "filePath": "src/com/llama4j/GGMLType.java",
+      "lineRange": [21, 106],
+      "summary": "Enum with 30+ GGML tensor format types. Each variant specifies typeSize and blockSize. Provides byteSizeFor() for memory sizing and fromId() for deserialization. Supports F32, F16, BF16, Q4_0, Q4_1, Q8_0, Q8_1, K-quants, and more.",
+      "tags": ["ggml", "enum", "quantization", "type-system"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "type": "file",
+      "name": "GGMLTensorEntry.java",
+      "filePath": "src/com/llama4j/GGMLTensorEntry.java",
+      "summary": "Record holding a mapped tensor's metadata: MemorySegment, name, GGML type, shape dimensions, and data MemorySegment",
+      "tags": ["tensor", "ggml", "record", "metadata"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/CategoricalSampler.java",
+      "type": "file",
+      "name": "CategoricalSampler.java",
+      "filePath": "src/com/llama4j/CategoricalSampler.java",
+      "summary": "Categorical (multinomial) sampler that draws a token from a probability distribution using cumulative distribution function inversion",
+      "tags": ["sampler", "categorical", "random", "token-generation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/com/llama4j/Sampler.java",
+      "type": "file",
+      "name": "Sampler.java",
+      "filePath": "src/com/llama4j/Sampler.java",
+      "summary": "Functional interface for token sampling strategies, providing ARGMAX greedy sampler as a built-in constant",
+      "tags": ["sampler", "interface", "functional", "token-generation"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "class:src/com/llama4j/FloatTensor.java:FloatTensor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/FloatTensor.java:FloatTensor",
+      "target": "function:src/com/llama4j/FloatTensor.java:argmax",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "target": "class:src/com/llama4j/ArrayFloatTensor.java:ArrayFloatTensor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/BF16FloatTensor.java",
+      "target": "class:src/com/llama4j/BF16FloatTensor.java:BF16FloatTensor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/BF16FloatTensor.java:BF16FloatTensor",
+      "target": "function:src/com/llama4j/BF16FloatTensor.java:vectorDot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/F16FloatTensor.java",
+      "target": "class:src/com/llama4j/F16FloatTensor.java:F16FloatTensor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/F16FloatTensor.java:F16FloatTensor",
+      "target": "function:src/com/llama4j/F16FloatTensor.java:vectorDot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "target": "class:src/com/llama4j/Q4_0FloatTensor.java:Q4_0FloatTensor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/Q4_0FloatTensor.java:Q4_0FloatTensor",
+      "target": "function:src/com/llama4j/Q4_0FloatTensor.java:getFloat",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/Q4_0FloatTensor.java:Q4_0FloatTensor",
+      "target": "function:src/com/llama4j/Q4_0FloatTensor.java:vectorDot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "target": "class:src/com/llama4j/Q8_0FloatTensor.java:Q8_0FloatTensor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:src/com/llama4j/Q8_0FloatTensor.java:Q8_0FloatTensor",
+      "target": "function:src/com/llama4j/Q8_0FloatTensor.java:vectorDot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLType.java",
+      "target": "class:src/com/llama4j/GGMLType.java:GGMLType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "file:src/com/llama4j/BF16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "file:src/com/llama4j/F16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "target": "file:src/com/llama4j/BF16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "target": "file:src/com/llama4j/F16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "target": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/ArrayFloatTensor.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/BF16FloatTensor.java",
+      "target": "file:src/com/llama4j/F16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/BF16FloatTensor.java",
+      "target": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/BF16FloatTensor.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/F16FloatTensor.java",
+      "target": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/F16FloatTensor.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLType.java",
+      "target": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLType.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLType.java",
+      "target": "file:src/com/llama4j/BF16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLType.java",
+      "target": "file:src/com/llama4j/F16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLType.java",
+      "target": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "target": "file:src/com/llama4j/BF16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "target": "file:src/com/llama4j/F16FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "target": "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/GGMLTensorEntry.java",
+      "target": "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Sampler.java",
+      "target": "file:src/com/llama4j/CategoricalSampler.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/FloatTensor.java",
+      "target": "file:src/com/llama4j/Sampler.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

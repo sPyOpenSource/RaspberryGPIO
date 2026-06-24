@@ -1,0 +1,31 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "README.rst",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 12,
+      "nonEmptyLines": 8,
+      "metrics": {}
+    },
+    {
+      "path": "build.xml",
+      "language": "xml",
+      "fileCategory": "config",
+      "totalLines": 73,
+      "nonEmptyLines": 60,
+      "metrics": {}
+    },
+    {
+      "path": "log.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 10,
+      "nonEmptyLines": 10,
+      "metrics": {}
+    }
+  ]
+}

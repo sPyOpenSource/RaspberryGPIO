@@ -1,0 +1,379 @@
+{
+  "nodes": [
+    {
+      "id": "file:src/com/llama4j/Tokenizer.java",
+      "type": "file:java",
+      "name": "Tokenizer.java",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "summary": "BPE tokenizer for GPT-2 style encoding/decoding. Encodes text to token IDs via byte-pair encoding merges and decodes token IDs back to text. Handles special tokens and provides byte-to-unicode mapping.",
+      "tags": ["tokenizer", "bpe", "encoding", "llama4j"],
+      "complexity": 4
+    },
+    {
+      "id": "file:src/com/llama4j/ToppSampler.java",
+      "type": "file:java",
+      "name": "ToppSampler.java",
+      "filePath": "src/com/llama4j/ToppSampler.java",
+      "summary": "Top-p (nucleus) sampling implementation. Uses a heap-based approach to select tokens from the smallest set whose cumulative probability exceeds the threshold, with cutoff optimization.",
+      "tags": ["sampler", "top-p", "nucleus", "llama4j"],
+      "complexity": 3
+    },
+    {
+      "id": "file:src/com/llama4j/Vocabulary.java",
+      "type": "file:java",
+      "name": "Vocabulary.java",
+      "filePath": "src/com/llama4j/Vocabulary.java",
+      "summary": "Java record holding token strings and scores with bidirectional lookup. Provides token-by-index and index-by-token resolution for the vocabulary.",
+      "tags": ["vocabulary", "record", "lookup", "llama4j"],
+      "complexity": 1
+    },
+    {
+      "id": "file:src/module-info.java",
+      "type": "file:java",
+      "name": "module-info.java",
+      "filePath": "src/module-info.java",
+      "summary": "Java module declaration for com.llama4j, declaring dependencies on incubator vector, java.desktop, logging, and native libraries.",
+      "tags": ["module", "configuration"],
+      "complexity": 1
+    },
+    {
+      "id": "file:src/package.bluej",
+      "type": "file:bluej",
+      "name": "package.bluej",
+      "filePath": "src/package.bluej",
+      "summary": "BlueJ IDE project configuration file with editor layout, window positions, and package target settings.",
+      "tags": ["bluej", "ide-config"],
+      "complexity": 1
+    },
+    {
+      "id": "file:test/test/G2PTokenizerTest.java",
+      "type": "file:java",
+      "name": "G2PTokenizerTest.java",
+      "filePath": "test/test/G2PTokenizerTest.java",
+      "summary": "JUnit test for a grapheme-to-phoneme tokenizer. Tests encoding input words to token IDs and decoding model output IDs back to phonemes using a G2P vocabulary.",
+      "tags": ["test", "g2p", "tokenizer"],
+      "complexity": 2
+    },
+    {
+      "id": "file:test/test/JUnitTest.java",
+      "type": "file:java",
+      "name": "JUnitTest.java",
+      "filePath": "test/test/JUnitTest.java",
+      "summary": "Simple JUnit test that instantiates the Llama3 model to verify basic initialization.",
+      "tags": ["test", "smoke-test"],
+      "complexity": 1
+    },
+    {
+      "id": "class:src/com/llama4j/Tokenizer.java:Tokenizer",
+      "type": "class",
+      "name": "Tokenizer",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [39, 284],
+      "summary": "Core BPE tokenizer class with 18 methods implementing GPT-2 compatible encode/decode, special token handling, byte-to-unicode mapping, and merge-based tokenization.",
+      "tags": ["tokenizer", "bpe"],
+      "complexity": 4
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:Tokenizer",
+      "type": "function",
+      "name": "Tokenizer",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [60, 71],
+      "summary": "Constructor that initializes the compiled regex pattern, special tokens map, and merges map from the vocabulary and merge pairs.",
+      "tags": ["constructor"],
+      "complexity": 2
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:encode",
+      "type": "function",
+      "name": "encode",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [84, 117],
+      "summary": "Encodes text to token IDs with special token handling. Splits text on special token boundaries and encodes each segment separately.",
+      "tags": ["encoding", "tokenization"],
+      "complexity": 3
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:encodeOrdinary",
+      "type": "function",
+      "name": "encodeOrdinary",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [133, 143],
+      "summary": "Encodes text ignoring special tokens by splitting into regex-defined chunks and encoding each chunk via BPE.",
+      "tags": ["encoding", "tokenization"],
+      "complexity": 2
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:encodeChunk",
+      "type": "function",
+      "name": "encodeChunk",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [154, 179],
+      "summary": "Encodes a single text chunk via BPE by converting bytes to token IDs, then repeatedly merging the pair with the lowest merge index.",
+      "tags": ["encoding", "bpe"],
+      "complexity": 3
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:merge",
+      "type": "function",
+      "name": "merge",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [181, 195],
+      "summary": "Merges adjacent token pairs in the ID list according to the BPE merge map, replacing matched pairs with the merged index.",
+      "tags": ["bpe", "merge"],
+      "complexity": 2
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:bytesToUnicode",
+      "type": "function",
+      "name": "bytesToUnicode",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [215, 235],
+      "summary": "Builds a lookup table mapping UTF-8 bytes to unicode code points, avoiding control characters that the BPE code cannot handle.",
+      "tags": ["encoding", "unicode"],
+      "complexity": 3
+    },
+    {
+      "id": "function:src/com/llama4j/Tokenizer.java:replaceControlCharacters",
+      "type": "function",
+      "name": "replaceControlCharacters",
+      "filePath": "src/com/llama4j/Tokenizer.java",
+      "lineRange": [251, 265],
+      "summary": "Replaces control characters in a code point array with escaped unicode representations, preserving newlines.",
+      "tags": ["utility", "sanitization"],
+      "complexity": 2
+    },
+    {
+      "id": "class:src/com/llama4j/ToppSampler.java:ToppSampler",
+      "type": "class",
+      "name": "ToppSampler",
+      "filePath": "src/com/llama4j/ToppSampler.java",
+      "lineRange": [22, 110],
+      "summary": "Implements the Sampler interface using top-p nucleus sampling with a heap-based partial sort for efficiency.",
+      "tags": ["sampler", "top-p"],
+      "complexity": 3
+    },
+    {
+      "id": "function:src/com/llama4j/ToppSampler.java:siftDown",
+      "type": "function",
+      "name": "siftDown",
+      "filePath": "src/com/llama4j/ToppSampler.java",
+      "lineRange": [40, 54],
+      "summary": "Heap sift-down operation used to maintain the max-heap property during partial sorting of candidate tokens.",
+      "tags": ["heap", "sorting"],
+      "complexity": 2
+    },
+    {
+      "id": "function:src/com/llama4j/ToppSampler.java:sampleToken",
+      "type": "function",
+      "name": "sampleToken",
+      "filePath": "src/com/llama4j/ToppSampler.java",
+      "lineRange": [56, 108],
+      "summary": "Performs top-p sampling: crops low-probability tokens, builds a max-heap, truncates to cumulative probability threshold, and samples from the remaining candidates.",
+      "tags": ["sampling", "nucleus", "top-p"],
+      "complexity": 4
+    },
+    {
+      "id": "class:src/com/llama4j/Vocabulary.java:Vocabulary",
+      "type": "class",
+      "name": "Vocabulary",
+      "filePath": "src/com/llama4j/Vocabulary.java",
+      "lineRange": [24, 45],
+      "summary": "Java record storing token strings and scores with bidirectional token-to-index and index-to-token lookup.",
+      "tags": ["vocabulary", "record"],
+      "complexity": 1
+    },
+    {
+      "id": "class:src/test/G2PTokenizerTest.java:G2PTokenizerTest",
+      "type": "class",
+      "name": "G2PTokenizerTest",
+      "filePath": "test/test/G2PTokenizerTest.java",
+      "lineRange": [32, 126],
+      "summary": "JUnit test class for G2P tokenizer with methods to load vocabulary, encode graphemes, decode phonemes, and run the full test pipeline.",
+      "tags": ["test", "g2p"],
+      "complexity": 2
+    },
+    {
+      "id": "function:test/test/G2PTokenizerTest.java:loadVocab",
+      "type": "function",
+      "name": "loadVocab",
+      "filePath": "test/test/G2PTokenizerTest.java",
+      "lineRange": [47, 60],
+      "summary": "Loads a G2P vocabulary file into token-to-ID and ID-to-token lookup maps, one token per line.",
+      "tags": ["vocabulary", "loading"],
+      "complexity": 2
+    },
+    {
+      "id": "function:test/test/G2PTokenizerTest.java:encode",
+      "type": "function",
+      "name": "encode",
+      "filePath": "test/test/G2PTokenizerTest.java",
+      "lineRange": [63, 84],
+      "summary": "Encodes input text to token IDs with optional start/end tokens, handling unknown characters via UNK token.",
+      "tags": ["encoding", "g2p"],
+      "complexity": 2
+    },
+    {
+      "id": "function:test/test/G2PTokenizerTest.java:decode",
+      "type": "function",
+      "name": "decode",
+      "filePath": "test/test/G2PTokenizerTest.java",
+      "lineRange": [87, 100],
+      "summary": "Decodes token IDs to phoneme strings, filtering out special tokens like UNK, START, END, and PAD.",
+      "tags": ["decoding", "g2p"],
+      "complexity": 2
+    },
+    {
+      "id": "function:test/test/G2PTokenizerTest.java:test",
+      "type": "function",
+      "name": "test",
+      "filePath": "test/test/G2PTokenizerTest.java",
+      "lineRange": [103, 125],
+      "summary": "JUnit test method that encodes an input word and decodes simulated model output to verify the tokenizer pipeline.",
+      "tags": ["test", "integration"],
+      "complexity": 2
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "class:src/com/llama4j/Tokenizer.java:Tokenizer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:Tokenizer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:encode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:encodeOrdinary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:encodeChunk",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:merge",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:bytesToUnicode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "function:src/com/llama4j/Tokenizer.java:replaceControlCharacters",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/ToppSampler.java",
+      "target": "class:src/com/llama4j/ToppSampler.java:ToppSampler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/ToppSampler.java",
+      "target": "function:src/com/llama4j/ToppSampler.java:siftDown",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/ToppSampler.java",
+      "target": "function:src/com/llama4j/ToppSampler.java:sampleToken",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/com/llama4j/Vocabulary.java",
+      "target": "class:src/com/llama4j/Vocabulary.java:Vocabulary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:test/test/G2PTokenizerTest.java",
+      "target": "class:src/test/G2PTokenizerTest.java:G2PTokenizerTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:test/test/G2PTokenizerTest.java",
+      "target": "function:test/test/G2PTokenizerTest.java:loadVocab",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:test/test/G2PTokenizerTest.java",
+      "target": "function:test/test/G2PTokenizerTest.java:encode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:test/test/G2PTokenizerTest.java",
+      "target": "function:test/test/G2PTokenizerTest.java:decode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:test/test/G2PTokenizerTest.java",
+      "target": "function:test/test/G2PTokenizerTest.java:test",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:test/test/JUnitTest.java",
+      "target": "file:src/com/llama4j/Llama3.java",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "file:test/test/G2PTokenizerTest.java",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/com/llama4j/Tokenizer.java",
+      "target": "file:src/com/llama4j/Vocabulary.java",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

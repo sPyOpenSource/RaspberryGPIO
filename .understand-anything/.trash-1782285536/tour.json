@@ -1,0 +1,50 @@
+[
+  {
+    "order": 1,
+    "title": "Project Overview & Build System",
+    "description": "Begin with the README to understand the project's purpose — a Java-based Llama model inference engine. The Ant build script and NetBeans project configuration define how the project is compiled, tested, and packaged, with dependencies on AIBase, opencv, and RXTXcomm.",
+    "nodeIds": ["document:README.rst", "config:build.xml", "config:nbproject/project.properties", "config:nbproject/project.xml"]
+  },
+  {
+    "order": 2,
+    "title": "Application Entry Point",
+    "description": "Llama3.java is the CLI application that orchestrates the full inference pipeline: it loads the model via ModelLoader, initializes the tokenizer, runs the generation loop, and handles chat interaction. ChatFormat provides the Llama 3 chat template for system/user/assistant message formatting.",
+    "nodeIds": ["file:src/com/llama4j/Llama3.java", "file:src/com/llama4j/ChatFormat.java"]
+  },
+  {
+    "order": 3,
+    "title": "Model File Parsing & Weight Loading",
+    "description": "GGUF.java parses the GGUF model file format, extracting metadata and tensor entries. ModelLoader reads these parsed tensors, creates the appropriate quantized tensor objects, and initializes the model state. AOT.java provides ahead-of-time preloading to reduce inference latency.",
+    "nodeIds": ["file:src/com/llama4j/GGUF.java", "file:src/com/llama4j/GGMLType.java", "file:src/com/llama4j/GGMLTensorEntry.java", "file:src/com/llama4j/ModelLoader.java", "file:src/com/llama4j/AOT.java"]
+  },
+  {
+    "order": 4,
+    "title": "Core Inference Engine",
+    "description": "Llama.java is the heart of the model — it implements the forward pass through transformer layers, manages the KV-cache for autoregressive generation, and orchestrates attention computations. RoPE.java provides Rotary Position Embeddings to encode token positions, while Parallel.java distributes tensor operations across CPU threads.",
+    "nodeIds": ["file:src/com/llama4j/Llama.java", "file:src/com/llama4j/RoPE.java", "file:src/com/llama4j/Parallel.java"]
+  },
+  {
+    "order": 5,
+    "title": "Tensor Hierarchy & Matrix Operations",
+    "description": "All neural network computations are built on the FloatTensor abstract base class, which defines matrix arithmetic, reshaping, and indexing primitives. ArrayFloatTensor provides the default dense implementation, while BF16FloatTensor and F16FloatTensor offer memory-efficient half-precision storage for larger models.",
+    "nodeIds": ["file:src/com/llama4j/FloatTensor.java", "file:src/com/llama4j/ArrayFloatTensor.java", "file:src/com/llama4j/BF16FloatTensor.java", "file:src/com/llama4j/F16FloatTensor.java"]
+  },
+  {
+    "order": 6,
+    "title": "Model Quantization",
+    "description": "To fit large language models into memory, the project supports quantized tensor types. Q4_0FloatTensor uses 4-bit quantization with block scaling for maximum compression, while Q8_0FloatTensor provides 8-bit quantization as a balance between size and precision. GGMLType enumerates all supported formats with metadata.",
+    "nodeIds": ["file:src/com/llama4j/Q4_0FloatTensor.java", "file:src/com/llama4j/Q8_0FloatTensor.java", "file:src/com/llama4j/GGMLType.java"]
+  },
+  {
+    "order": 7,
+    "title": "Tokenization & Token Sampling",
+    "description": "Tokenizer.java implements BPE tokenization to convert text to token IDs and back. Vocabulary.java maps between IDs and string tokens. Once the model produces logits, Sampler.java and its implementations — CategoricalSampler (direct probability sampling) and ToppSampler (nucleus sampling with a binary heap) — select the next token.",
+    "nodeIds": ["file:src/com/llama4j/Tokenizer.java", "file:src/com/llama4j/Vocabulary.java", "file:src/com/llama4j/Sampler.java", "file:src/com/llama4j/CategoricalSampler.java", "file:src/com/llama4j/ToppSampler.java"]
+  },
+  {
+    "order": 8,
+    "title": "Tests & Supporting Utilities",
+    "description": "JUnit tests validate the tokenizer (G2PTokenizerTest) and exercise the full inference pipeline (JUnitTest). Supporting utility classes like Pair (generic tuple), Timer (performance profiling), and the module-info.java descriptor round out the project structure.",
+    "nodeIds": ["file:test/test/G2PTokenizerTest.java", "file:test/test/JUnitTest.java", "file:src/com/llama4j/Pair.java", "file:src/com/llama4j/Timer.java", "file:src/module-info.java"]
+  }
+]

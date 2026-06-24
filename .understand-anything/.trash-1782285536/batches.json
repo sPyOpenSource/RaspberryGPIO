@@ -1,0 +1,482 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "louvain",
+  "totalFiles": 39,
+  "totalBatches": 4,
+  "exportsByPath": {
+    ".DS_Store": [],
+    ".understand-anything/.understandignore": [],
+    "CHANGELOG": [],
+    "manifest.mf": [],
+    "src/com/llama4j/AOT.java": [
+      "tryUsePreLoaded",
+      "AOT"
+    ],
+    "src/com/llama4j/ArrayFloatTensor.java": [
+      "allocate",
+      "size",
+      "getFloat",
+      "setFloat",
+      "type",
+      "fillInPlace",
+      "getFloatVector",
+      "ArrayFloatTensor"
+    ],
+    "src/com/llama4j/BF16FloatTensor.java": [
+      "BF16FloatTensor",
+      "setFloat",
+      "type",
+      "getFloat",
+      "dot",
+      "BF16FloatTensor"
+    ],
+    "src/com/llama4j/CategoricalSampler.java": [],
+    "src/com/llama4j/ChatFormat.java": [
+      "ChatFormat",
+      "getTokenizer",
+      "getStopTokens",
+      "encodeHeader",
+      "encodeMessage",
+      "encodeDialogPrompt",
+      "ChatFormat"
+    ],
+    "src/com/llama4j/F16FloatTensor.java": [
+      "F16FloatTensor",
+      "setFloat",
+      "type",
+      "getFloat",
+      "dot",
+      "F16FloatTensor"
+    ],
+    "src/com/llama4j/FloatTensor.java": [
+      "numberOfElements",
+      "FloatTensor"
+    ],
+    "src/com/llama4j/GGMLTensorEntry.java": [],
+    "src/com/llama4j/GGMLType.java": [],
+    "src/com/llama4j/GGUF.java": [
+      "getTensorInfos",
+      "getTensorDataOffset",
+      "getMetadata",
+      "loadModel",
+      "loadTensors",
+      "getAlignment",
+      "GGUF"
+    ],
+    "src/com/llama4j/Llama.java": [],
+    "src/com/llama4j/Llama3.java": [
+      "init",
+      "initInputPins",
+      "initOutputPins",
+      "process",
+      "Llama3"
+    ],
+    "src/com/llama4j/ModelLoader.java": [
+      "loadModel",
+      "loadModel",
+      "loadQuantized",
+      "loadArrayOfQuantized",
+      "loadArrayOfFloatBuffer",
+      "toFloatBuffer",
+      "ModelLoader"
+    ],
+    "src/com/llama4j/Pair.java": [],
+    "src/com/llama4j/Parallel.java": [
+      "parallelFor",
+      "parallelForLong",
+      "Parallel"
+    ],
+    "src/com/llama4j/Q4_0FloatTensor.java": [
+      "Q4_0FloatTensor",
+      "setFloat",
+      "type",
+      "getFloat",
+      "dot",
+      "Q4_0FloatTensor"
+    ],
+    "src/com/llama4j/Q8_0FloatTensor.java": [
+      "Q8_0FloatTensor",
+      "setFloat",
+      "type",
+      "getFloat",
+      "JAVA_SHORT_LE",
+      "dot",
+      "Q8_0FloatTensor"
+    ],
+    "src/com/llama4j/RoPE.java": [
+      "precomputeFreqsCis",
+      "RoPE"
+    ],
+    "src/com/llama4j/Sampler.java": [
+      "Sampler"
+    ],
+    "src/com/llama4j/Timer.java": [
+      "Timer"
+    ],
+    "src/com/llama4j/Tokenizer.java": [
+      "regexPattern",
+      "getSpecialTokens",
+      "isSpecialToken",
+      "Tokenizer",
+      "encodeOrdinary",
+      "decodeImpl",
+      "encode",
+      "replaceControlCharacters",
+      "replaceControlCharacters",
+      "encodeAsList",
+      "decode",
+      "Tokenizer"
+    ],
+    "src/com/llama4j/ToppSampler.java": [
+      "ToppSampler",
+      "sampleToken",
+      "ToppSampler"
+    ],
+    "src/com/llama4j/Vocabulary.java": [],
+    "src/module-info.java": [],
+    "src/package.bluej": [],
+    "test/test/G2PTokenizerTest.java": [
+      "G2PTokenizerTest",
+      "test",
+      "G2PTokenizerTest"
+    ],
+    "test/test/JUnitTest.java": [
+      "test",
+      "JUnitTest"
+    ]
+  },
+  "batches": [
+    {
+      "batchIndex": 1,
+      "files": [
+        {
+          "path": "README.rst",
+          "language": "markdown",
+          "sizeLines": 12,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "build.xml",
+          "language": "xml",
+          "sizeLines": 73,
+          "fileCategory": "config"
+        },
+        {
+          "path": "log.txt",
+          "language": "txt",
+          "sizeLines": 10,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        "README.rst": [],
+        "build.xml": [],
+        "log.txt": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 2,
+      "files": [
+        {
+          "path": "nbproject/build-impl.xml",
+          "language": "xml",
+          "sizeLines": 1807,
+          "fileCategory": "config"
+        },
+        {
+          "path": "nbproject/genfiles.properties",
+          "language": "properties",
+          "sizeLines": 8,
+          "fileCategory": "config"
+        },
+        {
+          "path": "nbproject/project.properties",
+          "language": "properties",
+          "sizeLines": 126,
+          "fileCategory": "config"
+        },
+        {
+          "path": "nbproject/project.xml",
+          "language": "xml",
+          "sizeLines": 33,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        "nbproject/build-impl.xml": [],
+        "nbproject/genfiles.properties": [],
+        "nbproject/project.properties": [],
+        "nbproject/project.xml": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 3,
+      "files": [
+        {
+          "path": ".DS_Store",
+          "language": "unknown",
+          "sizeLines": 2,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".understand-anything/.understandignore",
+          "language": "unknown",
+          "sizeLines": 38,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".understand-anything/config.json",
+          "language": "json",
+          "sizeLines": 1,
+          "fileCategory": "config"
+        },
+        {
+          "path": "CHANGELOG",
+          "language": "unknown",
+          "sizeLines": 35,
+          "fileCategory": "code"
+        },
+        {
+          "path": "manifest.mf",
+          "language": "mf",
+          "sizeLines": 3,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/AOT.java",
+          "language": "java",
+          "sizeLines": 77,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/ArrayFloatTensor.java",
+          "language": "java",
+          "sizeLines": 70,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/BF16FloatTensor.java",
+          "language": "java",
+          "sizeLines": 112,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/CategoricalSampler.java",
+          "language": "java",
+          "sizeLines": 37,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/ChatFormat.java",
+          "language": "java",
+          "sizeLines": 101,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/F16FloatTensor.java",
+          "language": "java",
+          "sizeLines": 124,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/FloatTensor.java",
+          "language": "java",
+          "sizeLines": 239,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/GGMLTensorEntry.java",
+          "language": "java",
+          "sizeLines": 27,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/GGMLType.java",
+          "language": "java",
+          "sizeLines": 106,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/GGUF.java",
+          "language": "java",
+          "sizeLines": 390,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/Llama.java",
+          "language": "java",
+          "sizeLines": 404,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/Llama3.java",
+          "language": "java",
+          "sizeLines": 313,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/ModelLoader.java",
+          "language": "java",
+          "sizeLines": 185,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/Pair.java",
+          "language": "java",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/Parallel.java",
+          "language": "java",
+          "sizeLines": 44,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/Q4_0FloatTensor.java",
+          "language": "java",
+          "sizeLines": 146,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/Q8_0FloatTensor.java",
+          "language": "java",
+          "sizeLines": 138,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/RoPE.java",
+          "language": "java",
+          "sizeLines": 52,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/Sampler.java",
+          "language": "java",
+          "sizeLines": 24,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/Timer.java",
+          "language": "java",
+          "sizeLines": 42,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        ".DS_Store": [],
+        ".understand-anything/.understandignore": [],
+        ".understand-anything/config.json": [],
+        "CHANGELOG": [],
+        "manifest.mf": [],
+        "src/com/llama4j/AOT.java": [],
+        "src/com/llama4j/ArrayFloatTensor.java": [],
+        "src/com/llama4j/BF16FloatTensor.java": [],
+        "src/com/llama4j/CategoricalSampler.java": [],
+        "src/com/llama4j/ChatFormat.java": [],
+        "src/com/llama4j/F16FloatTensor.java": [],
+        "src/com/llama4j/FloatTensor.java": [],
+        "src/com/llama4j/GGMLTensorEntry.java": [],
+        "src/com/llama4j/GGMLType.java": [],
+        "src/com/llama4j/GGUF.java": [],
+        "src/com/llama4j/Llama.java": [],
+        "src/com/llama4j/Llama3.java": [],
+        "src/com/llama4j/ModelLoader.java": [],
+        "src/com/llama4j/Pair.java": [],
+        "src/com/llama4j/Parallel.java": [],
+        "src/com/llama4j/Q4_0FloatTensor.java": [],
+        "src/com/llama4j/Q8_0FloatTensor.java": [],
+        "src/com/llama4j/RoPE.java": [],
+        "src/com/llama4j/Sampler.java": [],
+        "src/com/llama4j/Timer.java": []
+      },
+      "neighborMap": {
+        "src/com/llama4j/Llama3.java": [
+          {
+            "path": "test/test/JUnitTest.java",
+            "batchIndex": 4,
+            "symbols": [
+              "test",
+              "JUnitTest"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "batchIndex": 4,
+      "files": [
+        {
+          "path": "src/com/llama4j/Tokenizer.java",
+          "language": "java",
+          "sizeLines": 284,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/ToppSampler.java",
+          "language": "java",
+          "sizeLines": 110,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/com/llama4j/Vocabulary.java",
+          "language": "java",
+          "sizeLines": 45,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/module-info.java",
+          "language": "java",
+          "sizeLines": 11,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/package.bluej",
+          "language": "bluej",
+          "sizeLines": 31,
+          "fileCategory": "code"
+        },
+        {
+          "path": "test/test/G2PTokenizerTest.java",
+          "language": "java",
+          "sizeLines": 127,
+          "fileCategory": "code"
+        },
+        {
+          "path": "test/test/JUnitTest.java",
+          "language": "java",
+          "sizeLines": 31,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "src/com/llama4j/Tokenizer.java": [],
+        "src/com/llama4j/ToppSampler.java": [],
+        "src/com/llama4j/Vocabulary.java": [],
+        "src/module-info.java": [],
+        "src/package.bluej": [],
+        "test/test/G2PTokenizerTest.java": [],
+        "test/test/JUnitTest.java": [
+          "src/com/llama4j/Llama3.java"
+        ]
+      },
+      "neighborMap": {
+        "test/test/JUnitTest.java": [
+          {
+            "path": "src/com/llama4j/Llama3.java",
+            "batchIndex": 3,
+            "symbols": [
+              "init",
+              "initInputPins",
+              "initOutputPins",
+              "process",
+              "Llama3"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

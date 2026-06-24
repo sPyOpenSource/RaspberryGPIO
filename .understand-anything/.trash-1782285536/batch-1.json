@@ -1,0 +1,47 @@
+{
+  "nodes": [
+    {
+      "id": "document:README.rst",
+      "type": "document",
+      "name": "README.rst",
+      "filePath": "README.rst",
+      "summary": "Project-level README describing AIRobot as a NetBeans-based AI program that depends on AIBase, opencv, and RXTXcomm libraries, with git clone instructions for obtaining the source.",
+      "tags": ["documentation", "readme", "project-overview", "netbeans-project"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:build.xml",
+      "type": "config",
+      "name": "build.xml",
+      "filePath": "build.xml",
+      "summary": "Apache Ant build configuration for the AIRobot project, importing nbproject/build-impl.xml and defining targets for compilation, JAR packaging, execution, testing, and Javadoc generation.",
+      "tags": ["build-configuration", "apache-ant", "build-script", "project-build"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:log.txt",
+      "type": "document",
+      "name": "log.txt",
+      "filePath": "log.txt",
+      "summary": "Timestamped log file listing 10 paths to AI data files under /home/spy/AI/ from November 2017, recording processed data outputs.",
+      "tags": ["log", "timestamps", "data-files", "processing-record"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:build.xml",
+      "target": "document:README.rst",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:log.txt",
+      "target": "document:README.rst",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

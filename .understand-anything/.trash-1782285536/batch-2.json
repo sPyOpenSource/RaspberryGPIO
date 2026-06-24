@@ -1,0 +1,84 @@
+{
+  "nodes": [
+    {
+      "id": "config:nbproject/build-impl.xml",
+      "type": "config",
+      "name": "build-impl.xml",
+      "filePath": "nbproject/build-impl.xml",
+      "summary": "Auto-generated Ant build script for the AIRobot J2SE project, handling compilation, jar packaging, execution, debugging, javadoc generation, unit testing (JUnit/TestNG), profiling, and cleanup across 1800+ lines with extensive macro definitions and condition checks.",
+      "tags": ["ant-build", "netbeans", "build-automation", "compilation", "testing"],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:nbproject/genfiles.properties",
+      "type": "config",
+      "name": "genfiles.properties",
+      "filePath": "nbproject/genfiles.properties",
+      "summary": "Auto-generated CRC checksum file tracking the state of build-impl.xml and related generated files, used by NetBeans to detect when regeneration is needed.",
+      "tags": ["checksum", "netbeans", "build-tracking", "generated-files"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:nbproject/project.properties",
+      "type": "config",
+      "name": "project.properties",
+      "filePath": "nbproject/project.properties",
+      "summary": "NetBeans project properties defining source directories, classpaths with dependencies (HTTP client, JSON, JSoup, OpenCV, jSerialComm), build settings, JVM arguments, main class (com.llama4j.Llama3), and references to external projects OpenLab and PrimeFactors.",
+      "tags": ["netbeans", "project-configuration", "classpath", "dependencies", "build-settings"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:nbproject/project.xml",
+      "type": "config",
+      "name": "project.xml",
+      "filePath": "nbproject/project.xml",
+      "summary": "NetBeans project descriptor declaring the project type (J2SE), source and test roots, and references to external dependencies (OpenLab, PrimeFactors) used during the Ant build.",
+      "tags": ["netbeans", "project-descriptor", "j2se", "dependencies"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:nbproject/build-impl.xml",
+      "target": "config:nbproject/project.properties",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:nbproject/build-impl.xml",
+      "target": "config:nbproject/project.xml",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:nbproject/project.xml",
+      "target": "config:nbproject/build-impl.xml",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:nbproject/project.properties",
+      "target": "config:nbproject/build-impl.xml",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:nbproject/genfiles.properties",
+      "target": "config:nbproject/build-impl.xml",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:nbproject/project.xml",
+      "target": "config:nbproject/project.properties",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

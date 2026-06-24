@@ -1,0 +1,76 @@
+[
+  {
+    "id": "layer:core-model",
+    "name": "Core Model Engine",
+    "description": "Java implementation of the Llama model inference engine including tensor operations, GGUF model loading/parsing, tokenization, sampling, and model execution.",
+    "nodeIds": [
+      "file:src/com/llama4j/FloatTensor.java",
+      "file:src/com/llama4j/ArrayFloatTensor.java",
+      "file:src/com/llama4j/BF16FloatTensor.java",
+      "file:src/com/llama4j/F16FloatTensor.java",
+      "file:src/com/llama4j/Q4_0FloatTensor.java",
+      "file:src/com/llama4j/Q8_0FloatTensor.java",
+      "file:src/com/llama4j/GGMLType.java",
+      "file:src/com/llama4j/GGMLTensorEntry.java",
+      "file:src/com/llama4j/Sampler.java",
+      "file:src/com/llama4j/CategoricalSampler.java",
+      "file:src/com/llama4j/ToppSampler.java",
+      "file:src/com/llama4j/AOT.java",
+      "file:src/com/llama4j/ChatFormat.java",
+      "file:src/com/llama4j/GGUF.java",
+      "file:src/com/llama4j/Llama.java",
+      "file:src/com/llama4j/Llama3.java",
+      "file:src/com/llama4j/ModelLoader.java",
+      "file:src/com/llama4j/Pair.java",
+      "file:src/com/llama4j/Parallel.java",
+      "file:src/com/llama4j/RoPE.java",
+      "file:src/com/llama4j/Timer.java",
+      "file:src/com/llama4j/Tokenizer.java",
+      "file:src/com/llama4j/Vocabulary.java"
+    ]
+  },
+  {
+    "id": "layer:tests",
+    "name": "Tests",
+    "description": "JUnit tests exercising the tokenizer and core model components.",
+    "nodeIds": [
+      "file:test/test/G2PTokenizerTest.java",
+      "file:test/test/JUnitTest.java"
+    ]
+  },
+  {
+    "id": "layer:build-config",
+    "name": "Build & Configuration",
+    "description": "NetBeans/Ant build system configuration, Java module metadata, BlueJ project config, and JAR manifest.",
+    "nodeIds": [
+      "config:build.xml",
+      "config:nbproject/build-impl.xml",
+      "config:nbproject/genfiles.properties",
+      "config:nbproject/project.properties",
+      "config:nbproject/project.xml",
+      "file:src/module-info.java",
+      "file:src/package.bluej",
+      "file:manifest.mf"
+    ]
+  },
+  {
+    "id": "layer:documentation",
+    "name": "Documentation",
+    "description": "Project documentation including README, changelog, and runtime log.",
+    "nodeIds": [
+      "document:README.rst",
+      "file:CHANGELOG",
+      "document:log.txt"
+    ]
+  },
+  {
+    "id": "layer:tooling",
+    "name": "Tooling & Metadata",
+    "description": "Understand-Anything analysis metadata and build artifacts.",
+    "nodeIds": [
+      "file:.DS_Store",
+      "file:.understand-anything/.understandignore",
+      "config:.understand-anything/config.json"
+    ]
+  }
+]

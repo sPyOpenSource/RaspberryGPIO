@@ -288,6 +288,7 @@ public class Llama3 extends JVSMain {
             if(in != null){
                 Options options = Options.parseOptions(new String[]{
                     "--model", "/Users/xuyi/Downloads/Llama-3.2-1B-Instruct-Q4_0.gguf",
+                    "--model", "/Users/xuyi/.ollama/models/blob/sha256-74701a8c35f6c8d9a4b91f3f3497643001d63e0c7a84e085bed452548fa88d45",
                     "--prompt", in.getValue(),
                     "--stream", "false"
                 });

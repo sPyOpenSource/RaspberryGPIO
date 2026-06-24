@@ -1,0 +1,1475 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 7,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "src/com/llama4j/Tokenizer.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 284,
+      "nonEmptyLines": 258,
+      "functions": [
+        {
+          "name": "regexPattern",
+          "startLine": 45,
+          "endLine": 50,
+          "params": []
+        },
+        {
+          "name": "getSpecialTokens",
+          "startLine": 52,
+          "endLine": 54,
+          "params": []
+        },
+        {
+          "name": "isSpecialToken",
+          "startLine": 56,
+          "endLine": 58,
+          "params": [
+            "tokenIndex"
+          ]
+        },
+        {
+          "name": "Tokenizer",
+          "startLine": 60,
+          "endLine": 71,
+          "params": [
+            "vocabulary",
+            "merges",
+            "regexPattern",
+            "specialTokens"
+          ]
+        },
+        {
+          "name": "encodeImpl",
+          "startLine": 73,
+          "endLine": 75,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "encode",
+          "startLine": 84,
+          "endLine": 117,
+          "params": [
+            "text",
+            "allowedSpecial"
+          ]
+        },
+        {
+          "name": "findAll",
+          "startLine": 119,
+          "endLine": 126,
+          "params": [
+            "pattern",
+            "text"
+          ]
+        },
+        {
+          "name": "encodeOrdinary",
+          "startLine": 133,
+          "endLine": 143,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "getStats",
+          "startLine": 145,
+          "endLine": 152,
+          "params": [
+            "ids"
+          ]
+        },
+        {
+          "name": "encodeChunk",
+          "startLine": 154,
+          "endLine": 179,
+          "params": [
+            "chunk"
+          ]
+        },
+        {
+          "name": "merge",
+          "startLine": 181,
+          "endLine": 195,
+          "params": [
+            "ids",
+            "pair",
+            "idx"
+          ]
+        },
+        {
+          "name": "decodeImpl",
+          "startLine": 197,
+          "endLine": 204,
+          "params": [
+            "tokens"
+          ]
+        },
+        {
+          "name": "bytesToUnicode",
+          "startLine": 215,
+          "endLine": 235,
+          "params": []
+        },
+        {
+          "name": "encode",
+          "startLine": 242,
+          "endLine": 249,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "replaceControlCharacters",
+          "startLine": 251,
+          "endLine": 265,
+          "params": [
+            "codePoints"
+          ]
+        },
+        {
+          "name": "replaceControlCharacters",
+          "startLine": 267,
+          "endLine": 269,
+          "params": [
+            "str"
+          ]
+        },
+        {
+          "name": "encodeAsList",
+          "startLine": 271,
+          "endLine": 273,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "decode",
+          "startLine": 275,
+          "endLine": 283,
+          "params": [
+            "tokens"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Tokenizer",
+          "startLine": 39,
+          "endLine": 284,
+          "methods": [
+            "regexPattern",
+            "getSpecialTokens",
+            "isSpecialToken",
+            "Tokenizer",
+            "encodeImpl",
+            "encode",
+            "findAll",
+            "encodeOrdinary",
+            "getStats",
+            "encodeChunk",
+            "merge",
+            "decodeImpl",
+            "bytesToUnicode",
+            "encode",
+            "replaceControlCharacters",
+            "replaceControlCharacters",
+            "encodeAsList",
+            "decode"
+          ],
+          "properties": [
+            "compiledPattern",
+            "vocabulary",
+            "merges",
+            "specialTokens",
+            "BYTE_ENCODER",
+            "BYTE_DECODER"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "regexPattern",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "getSpecialTokens",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "isSpecialToken",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "Tokenizer",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "encodeOrdinary",
+          "line": 133,
+          "isDefault": false
+        },
+        {
+          "name": "decodeImpl",
+          "line": 197,
+          "isDefault": false
+        },
+        {
+          "name": "encode",
+          "line": 242,
+          "isDefault": false
+        },
+        {
+          "name": "replaceControlCharacters",
+          "line": 251,
+          "isDefault": false
+        },
+        {
+          "name": "replaceControlCharacters",
+          "line": 267,
+          "isDefault": false
+        },
+        {
+          "name": "encodeAsList",
+          "line": 271,
+          "isDefault": false
+        },
+        {
+          "name": "decode",
+          "line": 275,
+          "isDefault": false
+        },
+        {
+          "name": "Tokenizer",
+          "line": 39,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "regexPattern",
+          "callee": "compiledPattern.pattern",
+          "lineNumber": 49
+        },
+        {
+          "caller": "isSpecialToken",
+          "callee": "specialTokens.containsValue",
+          "lineNumber": 57
+        },
+        {
+          "caller": "Tokenizer",
+          "callee": "Pattern.compile",
+          "lineNumber": 62
+        },
+        {
+          "caller": "Tokenizer",
+          "callee": "new HashMap<>",
+          "lineNumber": 63
+        },
+        {
+          "caller": "Tokenizer",
+          "callee": "new HashMap<>",
+          "lineNumber": 64
+        },
+        {
+          "caller": "Tokenizer",
+          "callee": "pair.first",
+          "lineNumber": 66
+        },
+        {
+          "caller": "Tokenizer",
+          "callee": "pair.second",
+          "lineNumber": 67
+        },
+        {
+          "caller": "Tokenizer",
+          "callee": "vocabulary.getIndex(vocabulary.get(firstIndex) + vocabulary.get(secondIndex)).orElseThrow",
+          "lineNumber": 68
+        },
+        {
+          "caller": "Tokenizer",
+          "callee": "vocabulary.getIndex",
+          "lineNumber": 68
+        },
+        {
+          "caller": "Tokenizer",
+          "callee": "vocabulary.get",
+          "lineNumber": 68
+        },
+        {
+          "caller": "Tokenizer",
+          "callee": "vocabulary.get",
+          "lineNumber": 68
+        },
+        {
+          "caller": "Tokenizer",
+          "callee": "this.merges.put",
+          "lineNumber": 69
+        },
+        {
+          "caller": "encodeImpl",
+          "callee": "encode(text, Set.of()).stream().mapToInt(i -> i).toArray",
+          "lineNumber": 74
+        },
+        {
+          "caller": "encodeImpl",
+          "callee": "encode(text, Set.of()).stream().mapToInt",
+          "lineNumber": 74
+        },
+        {
+          "caller": "encodeImpl",
+          "callee": "encode(text, Set.of()).stream",
+          "lineNumber": 74
+        },
+        {
+          "caller": "encodeImpl",
+          "callee": "encode",
+          "lineNumber": 74
+        },
+        {
+          "caller": "encodeImpl",
+          "callee": "Set.of",
+          "lineNumber": 74
+        },
+        {
+          "caller": "encode",
+          "callee": "getSpecialTokens().keySet().containsAll",
+          "lineNumber": 87
+        },
+        {
+          "caller": "encode",
+          "callee": "getSpecialTokens().keySet",
+          "lineNumber": 87
+        },
+        {
+          "caller": "encode",
+          "callee": "getSpecialTokens",
+          "lineNumber": 87
+        },
+        {
+          "caller": "encode",
+          "callee": "special.isEmpty",
+          "lineNumber": 88
+        },
+        {
+          "caller": "encode",
+          "callee": "encodeOrdinary",
+          "lineNumber": 90
+        },
+        {
+          "caller": "encode",
+          "callee": "special\n                .stream()\n                .map(Pattern::quote).collect",
+          "lineNumber": 98
+        },
+        {
+          "caller": "encode",
+          "callee": "special\n                .stream().map",
+          "lineNumber": 98
+        },
+        {
+          "caller": "encode",
+          "callee": "special.stream",
+          "lineNumber": 98
+        },
+        {
+          "caller": "encode",
+          "callee": "Collectors.joining",
+          "lineNumber": 101
+        },
+        {
+          "caller": "encode",
+          "callee": "text.split",
+          "lineNumber": 103
+        },
+        {
+          "caller": "encode",
+          "callee": "new ArrayList<>",
+          "lineNumber": 106
+        },
+        {
+          "caller": "encode",
+          "callee": "special.contains",
+          "lineNumber": 108
+        },
+        {
+          "caller": "encode",
+          "callee": "ids.add",
+          "lineNumber": 110
+        },
+        {
+          "caller": "encode",
+          "callee": "getSpecialTokens().get",
+          "lineNumber": 110
+        },
+        {
+          "caller": "encode",
+          "callee": "getSpecialTokens",
+          "lineNumber": 110
+        },
+        {
+          "caller": "encode",
+          "callee": "ids.addAll",
+          "lineNumber": 113
+        },
+        {
+          "caller": "encode",
+          "callee": "encodeOrdinary",
+          "lineNumber": 113
+        },
+        {
+          "caller": "findAll",
+          "callee": "new ArrayList<>",
+          "lineNumber": 120
+        },
+        {
+          "caller": "findAll",
+          "callee": "pattern.matcher",
+          "lineNumber": 121
+        },
+        {
+          "caller": "findAll",
+          "callee": "matcher.find",
+          "lineNumber": 122
+        },
+        {
+          "caller": "findAll",
+          "callee": "allMatches.add",
+          "lineNumber": 123
+        },
+        {
+          "caller": "findAll",
+          "callee": "matcher.group",
+          "lineNumber": 123
+        },
+        {
+          "caller": "encodeOrdinary",
+          "callee": "findAll",
+          "lineNumber": 135
+        },
+        {
+          "caller": "encodeOrdinary",
+          "callee": "new ArrayList<>",
+          "lineNumber": 137
+        },
+        {
+          "caller": "encodeOrdinary",
+          "callee": "encodeChunk",
+          "lineNumber": 139
+        },
+        {
+          "caller": "encodeOrdinary",
+          "callee": "ids.addAll",
+          "lineNumber": 140
+        },
+        {
+          "caller": "getStats",
+          "callee": "new HashMap<>",
+          "lineNumber": 146
+        },
+        {
+          "caller": "getStats",
+          "callee": "ids.size",
+          "lineNumber": 147
+        },
+        {
+          "caller": "getStats",
+          "callee": "new Pair<>",
+          "lineNumber": 148
+        },
+        {
+          "caller": "getStats",
+          "callee": "ids.get",
+          "lineNumber": 148
+        },
+        {
+          "caller": "getStats",
+          "callee": "ids.get",
+          "lineNumber": 148
+        },
+        {
+          "caller": "getStats",
+          "callee": "map.put",
+          "lineNumber": 149
+        },
+        {
+          "caller": "getStats",
+          "callee": "map.getOrDefault",
+          "lineNumber": 149
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "new ArrayList<>",
+          "lineNumber": 157
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "chunk.toCharArray",
+          "lineNumber": 158
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "this.vocabulary.getIndex(String.valueOf((char) b)).orElseThrow",
+          "lineNumber": 159
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "this.vocabulary.getIndex",
+          "lineNumber": 159
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "String.valueOf",
+          "lineNumber": 159
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "ids.add",
+          "lineNumber": 160
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "ids.size",
+          "lineNumber": 163
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "getStats",
+          "lineNumber": 165
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "stats.keySet().stream().min(Comparator.comparingInt(key -> this.merges.getOrDefault(key, Integer.MAX_VALUE))).orElseThrow",
+          "lineNumber": 166
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "stats.keySet().stream().min",
+          "lineNumber": 166
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "stats.keySet().stream",
+          "lineNumber": 166
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "stats.keySet",
+          "lineNumber": 166
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "Comparator.comparingInt",
+          "lineNumber": 166
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "this.merges.getOrDefault",
+          "lineNumber": 166
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "this.merges.containsKey",
+          "lineNumber": 171
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "this.merges.get",
+          "lineNumber": 175
+        },
+        {
+          "caller": "encodeChunk",
+          "callee": "merge",
+          "lineNumber": 176
+        },
+        {
+          "caller": "merge",
+          "callee": "new ArrayList<>",
+          "lineNumber": 182
+        },
+        {
+          "caller": "merge",
+          "callee": "ids.size",
+          "lineNumber": 184
+        },
+        {
+          "caller": "merge",
+          "callee": "ids.get(i).equals",
+          "lineNumber": 186
+        },
+        {
+          "caller": "merge",
+          "callee": "ids.get",
+          "lineNumber": 186
+        },
+        {
+          "caller": "merge",
+          "callee": "pair.first",
+          "lineNumber": 186
+        },
+        {
+          "caller": "merge",
+          "callee": "ids.size",
+          "lineNumber": 186
+        },
+        {
+          "caller": "merge",
+          "callee": "ids.get(i + 1).equals",
+          "lineNumber": 186
+        },
+        {
+          "caller": "merge",
+          "callee": "ids.get",
+          "lineNumber": 186
+        },
+        {
+          "caller": "merge",
+          "callee": "pair.second",
+          "lineNumber": 186
+        },
+        {
+          "caller": "merge",
+          "callee": "newids.add",
+          "lineNumber": 187
+        },
+        {
+          "caller": "merge",
+          "callee": "newids.add",
+          "lineNumber": 190
+        },
+        {
+          "caller": "merge",
+          "callee": "ids.get",
+          "lineNumber": 190
+        },
+        {
+          "caller": "decodeImpl",
+          "callee": "new StringBuilder",
+          "lineNumber": 198
+        },
+        {
+          "caller": "decodeImpl",
+          "callee": "vocabulary.get",
+          "lineNumber": 200
+        },
+        {
+          "caller": "decodeImpl",
+          "callee": "sb.append",
+          "lineNumber": 201
+        },
+        {
+          "caller": "decodeImpl",
+          "callee": "sb.toString",
+          "lineNumber": 203
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "new ArrayList<>",
+          "lineNumber": 216
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "IntStream.rangeClosed('!', '~').forEach",
+          "lineNumber": 217
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "IntStream.rangeClosed",
+          "lineNumber": 217
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "IntStream.rangeClosed('¡', '¬').forEach",
+          "lineNumber": 218
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "IntStream.rangeClosed",
+          "lineNumber": 218
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "IntStream.rangeClosed('®', 'ÿ').forEach",
+          "lineNumber": 219
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "IntStream.rangeClosed",
+          "lineNumber": 219
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "new ArrayList<>",
+          "lineNumber": 221
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "bs.contains",
+          "lineNumber": 224
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "bs.add",
+          "lineNumber": 225
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "cs.add",
+          "lineNumber": 226
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "IntStream.range(0, bs.size())\n                .boxed().collect",
+          "lineNumber": 232
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "IntStream.range(0, bs.size()).boxed",
+          "lineNumber": 232
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "IntStream.range",
+          "lineNumber": 232
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "bs.size",
+          "lineNumber": 232
+        },
+        {
+          "caller": "bytesToUnicode",
+          "callee": "Collectors.toMap",
+          "lineNumber": 234
+        },
+        {
+          "caller": "encode",
+          "callee": "new StringBuilder",
+          "lineNumber": 243
+        },
+        {
+          "caller": "encode",
+          "callee": "text.getBytes",
+          "lineNumber": 244
+        },
+        {
+          "caller": "encode",
+          "callee": "sb.appendCodePoint",
+          "lineNumber": 246
+        },
+        {
+          "caller": "encode",
+          "callee": "BYTE_ENCODER.get",
+          "lineNumber": 246
+        },
+        {
+          "caller": "encode",
+          "callee": "Byte.toUnsignedInt",
+          "lineNumber": 246
+        },
+        {
+          "caller": "encode",
+          "callee": "encodeImpl",
+          "lineNumber": 248
+        },
+        {
+          "caller": "encode",
+          "callee": "sb.toString",
+          "lineNumber": 248
+        },
+        {
+          "caller": "replaceControlCharacters",
+          "callee": "new StringBuilder",
+          "lineNumber": 256
+        },
+        {
+          "caller": "replaceControlCharacters",
+          "callee": "Character.getType",
+          "lineNumber": 258
+        },
+        {
+          "caller": "replaceControlCharacters",
+          "callee": "chars.append(\"\\\\u\").append",
+          "lineNumber": 259
+        },
+        {
+          "caller": "replaceControlCharacters",
+          "callee": "chars.append",
+          "lineNumber": 259
+        },
+        {
+          "caller": "replaceControlCharacters",
+          "callee": "HexFormat.of().toHexDigits",
+          "lineNumber": 259
+        },
+        {
+          "caller": "replaceControlCharacters",
+          "callee": "HexFormat.of",
+          "lineNumber": 259
+        },
+        {
+          "caller": "replaceControlCharacters",
+          "callee": "chars.appendCodePoint",
+          "lineNumber": 261
+        },
+        {
+          "caller": "replaceControlCharacters",
+          "callee": "chars.toString",
+          "lineNumber": 264
+        },
+        {
+          "caller": "replaceControlCharacters",
+          "callee": "replaceControlCharacters",
+          "lineNumber": 268
+        },
+        {
+          "caller": "replaceControlCharacters",
+          "callee": "str.codePoints().toArray",
+          "lineNumber": 268
+        },
+        {
+          "caller": "replaceControlCharacters",
+          "callee": "str.codePoints",
+          "lineNumber": 268
+        },
+        {
+          "caller": "encodeAsList",
+          "callee": "Arrays.stream(encode(text)).boxed().toList",
+          "lineNumber": 272
+        },
+        {
+          "caller": "encodeAsList",
+          "callee": "Arrays.stream(encode(text)).boxed",
+          "lineNumber": 272
+        },
+        {
+          "caller": "encodeAsList",
+          "callee": "Arrays.stream",
+          "lineNumber": 272
+        },
+        {
+          "caller": "encodeAsList",
+          "callee": "encode",
+          "lineNumber": 272
+        },
+        {
+          "caller": "decode",
+          "callee": "decodeImpl",
+          "lineNumber": 276
+        },
+        {
+          "caller": "decode",
+          "callee": "decoded.codePoints().map(BYTE_DECODER::get).toArray",
+          "lineNumber": 277
+        },
+        {
+          "caller": "decode",
+          "callee": "decoded.codePoints().map",
+          "lineNumber": 277
+        },
+        {
+          "caller": "decode",
+          "callee": "decoded.codePoints",
+          "lineNumber": 277
+        },
+        {
+          "caller": "decode",
+          "callee": "decoded.length",
+          "lineNumber": 279
+        },
+        {
+          "caller": "decode",
+          "callee": "new String",
+          "lineNumber": 282
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 12,
+        "functionCount": 18,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/ToppSampler.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 110,
+      "nonEmptyLines": 97,
+      "functions": [
+        {
+          "name": "ToppSampler",
+          "startLine": 28,
+          "endLine": 32,
+          "params": [
+            "maxNumberOfElements",
+            "topp",
+            "rng"
+          ]
+        },
+        {
+          "name": "swap",
+          "startLine": 34,
+          "endLine": 38,
+          "params": [
+            "array",
+            "from",
+            "to"
+          ]
+        },
+        {
+          "name": "siftDown",
+          "startLine": 40,
+          "endLine": 54,
+          "params": [
+            "array",
+            "from",
+            "n",
+            "comparator"
+          ]
+        },
+        {
+          "name": "sampleToken",
+          "startLine": 56,
+          "endLine": 108,
+          "params": [
+            "logits"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ToppSampler",
+          "startLine": 22,
+          "endLine": 110,
+          "methods": [
+            "ToppSampler",
+            "swap",
+            "siftDown",
+            "sampleToken"
+          ],
+          "properties": [
+            "indices",
+            "topp",
+            "rng"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ToppSampler",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "sampleToken",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "ToppSampler",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "siftDown",
+          "callee": "comparator.compare",
+          "lineNumber": 44
+        },
+        {
+          "caller": "siftDown",
+          "callee": "comparator.compare",
+          "lineNumber": 47
+        },
+        {
+          "caller": "siftDown",
+          "callee": "swap",
+          "lineNumber": 48
+        },
+        {
+          "caller": "sampleToken",
+          "callee": "Comparator.comparingDouble(logits::getFloat).reversed",
+          "lineNumber": 61
+        },
+        {
+          "caller": "sampleToken",
+          "callee": "Comparator.comparingDouble",
+          "lineNumber": 61
+        },
+        {
+          "caller": "sampleToken",
+          "callee": "logits.size",
+          "lineNumber": 63
+        },
+        {
+          "caller": "sampleToken",
+          "callee": "logits.getFloat",
+          "lineNumber": 70
+        },
+        {
+          "caller": "sampleToken",
+          "callee": "siftDown",
+          "lineNumber": 80
+        },
+        {
+          "caller": "sampleToken",
+          "callee": "swap",
+          "lineNumber": 88
+        },
+        {
+          "caller": "sampleToken",
+          "callee": "logits.getFloat",
+          "lineNumber": 89
+        },
+        {
+          "caller": "sampleToken",
+          "callee": "siftDown",
+          "lineNumber": 94
+        },
+        {
+          "caller": "sampleToken",
+          "callee": "rng.nextFloat",
+          "lineNumber": 98
+        },
+        {
+          "caller": "sampleToken",
+          "callee": "logits.getFloat",
+          "lineNumber": 101
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/com/llama4j/Vocabulary.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 40,
+      "callGraph": [
+        {
+          "caller": "Vocabulary",
+          "callee": "IntStream.range(0, vocabulary.length)\n                        .boxed().collect",
+          "lineNumber": 27
+        },
+        {
+          "caller": "Vocabulary",
+          "callee": "IntStream.range(0, vocabulary.length).boxed",
+          "lineNumber": 27
+        },
+        {
+          "caller": "Vocabulary",
+          "callee": "IntStream.range",
+          "lineNumber": 27
+        },
+        {
+          "caller": "Vocabulary",
+          "callee": "Collectors.toMap",
+          "lineNumber": 29
+        },
+        {
+          "caller": "getIndex",
+          "callee": "tokenToIndex.get",
+          "lineNumber": 38
+        },
+        {
+          "caller": "getIndex",
+          "callee": "OptionalInt.of",
+          "lineNumber": 39
+        },
+        {
+          "caller": "getIndex",
+          "callee": "OptionalInt.empty",
+          "lineNumber": 39
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/module-info.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 11,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/package.bluej",
+      "language": "bluej",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 31,
+      "metrics": {}
+    },
+    {
+      "path": "test/test/G2PTokenizerTest.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 127,
+      "nonEmptyLines": 108,
+      "functions": [
+        {
+          "name": "G2PTokenizerTest",
+          "startLine": 42,
+          "endLine": 44,
+          "params": []
+        },
+        {
+          "name": "loadVocab",
+          "startLine": 47,
+          "endLine": 60,
+          "params": [
+            "vocabPath"
+          ]
+        },
+        {
+          "name": "encode",
+          "startLine": 63,
+          "endLine": 84,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "decode",
+          "startLine": 87,
+          "endLine": 100,
+          "params": [
+            "ids"
+          ]
+        },
+        {
+          "name": "test",
+          "startLine": 103,
+          "endLine": 125,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "G2PTokenizerTest",
+          "startLine": 32,
+          "endLine": 126,
+          "methods": [
+            "G2PTokenizerTest",
+            "loadVocab",
+            "encode",
+            "decode",
+            "test"
+          ],
+          "properties": [
+            "tokenToId",
+            "idToToken",
+            "UNK_TOKEN",
+            "START_TOKEN",
+            "END_TOKEN"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "G2PTokenizerTest",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "test",
+          "line": 103,
+          "isDefault": false
+        },
+        {
+          "name": "G2PTokenizerTest",
+          "line": 32,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "G2PTokenizerTest",
+          "callee": "loadVocab",
+          "lineNumber": 43
+        },
+        {
+          "caller": "loadVocab",
+          "callee": "new BufferedReader",
+          "lineNumber": 48
+        },
+        {
+          "caller": "loadVocab",
+          "callee": "new FileReader",
+          "lineNumber": 48
+        },
+        {
+          "caller": "loadVocab",
+          "callee": "reader.readLine",
+          "lineNumber": 51
+        },
+        {
+          "caller": "loadVocab",
+          "callee": "line.trim",
+          "lineNumber": 52
+        },
+        {
+          "caller": "loadVocab",
+          "callee": "line.isEmpty",
+          "lineNumber": 53
+        },
+        {
+          "caller": "loadVocab",
+          "callee": "tokenToId.put",
+          "lineNumber": 54
+        },
+        {
+          "caller": "loadVocab",
+          "callee": "idToToken.put",
+          "lineNumber": 55
+        },
+        {
+          "caller": "encode",
+          "callee": "new ArrayList<>",
+          "lineNumber": 64
+        },
+        {
+          "caller": "encode",
+          "callee": "tokenToId.containsKey",
+          "lineNumber": 67
+        },
+        {
+          "caller": "encode",
+          "callee": "ids.add",
+          "lineNumber": 67
+        },
+        {
+          "caller": "encode",
+          "callee": "tokenToId.get",
+          "lineNumber": 67
+        },
+        {
+          "caller": "encode",
+          "callee": "text.toLowerCase().toCharArray",
+          "lineNumber": 70
+        },
+        {
+          "caller": "encode",
+          "callee": "text.toLowerCase",
+          "lineNumber": 70
+        },
+        {
+          "caller": "encode",
+          "callee": "String.valueOf",
+          "lineNumber": 71
+        },
+        {
+          "caller": "encode",
+          "callee": "tokenToId.containsKey",
+          "lineNumber": 72
+        },
+        {
+          "caller": "encode",
+          "callee": "ids.add",
+          "lineNumber": 73
+        },
+        {
+          "caller": "encode",
+          "callee": "tokenToId.get",
+          "lineNumber": 73
+        },
+        {
+          "caller": "encode",
+          "callee": "ids.add",
+          "lineNumber": 76
+        },
+        {
+          "caller": "encode",
+          "callee": "tokenToId.getOrDefault",
+          "lineNumber": 76
+        },
+        {
+          "caller": "encode",
+          "callee": "tokenToId.containsKey",
+          "lineNumber": 81
+        },
+        {
+          "caller": "encode",
+          "callee": "ids.add",
+          "lineNumber": 81
+        },
+        {
+          "caller": "encode",
+          "callee": "tokenToId.get",
+          "lineNumber": 81
+        },
+        {
+          "caller": "decode",
+          "callee": "new ArrayList<>",
+          "lineNumber": 88
+        },
+        {
+          "caller": "decode",
+          "callee": "idToToken.getOrDefault",
+          "lineNumber": 91
+        },
+        {
+          "caller": "decode",
+          "callee": "token.equals",
+          "lineNumber": 94
+        },
+        {
+          "caller": "decode",
+          "callee": "token.equals",
+          "lineNumber": 94
+        },
+        {
+          "caller": "decode",
+          "callee": "token.equals",
+          "lineNumber": 95
+        },
+        {
+          "caller": "decode",
+          "callee": "token.equals",
+          "lineNumber": 95
+        },
+        {
+          "caller": "decode",
+          "callee": "phonemes.add",
+          "lineNumber": 96
+        },
+        {
+          "caller": "decode",
+          "callee": "String.join",
+          "lineNumber": 99
+        },
+        {
+          "caller": "test",
+          "callee": "new G2PTokenizerTest",
+          "lineNumber": 107
+        },
+        {
+          "caller": "test",
+          "callee": "tokenizer.encode",
+          "lineNumber": 111
+        },
+        {
+          "caller": "test",
+          "callee": "System.out.println",
+          "lineNumber": 112
+        },
+        {
+          "caller": "test",
+          "callee": "System.out.println",
+          "lineNumber": 113
+        },
+        {
+          "caller": "test",
+          "callee": "List.of",
+          "lineNumber": 117
+        },
+        {
+          "caller": "test",
+          "callee": "tokenizer.decode",
+          "lineNumber": 118
+        },
+        {
+          "caller": "test",
+          "callee": "System.out.println",
+          "lineNumber": 119
+        },
+        {
+          "caller": "test",
+          "callee": "System.out.println",
+          "lineNumber": 120
+        },
+        {
+          "caller": "test",
+          "callee": "System.err.println",
+          "lineNumber": 123
+        },
+        {
+          "caller": "test",
+          "callee": "e.getMessage",
+          "lineNumber": 123
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "test/test/JUnitTest.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 29,
+      "functions": [
+        {
+          "name": "test",
+          "startLine": 27,
+          "endLine": 30,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "JUnitTest",
+          "startLine": 26,
+          "endLine": 31,
+          "methods": [
+            "test"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "test",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "JUnitTest",
+          "line": 26,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test",
+          "callee": "new Llama3",
+          "lineNumber": 29
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    }
+  ]
+}

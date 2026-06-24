@@ -1,0 +1,58 @@
+{
+  "projectRoot": "/Users/xuyi/Source/Java/AIRobot",
+  "batchFiles": [
+    {
+      "path": "src/com/llama4j/Tokenizer.java",
+      "language": "java",
+      "sizeLines": 284,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/com/llama4j/ToppSampler.java",
+      "language": "java",
+      "sizeLines": 110,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/com/llama4j/Vocabulary.java",
+      "language": "java",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/module-info.java",
+      "language": "java",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/package.bluej",
+      "language": "bluej",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "test/test/G2PTokenizerTest.java",
+      "language": "java",
+      "sizeLines": 127,
+      "fileCategory": "code"
+    },
+    {
+      "path": "test/test/JUnitTest.java",
+      "language": "java",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "src/com/llama4j/Tokenizer.java": [],
+    "src/com/llama4j/ToppSampler.java": [],
+    "src/com/llama4j/Vocabulary.java": [],
+    "src/module-info.java": [],
+    "src/package.bluej": [],
+    "test/test/G2PTokenizerTest.java": [],
+    "test/test/JUnitTest.java": [
+      "src/com/llama4j/Llama3.java"
+    ]
+  }
+}

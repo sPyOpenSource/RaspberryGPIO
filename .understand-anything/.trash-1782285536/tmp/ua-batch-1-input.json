@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/xuyi/Source/Java/AIRobot",
+  "batchFiles": [
+    {
+      "path": "README.rst",
+      "language": "markdown",
+      "sizeLines": 12,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "build.xml",
+      "language": "xml",
+      "sizeLines": 73,
+      "fileCategory": "config"
+    },
+    {
+      "path": "log.txt",
+      "language": "txt",
+      "sizeLines": 10,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {
+    "README.rst": [],
+    "build.xml": [],
+    "log.txt": []
+  }
+}
