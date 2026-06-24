@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M1 Silicon Architecture — Reference</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+  .chip-diagram { text-align: center; margin: 2rem 0; }
+  .chip-diagram svg { max-width: 100%; height: auto; }
+  .block { font-family: "Fira Code", monospace; font-size: 0.75rem; }
+  .note { font-size: 0.8rem; color: #666; margin-top: 0.3rem; }
+  details { margin: 1rem 0; padding: 0.5rem 1rem; background: #fafaf5; border: 1px solid #d9d9d9; border-radius: 4px; }
+  details summary { cursor: pointer; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<h1>M1 Silicon Architecture</h1>
+<p class="meta">Reference — the processors available on your Mac, what each is built for, and how LLM inference maps to each.</p>
+
+<h2>Heterogeneous SoC Overview</h2>
+
+<p>The Apple M1 packs five kinds of programmable compute into one die:</p>
+
+<table>
+  <tr><th>Unit</th><th>Cores</th><th>Memory</th><th>Primitive</th><th>Peak FP32</th><th>Programmable via</th></tr>
+  <tr>
+    <td><strong>CPU</strong> (Firestorm + Icestorm)</td>
+    <td>4P + 4E</td>
+    <td>L1 192+128 KB / L2 12+4 MB</td>
+    <td>Scalar + SIMD (NEON)</td>
+    <td>~200 GFLOPS</td>
+    <td>C / Java / Swift</td>
+  </tr>
+  <tr>
+    <td><strong>GPU</strong> (Apple 7-8 core)</td>
+    <td>128 EU / 1024 ALU</td>
+    <td>8 MB SLC + UMA DRAM</td>
+    <td>SIMT (vector threads per tile)</td>
+    <td>2.6 TFLOPS</td>
+    <td>Metal (compute + graphics shaders)</td>
+  </tr>
+  <tr>
+    <td><strong>ANE</strong> (Neural Engine)</td>
+    <td>16</td>
+    <td>UMA DRAM</td>
+    <td>Conv / MatMul (INT8 / FP16)</td>
+    <td>11 TOPS</td>
+    <td>Core ML (private framework)</td>
+  </tr>
+  <tr>
+    <td><strong>AMX</strong> (Matrix eXtensions)</td>
+    <td>4 (per P-core cluster)</td>
+    <td>—</td>
+    <td>MatMul outer-product (FP16/INT8)</td>
+    <td>~1+ TFLOPS</td>
+    <td>Accelerate / BNNS (indirect)</td>
+  </tr>
+  <tr>
+    <td><strong>SEP</strong> (Secure Enclave)</td>
+    <td>2</td>
+    <td>Dedicated SRAM</td>
+    <td>Crypto / AES</td>
+    <td>—</td>
+    <td>iOS/macOS security services</td>
+  </tr>
+</table>
+
+<p class="note">M1 GPU is TBDR (tile-based deferred rendering) — the screen is split into tiles; each tile is processed entirely in on-chip tile memory (many 10× faster than DRAM) before being written out.</p>
+
+<h2>Unified Memory Architecture (UMA)</h2>
+
+<p>Every processor on the M1 shares the same LPDDR4X-4266 DRAM pool over a 128-bit bus at 68.25 GB/s. There is <em>no copy</em> between CPU and GPU memory — they read the same physical addresses. This is the single most important architectural fact for AI inference on Apple Silicon.</p>
+
+<table>
+  <tr><th>Architecture</th><th>CPU/GPU Memory Model</th><th>Bandwidth</th><th>LLM Consequence</th></tr>
+  <tr><td>Discrete GPU (NVIDIA)</td><td>Separate VRAM + PCIe copy</td><td>~20-32 GB/s PCIe</td><td>Must fit model in VRAM or swap</td></tr>
+  <tr><td>Apple Silicon UMA</td><td>Zero-copy shared</td><td>68-800 GB/s</td><td>Model can exceed GPU DRAM if CPU can reach it — but GPU still limited to addressable DRAM</td></tr>
+</table>
+
+<h2>How Current AIRobot Uses the M1</h2>
+
+<table>
+  <tr><th>Processor</th><th>Used?</th><th>How</th></tr>
+  <tr><td>CPU</td><td>✅</td><td><code>jdk.incubator.vector</code> → NEON SIMD (128-bit vectors via FloatVector, ByteVector, ShortVector)</td></tr>
+  <tr><td>CPU (multi-core)</td><td>✅</td><td><code>Parallel.parallelFor()</code> — Java parallel streams / ForkJoin</td></tr>
+  <tr><td>GPU</td><td>❌</td><td>Java has no Metal bindings. Would need JNI → Swift/Obj-C → Metal Performance Shaders</td></tr>
+  <tr><td>ANE</td><td>❌</td><td>Firmware-only. No public API. Only Core ML can target it.</td></tr>
+  <tr><td>AMX</td><td>❌</td><td>Accessed via <code>cblas_sgemm</code> (Accelerate). Not callable from Java without JNI.</td></tr>
+</table>
+
+<h2>What Each Processor is Best For in LLM Inference</h2>
+
+<table>
+  <tr><th>Operation</th><th>CPU NEON</th><th>GPU (Metal)</th><th>ANE</th></tr>
+  <tr><td>matmul (large, dim=4096)</td><td>O(n³) NEON FMAs</td><td>✅ Massive SIMT parallelism</td><td>✅ Native matmul engines</td></tr>
+  <tr><td>matmul (small, dim&lt;128)</td><td>✅ Low launch overhead</td><td>❌ Kernel launch latency dominates</td><td>⚠️ Variable</td></tr>
+  <tr><td>softmax</td><td>✅ If vectorized</td><td>⚠️ Needs warp-reduction</td><td>⚠️ Limited support</td></tr>
+  <tr><td>elementwise ops</td><td>✅ Trivial</td><td>❌ Overkill</td><td>⚠️ Limited</td></tr>
+  <tr><td>quantized dot (Q4_0)</td><td>✅ Decompress+dot in loop</td><td>⚠️ Needs custom Metal shader</td><td>❌ Unsupported types</td></tr>
+</table>
+
+<h2>Key Numbers for M1 (8-core GPU)</h2>
+
+<table>
+  <tr><th>Metric</th><th>Value</th></tr>
+  <tr><td>GPU ALUs</td><td>1024 (8 cores × 16 EU × 8 ALU)</td></tr>
+  <tr><td>GPU threads in flight</td><td>24,576</td></tr>
+  <tr><td>GPU FP32 TFLOPS</td><td>2.6</td></tr>
+  <tr><td>ANE TOPS</td><td>11</td></tr>
+  <tr><td>Memory bandwidth</td><td>68.25 GB/s</td></tr>
+  <tr><td>CPU NEON width</td><td>128-bit (4 × float32 per instruction)</td></tr>
+  <tr><td>CPU FP32 GFLOPS (peak, 4P)</td><td>~200</td></tr>
+  <tr><td>System Level Cache</td><td>8 MB (shared by GPU)</td></tr>
+  <tr><td>Process</td><td>TSMC N5 (5 nm)</td></tr>
+  <tr><td>Transistors</td><td>16 billion</td></tr>
+</table>
+
+<h2>GPU Architecture Detail: TBDR</h2>
+
+<ol>
+  <li><strong>Tiling:</strong> Render target divided into tiles (e.g. 32×32 pixels)</li>
+  <li><strong>Geometry pass:</strong> Primitive visibility determined per tile — invisible fragments discarded before shading</li>
+  <li><strong>Tile memory:</strong> Per-tile on-chip SRAM (bandwidth many × DRAM, latency many × lower)</li>
+  <li><strong>Shader execution:</strong> Fragments processed in lockstep SIMD groups (32 threads = 1 "warp" equivalent)</li>
+  <li><strong>Writeback:</strong> Final tile data written to DRAM</li>
+</ol>
+
+<p>For compute workloads (not graphics), Metal compute shaders bypass the tiling rasterizer and operate directly on threadgroups, but still use tile memory for local storage.</p>
+
+<h2>ANE Architecture: What We Know</h2>
+
+<p>Apple has published no detailed ANE documentation. Community reverse-engineering (hollance/neural-engine) reveals:</p>
+
+<ul>
+  <li>16 independent neural cores, each a systolic array-like matmul/conv engine</li>
+  <li>Operates on FP16 and INT8 (M1; M4 added INT8 performance improvements)</li>
+  <li>Every layer of a Core ML model is profiled: unsupported ops fall back to GPU or CPU</li>
+  <li>Best-case: ~4× faster than GPU for a well-optimized Core ML model</li>
+  <li>Key limitations: no arbitrary elementwise, no gather/scatter, limited softmax support</li>
+</ul>
+
+<h2>Glossary</h2>
+
+<table>
+  <tr><th>Term</th><th>Meaning</th></tr>
+  <tr><td>ALU</td><td>Arithmetic Logic Unit — the individual float/int compute lane in a GPU core</td></tr>
+  <tr><td>EU</td><td>Execution Unit — a GPU sub-core containing multiple ALUs (M1: 8 ALU per EU, 16 EU per GPU core)</td></tr>
+  <tr><td>SIMD</td><td>Single Instruction, Multiple Data — one instruction operates on a vector of values</td></tr>
+  <tr><td>SIMT</td><td>Single Instruction, Multiple Threads — GPU execution model; threads run in lockstep warps</td></tr>
+  <tr><td>TBDR</td><td>Tile-Based Deferred Rendering — Apple's GPU rendering architecture</td></tr>
+  <tr><td>UMA</td><td>Unified Memory Architecture — CPU and GPU share one physical memory pool</td></tr>
+  <tr><td>SLC</td><td>System Level Cache — the last-level cache shared by all processors on the die</td></tr>
+  <tr><td>ANE</td><td>Apple Neural Engine — the NPU on Apple Silicon</td></tr>
+  <tr><td>AMX</td><td>Apple Matrix Extensions — matrix multiply coprocessor instructions</td></tr>
+  <tr><td>NEON</td><td>ARM's 128-bit SIMD instruction set (what jdk.incubator.vector compiles to on M1)</td></tr>
+  <tr><td>TOPS</td><td>Tera (trillion) Operations Per Second — typically INT8 multiply-accumulate</td></tr>
+</table>
+
+<p>See also: <a href="../lessons/0001-tensors-the-foundation.html">Lesson 1: Tensors</a>, <a href="../lessons/0002-m1-silicon-overview.html">Lesson 2: M1 Silicon Overview</a></p>
+
+</body>
+</html>

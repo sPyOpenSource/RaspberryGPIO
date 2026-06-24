@@ -27,5 +27,6 @@ public class JUnitTest {
     @Test
     public void test(){
         Llama3 ai = new Llama3();
+        ai.process();
     }
 }

@@ -285,11 +285,12 @@ public class Llama3 extends JVSMain {
     @Override
     public void process() {
         try {
-            if(in != null){
+            //if(in != null){
                 Options options = Options.parseOptions(new String[]{
                     "--model", "/Users/xuyi/Downloads/Llama-3.2-1B-Instruct-Q4_0.gguf",
-                    "--model", "/Users/xuyi/.ollama/models/blob/sha256-74701a8c35f6c8d9a4b91f3f3497643001d63e0c7a84e085bed452548fa88d45",
-                    "--prompt", in.getValue(),
+                    "--model", "/Users/xuyi/.ollama/models/blobs/sha256-74701a8c35f6c8d9a4b91f3f3497643001d63e0c7a84e085bed452548fa88d45",
+                    //"--model", "/Users/xuyi/.ollama/models/blobs/sha256-4e30e2665218745ef463f722c0bf86be0cab6ee676320f1cfadf91e989107448",
+                    "--prompt", "tell me a joke",//in.getValue(),
                     "--stream", "false"
                 });
                 Llama model = AOT.tryUsePreLoaded(options.modelPath(), options.maxTokens());
@@ -301,11 +302,12 @@ public class Llama3 extends JVSMain {
                 if (options.interactive()) {
                     runInteractive(model, sampler, options);
                 } else {
-                    out.setValue(runInstructOnce(model, sampler, options));
+                    System.out.println(runInstructOnce(model, sampler, options));
+                    //out.setValue(runInstructOnce(model, sampler, options));
                     out.setChanged(true);
-                    element.notifyPin(0);
+                    //element.notifyPin(0);
                 }
-            }
+            //}
         } catch (IOException ex) {
             System.getLogger(Llama3.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }

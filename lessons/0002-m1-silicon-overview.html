@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 2: M1 Silicon Overview — Three Processors, One Memory</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+  .proc-grid { display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; }
+  .proc-card { flex: 1; min-width: 200px; background: #fafaf5; border: 1px solid #d9d9d9; border-radius: 4px; padding: 1.25rem; border-top: 3px solid #4a6fa5; }
+  .proc-card.gpu { border-top-color: #d96c4a; }
+  .proc-card.ane { border-top-color: #6a994e; }
+  .proc-card h3 { margin-top: 0; font-size: 1rem; }
+  .proc-card .num { font-size: 1.4rem; font-weight: 500; color: var(--accent); display: block; }
+  .proc-card.gpu .num { color: #d96c4a; }
+  .proc-card.ane .num { color: #6a994e; }
+  .trace { font-family: "Fira Code", monospace; font-size: 0.85rem; }
+  .arrow { color: #999; }
+</style>
+</head>
+<body>
+
+<h1>M1 Silicon Overview: Three Processors, One Memory</h1>
+<p class="meta">Lesson 2 · AIRobot · LLM Inference at the Metal Level</p>
+
+<p class="sidenote">The M1 is not "a CPU with a GPU." It's a heterogeneous SoC: three radically different processors connected by one memory bus.</p>
+
+<p>In <a href="0001-tensors-the-foundation.html">Lesson 1</a>, you learned that every LLM operation reduces to tensor primitives: <code>dot</code>, <code>matmul</code>, <code>softmax</code>, elementwise ops. In AIRobot, all of these run on the <strong>CPU</strong> via Java's Vector API — which compiles to ARM NEON SIMD instructions.</p>
+
+<p>But your MacBook Air has three processors, not one. Each is built for a different kind of math. This lesson maps each tensor operation to the processor that would execute it best, and explains why AIRobot uses only one of them.</p>
+
+<h2>The M1: Three Computers on One Die</h2>
+
+<div class="proc-grid">
+  <div class="proc-card">
+    <h3>CPU</h3>
+    <span class="num">~200 GFLOPS</span>
+    <p>4+4 cores. NEON SIMD (128-bit). Serial-control-heavy. Low latency per operation.</p>
+    <p><strong>Your code runs here.</strong></p>
+  </div>
+  <div class="proc-card gpu">
+    <h3>GPU</h3>
+    <span class="num">2.6 TFLOPS</span>
+    <p>7–8 cores, 1024 ALU. SIMT (warp parallelism). High throughput, high launch latency.</p>
+    <p><strong>You'd use Metal to reach it.</strong></p>
+  </div>
+  <div class="proc-card ane">
+    <h3>ANE</h3>
+    <span class="num">11 TOPS</span>
+    <p>16 cores. Systolic array for matmul/conv. Max efficiency, opaque API.</p>
+    <p><strong>Only Core ML can touch it.</strong></p>
+  </div>
+</div>
+
+<p>All three share the same LPDDR4X memory at 68.25 GB/s. There is no PCIe bottleneck, no buffer copy, no VRAM limit separate from system RAM. The <strong>unified memory architecture</strong> is the M1's superpower for inference: a model too large for a discrete GPU's VRAM doesn't hit a hard wall — it just gets slower as the CPU/GPU share bandwidth.</p>
+
+<h2>Trace a matmul Through Each Processor</h2>
+
+<p>Take a single forward-pass matmul: <code>wq · xb</code>, where <code>wq</code> is (dim=4096 × dim=4096) and <code>xb</code> is (dim=4096).</p>
+
+<table>
+  <tr><th>Step</th><th>CPU (NEON)</th><th>GPU (Metal)</th></tr>
+  <tr>
+    <td>Launch</td>
+    <td><span class="trace">call matmul() → loop over rows</span></td>
+    <td><span class="trace">encode 4096 threads → submit command buffer → GPU scheduler dispatches</span></td>
+  </tr>
+  <tr>
+    <td>Latency</td>
+    <td>~microseconds (function call overhead)</td>
+    <td>~10–50 µs (kernel launch + synchronization)</td>
+  </tr>
+  <tr>
+    <td>Execution</td>
+    <td>1 row at a time, 4 FMAs per NEON instruction × 4 P-cores = 16 flops/cycle</td>
+    <td>1024 threads in flight simultaneously, each computing one row's dot product</td>
+  </tr>
+  <tr>
+    <td>Memory pattern</td>
+    <td>Sequential cache-line reads (12 MB L2 fits one weight row)</td>
+    <td>Wide scatter-gather across DRAM; tile memory reduces pressure</td>
+  </tr>
+  <tr>
+    <td>Wins when</td>
+    <td>Small batches, irregular shapes, quantized formats</td>
+    <td>Large batches, big matmuls, high arithmetic intensity</td>
+  </tr>
+</table>
+
+<p class="sidenote">Batch size matters. At batch=1 (autoregressive), the GPU spends more time launching kernels than computing. At batch=32, the GPU's 1024 ALUs eat the matmul for breakfast.</p>
+
+<h2>Why AIRobot Is CPU-Only</h2>
+
+<p>Open <code>FloatTensor.java</code> at the line that reads:</p>
+
+<pre>// (Apple Silicon) NEON only supports up-to 128bit vectors.
+static final int VECTOR_BIT_SIZE = ...</pre>
+
+<p>Your code already knows it's on Apple Silicon. It's using the Java Vector API (<code>jdk.incubator.vector</code>) which the JVM compiles to NEON <code>fmla</code> (fused multiply-add) instructions. That's the fastest way to do dense linear algebra on the CPU without dropping down to C.</p>
+
+<p>To reach the GPU, you would need:</p>
+
+<ol>
+  <li><strong>JNI</strong> (Java Native Interface) — bridge Java → C/Swift</li>
+  <li><strong>Metal compute shaders</strong> — write matmul and softmax kernels in the Metal Shading Language</li>
+  <li><strong>Buffer management</strong> — wrap <code>FloatTensor</code>'s storage as <code>MTLBuffer</code> for zero-copy access in UMA</li>
+</ol>
+
+<p>To reach the ANE, you would need to rewrite the model as a Core ML model — which means losing AIRobot's tensor interface entirely. The ANE has no public API; it is only accessible through Core ML's private frameworks.</p>
+
+<h2>So What's the Practical Difference Today?</h2>
+
+<table>
+  <tr><th>Metric</th><th>CPU (your code)</th><th>GPU (Metal)</th><th>ANE (Core ML)</th></tr>
+  <tr><td>Tokens/sec (Llama 3 8B Q4_0)</td><td>~10-20</td><td>~30-60 (est.)</td><td>~60-100 (est.)</td></tr>
+  <tr><td>Memory efficiency</td><td>High (cache-friendly)</td><td>Medium (wider access pattern)</td><td>High (fixed function)</td></tr>
+  <tr><td>Quantization support</td><td>Full (Q4_0, Q8_0, BF16, F16)</td><td>Limited (FP16 native, INT8 possible)</td><td>FP16 / INT8 only</td></tr>
+  <tr><td>Flexibility</td><td>Total — you wrote it</td><td>High — MSL is Turing-complete</td><td>Low — only Core ML graph ops</td></tr>
+  <tr><td>Portability</td><td>Java = anywhere</td><td>Apple Silicon only</td><td>Apple Silicon only</td></tr>
+</table>
+
+<div class="callout">
+<strong>Key insight:</strong> The M1's GPU is 10× more FLOPs than the CPU, but AIRobot can't reach it without a native bridge. This is a <em>software boundary</em>, not a hardware one. The unified memory means there's no data-movement penalty — the only cost is language/runtime friction.
+</div>
+
+<h2>Check Your Understanding</h2>
+
+<div class="quiz" id="quiz1">
+  <h3>Question 1</h3>
+  <p>Why does the GPU's massive parallelism advantage shrink at batch size 1 in autoregressive decoding?</p>
+  <button onclick="reveal('a1')">Show answer</button>
+  <div class="answer" id="a1">
+    <p><strong>Answer:</strong> Kernel launch latency dominates. The GPU needs ~10-50 µs to dispatch a compute kernel, but the matmul for one token's attention scores is tiny (1 × seq_len). The CPU finishes the same work in a few microseconds of direct function calls — no dispatch overhead.</p>
+    <p>The GPU only wins when the matmul is large enough (batch × dim) to amortize the launch cost across enough ALUs.</p>
+  </div>
+</div>
+
+<div class="quiz" id="quiz2">
+  <h3>Question 2</h3>
+  <p>Open <code>FloatTensor.java:64</code>. The comment says "NEON only supports up-to 128bit vectors." How many float32 operations does one NEON instruction do per cycle?</p>
+  <button onclick="reveal('a2')">Show answer</button>
+  <div class="answer" id="a2">
+    <p><strong>Answer:</strong> 4. A 128-bit vector holds 4 × float32 values. A NEON <code>fmla</code> (fused multiply-add) performs 4 multiply-adds = 8 flops per instruction. With 4 P-cores, that's 32 flops/cycle theoretical peak.</p>
+    <p>Compare to the GPU: 1024 ALUs at ~1.3 GHz = 2.6 TFLOPS. The GPU's ALUs are simpler (no branch prediction, no out-of-order), so they pack more per mm² at lower power.</p>
+  </div>
+</div>
+
+<div class="quiz" id="quiz3">
+  <h3>Question 3</h3>
+  <p>What architectural feature makes the M1 uniquely suited for running LLMs that exceed a discrete GPU's VRAM?</p>
+  <button onclick="reveal('a3')">Show answer</button>
+  <div class="answer" id="a3">
+    <p><strong>Answer:</strong> Unified memory. A discrete GPU with 16 GB VRAM cannot load a 32 GB model at all — it must offload layers to system RAM over PCIe (~20-32 GB/s). On the M1, the CPU and GPU both access the same 16 GB pool. The tradeoff is bandwidth: a 32 GB model doesn't fit in 16 GB either, but the difference is that <em>every processor</em> on the M1 shares the same memory bottleneck, whereas a discrete GPU hits a hard VRAM wall.</p>
+    <p>Practically: M1 Max/M2 Ultra with 64-192 GB can hold large models entirely in unified memory, which no consumer discrete GPU can match.</p>
+  </div>
+</div>
+
+<h2>Further Reading</h2>
+
+<ul>
+  <li><a href="../reference/m1-silicon-architecture.html">M1 Silicon Architecture reference</a> — die layout, TBDR details, full spec tables</li>
+  <li><code>src/com/llama4j/FloatTensor.java:63-65</code> — the NEON vector size comment in your own code</li>
+  <li><a href="https://en.wikipedia.org/wiki/Apple_M1">Apple M1 — Wikipedia</a> — die shot, transistor counts, GPU ALU configuration</li>
+  <li><a href="https://github.com/hollance/neural-engine">hollance/neural-engine</a> — community-reverse-engineered ANE documentation</li>
+  <li><a href="https://developer.apple.com/documentation/metal">Metal — Apple Developer</a> — official GPU programming docs (if you ever decide to build a Metal backend)</li>
+</ul>
+
+<p><strong>Primary source:</strong> <a href="https://en.wikipedia.org/wiki/Apple_M1">Apple M1 (Wikipedia)</a> — start with the die floorplan and GPU section, then cross-reference with <a href="https://asahilinux.org/docs/hw/soc/accelerators/">Asahi Linux's accelerator docs</a> for the block-level names.</p>
+
+<p><strong>Next:</strong> Ask followup questions — want to go deeper on TBDR? The ANE's systolic array? Or trace one specific matmul through the GPU pipeline?</p>
+
+<script>
+function reveal(id) {
+  document.getElementById(id).classList.toggle('show');
+}
+</script>
+
+</body>
+</html>
