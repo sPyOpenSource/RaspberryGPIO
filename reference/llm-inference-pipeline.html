@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLM Inference Pipeline — Reference</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+  body { max-width: 900px; }
+  .flow { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 2rem 0; }
+  .step { flex: 1; min-width: 120px; background: #f0f4f8; border-radius: 4px; padding: 1rem; text-align: center; border-left: 3px solid #4a6fa5; }
+  .step code { display: block; margin-top: 0.3rem; font-size: 0.75rem; }
+  h2 { border-bottom: 1px solid #d9d9d9; padding-bottom: 0.3rem; }
+</style>
+</head>
+<body>
+
+<h1>LLM Inference Pipeline</h1>
+<p class="meta">Reference — not a lesson. Quick lookup for the inference dataflow in AIRobot.</p>
+
+<h2>Dataflow</h2>
+
+<div class="flow">
+  <div class="step">Tokenize<br><code>Tokenizer.encode()</code></div>
+  <div class="step">Embed<br><code>token_embedding_table</code></div>
+  <div class="step">RMSNorm<br><code>rmsnorm()</code></div>
+  <div class="step">Q/K/V<br><code>matmul(wq/wk/wv)</code></div>
+  <div class="step">RoPE<br><code>freq_cis</code></div>
+  <div class="step">Attn Scores<br><code>dot(q, k) / sqrt(h)</code></div>
+  <div class="step">Softmax<br><code>softmaxInPlace()</code></div>
+  <div class="step">Weighted V<br><code>saxpyInPlace()</code></div>
+  <div class="step">Output Proj<br><code>matmul(wo)</code></div>
+  <div class="step">+ Residual</div>
+  <div class="step">FFN Norm<br><code>rmsnorm()</code></div>
+  <div class="step">SwiGLU FFN<br><code>w1·silu(w1·x)*w3·x·w2</code></div>
+  <div class="step">+ Residual</div>
+  <div class="step">Final Norm</div>
+  <div class="step">Logits<br><code>matmul(wcls)</code></div>
+  <div class="step">Sample<br><code>sampler()</code></div>
+</div>
+
+<p>One token in → one token out. Repeat until stop token (autoregressive).</p>
+
+<h2>Key Dimensions</h2>
+
+<table>
+  <tr><th>Symbol</th><th>Meaning</th><th>Typical Value</th></tr>
+  <tr><td><code>dim</code></td><td>Transformer (hidden) dimension</td><td>4096</td></tr>
+  <tr><td><code>hiddenDim</code></td><td>FFN inner dimension</td><td>11008</td></tr>
+  <tr><td><code>n_heads</code></td><td>Number of query heads</td><td>32</td></tr>
+  <tr><td><code>n_kv_heads</code></td><td>Number of key/value heads</td><td>8 (GQA)</td></tr>
+  <tr><td><code>headSize</code></td><td>dim / n_heads</td><td>128</td></tr>
+  <tr><td><code>kvDim</code></td><td>dim × n_kv_heads / n_heads</td><td>1024</td></tr>
+  <tr><td><code>vocab_size</code></td><td>Vocabulary size</td><td>128256 (Llama 3)</td></tr>
+  <tr><td><code>ctx_len</code></td><td>Maximum sequence length</td><td>8192</td></tr>
+</table>
+
+<h2>File Map</h2>
+
+<table>
+  <tr><th>File</th><th>Role</th></tr>
+  <tr><td><code>FloatTensor.java</code></td><td>Abstract tensor base — dot, matmul, softmax, rmsnorm primitives</td></tr>
+  <tr><td><code>ArrayFloatTensor.java</code></td><td>Dense float32 array-backed tensor</td></tr>
+  <tr><td><code>BF16FloatTensor.java</code></td><td>Brain-float 16-bit quantized tensor</td></tr>
+  <tr><td><code>F16FloatTensor.java</code></td><td>Half-precision (IEEE 754) tensor</td></tr>
+  <tr><td><code>Q4_0FloatTensor.java</code></td><td>4-bit block-quantized tensor (8 values + scale per block)</td></tr>
+  <tr><td><code>Q8_0FloatTensor.java</code></td><td>8-bit block-quantized tensor (16 values + scale per block)</td></tr>
+  <tr><td><code>GGMLType.java</code></td><td>Enum of supported quantization types</td></tr>
+  <tr><td><code>GGUF.java</code></td><td>GGUF format parser (metadata + tensor entries)</td></tr>
+  <tr><td><code>ModelLoader.java</code></td><td>Loads GGUF → instantiates quantized tensors → sets up Weights</td></tr>
+  <tr><td><code>Llama.java</code></td><td>Core inference engine — Configuration, Weights, State, forward(), generateTokens()</td></tr>
+  <tr><td><code>Llama3.java</code></td><td>CLI entry point: parse args, load model, run chat loop</td></tr>
+  <tr><td><code>Tokenizer.java</code></td><td>BPE tokenizer (encode/decode)</td></tr>
+  <tr><td><code>Sampler.java</code></td><td>Sampling interface</td></tr>
+  <tr><td><code>CategoricalSampler.java</code></td><td>Direct probability sampling</td></tr>
+  <tr><td><code>ToppSampler.java</code></td><td>Nucleus (top-p) sampling with binary heap</td></tr>
+  <tr><td><code>Vocabulary.java</code></td><td>Token ID ↔ string mapping</td></tr>
+  <tr><td><code>ChatFormat.java</code></td><td>Llama 3 chat template formatting</td></tr>
+  <tr><td><code>RoPE.java</code></td><td>Rotary Position Embedding precomputation</td></tr>
+  <tr><td><code>Parallel.java</code></td><td>CPU parallel-for utilities</td></tr>
+</table>
+
+<h2>Quantization Formats</h2>
+
+<table>
+  <tr><th>Type</th><th>Storage</th><th>Block Size</th><th>Bytes per Value</th><th>When to Use</th></tr>
+  <tr><td><code>GGMLType.F32</code></td><td>float32</td><td>1</td><td>4.0</td><td>Highest precision, largest memory</td></tr>
+  <tr><td><code>GGMLType.F16</code></td><td>IEEE half</td><td>1</td><td>2.0</td><td>Good balance, standard half-precision</td></tr>
+  <tr><td><code>GGMLType.BF16</code></td><td>bfloat16</td><td>1</td><td>2.0</td><td>Same range as F32, less precision</td></tr>
+  <tr><td><code>GGMLType.Q8_0</code></td><td>int8 + f32 scale</td><td>16</td><td>1.0625</td><td>Near-lossless quantization</td></tr>
+  <tr><td><code>GGMLType.Q4_0</code></td><td>int4 + f32 scale</td><td>8</td><td>0.5625</td><td>Aggressive compression, some quality loss</td></tr>
+</table>
+
+<p>See also: <a href="../lessons/0001-tensors-the-foundation.html">Lesson 1: Tensors</a></p>
+
+</body>
+</html>

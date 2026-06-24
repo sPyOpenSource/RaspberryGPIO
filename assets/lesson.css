@@ -1,0 +1,132 @@
+/* Tufte-inspired lesson stylesheet */
+
+:root {
+  --text: #1a1a1a;
+  --background: #fffff8;
+  --accent: #4a6fa5;
+  --code-bg: #f5f2f0;
+  --border: #d9d9d9;
+  --sidebar: #666;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "ET Book", "Palatino", "Georgia", serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--background);
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+h1, h2, h3 { font-weight: 500; line-height: 1.3; }
+h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+h2 { font-size: 1.6rem; margin: 2.5rem 0 1rem; }
+h3 { font-size: 1.2rem; margin: 2rem 0 0.5rem; }
+
+p { margin-bottom: 1rem; }
+
+code {
+  font-family: "Fira Code", "Hack", "Source Code Pro", monospace;
+  font-size: 0.85rem;
+  background: var(--code-bg);
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+}
+
+pre {
+  background: var(--code-bg);
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  margin: 1.5rem 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  color: var(--sidebar);
+  font-style: italic;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+ul, ol { margin: 1rem 0 1rem 1.5rem; }
+li { margin-bottom: 0.3rem; }
+
+.sidenote {
+  float: right;
+  clear: right;
+  margin-right: -250px;
+  width: 220px;
+  font-size: 0.8rem;
+  color: var(--sidebar);
+  line-height: 1.4;
+  position: relative;
+}
+
+@media (max-width: 1000px) {
+  .sidenote { display: none; }
+}
+
+.callout {
+  background: #f0f4f8;
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.callout strong { color: var(--accent); }
+
+.quiz {
+  background: #fafaf5;
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 4px;
+}
+
+.quiz button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.quiz button:hover { opacity: 0.9; }
+
+.quiz .answer { display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.quiz .answer.show { display: block; }
+
+.meta {
+  font-size: 0.85rem;
+  color: var(--sidebar);
+  margin-bottom: 2rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+th { background: var(--code-bg); font-weight: 500; }

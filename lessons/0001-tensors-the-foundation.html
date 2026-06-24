@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 1: Tensors — The Foundation</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+
+<h1>Tensors: The Foundation</h1>
+<p class="meta">Lesson 1 · AIRobot · LLM Inference at the Metal Level</p>
+
+<p class="sidenote">Everything in an LLM is a tensor. The weights are tensors. The activations are tensors. The KV cache is tensors. There is no escape.</p>
+
+<p>An LLM has exactly one job: transform a sequence of input tokens into a probability distribution over the next token. It does this by applying a series of matrix operations — and every matrix in the system is a <strong>tensor</strong>.</p>
+
+<p>In AIRobot, the abstract class <code>FloatTensor</code> (<code>src/com/llama4j/FloatTensor.java</code>) defines the interface every tensor must implement. The <code>dot</code> and <code>matmul</code> methods here are the computational atoms that everything else is built from.</p>
+
+<h2>What is a tensor in this codebase?</h2>
+
+<p>AIRobot's <code>FloatTensor</code> is deliberately simple. It's not a general N-dimensional array library. The documentation says it best:</p>
+
+<blockquote>"Over-simplified, shapeless, float tensor. Not a strict tensor, but rather just a sequence of floats, not required to be backed by memory."</blockquote>
+
+<p>A <code>FloatTensor</code> is just a sequence of floats with an abstract <code>size()</code> and indexed access via <code>getFloat(index)</code> / <code>setFloat(index, value)</code>. That's it. Every operation — dot product, matmul, softmax, RMSNorm — is built on top of these three primitives.</p>
+
+<h3>Key methods</h3>
+
+<table>
+  <tr><th>Method</th><th>What it does</th><th>Where used</th></tr>
+  <tr><td><code>dot()</code></td><td>Dot product of two tensor segments: Σ aᵢ × bᵢ</td><td>Attention score calculation</td></tr>
+  <tr><td><code>matmul()</code></td><td>Matrix multiply (delegates to <code>dot</code> over rows)</td><td>Q/K/V projections, FFN layers</td></tr>
+  <tr><td><code>softmaxInPlace()</code></td><td>exp(x - max) / sum(exp(...)) — numerical stability</td><td>Attention weight normalization</td></tr>
+  <tr><td><code>saxpyInPlace()</code></td><td><code>this = a × that + this</code> (fused multiply-add)</td><td>Weighted value aggregation</td></tr>
+  <tr><td><code>mapInPlace()</code></td><td>Apply a function to every element</td><td>SwiGLU activation: x / (1 + e⁻ˣ)</td></tr>
+  <tr><td><code>copyTo()</code></td><td>Copy a segment from one tensor to another</td><td>Token embedding lookup, KV cache save</td></tr>
+  <tr><td><code>reduce()</code></td><td>Fold over elements with an accumulator</td><td>RMSNorm: Σ xᵢ² / n</td></tr>
+</table>
+
+<h2>The tensor hierarchy</h2>
+
+<p class="sidenote"><code>ArrayFloatTensor</code> is the "reference" implementation — all other quantized types implement the same interface with different storage formats.</p>
+
+<p>Different weight formats inherit from <code>FloatTensor</code>, each overriding <code>getFloat</code> and <code>setFloat</code> to decompress on the fly:</p>
+
+<ul>
+  <li><strong><code>ArrayFloatTensor</code></strong> — Simple float[] array. Every value takes 4 bytes. Baseline.</li>
+  <li><strong><code>BF16FloatTensor</code></strong> — Brain-float 16-bit. Same exponent range as float32 (8 bits), truncated mantissa (7 bits). 2 bytes per value.</li>
+  <li><strong><code>F16FloatTensor</code></strong> — IEEE 754 half-precision. 5-bit exponent (smaller range), 10-bit mantissa. 2 bytes.</li>
+  <li><strong><code>Q4_0FloatTensor</code></strong> — Block 4-bit. Blocks of 8 values share one float32 scale. 0.5625 bytes per value.</li>
+  <li><strong><code>Q8_0FloatTensor</code></strong> — Block 8-bit. Blocks of 16 values share one float32 scale. 1.0625 bytes per value.</li>
+</ul>
+
+<p>The key insight: <code>getFloat</code> decompresses, <code>dot</code> stays the same. Every quantized tensor implements <code>dot</code> directly on its compressed representation for efficiency — see <code>Q4_0FloatTensor.dot()</code> which computes the dot product without ever materializing the full float32
+ vector.</p>
+
+<h2>What does a forward pass look like, tensor-wise?</h2>
+
+<p>When <code>Llama.forward()</code> runs, here's the tensor flow for one token:</p>
+
+<ol>
+  <li><strong>Embed lookup:</strong> <code>token_embedding_table.copyTo(token_id × dim, x, 0, dim)</code> — one row copy into the activation buffer <code>x</code></li>
+  <li><strong>RMSNorm:</strong> <code>rmsnorm(xb, x, weight, dim, eps)</code> — elementwise normalize using root-mean-square</li>
+  <li><strong>QKV projections:</strong> <code>wq.matmul(xb, q, dim, dim)</code> — three matrix multiplies, weights × activation</li>
+  <li><strong>RoPE:</strong> Complex rotation on q and k pairs — elementwise 2D rotation</li>
+  <li><strong>Attention scores:</strong> <code>q.dot(k_offset, keyCache, keyOffset, headSize) / sqrt(headSize)</code> — batched dot products</li>
+  <li><strong>Softmax:</strong> <code>att.softmaxInPlace(...)</code> — normalize scores to [0, 1]</li>
+  <li><strong>Weighted sum:</strong> <code>xb.saxpyInPlace(...)</code> — attention weight × value vector</li>
+  <li><strong>Output projection:</strong> <code>wo.matmul(xb, xb2, dim, dim)</code> — mix head outputs back together</li>
+  <li><strong>Residual add:</strong> <code>x.addInPlace(xb2)</code> — skip connection</li>
+  <li><strong>FFN:</strong> <code>w1·x → silu → × w3·x → w2·result</code> — SwiGLU feed-forward with two matmuls and an elementwise multiply</li>
+  <li><strong>Final projection:</strong> <code>wcls.matmul(x, logits, vocab_size, dim)</code> — map to vocabulary scores</li>
+</ol>
+
+<p>Every bullet is a tensor operation. That's the whole pipeline.</p>
+
+<h2>Why this matters</h2>
+
+<p>Understanding the tensor layer is understanding the <strong>cost model</strong> of inference:</p>
+
+<ul>
+  <li>A <code>matmul</code> from a Q4_0 tensor is memory-bound (4-bit weights, 4× less data to load from RAM)</li>
+  <li>A <code>matmul</code> from an F32 tensor is compute-bound (full precision, no decompression overhead)</li>
+  <li>The <code>dot</code> inner loop is where the CPU spends most of its time — vectorized via <code>jdk.incubator.vector.FloatVector</code></li>
+  <li>Quantization saves memory but adds decompression overhead per <code>getFloat</code></li>
+</ul>
+
+<div class="callout">
+<strong>Trace it yourself:</strong> Open <code>src/com/llama4j/Llama.java:169</code> — the <code>forward()</code> method. Every call to <code>matmul</code>, <code>dot</code>, <code>softmaxInPlace</code>, <code>copyTo</code>, or <code>saxpyInPlace</code> is a tensor operation. Count them. You'll find exactly 6 matmuls per layer (Q, K, V, O, W1, W3, W2 = 7), plus the final classifier.
+</div>
+
+<div class="quiz" id="quiz1">
+  <h3>Check your understanding</h3>
+  <p>How many unique matmul operations happen per transformer layer in AIRobot's forward pass?</p>
+  <button onclick="reveal('a1')">Show answer</button>
+  <div class="answer" id="a1">
+    <p><strong>Answer:</strong> 7. Three for attention (Q, K, V), one for the output projection (O), and three for the SwiGLU FFN (W1, W3, W2). The RMSNorm and RoPE steps use elementwise operations, not matmuls.</p>
+    <p>Wait — actually, the final classifier <code>wcls.matmul</code> happens once per token, not per layer. Inside <code>forward()</code>, each layer has: wq·xb, wk·xb, wv·xb (3) + wo·xb (1) + w1·xb, w3·xb, w2·hb (3) = <strong>7 matmuls per layer</strong>.</p>
+  </div>
+</div>
+
+<h2>Further reading</h2>
+
+<ul>
+  <li>Read the <a href="../reference/llm-inference-pipeline.html">LLM Inference Pipeline reference</a> for the full file map</li>
+  <li>Open <code>src/com/llama4j/FloatTensor.java</code> — read the <code>dot()</code> and <code>matmul()</code> methods</li>
+  <li>Open <code>src/com/llama4j/Q4_0FloatTensor.java</code> — see how <code>getFloat</code> decompresses 4-bit blocks</li>
+</ul>
+
+<p><strong>Primary source:</strong> <a href="https://arxiv.org/abs/1706.03762">"Attention Is All You Need"</a> (Vaswani et al., 2017) — the original transformer paper. Read section 3 for the exact matrix
+ shapes.</p>
+
+<p><em>Ask followup questions any time — the agent is your teacher.</em></p>
+
+<script>
+function reveal(id) {
+  document.getElementById(id).classList.toggle('show');
+}
+</script>
+
+</body>
+</html>
