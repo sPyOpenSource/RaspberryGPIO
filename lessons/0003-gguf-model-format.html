@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3: GGUF Model Format — The Container for Weights</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+  .format-diagram { font-family: "Fira Code", monospace; font-size: 0.85rem; background: #fafaf5; padding: 1rem; border-radius: 4px; margin: 1.5rem 0; }
+  .format-diagram span { display: block; margin: 0.3rem 0; }
+  .format-diagram .magic { color: #2a7ae2; }
+  .format-diagram .header { color: #6a994e; }
+  .format-diagram .key-value { color: #d96c4a; }
+  .format-diagram .tensor { color: #e67e22; }
+  .format-diagram .weights { color: #8e44ad; }
+  details { margin: 1rem 0; padding: 0.5rem 1rem; background: #fafaf5; border: 1px solid #d9d9d9; border-radius: 4px; }
+  details summary { cursor: pointer; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<h1>GGUF Model Format</h1>
+<p class="meta">Lesson 3 · AIRobot · LLM Inference at the Metal Level</p>
+
+<p class="sidenote">Your Mac's <code>gguf</code> file is a <strong>very close cousin of the ZIP format</strong> — it bundles metadata, tensors, and their quantized layouts into one <em>self-describing</em> container. <code>FloatTensor</code> never sees a <em>container</em>; it sees a <em>tensor entry</em> from the GGUF and loads the referenced data directly to its decompressor.</p>
+
+<p>In AIRobot's <code>GGUF.java</code>, <code>ModelLoader</code> parses the file at runtime and creates <code>Weights</code> — which are just <code>FloatTensor</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/FloatTensor.java:18]> instances mapped by layer and role.</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/GGUF.java:65]> This happens the first time you run <code>forward()</code> — LLama3.java line 52 calls it, so the cost is paid on first inference.</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Llama3.java:52]></p>
+
+<ol>
+  <li><strong>File magic</strong> (first 4 bytes: <code>GGUF</code>) identifies it as a GGUF container.</li>
+  <li><strong>Header</strong> (version + metadata key-value pairs) describes tensors and quantization types.</li>
+  <li><strong>Tensor entries</strong> — one per weight matrix: name, shape, quantization, byte offset.</li>
+  <li><strong>Aligned weight data</strong> — raw bytes, padded to 32-byte boundaries.</li>
+</ol>
+
+<h2>GGUF vs ZIP Analogy</h2>
+
+<div class="format-diagram">
+<span><span class="magic">GGUF Magic</span>: <code>0x46554747</code> ("GGUF")</span>
+<span><span class="header">Header</span>: <code>version (uint32)</code></span>
+<span>  └ <span class="key-value">key-value pairs</span> → <span class="tensor">tensor descriptors</span></span>
+<span>      └ <span class="tensor">"general.architecture" → "llama"</span></span>
+<span>      └ <span class="tensor">"general.file_type" → <code>1 (sequential)</code></span></span>
+<span><span class="tensor">Tensor Entry</span>: <code>name (string), dimension (uint32[]), quantization (enum), offset (uint64)</code></span>
+<span>  └ "blocks.<i>layer</i>.wq.weight"</span>
+<span>  └ "blocks.<i>layer</i>.wk.weight"</span>
+<span>  └ "blocks.<i>layer</i>.wv.weight"</span>
+<span>  └ "output.weight"</span>
+<span>      └ <span class="weights">weight data</span> (aligned to <code>32 bytes</code>)</span>
+</div>
+
+<p>The GGUF container is exactly like a ZIP with <em>no compression</em> but <em>4-byte alignment</em> for tensors. It lists everything and where to find it — no external index, no filesystem scanning.</p>
+
+<h2>Key Sections</h2>
+
+<table>
+  <tr><th>Section</th><th>What it contains</th><th>Where it's used</th></tr>
+  <tr>
+    <td><strong>Metadata</strong></td>
+    <td>Model config (vocab size, head count, context length)</td>
+    <td><code>Configuration</code></td>
+  </tr>
+  <tr>
+    <td><strong>Tensor Entries</strong></td>
+    <td><code>name, shape, quant type, offset, padding</code></td>
+    <td><code>Weights</code> initialization</td>
+  </tr>
+  <tr>
+    <td><strong>Weight Data</strong></td>
+    <td>Raw bytes (packed Q4_0, Q8_0, BF16, F16, F32)</td>
+    <td><code>FloatTensor</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/FloatTensor.java:18]> constructors (see <code>Q4_0FloatTensor(byte[] slice)</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Q4_0FloatTensor.java:23]>)\n\n</td>
+  </tr>
+</table>
+
+<h2>Quantization Types in GGUF</h2>
+
+<div class="format-diagram">
+<span><span class="header">by Type</span>: <code>GGMLType</code> enum (see src/com/llama4j/GGMLType.java)</span>
+<span><span class="tensor">F32, F16, BF16, Q8_0, Q4_0, Q2_K, Q3_K, Q4_K, Q5_K, Q6_K</span></span>
+<span>                    └<span class="tensor">CPU: Q8_0 (int8 + fp32 scale), Q4_0 (int4 + fp32 scale)</span></span>
+<span>                    └<span class="tensor">GPU: F16 (native), FP32 (scalar fallback)</span></span>
+<span>                    └<span class="tensor">ANE: <em>not supported by Core ML</em> (FP16/INT8 only)</span></span>
+</div>
+
+<p>GGUF is <em>agnostic</em> to the quantized format. The container just says <span class="tensor">"blocks.0.wq.weight" → <code>Q4_0</code>, offset=1024, shape=[4096,4096]</code></span>. Each <code>FloatTensor</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/FloatTensor.java:18]> subclass knows how to parse its own slice of the data.</p>
+
+<h2>Tensor Loading</h2>
+
+<p>TRACE through <code>FloatTensor.java</code> <code>matmul</code> line 63:</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/FloatTensor.java:63]> First it computes <code>dot(i * dim1, that, 0, dim1)</code> → <code>that.getFloat</code> loops reading from the tensor's storage. For a <code>Q4_0FloatTensor</code>, <code>getFloat</code> decompresses the block (see <code>Q4_0FloatTensor.java:88</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Q4_0FloatTensor.java:88]>).</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Q4_0FloatTensor.java:88]> Weight data is never decompressed as a whole — the block iterators (NEON)</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Q4_0FloatTensor.java:88]> read from the slice directly.</p>
+
+<h2>Model Loading Steps</h2>
+
+<ol>
+  <li><code>ModelLoader.loadModel(ggufPath)</code> opens file, reads magic.</li>
+  <li>Parses header → <code>Configuration</code> (contextLength, numberOfLayers, dim, vocabSize) + <code>weights</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/GGUF.java:65]> offset table.</li>
+  <li>For each tensor entry, allocates a <code>FloatTensor</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/FloatTensor.java:18]> according to quantization type (<code>ArrayFloatTensor</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/ArrayFloatTensor.java:13]> for F32/F16, <code>Q4_0FloatTensor</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Q4_0FloatTensor.java:23]> for Q4_0, etc.)</li>
+  <li>Reads slice from <code>FileChannel</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/GGUF.java:75]> at <code>offset</code> into tensor's <code>ByteBuffer</code> (see <code>Q4_0FloatTensor:74</code]> <code>memorySegment</code> setup)</li>
+  <li>Caller (<code>Llama.createNewState</code>) can now <code>matmul</code> or <code>dot</code> directly without copying.</li>
+</ol>
+
+<h2>File Map vs. Memory Layout</h2>
+
+<table>
+  <tr><th>CPU Order</th><th>GPU Order</th><th>Apple Silicon Advantage</th></tr>
+  <tr>
+    <td><strong>Sequential</strong> (default GGUF) → load via <code>FileChannel.open(modelPath, READ)</code></td>
+    <td><strong>Trivial (UMA)</strong> → same DRAM, zero-copy</td>
+    <td>CPU <code>FloatVector</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Q4_0FloatTensor.java:41]> accesses block data directly from file-backed <code>ByteBuffer</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Q4_0FloatTensor.java:88]> (no CPU copy)</td>
+  </tr>
+  <tr>
+    <td><strong>Split-by-layer</strong> (e.g., Q6_K) → complex interleave logic (not AIRobot)</td>
+    <td><strong>Tile memory</strong> → no CPU offload, tensors fit in DRAM</td>
+    <td>Tensor data stays in DRAM when used by NEON, avoiding extra memcpy</td>
+  </tr>
+</table>
+
+<p>Currently AIRobot expects a **sequential GGUF** (row-major tensors) — equivalent to typical <code>matmul(W, X)</code> memory access pattern.</p>
+
+<h2>Hints for Users</h2>
+
+<ul>
+  <li><strong>GGUF validation</strong> — Quick check: <code>head -c 4 model.gguf | hexdump -e '/1 "%02X"' | head -n 1</code> should print <code>47 47 55 46</code></li>
+  <li><strong>Layer order</strong> — Look at metadata <code>general.architecture</code> (LLaMA, LLaMA2, etc.)</li>
+  <li><strong>Quantization</strong> — Check <code>general.file_type</code> field for Q format (more Q20 = smaller file, more decompression overhead)</li>
+  <li><strong>Tensor inspection</strong> — Use <code>jnew</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/GGUF.java:65]> inside <code>FGrep</code>: GGUF → dump only <code>name</code> and <code>quantization</code> lines.</li>
+</ul>
+
+<h2>Further Reading</h2>
+
+<ul>
+  <li><a href="https://github.com/ggerganov/llama.cpp/blob/master/docs/gguf.md">llama.cpp docs — GGUF format specification</a></li>
+  <li><a href="../reference/llm-inference-pipeline.html">LLM Inference Pipeline reference</a> — how <code>Weights</code> fit into the total forward pass</li>
+  <li><a href="src/com/llama4j/GGUF.java">Read <code>GGUF.loadModel</code> — essential to understand how AIRobot binds external weights</a></li>
+  <li><a href="https://arxiv.org/abs/2302.11196">"Tensor Programs V: Tuning Large Neural Networks via Zero-Shot Hyperparameter Search\"</a> — discusses GGUF quantization strategies.</li>
+</ul>
+
+<p><strong>Primary source</strong>: The <a href="https://github.com/ggerganov/llama.cpp/blob/master/docs/gguf.md">llama.cpp GGUF documentation</a> — this is the de facto standard for GGUF, which AIRobot implements as a subset. The llama.cpp codebase itself is the most comprehensive reference for the full GGUF spec.</p>
+
+<p><em>Ask followup questions — the agent is your teacher.</em></p>
+
+<script>
+function reveal(id) {
+  document.getElementById(id).classList.toggle('show');
+}
+</script>
+
+</body>
+</html>

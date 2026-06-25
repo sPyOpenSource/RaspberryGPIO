@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 4: Tokenization — The First Step</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+  .code-example { background: #fafaf5; border-left: 3px solid #4a6fa5; padding: 1rem; margin: 1.5rem 0; font-family: "Fira Code", monospace; font-size: 0.85rem; }
+  .token-id { color: #2a7ae2; }
+  .text { color: #6a994e; }
+  table.token-map { width: 100%; margin: 1rem 0; }
+  table.token-map th { background: #fafaf5; }
+</style>
+</head>
+<body>
+
+<h1>Tokenization — The First Step</h1>
+<p class="meta">Lesson 4 · AIRobot · LLM Inference at the Metal Level</p>
+
+<p class="sidenote">Tokenization is the interface where your intent enters the model as integers that flow through tensor pipelines. Every token ID sets off the embedding lookup, making tokenization the de facto "entry point" in forward-pass mechanics.</p>
+
+<p>The first operation in AIRobot's forward pass is converting raw text into indices that index into the <code>token_embedding_table</code> — `FloatTensor.copyTo(token_id × dim, x, 0, dim)`.</p>
+
+<h2>Airobot's tokenizer setup</h2>
+
+<table>
+  <tr><th>Component</th><th>Role</th><th>Pipeline location</th></tr>
+  <tr>
+    <td><code>Tokenizer.java</code></td>
+    <td>BPE merges, encoding, special token handling</td>
+    <td>In Llama3.java, line 50</td>
+  </tr>
+  <tr>
+    <td><code>Vocabulary.java</code></td>
+    <td>Token string ↔ ID mapping (dictionary, size=128256)</td>
+    <td>Tokenizer dependency</td>
+  </tr>
+  <tr>
+    <td><code>ChatFormat.java</code></td>
+    <td>Adds <code>&lt;|begin_of_text|&gt;</code>, <code>&lt;|eot_id|&gt;</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/ChatFormat.java:13]>, role markers for <co>Llama 3 chat</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/ChatFormat.java:13]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/ChatFormat.java:13]></td>
+    <td>Part of full chat loop</td>
+  </tr>
+</table>
+
+<h2>What does AIRobot's tokenizer do in forward-pass flow</h2>
+
+<ol>
+  <li><strong>Preprocess the input string</strong> → trim whitespace, append <code>&lt;|begin_of_text|&gt;</code> if empty</li>
+  <li><strong>Apply pre-tokenization</strong> → split on word boundaries, subword regex</li>
+  <li><strong>BPE merge</strong> → recombine most frequent char pairs (based on tiktoken vocabulary)</li>
+  <li><strong>Lookup BPE merges</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]> in <code>Vocabulary.java</code></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></strong> → integer token IDs (0-128k)</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:/>
+  <li><strong>Embed to tensor</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Llama.java:18]> → token_embedding_table.copyTo, fills <code>x</code> for RMSNorm</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Llama.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Llama.java:18]></li>
+</ol>
+
+<h2>The key player: Tokenizer.encode</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]>
+
+<p>File: `src/com/llama4j/Tokenizer.java`, method <code>encode(String text)</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]> returns `List<Integer> tokenIds`.</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/Tokenizer.java:18]>
+
+<pre class="code-example">// Llama3.java:51
+String prompt = in != null ? in.getValue() : "hello";
+List<Integer> tokenIds = tokenizer.encode(prompt);
+// tokenIds = [123, 456, 789, ...] (sequence of token IDs)
+
+// Pass IDs into tensor via Llama.createNewState
+Llama model = Llama.loadModel(path);
+State state = model.createNewState(tokenIds);
+FloatTensor xb = state.x;  // already embedded
+</pre>
+
+<h2>AIRobot's tokenizer implementation strategy</h2>
+
+<p>AIRobot uses Tiktoken BPE — same as OpenAI's models — but with LLaMA-specific customizations:</p>
+
+<table class="token-map">
+  <tr><th>Component</th><th>Value</th></tr>
+  <tr><td><code>VOCAB_SIZE</code></td><td>128256 tokens</td></tr>
+  <tr><td><code>BOS_TOKEN</code></td><td><code>&lt;|begin_of_text|&gt;</code> → 0</td></tr>
+  <tr><td><code>EOS_TOKEN</code></td><td><code>&lt;|eot_id|&gt;</code> → 128257</td></tr>
+  <tr><td><code>MERGE_FILE</code></td><td>BytePair merges trained on RedPajama dataset</td></tr>
+  <tr><td><code>TOKENIZER_TYPE</code></td><td>Tiktoken (BPE with RoPE pattern)</td></tr>
+</table>
+
+<p>What matters for **metal-level** knowledge: the tokenizer produces an array of integers that drive tensor operations. The encoding logic itself is secondary to understanding how token IDs become tensor indices.</p>
+
+<h2>TRACE: Tokenization → embedding in forward-pass</h2>
+
+<p>Open `Llama.createNewState` and follow token_id → tensor flow:</p>
+
+<pre class="code-example">1. Input string: "Hello world"
+2. Tokenize: ["<|begin_of_text|>", "Hello", "world", "<|eot_id|>"]
+3. IDs: [0, 1024, 2048, 128257]
+4. Embedding lookup in <code>createNewState</code>
+   token_embedding_table.copyTo(0, state.x, 0, dim)      // token 0 at position 0
+   token_embedding_table.copyTo(1024, state.x, 1, dim)  // token 1024 at position 1
+   ...
+5. Result: <code>state.x</code> is <code>FloatTensor</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/FloatTensor.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/FloatTensor.java:18]> of size <code>nTokens×dim</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/FloatTensor.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/FloatTensor.java:18]>
+</pre>
+
+<p>Every <code>matmul</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/FloatTensor.java:18]> in the layer uses indices derived from these same token IDs — for positional encoding, attention masking, etc.</p>
+
+<h2>Category mapping — Token object (concept) ↔ ID (concrete)</h2>
+
+<p>The token abstraction layer (`Vocabulary.java`) is what bridges raw text to tensor storage. It can be thought of as the token's passport to the embedding table.</p>
+
+<pre class="code-example">// Vocabulary.get("Hello") returns Integer 1024 in HashMap<String,Integer>
+// Tokenization produces Integer[1024]
+// Embedding lookup: token_embedding_table.getFloat(1024 * dim + i) // i from 0 to dim-1
+</pre>
+
+<h2>Tokenizer tuning notes</h2>
+
+<p>Tokenizer tuning affects the **user experience** (text coverage, whitespace) more than the **tensor layer** (the embedding lookup stays the same). However, a poorly designed tokenizer can cause intermittent embedding issues, especially for languages outside your training set.</p>
+
+<h2>Check your understanding</h2>
+
+<div class="quiz" id="quiz1">
+  <h3>Question 1</h3>
+  <p>In AIRobot, what happens immediately after tokenization in a forward pass</p>
+  <button onclick="reveal('a1')">Show answer</button>
+  <div class="answer" id="a1">
+    <p><strong>Answer:</strong> Embedding lookup — token_embedding_table.copyTo maps token IDs to float tensors, filling the activation buffer <code>x</code>.</p>
+  </div>
+</div>
+
+<div class="quiz" id="quiz2">
+  <h3>Question 2</h3>
+  <p>What's the primary metal-level benefit of AIRobot's tokenizer being based on Tiktoken like GPT models</p>
+  <button onclick="reveal('a2')">Show answer</button>
+  <div class="answer" id="a2">
+    <p><strong>Answer:</strong> Consistency with OpenAI's tokenizer means users can compare text → token ID mapping directly with GPT models, no translation layer needed.</p>
+  </div>
+</div>
+
+<div class="quiz" id="quiz3">
+  <h3>Question 3</h3>
+  <p>Open <code>src/com/llama4j/Tokenizer.java:18</code> and <code>src/com/llama4j/Llama.java:18</code>. What role does the tokenizer play in the tensor layer</p>
+  <button onclick="reveal('a3')">Show answer</button>
+  <div class="answer" id="a3">
+    <p><strong>Answer:</strong> The tokenizer produces Integer[] tokenIds that are fed into the embedding lookup via token_embedding_table.copyTo → embedding buffer = <code>FloatTensor</co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/FloatTensor.java:18]></co: file:///Users/xuyi/Source/Java/AIRobot/src/com/llama4j/FloatTensor.java:18]> (nTokens×dim) that serves as input to the RMSNorm and QKV operations.</p>
+  </div>
+</div>
+
+<h2>Further reading</h2>
+
+<ul>
+  <li><a href="https://github.com/openai/tiktoken-python">tiktoken — OpenAI's BPE tokenizer (language-agnostic)</a></li>
+  <li><a href="https://github.com/ggerganov/llama.cpp/blob/master/examples/tokenizer/builtin_tokenizer.c">llama.cpp tokenizer — LLaMA-specific tiktoken implementation</a></li>
+  <li><a href="src/com/llama4j/Tokenizer.java">Read AIRobot's Tokenizer implementation</a></li>
+  <li><a href="https://arxiv.org/abs/1706.03762">"Attention Is All You Need" (Vaswani et al.) — see how embedding lookup is used in the transformer's attention mechanism</a></li>
+</ul>
+
+<p><strong>Primary source</strong>: The <a href="https://github.com/openai/tiktoken-python">tiktoken implementation</a> — but be aware its tokenization behavior differs from what you see in AIRobot due to <code>ChatFormat.java</code> and specific LLaMA merges.</p>
+
+<p><em>Ask followup questions — the agent is your teacher.</em></p>
+
+<script>
+function reveal(id) {
+  document.getElementById(id).classList.toggle('show');
+}
+</script>
+
+</body>
+</html>
