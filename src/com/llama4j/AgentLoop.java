@@ -24,14 +24,14 @@ public final class AgentLoop {
             Allowed commands: date, ls, pwd, whoami, echo.
             Example: the user asks "what day is it", so you reply "TOOL: date".
             You will then receive a line beginning with "OBSERVATION:" containing the output.
-            After that, answer in plain language with NO TOOL line.
+            After that, answer in plain language with no TOOL line.
             """;
 
     static final Set<String> ALLOWED = Set.of("date", "ls", "pwd", "whoami", "echo");
     static final int MAX_STEPS = 5;
 
     private static final Pattern TOOL_PATTERN =
-            Pattern.compile("TOOL:[ \\t]*([^\\n\\r]+)", Pattern.CASE_INSENSITIVE);
+            Pattern.compile("(?m)^[ \\t]*TOOL:[ \\t]*(\\S[^\\r\\n]*)", Pattern.CASE_INSENSITIVE);
 
     private final Llm llm;
 
@@ -64,14 +64,31 @@ public final class AgentLoop {
         }
         try {
             Process process = new ProcessBuilder(parts).redirectErrorStream(true).start();
+            StringBuilder output = new StringBuilder();
+            Thread reader = new Thread(() -> {
+                try (var in = process.getInputStream()) {
+                    byte[] buffer = new byte[8192];
+                    int read;
+                    while ((read = in.read(buffer)) != -1) {
+                        output.append(new String(buffer, 0, read, StandardCharsets.UTF_8));
+                    }
+                } catch (IOException ignored) {
+                }
+            });
+            reader.setDaemon(true);
+            reader.start();
             boolean finished = process.waitFor(5, TimeUnit.SECONDS);
             if (!finished) {
                 process.destroyForcibly();
                 return "error: timeout";
             }
-            String output = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8).trim();
-            return output.isEmpty() ? "(no output)" : output;
-        } catch (IOException | InterruptedException ex) {
+            reader.join(1000);
+            String text = output.toString().trim();
+            return text.isEmpty() ? "(no output)" : text;
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            return "error: interrupted";
+        } catch (IOException ex) {
             return "error: " + ex.getMessage();
         }
     }

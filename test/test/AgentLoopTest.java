@@ -24,6 +24,11 @@ public class AgentLoopTest {
     }
 
     @Test
+    public void ignoresToolMentionMidSentence() {
+        assertTrue(AgentLoop.parseToolCall("there is no TOOL: date needed here").isEmpty());
+    }
+
+    @Test
     public void parsesNullAsEmpty() {
         assertTrue(AgentLoop.parseToolCall(null).isEmpty());
     }
@@ -51,6 +56,17 @@ public class AgentLoopTest {
     }
 
     @Test
+    public void runShellHandlesLargeOutputWithoutTimeout() {
+        String big = AgentLoop.runShell("echo " + "a".repeat(200000));
+        assertEquals(200000, big.length());
+    }
+
+    @Test
+    public void runShellReturnsPlaceholderWhenEmpty() {
+        assertEquals("(no output)", AgentLoop.runShell("echo"));
+    }
+
+    @Test
     public void buildContentAppendsObservations() {
         String content = AgentLoop.buildContent("what date?", List.of("Fri Oct 11"));
         assertTrue(content.contains("what date?"));
@@ -74,9 +90,27 @@ public class AgentLoopTest {
     }
 
     @Test
-    public void loopStopsAtMaxStepsWhenModelNeverFinishes() {
-        AgentLoop.Llm alwaysTool = content -> "TOOL: echo loop";
+    public void loopReportsDisallowedCommandAsObservation() {
+        List<String> seen = new ArrayList<>();
+        AgentLoop.Llm fake = content -> {
+            seen.add(content);
+            return seen.size() == 1 ? "TOOL: rm -rf /" : "done";
+        };
+        AgentLoop loop = new AgentLoop(fake);
+        assertEquals("done", loop.answer("go"));
+        assertTrue(seen.get(1).contains("error: command not allowed"));
+    }
+
+    @Test
+    public void loopStopsAtMaxStepsAndForcesFinalAnswer() {
+        List<String> seen = new ArrayList<>();
+        AgentLoop.Llm alwaysTool = content -> {
+            seen.add(content);
+            return "TOOL: echo loop";
+        };
         AgentLoop loop = new AgentLoop(alwaysTool);
-        assertNotNull(loop.answer("go"));
+        assertEquals("TOOL: echo loop", loop.answer("go"));
+        assertEquals(6, seen.size());
+        assertTrue(seen.get(seen.size() - 1).contains("You must answer now"));
     }
 }
