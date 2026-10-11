@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 5: Build a Tiny Java Agent</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+  .code-example { background: #fafaf5; border-left: 3px solid #4a6fa5; padding: 1rem;
+                  margin: 1.5rem 0; font-family: "Fira Code", monospace; font-size: 0.85rem;
+                  overflow-x: auto; }
+  .diagram { font-family: "Fira Code", monospace; font-size: 0.78rem; line-height: 1.5;
+             background: #f5f2f0; padding: 1rem; border-radius: 4px; margin: 1.5rem 0; overflow-x: auto; }
+  .trace { background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 4px;
+           font-family: "Fira Code", monospace; font-size: 0.8rem; line-height: 1.6;
+           margin: 1.5rem 0; overflow-x: auto; }
+  .trace .dim { color: #8a8a8a; }
+</style>
+</head>
+<body>
+
+<h1>Build a Tiny Java Agent</h1>
+<p class="meta">Lesson 5 · AIRobot · LLM Inference at the Metal Level</p>
+
+<p class="sidenote">You already understand the engine: tokens in, logits out, a sampled
+next token. This lesson adds the smallest possible thing on top of it — a loop that lets
+the model act on the world and read back what happened.</p>
+
+<p>You have built an inference engine. This lesson turns it into an <strong>agent</strong>:
+a system that can <em>do</em> something and use the result. The whole agent is about
+60 lines of Java, and it reuses <code>Llama.generateTokens</code> exactly as it is.</p>
+
+<h2>The gap a lone LLM cannot cross</h2>
+
+<p>An LLM predicts the next token from its weights and the text in its context. It has no
+senses. Ask it today's date and it will produce a fluent, confident, <em>wrong</em> answer,
+because the date is nowhere in its weights and nowhere in the prompt. The same is true of
+"what is in this directory" — the model cannot look.</p>
+
+<p>We validated exactly this while building the lesson: asked to reply with the token
+stream <code>TOOL: date</code>, the 1B model instead answered <code>December 8, 2006</code>.
+It <em>guessed</em>. That guess is the problem an agent solves.</p>
+
+<h2>The agent loop</h2>
+
+<p>An agent wraps the engine in a loop: <strong>think → act → observe → repeat → answer</strong>.</p>
+
+<pre class="diagram">
+          question
+             |
+             v
+   +--------------------+        no TOOL line
+   |  build prompt      |---------------------------> final answer
+   |  (question +       |
+   |   observations)    |
+   +--------------------+
+             |
+             v
+   +--------------------+     TOOL: &lt;cmd&gt;
+   |  llm.generate()    |--------------------> validate &amp; run command
+   +--------------------+                              |
+             ^                                         v
+             |                              append "OBSERVATION: ..."
+             +-----------------------------------------+
+                        repeat (max 5 steps)
+</pre>
+
+<ol>
+  <li><strong>Think</strong> — build the prompt: the question plus any observations so far.</li>
+  <li><strong>Act</strong> — the model replies. If the reply contains <code>TOOL: &lt;cmd&gt;</code>, that is the action.</li>
+  <li><strong>Observe</strong> — run the command and append <code>OBSERVATION: &lt;output&gt;</code>.</li>
+  <li><strong>Repeat</strong> — regenerate with the observation in context, up to 5 steps.</li>
+  <li><strong>Answer</strong> — any reply with no <code>TOOL:</code> line is the final answer.</li>
+</ol>
+
+<p class="callout"><strong>Key idea:</strong> the model never "knows" the date. It knows
+how to <em>ask</em> for it. The loop supplies the knowledge from the real world.</p>
+
+<p>The loop lives in <code>src/com/llama4j/AgentLoop.java</code>. The engine call is the
+same <code>Llama.generateTokens(...)</code> you met in
+<a href="0004-tokenization-the-first-step.html">Lesson 4</a> (<code>Llama.java:342</code>).</p>
+
+<h2>Walk the loop</h2>
+
+<p><strong>1. The protocol.</strong> The model needs to be told the grammar. With a 1B
+model the instruction must be brutally short — every extra line made it refuse or invent an
+answer:</p>
+
+<pre class="code-example">You can run commands. To get the date reply with TOOL: date</pre>
+
+<p>That is the entire system prompt. The allowlist — <code>date</code>, <code>ls</code>,
+<code>pwd</code>, <code>whoami</code>, <code>echo</code> — is <em>not</em> here. It lives in
+code, so a weak or even adversarial prompt cannot widen what the agent may run.</p>
+
+<p><strong>2. Parsing the action.</strong> A single regex extracts the command from the
+generated text. It is anchored to the start of a line, so a passing mention of
+<code>TOOL:</code> mid-sentence does not fire. If there is no match, the model has finished:</p>
+
+<pre class="code-example">static final Pattern TOOL_PATTERN =
+        Pattern.compile("(?m)^[ \\t]*TOOL:[ \\t]*(\\S[^\\r\\n]*)", Pattern.CASE_INSENSITIVE);</pre>
+
+<p><strong>3. Running the tool, safely.</strong> The command is split into arguments and
+executed <em>without a shell</em>. That is why <code>ls; rm -rf /</code> cannot sneak a
+second command past the allowlist — <code>ls;</code> is not a program name:</p>
+
+<pre class="code-example">String[] parts = cmd.trim().split("\\s+");
+if (!ALLOWED.contains(parts[0])) {
+    return "error: command not allowed: " + parts[0];
+}
+Process process = new ProcessBuilder(parts).redirectErrorStream(true).start();</pre>
+
+<p><strong>4. The loop.</strong> Generate, parse, run, append, repeat — with a hard cap so
+a stubborn model cannot loop forever:</p>
+
+<pre class="code-example">for (int step = 0; step &lt; MAX_STEPS; step++) {
+    String reply = llm.generate(buildContent(question, observations));
+    Optional&lt;String&gt; toolCall = parseToolCall(reply);
+    if (toolCall.isEmpty()) {
+        return reply.strip();          // no action -&gt; final answer
+    }
+    observations.add(runShell(toolCall.get()));
+}</pre>
+
+<p>Small models do not always stop on their own. Once an observation exists, the prompt
+builder appends a one-line cue so the model finally answers instead of calling the tool
+again:</p>
+
+<pre class="code-example">if (!observations.isEmpty()) {
+    builder.append("\nFinal answer:");
+}</pre>
+
+<p><strong>5. The seam.</strong> The loop never mentions <code>Llama</code>. It depends on
+one method — <code>Llm.generate(String)</code> — which is why it is testable with a fake
+model and reusable with the real one:</p>
+
+<pre class="code-example">public interface Llm {
+    String generate(String userContent);
+}</pre>
+
+<h2>The wiring</h2>
+
+<p><code>src/com/llama4j/MiniAgent.java</code> connects the loop to the engine: it owns the
+<code>Llama</code> model, a <code>ChatFormat</code>, the KV cache state, and the growing
+token list. It also prints a small trace so you can watch the loop work. The bridge is one
+method reference:</p>
+
+<pre class="code-example">public String answer(String question) {
+    return new AgentLoop(this::generate).answer(question);
+}</pre>
+
+<p><code>this::generate</code> runs the same token pipeline you already built: encode the
+prompt, call <code>Llama.generateTokens</code> with <code>Sampler.ARGMAX</code>, decode the
+new tokens, and hand the text back to the loop.</p>
+
+<h2>Run it</h2>
+
+<pre class="code-example">LIBS="$(ls /Users/xuyi/Source/Java/lib/*.jar | tr '\n' ':')"
+mkdir -p build/miniagent
+/opt/homebrew/opt/openjdk@25/bin/javac -cp "build/classes:$LIBS" -d build/miniagent \
+  src/com/llama4j/AgentLoop.java src/com/llama4j/MiniAgent.java
+/opt/homebrew/opt/openjdk@25/bin/java --add-modules jdk.incubator.vector \
+  -cp "build/miniagent:build/classes:$LIBS" com.llama4j.MiniAgent</pre>
+
+<p>Ask <code>What's today's date?</code> and watch the loop: the model asks for the tool,
+the tool looks at the real clock, and only then does the model answer.</p>
+
+<pre class="trace"><span class="dim">Tiny Agent — ask a question, or type 'quit'.</span>
+&gt; What's today's date?
+  model: TOOL: date
+  observation: Sun Oct 11 21:01:58 CEST 2026
+Today's date is October 11, 2026.</pre>
+
+<p>Try <code>What directory am I in?</code> and <code>What is my username?</code> too. The
+date cannot come from the weights — it is 2026 in that trace, and the model has no way to
+know that except by running the command.</p>
+
+<p><em>See the compressed version in the <a href="../reference/agent-loop.html">agent-loop
+reference</a>.</em></p>
+
+<h2>Check your understanding</h2>
+
+<div class="quiz" id="quiz1">
+  <h3>Question 1</h3>
+  <p>After the agent receives an observation, what happens next?</p>
+  <button onclick="reveal('a1')">Show answer</button>
+  <div class="answer" id="a1">
+    <p><strong>Answer:</strong> It adds the observation and generates another reply.</p>
+  </div>
+</div>
+
+<div class="quiz" id="quiz2">
+  <h3>Question 2</h3>
+  <p>Why does the tool run commands without invoking a shell?</p>
+  <button onclick="reveal('a2')">Show answer</button>
+  <div class="answer" id="a2">
+    <p><strong>Answer:</strong> No shell means pipes and semicolons cannot run.</p>
+  </div>
+</div>
+
+<div class="quiz" id="quiz3">
+  <h3>Question 3</h3>
+  <p>What stops the loop when the model never emits a final answer?</p>
+  <button onclick="reveal('a3')">Show answer</button>
+  <div class="answer" id="a3">
+    <p><strong>Answer:</strong> The five step limit forces one final answer.</p>
+  </div>
+</div>
+
+<h2>Sources</h2>
+
+<ul>
+  <li><a href="https://arxiv.org/abs/2210.07316">ReAct: Synergizing Reasoning and Acting in
+      Language Models</a> — the paper that named the think/act/observe loop.</li>
+  <li><a href="https://www.anthropic.com/engineering/building-effective-agents">Building
+      Effective Agents</a> — why the simplest loop often wins over a framework.</li>
+</ul>
+
+<p><em>Ask followup questions — the agent is your teacher.</em></p>
+
+<script>
+function reveal(id) {
+  document.getElementById(id).classList.toggle('show');
+}
+</script>
+
+</body>
+</html>
