@@ -17,14 +17,7 @@ public final class AgentLoop {
     }
 
     public static final String SYSTEM_PROMPT = """
-            You are a tiny agent that answers questions by running shell commands.
-            You do NOT know today's date, the filesystem, or anything outside this chat.
-            To find something out, reply with exactly one line:
-            TOOL: <command>
-            Allowed commands: date, ls, pwd, whoami, echo.
-            Example: the user asks "what day is it", so you reply "TOOL: date".
-            You will then receive a line beginning with "OBSERVATION:" containing the output.
-            After that, answer in plain language with no TOOL line.
+            You can run commands. To get the date reply with TOOL: date
             """;
 
     static final Set<String> ALLOWED = Set.of("date", "ls", "pwd", "whoami", "echo");
@@ -97,6 +90,9 @@ public final class AgentLoop {
         StringBuilder builder = new StringBuilder(question);
         for (String observation : observations) {
             builder.append("\nOBSERVATION: ").append(observation);
+        }
+        if (!observations.isEmpty()) {
+            builder.append("\nFinal answer:");
         }
         return builder.toString();
     }
