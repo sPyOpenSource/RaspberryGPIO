@@ -287,9 +287,9 @@ public class Llama3 extends JVSMain {
         try {
             //if(in != null){
                 Options options = Options.parseOptions(new String[]{
-                    "--model", "/Users/xuyi/Downloads/Llama-3.2-1B-Instruct-Q4_0.gguf",
                     "--model", "/Users/xuyi/.ollama/models/blobs/sha256-74701a8c35f6c8d9a4b91f3f3497643001d63e0c7a84e085bed452548fa88d45",
-                    //"--model", "/Users/xuyi/.ollama/models/blobs/sha256-4e30e2665218745ef463f722c0bf86be0cab6ee676320f1cfadf91e989107448",
+                    //"--model", "/Users/xuyi/.ollama/models/blobs/sha256-1fe90b72e105d7bc71650aa59883edece3e84751af489075217a7ae717b1fe8d",
+                    //"--model", "/Users/xuyi/.ollama/models/blobs/sha256-5720d1f671b4996481274fffe01868c3c36e87c135cc8538471cc7bd6087b106",
                     "--prompt", "tell me a joke",//in.getValue(),
                     "--stream", "false"
                 });
