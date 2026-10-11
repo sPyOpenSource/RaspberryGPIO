@@ -189,14 +189,14 @@ final class Transformer {
     }
 }
 
-final class Tokenizer {
+final class Tokenizer2 {
     final String[] vocab;
     final float[] vocab_scores;
     final int vocab_size;
     final int max_token_length;
     Map<String, Integer> sorted_vocab;
 
-    Tokenizer(String tokenizer_path, int vocab_size) throws IOException {
+    Tokenizer2(String tokenizer_path, int vocab_size) throws IOException {
         // i should have written the vocab_size into the tokenizer file... sigh
         this.vocab_size = vocab_size;
         // malloc space to hold the scores and the strings
@@ -216,35 +216,6 @@ final class Tokenizer {
                 this.vocab[i] = new String(bytes, StandardCharsets.UTF_8);
             }
         }
-    }
-}
-
-final class Sampler {
-    final int vocab_size;
-    final int[] probindex; // buffer used in top-p sampling
-    final float temperature;
-    final float topp;
-    long rng_seed;
-
-    Sampler(int vocab_size, float temperature, float topp, long rng_seed) {
-        this.vocab_size = vocab_size;
-        this.temperature = temperature;
-        this.topp = topp;
-        this.rng_seed = rng_seed;
-        // buffer only used with nucleus sampling; may not need but it's ~small
-        this.probindex = new int[vocab_size];
-    }
-
-    int random_u32() {
-        // xorshift rng: https://en.wikipedia.org/wiki/Xorshift#xorshift.2A
-        rng_seed ^= rng_seed >> 12;
-        rng_seed ^= rng_seed << 25;
-        rng_seed ^= rng_seed >> 27;
-        return (int) ((rng_seed * 0x2545F4914F6CDD1DL) >> 32);
-    }
-
-    float random_f32() { // random float32 in [0,1)
-        return (random_u32() >>> 8) / 16777216.0f;
     }
 }
 
@@ -488,7 +459,7 @@ public class Llama2 {
 
 // The Byte Pair Encoding (BPE) Tokenizer that translates strings <-> tokens
 
-    static String decode(Tokenizer t, int prev_token, int token) {
+    static String decode(Tokenizer2 t, int prev_token, int token) {
         String piece = t.vocab[token];
         // following BOS (1) token, sentencepiece decoder strips any leading whitespace (see PR #89)
         if (prev_token == 1 && piece.charAt(0) == ' ') {
@@ -527,7 +498,7 @@ public class Llama2 {
         return sorted_vocab.getOrDefault(str, -1);
     }
 
-    static int encode(Tokenizer t, String text, boolean bos, boolean eos, int[] tokens) {
+    static int encode(Tokenizer2 t, String text, boolean bos, boolean eos, int[] tokens) {
         // encode the string text (input) into an upper-bound preallocated tokens[] array
         // bos != 0 means prepend the BOS token (=1), eos != 0 means append the EOS token (=2)
         if (text == null) {
@@ -631,7 +602,7 @@ public class Llama2 {
 // ----------------------------------------------------------------------------
 // generation loop
 
-    static void generate(Transformer transformer, Tokenizer tokenizer, Sampler sampler, String prompt, int steps) {
+    static void generate(Transformer transformer, Tokenizer2 tokenizer, Sampler sampler, String prompt, int steps) {
         String empty_prompt = "";
         if (prompt == null) {
             prompt = empty_prompt;
@@ -839,7 +810,7 @@ public class Llama2 {
 // python reference and that seemed ok, but this was not thoroughly tested and
 // is not safely implemented, it's more a proof of concept atm.
 
-    static void chat(Transformer transformer, Tokenizer tokenizer, Sampler sampler,
+    static void chat(Transformer transformer, Tokenizer2 tokenizer, Sampler sampler,
               String cli_user_prompt, String cli_system_prompt, int steps) {
 
         // buffers for reading the system prompt and user prompt from stdin
@@ -1002,9 +973,9 @@ public class Llama2 {
         }
 
         // build the Tokenizer via the tokenizer .bin file
-        Tokenizer tokenizer = new Tokenizer(tokenizer_path, transformer.config.vocab_size);
+        Tokenizer2 tokenizer = new Tokenizer2(tokenizer_path, transformer.config.vocab_size);
 
-        // build the Sampler
+        // build the iSampler
         Sampler sampler = new Sampler(transformer.config.vocab_size, temperature, topp, rng_seed);
 
         // run!

@@ -19,7 +19,7 @@ package com.llama4j;
 import java.util.Comparator;
 import java.util.random.RandomGenerator;
 
-public final class ToppSampler implements Sampler {
+public final class ToppSampler implements iSampler {
 
     final int[] indices;
     final float topp;

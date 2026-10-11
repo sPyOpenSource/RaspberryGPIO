@@ -13,7 +13,7 @@ public final class MiniAgent {
             "/Users/xuyi/.ollama/models/blobs/sha256-74701a8c35f6c8d9a4b91f3f3497643001d63e0c7a84e085bed452548fa88d45";
 
     private final Llama model;
-    private final Sampler sampler;
+    private final iSampler sampler;
     private final Llama.State state;
     private final ChatFormat chatFormat;
     private final List<Integer> conversationTokens = new ArrayList<>();
@@ -23,7 +23,7 @@ public final class MiniAgent {
     MiniAgent(Llama model, int maxTokens) {
         this.model = model;
         this.maxTokens = maxTokens;
-        this.sampler = Sampler.ARGMAX;
+        this.sampler = iSampler.ARGMAX;
         this.state = model.createNewState(16);
         this.chatFormat = new ChatFormat(model.tokenizer());
         this.conversationTokens.add(chatFormat.beginOfText);

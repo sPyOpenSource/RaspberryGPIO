@@ -18,7 +18,7 @@ package com.llama4j;
 
 import java.util.random.RandomGenerator;
 
-public record CategoricalSampler(RandomGenerator rng) implements Sampler {
+public record CategoricalSampler(RandomGenerator rng) implements iSampler {
 
     @Override
     public int sampleToken(FloatTensor logits) {

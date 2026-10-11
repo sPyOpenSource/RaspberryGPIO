@@ -334,12 +334,12 @@ public record Llama(Configuration configuration, Tokenizer tokenizer, Weights we
      * @param stopTokens       set of tokens that abort generation during inference, stop tokens do not affect prompt ingestion
      * @param maxTokens        maximum number of tokens (can go up to {@link Configuration#contextLength context length}
      *                         if this value is negative or greater than {@link Configuration#contextLength context length}
-     * @param sampler          {@link Sampler strategy} used to select tokens
+     * @param sampler          {@link iSampler strategy} used to select tokens
      * @param echo             debugging flag, prints ALL, prompt and inferred tokens, to {@link System#err stderr}
      * @param onTokenGenerated callback, if non-null, it's called every time a token is inferred e.g. it's not called when ingesting prompt tokens
      * @return list of generated/inferred tokens, including the stop token, if any e.g. does not include any token from the prompt
      */
-    public static List<Integer> generateTokens(Llama model, State state, int startPosition, List<Integer> promptTokens, Set<Integer> stopTokens, int maxTokens, Sampler sampler, boolean echo,
+    public static List<Integer> generateTokens(Llama model, State state, int startPosition, List<Integer> promptTokens, Set<Integer> stopTokens, int maxTokens, iSampler sampler, boolean echo,
                                                IntConsumer onTokenGenerated) {
         long startNanos = System.nanoTime();
         long startGen = 0;

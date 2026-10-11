@@ -41,15 +41,15 @@ public class Llama3 extends JVSMain {
     private VSString in;
     private final VSString out = new VSString();
     
-    static Sampler selectSampler(int vocabularySize, float temperature, float topp, long rngSeed) {
-        Sampler sampler;
+    static iSampler selectSampler(int vocabularySize, float temperature, float topp, long rngSeed) {
+        iSampler sampler;
         if (temperature == 0.0f) {
             // greedy argmax sampling: take the token with the highest probability
-            sampler = Sampler.ARGMAX;
+            sampler = iSampler.ARGMAX;
         } else {
             // we sample from this distribution to get the next token
             RandomGenerator rng = RandomGeneratorFactory.getDefault().create(rngSeed);
-            Sampler innerSampler;
+            iSampler innerSampler;
             if (topp <= 0 || topp >= 1) {
                 // simply sample from the predicted probability distribution
                 innerSampler = new CategoricalSampler(rng);
@@ -68,7 +68,7 @@ public class Llama3 extends JVSMain {
         return sampler;
     }
 
-    static void runInteractive(Llama model, Sampler sampler, Options options) {
+    static void runInteractive(Llama model, iSampler sampler, Options options) {
         Llama.State state = null;
         List<Integer> conversationTokens = new ArrayList<>();
         ChatFormat chatFormat = new ChatFormat(model.tokenizer());
@@ -125,7 +125,7 @@ public class Llama3 extends JVSMain {
         }
     }
 
-    static String runInstructOnce(Llama model, Sampler sampler, Options options) {
+    static String runInstructOnce(Llama model, iSampler sampler, Options options) {
         Llama.State state = model.createNewState(BATCH_SIZE);
         ChatFormat chatFormat = new ChatFormat(model.tokenizer());
 
@@ -298,7 +298,7 @@ public class Llama3 extends JVSMain {
                     // No compatible preloaded model found, fallback to fully parse and load the specified file.
                     model = ModelLoader.loadModel(options.modelPath(), options.maxTokens(), true);
                 }
-                Sampler sampler = selectSampler(model.configuration().vocabularySize, options.temperature(), options.topp(), options.seed());
+                iSampler sampler = selectSampler(model.configuration().vocabularySize, options.temperature(), options.topp(), options.seed());
                 if (options.interactive()) {
                     runInteractive(model, sampler, options);
                 } else {
