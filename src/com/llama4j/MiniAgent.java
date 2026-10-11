@@ -18,6 +18,7 @@ public final class MiniAgent {
     private final ChatFormat chatFormat;
     private final List<Integer> conversationTokens = new ArrayList<>();
     private final int maxTokens;
+    private int startPosition;
 
     MiniAgent(Llama model, int maxTokens) {
         this.model = model;
@@ -28,10 +29,10 @@ public final class MiniAgent {
         this.conversationTokens.add(chatFormat.beginOfText);
         this.conversationTokens.addAll(chatFormat.encodeMessage(
                 new ChatFormat.Message(ChatFormat.Role.SYSTEM, AgentLoop.SYSTEM_PROMPT)));
+        this.startPosition = 0;
     }
 
     private String generate(String userContent) {
-        int startPosition = conversationTokens.size();
         conversationTokens.addAll(chatFormat.encodeMessage(
                 new ChatFormat.Message(ChatFormat.Role.USER, userContent)));
         conversationTokens.addAll(chatFormat.encodeHeader(
@@ -41,6 +42,7 @@ public final class MiniAgent {
                 conversationTokens.subList(startPosition, conversationTokens.size()),
                 chatFormat.getStopTokens(), maxTokens, sampler, false, null);
         conversationTokens.addAll(responseTokens);
+        startPosition = conversationTokens.size();
         List<Integer> visible = new ArrayList<>(responseTokens);
         if (!visible.isEmpty() && chatFormat.getStopTokens().contains(visible.get(visible.size() - 1))) {
             visible.remove(visible.size() - 1);
