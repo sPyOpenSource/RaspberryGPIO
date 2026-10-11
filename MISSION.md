@@ -13,5 +13,6 @@
 - KV-cache management
 - The autoregressive generation loop
 - Sampling strategies (categorical, top-p, top-k)
+- The agent control loop (generate → parse action → run a tool → observe) built on top of inference
 
 **Non-goals:** This is not about training LLMs, fine-tuning, or deployment infrastructure. This is about understanding inference — what happens when you press "go."
