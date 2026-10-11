@@ -33,6 +33,11 @@ public final class MiniAgent {
     }
 
     private String generate(String userContent) {
+        for (String line : userContent.split("\n")) {
+            if (line.startsWith("OBSERVATION: ")) {
+                System.out.println("  observation: " + line.substring("OBSERVATION: ".length()));
+            }
+        }
         conversationTokens.addAll(chatFormat.encodeMessage(
                 new ChatFormat.Message(ChatFormat.Role.USER, userContent)));
         conversationTokens.addAll(chatFormat.encodeHeader(
@@ -47,7 +52,11 @@ public final class MiniAgent {
         if (!visible.isEmpty() && chatFormat.getStopTokens().contains(visible.get(visible.size() - 1))) {
             visible.remove(visible.size() - 1);
         }
-        return model.tokenizer().decode(visible);
+        String reply = model.tokenizer().decode(visible);
+        if (AgentLoop.parseToolCall(reply).isPresent()) {
+            System.out.println("  model: " + reply.strip());
+        }
+        return reply;
     }
 
     public String answer(String question) {
