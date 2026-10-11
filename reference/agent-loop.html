@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Agent Loop — Reference</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+<style>
+  body { max-width: 900px; }
+  .diagram { font-family: "Fira Code", monospace; font-size: 0.75rem; line-height: 1.5;
+             background: #f5f2f0; padding: 1rem; border-radius: 4px; margin: 1.5rem 0; overflow-x: auto; }
+  h2 { border-bottom: 1px solid #d9d9d9; padding-bottom: 0.3rem; }
+</style>
+</head>
+<body>
+
+<h1>The Agent Loop</h1>
+<p class="meta">Reference — not a lesson. Quick lookup for the agent control loop in AIRobot.</p>
+
+<p>An <strong>agent</strong> is an LLM wrapped in a control loop that can act on the world
+and read back the result. The LLM proposes an action as text; the loop executes it and feeds
+the result back until the LLM can answer.</p>
+
+<h2>The loop</h2>
+<pre class="diagram">
+          question
+             |
+             v
+   +--------------------+        no TOOL line
+   |  build prompt      |---------------------------> final answer
+   |  (question +       |
+   |   observations)    |
+   +--------------------+
+             |
+             v
+   +--------------------+     TOOL: &lt;cmd&gt;
+   |  llm.generate()    |--------------------> validate &amp; run command
+   +--------------------+                              |
+             ^                                         v
+             |                              append "OBSERVATION: ..."
+             +-----------------------------------------+
+                        repeat (max 5 steps)
+</pre>
+
+<h2>Protocol grammar</h2>
+<table>
+  <tr><th>Element</th><th>Rule</th></tr>
+  <tr><td>Tool request</td><td>One line: <code>TOOL: &lt;command&gt;</code> (case-insensitive, anchored to line start)</td></tr>
+  <tr><td>Allowed commands</td><td><code>date</code>, <code>ls</code>, <code>pwd</code>, <code>whoami</code>, <code>echo</code></td></tr>
+  <tr><td>Observation</td><td>Appended to the next prompt as <code>OBSERVATION: &lt;output&gt;</code></td></tr>
+  <tr><td>Answer cue</td><td>Once observations exist, <code>Final answer:</code> is appended to nudge a small model to stop calling tools</td></tr>
+  <tr><td>Final answer</td><td>Any reply with no <code>TOOL:</code> line</td></tr>
+  <tr><td>Iteration cap</td><td>At most 5 tool steps before a forced final answer</td></tr>
+</table>
+
+<h2>Protocol regex</h2>
+<pre class="diagram">(?m)^[ \t]*TOOL:[ \t]*(\S[^\r\n]*)</pre>
+<p>Anchored to the start of a line so a passing mention ("no TOOL: date needed") is not an
+action. Case-insensitive; group 1 is the command to validate and run.</p>
+
+<h2>Tool contract</h2>
+<p>The command is split into arguments and executed <em>without a shell</em> via
+<code>ProcessBuilder(argv)</code>. No shell means metacharacters like <code>;</code>,
+<code>|</code>, and <code>&amp;&amp;</code> cannot introduce a second command, so the
+allowlist on the first argument is meaningful. Output is capped by a 5-second timeout;
+stderr is merged into stdout; empty output becomes <code>(no output)</code>.</p>
+
+<p class="callout"><strong>Tiny-model note:</strong> the shipped system prompt is deliberately
+short (<code>"You can run commands. To get the date reply with TOOL: date"</code>). Longer
+prompts made the 1B model refuse or hallucinate instead of calling the tool. The allowlist
+lives in code, not the prompt, so a weak prompt cannot widen access.</p>
+
+<h2>Source map</h2>
+<table>
+  <tr><th>Piece</th><th>Location</th></tr>
+  <tr><td>Control loop, protocol, shell tool</td><td><code>src/com/llama4j/AgentLoop.java</code></td></tr>
+  <tr><td>Engine wiring + REPL</td><td><code>src/com/llama4j/MiniAgent.java</code></td></tr>
+  <tr><td><code>Llm</code> seam (fake or real)</td><td><code>AgentLoop.Llm#generate</code></td></tr>
+  <tr><td>Engine call</td><td><code>src/com/llama4j/Llama.java:342</code> (<code>generateTokens</code>)</td></tr>
+  <tr><td>Unit tests</td><td><code>test/test/AgentLoopTest.java</code></td></tr>
+</table>
+
+<p>See also: <a href="../lessons/0005-build-a-tiny-agent.html">Lesson 5: Build a Tiny Java Agent</a></p>
+
+</body>
+</html>
